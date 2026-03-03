@@ -159,7 +159,7 @@ const AcademySection = () => {
                   buttonText: "Découvrir les masterclasses",
                   duration: "2h - 2 jours",
                   level: "Tous niveaux",
-                  price: "À partir de 199€",
+                  price: "À partir de 199 FCFA",
                   details: [
                     "Interventions d'experts reconnus",
                     "Ateliers pratiques et études de cas",
@@ -178,7 +178,7 @@ const AcademySection = () => {
                   buttonText: "Accéder aux formations",
                   duration: "Accès illimité",
                   level: "Tous niveaux",
-                  price: "À partir de 99€",
+                  price: "À partir de 99 FCFA",
                   details: [
                     "Accès 24/7 à la plateforme",
                     "Contenu mis à jour régulièrement",

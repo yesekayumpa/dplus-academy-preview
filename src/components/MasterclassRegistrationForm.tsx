@@ -15,6 +15,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useNotification } from "@/components/Notification";
 import { 
   User, Mail, MapPin, Phone, Briefcase, Code, BarChart3, 
   GraduationCap, Award, BookOpen, Target, ArrowRight, Info,
@@ -427,6 +428,8 @@ const MasterclassRegistrationForm = () => {
   const [hoveredTab, setHoveredTab] = useState(null);
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>("marketing");
   const [showThemePicker, setShowThemePicker] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { addNotification, NotificationContainer } = useNotification();
 
   const theme = themes[currentTheme];
 
@@ -486,9 +489,55 @@ const MasterclassRegistrationForm = () => {
     return () => subscription.unsubscribe();
   }, [form.watch]);
 
-  const onSubmit = (data: FormData) => {
-    console.log("Données du formulaire:", data);
-    setIsSubmitted(true);
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      console.log("Données du formulaire:", data);
+      
+      // Préparer les données pour l'email
+      const emailData = {
+        to: 'academy@dmplus-group.com',
+        subject: `Nouvelle inscription - ${data.nomPrenom}`,
+        formData: {
+          ...data,
+          submittedAt: new Date().toLocaleString('fr-FR'),
+          formType: 'Masterclass Registration'
+        }
+      };
+
+      // Envoyer l'email via l'API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'envoi de l\'email');
+      }
+
+      const result = await response.json();
+      console.log('Email envoyé avec succès:', result);
+      
+      // Notification de succès
+      addNotification('success', `Votre inscription a été envoyée avec succès à l'academy ! Un email de confirmation vous sera envoyé à ${data.email}`);
+      
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Erreur:', error);
+      
+      // Notification d'erreur
+      addNotification('error', 'Une erreur est survenue lors de l\'envoi de votre inscription. Veuillez réessayer ou contacter l\'academy directement.');
+      
+      // En cas d'erreur, on peut quand même marquer comme soumis pour l'UX
+      // mais vous pourriez vouloir garder le formulaire ouvert
+      // setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const tabs = [
@@ -650,6 +699,9 @@ const MasterclassRegistrationForm = () => {
     <div className={`min-h-screen transition-colors duration-500 relative overflow-hidden ${
       theme.bgVeryLight
     }`}>
+      {/* Container de notifications */}
+      <NotificationContainer />
+      
       {/* Éléments de fond élégants */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Cercles flous */}
@@ -1197,16 +1249,21 @@ const MasterclassRegistrationForm = () => {
                           {activeTab === "attentes" && (
                             <Button
                               type="submit"
-                              disabled={progress < 80}
+                              disabled={progress < 80 || isSubmitting}
                               className={`
                                 px-8 py-6 text-base font-semibold transition-all
-                                ${progress >= 80
+                                ${progress >= 80 && !isSubmitting
                                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white'
                                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                                 }
                               `}
                             >
-                              {progress >= 80 ? (
+                              {isSubmitting ? (
+                                <>
+                                  <div className="w-5 h-5 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                  Envoi en cours...
+                                </>
+                              ) : progress >= 80 ? (
                                 <>
                                   <Crown className="w-5 h-5 mr-2" />
                                   Confirmer mon inscription

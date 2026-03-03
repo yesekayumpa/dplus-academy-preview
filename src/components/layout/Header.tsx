@@ -7,10 +7,17 @@ import { cn } from "@/lib/utils";
 import logo from "@/assets/academy-white.png";
 import logo2 from "@/assets/LOGOTYPE [Récupéré]-18.png";
 
+const formats = [
+  { id: 1, label: "Masterclass", href: "/masterclasses", description: "Sessions intensives avec des experts" },
+  { id: 2, label: "E-learning", href: "/e-learning", description: "Apprentissage flexible en ligne" },
+  { id: 3, label: "Sur mesure", href: "/sur-mesure", description: "Formations personnalisées" },
+];
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSubsidiariesOpen, setIsSubsidiariesOpen] = useState(false);
+  const [isFormatsOpen, setIsFormatsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,11 +31,13 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsSubsidiariesOpen(false);
+    setIsFormatsOpen(false);
   }, [location]);
 
   const navItems = [
     { label: "Accueil", href: "/#groupe" },
-    { label: "Nos formations", href: "/#filiales", hasDropdown: true },
+    { label: "Nos masterclass", href: "/masterclasses" },
+    { label: "Nos formats pédagogiques", href: "/formats", hasDropdown: true },
     { label: "Nos formateurs", href: "/#formateurs" },
   ];
 
@@ -51,8 +60,20 @@ const Header = () => {
                 {item.hasDropdown ? (
                   <div
                     className="relative"
-                    onMouseEnter={() => setIsSubsidiariesOpen(true)}
-                    onMouseLeave={() => setIsSubsidiariesOpen(false)}
+                    onMouseEnter={() => {
+                      if (item.label === "Nos formations") {
+                        setIsSubsidiariesOpen(true);
+                      } else if (item.label === "Nos formats pédagogiques") {
+                        setIsFormatsOpen(true);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (item.label === "Nos formations") {
+                        setIsSubsidiariesOpen(false);
+                      } else if (item.label === "Nos formats pédagogiques") {
+                        setIsFormatsOpen(false);
+                      }
+                    }}
                   >
                     <button
                       className="flex items-center gap-1 px-4 py-2 rounded-lg font-medium 
@@ -61,12 +82,15 @@ const Header = () => {
                       {item.label}
                       <ChevronDown className={cn(
                         "w-4 h-4 transition-transform duration-300",
-                        isSubsidiariesOpen && "rotate-180"
+                        (item.label === "Nos formations" && isSubsidiariesOpen) || 
+                        (item.label === "Nos formats pédagogiques" && isFormatsOpen) 
+                        ? "rotate-180" : ""
                       )} />
                     </button>
 
                     <AnimatePresence>
-                      {isSubsidiariesOpen && (
+                      {((item.label === "Nos formations" && isSubsidiariesOpen) || 
+                        (item.label === "Nos formats pédagogiques" && isFormatsOpen)) && (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -76,29 +100,57 @@ const Header = () => {
                           rounded-xl shadow-2xl overflow-hidden transition-all duration-200`}
                         >
                           <div className="px-2 py-3">
-                            {subsidiaries.map((sub) => {
-                              const Icon = sub.icon;
-                              return (
+                            {item.label === "Nos formations" ? (
+                              subsidiaries.map((sub) => {
+                                const Icon = sub.icon;
+                                return (
+                                  <Link
+                                    key={sub.id}
+                                    to={`/filiale/${sub.slug}`}
+                                    className={`flex items-center gap-3 p-1 rounded-xl 
+                                    hover:bg-white/5 transition-all duration-200 ${isScrolled ? 'text-black' : 'text-white'}`}
+                                  >
+                                    <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                                      <Icon className="w-5 h-5 8" />
+                                    </div>
+                                    <div>
+                                      <div className="font-medium transition-colors">
+                                        {sub.shortName}
+                                      </div>
+                                      <div className="text-xs line-clamp-1">
+                                        {sub.services[0]}
+                                      </div>
+                                    </div>
+                                  </Link>
+                                );
+                              })
+                            ) : (
+                              formats.map((format) => (
                                 <Link
-                                  key={sub.id}
-                                  to={`/filiale/${sub.slug}`}
-                                  className={`flex items-center gap-3 p-1 rounded-xl 
-                                  hover:bg-white/5 transition-all duration-200 ${isScrolled ? 'text-black' : 'text-white'}`}
+                                  key={format.id}
+                                  to={format.href}
+                                  className={`group flex items-center gap-3 p-3 rounded-xl 
+                                  transition-all duration-300 transform hover:scale-105 hover:shadow-lg
+                                  ${isScrolled ? 'text-black hover:bg-primary/10' : 'text-white hover:bg-white/10'}`}
                                 >
-                                  <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                                    <Icon className="w-5 h-5 8" />
+                                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300
+                                    ${isScrolled ? 'bg-primary/10 group-hover:bg-primary/20' : 'bg-white/10 group-hover:bg-white/20'}`}>
+                                    <div className="w-5 h-5 bg-primary rounded transition-all duration-300 group-hover:scale-110"></div>
                                   </div>
-                                  <div>
-                                    <div className="font-medium transition-colors">
-                                      {sub.shortName}
+                                  <div className="flex-1">
+                                    <div className="font-medium transition-colors group-hover:text-primary">
+                                      {format.label}
                                     </div>
-                                    <div className="text-xs line-clamp-1">
-                                      {sub.services[0]}
+                                    <div className={`text-xs line-clamp-1 transition-opacity duration-300
+                                      ${isScrolled ? 'text-gray-600' : 'text-white/70'}`}>
+                                      {format.description}
                                     </div>
                                   </div>
+                                  <div className={`w-2 h-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100
+                                    ${isScrolled ? 'bg-primary' : 'bg-white'}`}></div>
                                 </Link>
-                              );
-                            })}
+                              ))
+                            )}
                           </div>
                         </motion.div>
                       )}
@@ -166,41 +218,69 @@ const Header = () => {
                     {item.hasDropdown ? (
                       <div className="space-y-2">
                         <button
-                          onClick={() => setIsSubsidiariesOpen(!isSubsidiariesOpen)}
+                          onClick={() => {
+                            if (item.label === "Nos formations") {
+                              setIsSubsidiariesOpen(!isSubsidiariesOpen);
+                            } else if (item.label === "Nos formats pédagogiques") {
+                              setIsFormatsOpen(!isFormatsOpen);
+                            }
+                          }}
                           className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
                         >
                           {item.label}
                           <ChevronDown className={cn(
                             "w-4 h-4 transition-transform duration-300",
-                            isSubsidiariesOpen && "rotate-180"
+                            (item.label === "Nos formations" && isSubsidiariesOpen) || 
+                            (item.label === "Nos formats pédagogiques" && isFormatsOpen)
+                            ? "rotate-180" : ""
                           )} />
                         </button>
                         <AnimatePresence>
-                          {isSubsidiariesOpen && (
+                          {((item.label === "Nos formations" && isSubsidiariesOpen) || 
+                            (item.label === "Nos formats pédagogiques" && isFormatsOpen)) && (
                             <motion.div
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               className="pl-4 space-y-1"
                             >
-                              {subsidiaries.map((sub) => {
-                                const Icon = sub.icon;
-                                return (
+                              {item.label === "Nos formations" ? (
+                                subsidiaries.map((sub) => {
+                                  const Icon = sub.icon;
+                                  return (
+                                    <Link
+                                      key={sub.id}
+                                      to={`/filiale/${sub.slug}`}
+                                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors"
+                                    >
+                                      <div className={cn(
+                                        "w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br",
+                                        sub.gradientClass
+                                      )}>
+                                        <Icon className="w-4 h-4 text-white" />
+                                      </div>
+                                      <span className="text-sm font-medium">{sub.shortName}</span>
+                                    </Link>
+                                  );
+                                })
+                              ) : (
+                                formats.map((format) => (
                                   <Link
-                                    key={sub.id}
-                                    to={`/filiale/${sub.slug}`}
-                                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors"
+                                    key={format.id}
+                                    to={format.href}
+                                    className="group flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-all duration-300 transform hover:scale-105 hover:shadow-md"
                                   >
-                                    <div className={cn(
-                                      "w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br",
-                                      sub.gradientClass
-                                    )}>
-                                      <Icon className="w-4 h-4 text-white" />
+                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
+                                      <div className="w-4 h-4 bg-primary rounded transition-all duration-300 group-hover:scale-110"></div>
                                     </div>
-                                    <span className="text-sm font-medium">{sub.shortName}</span>
+                                    <div className="flex-1">
+                                      <span className="text-sm font-medium group-hover:text-primary transition-colors">{format.label}</span>
+                                      <div className="text-xs text-muted-foreground group-hover:text-primary/70 transition-colors">{format.description}</div>
+                                    </div>
+                                    <div className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                                   </Link>
-                                );
-                              })}
+                                ))
+                              )}
                             </motion.div>
                           )}
                         </AnimatePresence>
