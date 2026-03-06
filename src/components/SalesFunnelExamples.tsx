@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  CheckCircle2, ArrowRight, Star, Zap, Shield, TrendingUp, 
-  Users, Clock, Award, BookOpen, Target, Sparkles, Gift,
-  Crown, Gem, Lock, Key, Heart, AlertCircle, ChevronRight, ArrowLeft
+import {
+  CheckCircle2,
+  ArrowRight,
+  Star,
+  Zap,
+  Shield,
+  TrendingUp,
+  Users,
+  Clock,
+  Award,
+  BookOpen,
+  Target,
+  Sparkles,
+  Gift,
+  Crown,
+  Gem,
+  Lock,
+  Key,
+  Heart,
+  AlertCircle,
+  ChevronRight,
+  ArrowLeft,
 } from "lucide-react";
 
 // Types pour les tunnels de vente
@@ -43,7 +61,12 @@ const products: Product[] = [
     price: 299,
     originalPrice: 599,
     description: "Devenez expert en Python avec ce bootcamp intensif",
-    features: ["50+ heures de vidéo", "Projets pratiques", "Certificat", "Accès à vie"],
+    features: [
+      "50+ heures de vidéo",
+      "Projets pratiques",
+      "Certificat",
+      "Accès à vie",
+    ],
     isUpdated: true,
     updateVersion: "v3.2",
     updateDate: "2024-03-01",
@@ -51,7 +74,7 @@ const products: Product[] = [
     level: "débutant",
     duration: "40h",
     students: 15420,
-    rating: 4.8
+    rating: 4.8,
   },
   {
     id: "data-science",
@@ -59,7 +82,12 @@ const products: Product[] = [
     price: 499,
     originalPrice: 899,
     description: "Maîtrisez la science des données avec R et Python",
-    features: ["Machine Learning", "Deep Learning", "Projets réels", "Mentorat"],
+    features: [
+      "Machine Learning",
+      "Deep Learning",
+      "Projets réels",
+      "Mentorat",
+    ],
     isUpdated: true,
     updateVersion: "v2.5",
     updateDate: "2024-02-15",
@@ -67,7 +95,7 @@ const products: Product[] = [
     level: "avancé",
     duration: "60h",
     students: 8750,
-    rating: 4.9
+    rating: 4.9,
   },
   {
     id: "web-dev",
@@ -80,7 +108,7 @@ const products: Product[] = [
     level: "intermédiaire",
     duration: "45h",
     students: 12300,
-    rating: 4.7
+    rating: 4.7,
   },
   {
     id: "marketing-digital",
@@ -96,7 +124,7 @@ const products: Product[] = [
     level: "débutant",
     duration: "25h",
     students: 9800,
-    rating: 4.6
+    rating: 4.6,
   },
   {
     id: "blockchain",
@@ -109,8 +137,8 @@ const products: Product[] = [
     level: "avancé",
     duration: "50h",
     students: 3200,
-    rating: 4.8
-  }
+    rating: 4.8,
+  },
 ];
 
 // Tunnel 1: Classique avec scarcity
@@ -118,11 +146,12 @@ const classicFunnel: FunnelStep[] = [
   {
     id: "step1",
     title: "Offre Spéciale Limitée",
-    description: "Rejoignez des milliers d'étudiants et transformez votre carrière",
+    description:
+      "Rejoignez des milliers d'étudiants et transformez votre carrière",
     cta: "Profiter de l'offre -50%",
     urgency: "Plus que 12 places disponibles",
     discount: 50,
-    bonus: ["Guide PDF exclusif", "Webinaire mensuel", "Communauté privée"]
+    bonus: ["Guide PDF exclusif", "Webinaire mensuel", "Communauté privée"],
   },
   {
     id: "step2",
@@ -130,8 +159,8 @@ const classicFunnel: FunnelStep[] = [
     description: "L'offre expire dans 2 heures",
     cta: "S'inscrire maintenant",
     urgency: "⏰ Temps restant: 1h58min",
-    bonus: ["Bonus supplémentaire: Templates premium"]
-  }
+    bonus: ["Bonus supplémentaire: Templates premium"],
+  },
 ];
 
 // Tunnel 2: Premium avec valeur ajoutée
@@ -141,15 +170,20 @@ const premiumFunnel: FunnelStep[] = [
     title: "Formation Premium",
     description: "Accès VIP avec mentorat personnalisé",
     cta: "Devenir membre VIP",
-    bonus: ["Mentorat 1-to-1", "Sessions Q&A", "Projets personnalisés", "Certificat premium"]
+    bonus: [
+      "Mentorat 1-to-1",
+      "Sessions Q&A",
+      "Projets personnalisés",
+      "Certificat premium",
+    ],
   },
   {
     id: "step2",
     title: "Upgrade Exclusif",
     description: "Passez au niveau supérieur avec notre offre tout-inclus",
     cta: "Accéder à tout",
-    urgency: "Places limitées pour le mentorat"
-  }
+    urgency: "Places limitées pour le mentorat",
+  },
 ];
 
 // Tunnel 3: Gratuité puis montée en gamme
@@ -159,7 +193,7 @@ const freemiumFunnel: FunnelStep[] = [
     title: "Commencez Gratuitement",
     description: "Accédez aux premiers modules sans engagement",
     cta: "Commencer gratuitement",
-    bonus: ["5 leçons gratuites", "Quiz d'évaluation", "Certificat de base"]
+    bonus: ["5 leçons gratuites", "Quiz d'évaluation", "Certificat de base"],
   },
   {
     id: "step2",
@@ -167,8 +201,8 @@ const freemiumFunnel: FunnelStep[] = [
     description: "Accédez à tous les modules et fonctionnalités avancées",
     cta: "Passer à la version complète",
     discount: 30,
-    urgency: "Offre de lancement"
-  }
+    urgency: "Offre de lancement",
+  },
 ];
 
 // Tunnel 4: Urgence et social proof
@@ -180,15 +214,15 @@ const urgencyFunnel: FunnelStep[] = [
     cta: "Acheter maintenant",
     urgency: "⚡ Se termine dans 23h45min",
     discount: 75,
-    bonus: ["Pack de ressources", "Mise à jour gratuite à vie"]
+    bonus: ["Pack de ressources", "Mise à jour gratuite à vie"],
   },
   {
     id: "step2",
     title: "Derniers Instants",
     description: "Plus que quelques places à ce prix",
     cta: "Sécuriser ma place",
-    urgency: "🔥 Plus que 5 places !"
-  }
+    urgency: "🔥 Plus que 5 places !",
+  },
 ];
 
 // Tunnel 5: Communauté et transformation
@@ -198,23 +232,33 @@ const communityFunnel: FunnelStep[] = [
     title: "Rejoignez Notre Communauté",
     description: "Apprenez avec des experts et des passionnés",
     cta: "Rejoindre la communauté",
-    bonus: ["Accès communauté", "Live sessions", "Projets collaboratifs"]
+    bonus: ["Accès communauté", "Live sessions", "Projets collaboratifs"],
   },
   {
     id: "step2",
     title: "Devenez un Expert",
     description: "Le chemin complet vers la maîtrise",
     cta: "Commencer ma transformation",
-    urgency: "Prochaine session: Lundi"
-  }
+    urgency: "Prochaine session: Lundi",
+  },
 ];
 
 const funnels = [
-  { id: "classic", name: "Classique Scarcity", steps: classicFunnel, color: "blue" },
+  {
+    id: "classic",
+    name: "Classique Scarcity",
+    steps: classicFunnel,
+    color: "blue",
+  },
   { id: "premium", name: "Premium VIP", steps: premiumFunnel, color: "purple" },
   { id: "freemium", name: "Freemium", steps: freemiumFunnel, color: "green" },
   { id: "urgency", name: "Flash Sale", steps: urgencyFunnel, color: "red" },
-  { id: "community", name: "Communauté", steps: communityFunnel, color: "orange" }
+  {
+    id: "community",
+    name: "Communauté",
+    steps: communityFunnel,
+    color: "orange",
+  },
 ];
 
 interface SalesFunnelExamplesProps {
@@ -234,36 +278,36 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
         primaryLight: "bg-blue-50",
         text: "text-blue-600",
         border: "border-blue-200",
-        gradient: "from-blue-600 to-blue-500"
+        gradient: "from-blue-600 to-blue-500",
       },
       purple: {
         primary: "bg-purple-600",
         primaryLight: "bg-purple-50",
         text: "text-purple-600",
         border: "border-purple-200",
-        gradient: "from-purple-600 to-purple-500"
+        gradient: "from-purple-600 to-purple-500",
       },
       green: {
         primary: "bg-green-600",
         primaryLight: "bg-green-50",
         text: "text-green-600",
         border: "border-green-200",
-        gradient: "from-green-600 to-green-500"
+        gradient: "from-green-600 to-green-500",
       },
       red: {
         primary: "bg-[hsl(345_70%_35%)]",
         primaryLight: "bg-[hsl(345_75%_95%)]",
         text: "text-[hsl(345_70%_35%)]",
         border: "border-[hsl(345_70%_35%)]",
-        gradient: "from-[hsl(345_70%_35%)] to-[hsl(345_75%_50%)]"
+        gradient: "from-[hsl(345_70%_35%)] to-[hsl(345_75%_50%)]",
       },
       orange: {
         primary: "bg-orange-600",
         primaryLight: "bg-orange-50",
         text: "text-orange-600",
         border: "border-orange-200",
-        gradient: "from-orange-600 to-orange-500"
-      }
+        gradient: "from-orange-600 to-orange-500",
+      },
     };
     return themes[color as keyof typeof themes] || themes.blue;
   };
@@ -279,12 +323,15 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
       {/* Badge de mise à jour */}
       {product.isUpdated && (
         <div className="flex items-center gap-2 mb-4">
-          <div className={`px-3 py-1 ${theme.primaryLight} ${theme.text} rounded-full text-xs font-medium flex items-center gap-1`}>
+          <div
+            className={`px-3 py-1 ${theme.primaryLight} ${theme.text} rounded-full text-xs font-medium flex items-center gap-1`}
+          >
             <Sparkles className="w-3 h-3" />
             Produit à jour - {product.updateVersion}
           </div>
           <div className="text-xs text-gray-500">
-            Mis à jour le {new Date(product.updateDate!).toLocaleDateString('fr-FR')}
+            Mis à jour le{" "}
+            {new Date(product.updateDate!).toLocaleDateString("fr-FR")}
           </div>
         </div>
       )}
@@ -294,9 +341,13 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
 
       {/* Prix */}
       <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl font-bold text-gray-900">{product.price} FCFA</span>
+        <span className="text-3xl font-bold text-gray-900">
+          {product.price * 655} FCFA
+        </span>
         {product.originalPrice && (
-          <span className="text-lg text-gray-400 line-through">{product.originalPrice} FCFA</span>
+          <span className="text-lg text-gray-400 line-through">
+            {product.originalPrice * 655} FCFA
+          </span>
         )}
         <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
           -{Math.round((1 - product.price / product.originalPrice!) * 100)}%
@@ -322,7 +373,10 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
       {/* Features */}
       <div className="space-y-2 mb-4">
         {product.features.map((feature, index) => (
-          <div key={index} className="flex items-center gap-2 text-sm text-gray-700">
+          <div
+            key={index}
+            className="flex items-center gap-2 text-sm text-gray-700"
+          >
             <CheckCircle2 className="w-4 h-4 text-green-500" />
             <span>{feature}</span>
           </div>
@@ -331,7 +385,9 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
 
       {/* Badge niveau */}
       <div className="flex items-center justify-between">
-        <span className={`px-3 py-1 ${theme.primaryLight} ${theme.text} rounded-full text-xs font-medium`}>
+        <span
+          className={`px-3 py-1 ${theme.primaryLight} ${theme.text} rounded-full text-xs font-medium`}
+        >
           Niveau {product.level}
         </span>
         <button
@@ -344,7 +400,13 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
     </motion.div>
   );
 
-  const FunnelStep = ({ step, isLast }: { step: FunnelStep; isLast: boolean }) => (
+  const FunnelStep = ({
+    step,
+    isLast,
+  }: {
+    step: FunnelStep;
+    isLast: boolean;
+  }) => (
     <motion.div
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
@@ -361,14 +423,27 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
         {/* Produit sélectionné - carte compacte */}
         <div className={`p-4 ${theme.primaryLight} rounded-lg`}>
           <div className="flex items-start justify-between mb-2">
-            <h3 className="font-semibold text-gray-900 text-sm">{selectedProduct.name}</h3>
-            <span className={`px-2 py-1 ${theme.primary} text-white rounded text-xs font-medium`}>
-              -{Math.round((1 - selectedProduct.price / selectedProduct.originalPrice!) * 100)}%
+            <h3 className="font-semibold text-gray-900 text-sm">
+              {selectedProduct.name}
+            </h3>
+            <span
+              className={`px-2 py-1 ${theme.primary} text-white rounded text-xs font-medium`}
+            >
+              -
+              {Math.round(
+                (1 - selectedProduct.price / selectedProduct.originalPrice!) *
+                  100,
+              )}
+              %
             </span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
-            <span className="text-xl font-bold text-gray-900">{selectedProduct.price} FCFA</span>
-            <span className="text-sm text-gray-400 line-through">{selectedProduct.originalPrice} FCFA</span>
+            <span className="text-xl font-bold text-gray-900">
+              {selectedProduct.price * 655} FCFA
+            </span>
+            <span className="text-sm text-gray-400 line-through">
+              {selectedProduct.originalPrice * 655} FCFA
+            </span>
           </div>
           <div className="flex items-center gap-3 text-xs text-gray-600">
             <div className="flex items-center gap-1">
@@ -397,7 +472,10 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
               </h4>
               <div className="space-y-1">
                 {step.bonus.map((bonus, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs text-gray-700">
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 text-xs text-gray-700"
+                  >
                     <CheckCircle2 className="w-3 h-3 text-green-500 flex-shrink-0" />
                     <span className="truncate">{bonus}</span>
                   </div>
@@ -408,9 +486,13 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
 
           {/* Urgence compacte */}
           {step.urgency && (
-            <div className={`p-3 ${theme.primaryLight} rounded-lg flex items-center gap-2`}>
+            <div
+              className={`p-3 ${theme.primaryLight} rounded-lg flex items-center gap-2`}
+            >
               <AlertCircle className={`w-4 h-4 ${theme.text} flex-shrink-0`} />
-              <span className={`text-sm font-medium ${theme.text}`}>{step.urgency}</span>
+              <span className={`text-sm font-medium ${theme.text}`}>
+                {step.urgency}
+              </span>
             </div>
           )}
         </div>
@@ -428,9 +510,157 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-7xl">
+        {/* Header avec navigation */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="font-medium">Retour aux cours</span>
+            </button>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-500">Tunnel actuel:</span>
+              <span
+                className={`px-3 py-1 ${theme.primary} text-white rounded-full text-sm font-medium`}
+              >
+                {selectedFunnel.name}
+              </span>
+            </div>
+          </div>
+
+          {/* Sélecteur de tunnels avec scroll horizontal */}
+          <div className="mb-8">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              Choisissez votre tunnel de vente
+            </h2>
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              {funnels.map((funnel) => (
+                <button
+                  key={funnel.id}
+                  onClick={() => {
+                    setSelectedFunnel(funnel);
+                    setCurrentStep(0);
+                  }}
+                  className={`flex-shrink-0 px-4 py-2 rounded-lg border-2 transition-all ${
+                    selectedFunnel.id === funnel.id
+                      ? `${theme.primary} text-white border-${theme.primary.split("-")[1]}-600`
+                      : "bg-white text-gray-700 border-gray-200 hover:border-gray-300"
+                  }`}
+                >
+                  <div className="text-sm font-medium">{funnel.name}</div>
+                  <div className="text-xs opacity-75">
+                    {funnel.steps.length} étapes
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Contenu principal avec scroll vertical */}
+          <div className="max-h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            {/* Sélection du produit */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">
+                Produit à promouvoir
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {products.map((product) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.02 }}
+                    onClick={() => setSelectedProduct(product)}
+                    className={`cursor-pointer rounded-xl border-2 transition-all ${
+                      selectedProduct.id === product.id
+                        ? "border-blue-500 shadow-lg"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <ProductCard product={product} />
+                  </motion.div>
+                ))}
               </div>
+            </div>
+
+            {/* Étapes du tunnel */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-bold text-gray-900">
+                  Étapes du tunnel
+                </h3>
+                <div className="flex items-center gap-2">
+                  {selectedFunnel.steps.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentStep
+                          ? `${theme.primary} w-8`
+                          : index < currentStep
+                            ? "bg-green-500"
+                            : "bg-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {selectedFunnel.steps.map((step, index) => (
+                  <motion.div
+                    key={step.id}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <FunnelStep
+                      step={step}
+                      isLast={index === selectedFunnel.steps.length - 1}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Indicateurs de performance */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">
+                Performance attendue
+              </h3>
+              <div className="grid md:grid-cols-4 gap-4">
+                {[
+                  { label: "Taux de conversion", value: "3.2%", trend: "+12%" },
+                  { label: "Panier moyen", value: "299€", trend: "+8%" },
+                  { label: "ROI", value: "320%", trend: "+25%" },
+                  { label: "Satisfaction", value: "4.8/5", trend: "+5%" },
+                ].map((metric, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white rounded-lg p-4 border border-gray-200"
+                  >
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {metric.value}
+                    </div>
+                    <div className="text-sm text-gray-600 mb-2">
+                      {metric.label}
+                    </div>
+                    <div className="text-xs text-green-600 font-medium">
+                      {metric.trend}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

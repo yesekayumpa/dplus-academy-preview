@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BarChart, Globe, Rocket, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import outils from "@/assets/woman-sitting-library-with-her-laptop.jpg";
 import softSkills from "@/assets/soft-skills.jpeg";
 import statistiques from "@/assets/statistiques.jpg";
@@ -103,19 +104,52 @@ const cardsData: CardData[] = [
 
 const InteractiveCards = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/sur-mesure");
+  };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      const interval = setInterval(() => {
+        setHoveredCard(prev => {
+          if (prev === null) return 1;
+          return prev >= cardsData.length ? 1 : prev + 1;
+        });
+      }, 3000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isMobile]);
 
   return (
     <div className="w-full py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div 
-          className="flex gap-4 items-center justify-center"
+          className={cn(
+            "flex gap-4 items-center justify-center",
+            isMobile && "flex-col gap-6"
+          )}
           layout
         >
           <AnimatePresence>
             {cardsData.map((card) => {
               const isHovered = hoveredCard === card.id;
               const isAnyHovered = hoveredCard !== null;
-              const isFirstCardDefaultHovered = card.id === 1 && hoveredCard === null;
+              const isFirstCardDefaultHovered = card.id === 1 && hoveredCard === null && !isMobile;
               const shouldShowHoveredState = isHovered || isFirstCardDefaultHovered;
               
               return (
@@ -123,12 +157,16 @@ const InteractiveCards = () => {
                   key={card.id}
                   className="relative cursor-pointer"
                   layout
-                  onHoverStart={() => setHoveredCard(card.id)}
-                  onHoverEnd={() => setHoveredCard(null)}
-                  initial={{ width: "200px", height: "400px" }}
+                  onHoverStart={!isMobile ? () => setHoveredCard(card.id) : undefined}
+                  onHoverEnd={!isMobile ? () => setHoveredCard(null) : undefined}
+                  onClick={handleCardClick}
+                  initial={{ 
+                    width: isMobile ? "100%" : "200px", 
+                    height: isMobile ? "300px" : "400px" 
+                  }}
                   animate={{
-                    width: shouldShowHoveredState ? "400px" : "200px",
-                    height: "400px",
+                    width: shouldShowHoveredState ? (isMobile ? "100%" : "400px") : (isMobile ? "100%" : "200px"),
+                    height: isMobile ? "300px" : "400px",
                     borderRadius: shouldShowHoveredState ? "24px" : "16px",
                     scale: 1
                   }}
@@ -136,9 +174,9 @@ const InteractiveCards = () => {
                     duration: 0.4,
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
-                  whileHover={{
+                  whileHover={!isMobile ? {
                     zIndex: 50
-                  }}
+                  } : undefined}
                 >
                   <motion.div
                     className="absolute inset-0 overflow-hidden rounded-[inherit]"
@@ -175,6 +213,7 @@ const InteractiveCards = () => {
                     <motion.div
                       className="absolute bottom-0 left-0 right-0 p-4 text-white"
                       layout
+                      style={{ padding: isMobile ? "16px" : "16px" }}
                     >
                       {/* Icon */}
                       <motion.div
@@ -191,7 +230,7 @@ const InteractiveCards = () => {
                       <motion.h3
                         className="font-bold text-lg mb-2"
                         animate={{
-                          fontSize: shouldShowHoveredState ? "1.25rem" : "1rem",
+                          fontSize: shouldShowHoveredState ? (isMobile ? "1.125rem" : "1.25rem") : (isMobile ? "1rem" : "1rem"),
                           marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
                         }}
                         transition={{ duration: 0.3 }}
@@ -203,7 +242,7 @@ const InteractiveCards = () => {
                       <motion.p
                         className="text-white text-sm leading-relaxed"
                         animate={{
-                          fontSize: shouldShowHoveredState ? "0.875rem" : "0.75rem",
+                          fontSize: shouldShowHoveredState ? (isMobile ? "0.8rem" : "0.875rem") : (isMobile ? "0.75rem" : "0.75rem"),
                           opacity: shouldShowHoveredState ? 0.9 : 0.7,
                           display: shouldShowHoveredState ? "block" : "-webkit-box"
                         }}

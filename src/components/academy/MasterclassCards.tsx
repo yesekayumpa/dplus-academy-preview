@@ -1,4 +1,7 @@
+"use client"
+
 import { Star } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export interface MasterclassCardData {
   id: string
@@ -20,8 +23,17 @@ interface MasterclassCardProps {
 }
 
 export function MasterclassCard({ data }: MasterclassCardProps) {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/sur-mesure")
+  }
+
   return (
-    <div className="group flex w-[280px] flex-shrink-0 cursor-pointer flex-col gap-2 sm:w-[300px]">
+    <div 
+      className="group flex w-[280px] flex-shrink-0 cursor-pointer flex-col gap-2 sm:w-[300px] md:w-[320px] lg:w-[280px] xl:w-[300px] snap-center"
+      onClick={handleClick}
+    >
       <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
         <img
           src={data.image || "/placeholder.svg"}
@@ -30,46 +42,49 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
         />
       </div>
 
-      <div className="flex flex-col gap-1 px-0.5">
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-foreground">
+      <div className="flex flex-col gap-1 px-0.5 sm:px-1">
+        <h3 className="line-clamp-2 text-xs sm:text-sm font-bold leading-snug text-foreground">
           {data.title}
         </h3>
         <p className="text-xs text-muted-foreground">{data.instructor}</p>
 
-        <div className="mt-1 flex items-center gap-2">
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-1 flex flex-col sm:flex-row sm:items-center gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             {data.isBestseller && (
-              <span className="rounded-sm bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">
+              <span className="rounded-sm bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-800">
                 {"Les mieux not\u00E9s"}
               </span>
             )}
             {data.isCertified && (
-              <span className="rounded-sm bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-800">
+              <span className="rounded-sm bg-green-100 px-1.5 py-0.5 text-xs font-semibold text-green-800">
                 {"Certifi\u00E9"}
               </span>
             )}
             {data.isPrensential ? 
-              <span className="rounded-sm bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-800">
+              <span className="rounded-sm bg-gray-100 px-1.5 py-0.5 text-xs font-semibold text-gray-800">
                 {"Pr\u00E9sential"}
               </span> :
-              <span className="rounded-sm bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-800">
+              <span className="rounded-sm bg-blue-100 px-1.5 py-0.5 text-xs font-semibold text-blue-800">
                 {"En ligne"}
               </span>
             }
             {data.isFollowed && (
-              <span className="rounded-sm bg-orange-100 px-2 py-0.5 text-xs font-semibold text-orange-800">
+              <span className="rounded-sm bg-orange-100 px-1.5 py-0.5 text-xs font-semibold text-orange-800">
                 {"Suivi"}
               </span>
             )}
           </div>
           
-          <div className="flex items-center gap-1">
-            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+          <div className="flex items-center gap-1 sm:mt-0 mt-2">
+            <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-amber-400 text-amber-400" />
             <span className="text-xs font-semibold text-foreground">
               {data.rating.toFixed(1).replace(".", ",")}
             </span>
+            <span className="text-xs text-muted-foreground hidden sm:inline">
+              {data.reviewCount} avis
+            </span>
           </div>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground sm:hidden">
             {data.reviewCount} avis
           </span>
         </div>

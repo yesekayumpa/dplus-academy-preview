@@ -160,6 +160,11 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, hsl(207 70% 28%) 0%, hsl(210 29% 24%) 100%)',
       },
+      scrollbar: {
+        thin: 'thin',
+        'thumb-gray-300': 'gray-300',
+        'track-gray-100': 'gray-100',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

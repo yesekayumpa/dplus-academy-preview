@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Clock, User, DollarSign, Star, ChevronRight, ArrowUpRight, Check } from "lucide-react";
+import { X, Clock, User, DollarSign, Star, ChevronRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./button";
 import { useState } from "react";
@@ -182,7 +182,6 @@ export function TrainingModal({
                       className="flex-1 bg-gradient-to-r from-academy to-academy/90 hover:from-academy/90 hover:to-academy/80 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center group/button"
                     >
                       <span>Je m'inscris maintenant</span>
-                      <ArrowUpRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-1" />
                     </Button>
                   </div>
                 </div>

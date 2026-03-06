@@ -118,19 +118,19 @@ const AcademySection = () => {
   ];
 
   return (
-    <div className="space-y-24">
+    <div className="space-y-4">
      {/* Piliers de formation – Version Premium */}
-      <section className="relative py-24">
+      <section className="relative py-2">
         {/* Fond subtil */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
         <div className="relative container mx-auto px-4 max-w-6xl">
           {/* Header */}
-          <div className="text-center mb-20 max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
               Nos Piliers de Formation
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               Une approche structurée pour un apprentissage durable et impactant
             </p>
             <div className="w-20 h-1 rounded-full bg-gradient-to-r from-academy to-academy-light mx-auto" />
@@ -141,9 +141,9 @@ const AcademySection = () => {
       </section>
 
       
-<section className="bg-muted/30 py-16 rounded-2xl">
+<section className="bg-muted/30 py-4 rounded-2xl">
         <div className="container mx-auto px-4 max-w-8xl">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-8">
             Nos formats pédagogiques
           </h2>
           <div className="max-w-6xl mx-auto">
@@ -159,7 +159,7 @@ const AcademySection = () => {
                   buttonText: "Découvrir les masterclasses",
                   duration: "2h - 2 jours",
                   level: "Tous niveaux",
-                  price: "À partir de 199 FCFA",
+                  price: "À partir de 130 345 FCFA",
                   details: [
                     "Interventions d'experts reconnus",
                     "Ateliers pratiques et études de cas",
@@ -223,9 +223,9 @@ const AcademySection = () => {
                 price={selectedTraining.price}
               >
                 {selectedTraining.details && selectedTraining.details.length > 0 && (
-                  <div className="mt-6 space-y-4">
+                  <div className="mt-4 space-y-3">
                     <h4 className="font-semibold text-lg">Ce que vous allez découvrir :</h4>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {selectedTraining.details.map((detail, index) => (
                         <li key={index} className="flex items-start space-x-3">
                           <div className="flex-shrink-0 mt-1">
@@ -237,7 +237,7 @@ const AcademySection = () => {
                     </ul>
                   </div>
                 )}
-                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <div className="mt-6 flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={() => {
                       window.open('https://academy.dmplus-group.com/', '_blank');
@@ -261,24 +261,66 @@ const AcademySection = () => {
       </section>
 
       {/* Vidéo d'introduction */}
-      <section className="py-16">
+      <section className="py-4">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-6">
+          <h2 className="text-3xl font-bold text-center mb-4">
             Découvrez notre formation en vidéo
           </h2>
-          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-12">
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
             Plongez dans l'univers de notre formation à travers cette vidéo de
             présentation qui vous donnera un aperçu de notre approche
             pédagogique et de nos valeurs.
           </p>
-          <div className="aspect-video max-w-5xl mx-auto bg-black rounded-xl overflow-hidden shadow-xl">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&showinfo=0&controls=1"
-              title="Présentation de la formation DM+ Academy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+          <div className="relative max-w-3xl mx-auto">
+            {/* Ordinateur portable avec vidéo intégrée */}
+            <div className="relative scale-75">
+              {/* Écran de l'ordinateur */}
+              <div className="relative bg-gray-900 rounded-t-2xl p-1.5 shadow-2xl">
+                {/* Barre supérieure de l'écran */}
+                <div className="flex items-center justify-between mb-1.5 px-1.5">
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="text-xs text-gray-400 font-medium">DM+ Academy</div>
+                  <div className="w-10"></div>
+                </div>
+                
+                {/* Conteneur de la vidéo */}
+                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
+                  <video
+                    className="w-full h-full"
+                    controls
+                    poster="/placeholder.svg"
+                    title="Présentation de la formation DM+ Academy"
+                  >
+                    <source src="/videos/your-video.mp4" type="video/mp4" />
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                  </video>
+                </div>
+              </div>
+              
+              {/* Clavier du laptop */}
+              <div className="relative bg-gray-800 h-12 rounded-b-2xl shadow-2xl">
+                {/* Trackpad */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-700 rounded-lg shadow-inner"></div>
+                
+                {/* Indicateurs lumineux */}
+                <div className="absolute bottom-1 left-2 flex gap-0.5">
+                  <div className="w-0.5 h-0.5 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-0.5 h-0.5 bg-gray-600 rounded-full"></div>
+                </div>
+              </div>
+              
+              {/* Base du laptop */}
+              <div className="relative h-2 bg-gray-900 rounded-b-3xl shadow-2xl transform scale-105"></div>
+            </div>
+            
+            {/* Effet de reflet sur l'écran */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-3xl"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -288,13 +330,13 @@ const AcademySection = () => {
       <MasterclassSection />
 
       {/* Publics cibles */}
-      <section>
+      <section className="pb-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-4">
+          <h2 className="text-3xl font-bold text-center mb-3">
             Nos publics cibles
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-academy to-academy-light mx-auto mb-12"></div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="w-16 h-0.5 bg-gradient-to-r from-academy to-academy-light mx-auto mb-8"></div>
+          <div className="grid md:grid-cols-3 gap-6">
             {targetAudiences.map((audience, index) => (
               <motion.div
                 key={index}
@@ -302,13 +344,13 @@ const AcademySection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="bg-card p-8 rounded-2xl border border-border text-center hover:shadow-lg transition-all"
+                className="bg-card p-6 rounded-2xl border border-border text-center hover:shadow-lg transition-all"
               >
-                <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-4">
+                <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-3">
                   {audience.icon}
                 </div>
-                <h3 className="font-semibold text-xl mb-3">{audience.title}</h3>
-                <p className="text-muted-foreground">{audience.description}</p>
+                <h3 className="font-semibold text-lg mb-2">{audience.title}</h3>
+                <p className="text-muted-foreground text-sm">{audience.description}</p>
               </motion.div>
             ))}
           </div>

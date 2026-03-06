@@ -1,0 +1,104 @@
+/* Scrollbar personnalisées pour une meilleure expérience utilisateur */
+
+/* Scrollbar verticale */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Scrollbar horizontale */
+.scrollbar-thin::-webkit-scrollbar-horizontal {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-horizontal-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-horizontal-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar-horizontal-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Variante pour les scrollbars plus discrètes */
+.scrollbar-thin.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+}
+
+.scrollbar-thin.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.scrollbar-thin.scrollbar-track-gray-100::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+/* Effet de scroll fluide */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Masquer la scrollbar mais garder la fonctionnalité */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scrollbar avec ombre pour effet de profondeur */
+.scrollbar-shadow::-webkit-scrollbar-track {
+  background: #f8fafc;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.scrollbar-shadow::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+  border-radius: 3px;
+}
+
+/* Animation pour les scrollbars */
+@keyframes scrollbar-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.scrollbar-animate::-webkit-scrollbar {
+  animation: scrollbar-fade 0.3s ease-out;
+}
+
+/* Styles pour Firefox */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.scrollbar-thin:hover {
+  scrollbar-color: #94a3b8 #f1f5f9;
+}

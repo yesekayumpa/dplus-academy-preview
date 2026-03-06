@@ -201,7 +201,7 @@ export const CartSidebar = () => {
                             
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-semibold text-[hsl(346,100%,35%)]">
-                                {item.price * item.quantity}€
+                                {item.price * item.quantity * 655} FCFA
                               </span>
                               <button
                                 onClick={() => removeFromCart(item.id)}
@@ -226,7 +226,7 @@ export const CartSidebar = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Total</span>
                     <span className="text-xl font-bold text-[hsl(346,100%,35%)]">
-                      {getTotalPrice()}€
+                      {getTotalPrice() * 655} FCFA
                     </span>
                   </div>
                   

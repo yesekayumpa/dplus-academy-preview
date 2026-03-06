@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Clock, Award, User, ArrowRightCircle, Star } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Award, User, Star } from 'lucide-react';
 import { Button } from './button';
 import { Link } from 'react-router-dom';
 
@@ -126,7 +126,6 @@ export function TrainingCarousel({
                         }`}
                       >
                         {buttonText}
-                        <ArrowRightCircle className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-1" />
                       </Link>
                     ) : (
                       <Button 
@@ -141,7 +140,6 @@ export function TrainingCarousel({
                         } flex items-center justify-center group/button`}
                       >
                         {buttonText}
-                        <ArrowRightCircle className="ml-2 h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-1" />
                       </Button>
                     )}
                   </div>

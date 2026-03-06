@@ -69,7 +69,7 @@ const AcademyPage = () => {
 
       
       {/* Team Section */}
-      <section className="py-24 bg-background">
+      <section className="py-6 pb-16 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -126,7 +126,7 @@ const AcademyPage = () => {
       </section>
 
       {/* Careers CTA */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-6 relative overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"

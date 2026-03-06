@@ -10,6 +10,7 @@ import MasterclassesPage from "./pages/MasterclassesPage";
 import FormatsPage from "./pages/FormatsPage";
 import ElearningPage from "./pages/ElearningPage";
 import SurMesurePage from "./pages/SurMesurePage";
+import TrainersPage from "./pages/TrainersPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,11 +24,13 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/nous-contacter" element={<ContactPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/masterclasses" element={<MasterclassesPage />} />
           <Route path="/formats" element={<FormatsPage />} />
           <Route path="/e-learning" element={<ElearningPage />} />
           <Route path="/sur-mesure" element={<SurMesurePage />} />
+          <Route path="/nos-formateurs" element={<TrainersPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

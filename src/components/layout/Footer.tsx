@@ -5,8 +5,7 @@ import {
   Instagram, 
   Mail, 
   Phone, 
-  MapPin,
-  ArrowUpRight
+  MapPin
 } from "lucide-react";
 import { subsidiaries } from "@/data/subsidiaries";
 import logo from "@/assets/academy-white.png";
@@ -76,7 +75,6 @@ const Footer = () => {
                     className="text-white/70 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
                     {sub.name}
-                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
               ))}
@@ -97,7 +95,6 @@ const Footer = () => {
                     className="text-white/70 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
                     {sub.name}
-                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
               ))}

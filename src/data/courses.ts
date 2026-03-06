@@ -34,11 +34,12 @@ export interface Course {
   prerequisites: string[];
   isUpdated: boolean;
   lastUpdateDate: string;
-  status: "disponible" | "réservation" | "achat" | "coach";
+  status: "disponible" | "réservation" | "achat" | "coach" | "bientôt_disponible";
   icon: typeof BookOpen;
   features: string[];
   schedule?: string;
   nextSession?: string;
+  availableDate?: string; // Nouveau champ pour la date de disponibilité
 }
 
 export const popularCourses: Course[] = [
@@ -50,13 +51,13 @@ export const popularCourses: Course[] = [
     category: "Data Science",
     level: "intermédiaire",
     duration: "40 heures",
-    price: 787152, // 1200€ * 655,96
+    price: 787152, // 1200 FCFA * 655,96
     rating: 4.8,
     reviews: 127,
     students: 450,
     instructor: "Dr. Marie Dubois",
     instructorTitle: "Data Scientist Senior",
-    image: "/assets/r-shiny-course.jpg",
+    image: "/assets/E-learning2.jpg",
     tags: ["R", "Shiny", "Data Visualization", "Web Apps"],
     objectives: [
       "Créer des applications web interactives",
@@ -86,13 +87,13 @@ export const popularCourses: Course[] = [
     category: "Data Science",
     level: "débutant",
     duration: "60 heures",
-    price: 983940, // 1500€ * 655,96
+    price: 983940, // 1500 FCFA * 655,96
     rating: 4.9,
     reviews: 203,
     students: 680,
     instructor: "Jean-Marc Martin",
     instructorTitle: "ML Engineer",
-    image: "/assets/python-data-science.jpg",
+    image: "/assets/E-learning2.jpg",
     tags: ["Python", "Pandas", "Machine Learning", "NumPy"],
     objectives: [
       "Manipuler des données avec pandas",
@@ -122,13 +123,13 @@ export const popularCourses: Course[] = [
     category: "Bureautique",
     level: "intermédiaire",
     duration: "30 heures",
-    price: 524768, // 800€ * 655,96
+    price: 524768, // 800 FCFA * 655,96
     rating: 4.7,
     reviews: 89,
     students: 320,
     instructor: "Sophie Laurent",
     instructorTitle: "Expert Excel",
-    image: "/assets/excel-avance.jpg",
+    image: "/assets/Masterclass.jpg",
     tags: ["Excel", "VBA", "Power Query", "Automatisation"],
     objectives: [
       "Maîtriser les fonctions complexes",
@@ -156,13 +157,13 @@ export const popularCourses: Course[] = [
     category: "Développement Web",
     level: "intermédiaire",
     duration: "50 heures",
-    price: 852748, // 1300€ * 655,96
+    price: 852748, // 1300 FCFA * 655,96
     rating: 4.8,
     reviews: 156,
     students: 410,
     instructor: "Thomas Bernard",
     instructorTitle: "Full Stack Developer",
-    image: "/assets/react-web-design.jpg",
+    image: "/assets/dakar-city.webp",
     tags: ["React", "JavaScript", "CSS", "Web Design"],
     objectives: [
       "Maîtriser React et ses hooks",
@@ -192,13 +193,13 @@ export const popularCourses: Course[] = [
     category: "Business Intelligence",
     level: "avancé",
     duration: "45 heures",
-    price: 721556, // 1100€ * 655,96
+    price: 721556, // 1100 FCFA * 655,96
     rating: 4.6,
     reviews: 94,
     students: 280,
     instructor: "Claire Petit",
     instructorTitle: "BI Consultant",
-    image: "/assets/bi-dashboard.jpg",
+    image: "/assets/Masterclass.jpg",
     tags: ["Power BI", "Tableau", "Data Analysis", "KPIs"],
     objectives: [
       "Maîtriser Power BI et Tableau",
@@ -226,13 +227,13 @@ export const popularCourses: Course[] = [
     category: "Cybersécurité",
     level: "débutant",
     duration: "35 heures",
-    price: 590364, // 900€ * 655,96
+    price: 590364, // 900 FCFA * 655,96
     rating: 4.7,
     reviews: 112,
     students: 390,
     instructor: "Marc Rousseau",
     instructorTitle: "Security Analyst",
-    image: "/assets/cybersecurity.jpg",
+    image: "/assets/Formateur Afrique.jpg",
     tags: ["Sécurité", "Réseaux", "Cryptographie", "Best Practices"],
     objectives: [
       "Comprendre les menaces cybersécurité",
@@ -253,6 +254,117 @@ export const popularCourses: Course[] = [
     ],
     schedule: "Flexible",
     nextSession: "2024-04-20"
+  },
+  {
+    id: "blockchain-development",
+    title: "Développement Blockchain & Web3",
+    description: "Maîtrisez la création d'applications décentralisées et smart contracts",
+    longDescription: "Formation complète sur l'écosystème blockchain. Apprenez à développer des DApps, créer des smart contracts et comprendre les fondements de la Web3.",
+    category: "Technologies Émergentes",
+    level: "avancé",
+    duration: "60 heures",
+    price: 1319920, // 2000 FCFA * 655,96
+    rating: 4.9,
+    reviews: 45,
+    students: 120,
+    instructor: "Dr. Alexandre Kofi",
+    instructorTitle: "Blockchain Architect",
+    image: "/assets/dmplus-tech.webp",
+    tags: ["Blockchain", "Ethereum", "Smart Contracts", "Web3"],
+    objectives: [
+      "Développer des smart contracts",
+      "Créer des DApps complètes",
+      "Comprendre les mécanismes de consensus",
+      "Déployer sur différentes blockchains"
+    ],
+    prerequisites: ["JavaScript avancé", "Concepts de programmation distribuée"],
+    isUpdated: false,
+    lastUpdateDate: "2024-03-01",
+    status: "bientôt_disponible",
+    icon: Shield,
+    features: [
+      "Projets blockchain réels",
+      "Accès aux testnets",
+      "Certification Blockchain",
+      "Support expert"
+    ],
+    schedule: "3x par semaine",
+    nextSession: "2024-05-15",
+    availableDate: "2024-05-15"
+  },
+  {
+    id: "ai-machine-learning",
+    title: "Intelligence Artificielle & Machine Learning",
+    description: "Devenez expert en IA et développez des modèles de machine learning",
+    longDescription: "Formation intensive sur l'intelligence artificielle moderne. Couvre le deep learning, les réseaux de neurones, NLP et les applications pratiques de l'IA.",
+    category: "Intelligence Artificielle",
+    level: "avancé",
+    duration: "80 heures",
+    price: 1649900, // 2500 FCFA * 655,96
+    rating: 4.8,
+    reviews: 89,
+    students: 280,
+    instructor: "Dr. Marie Claire",
+    instructorTitle: "AI Research Scientist",
+    image: "/assets/vr-headset.webp",
+    tags: ["Machine Learning", "Deep Learning", "Neural Networks", "NLP"],
+    objectives: [
+      "Maîtriser les algorithmes de ML",
+      "Développer des réseaux de neurones",
+      "Appliquer le NLP",
+      "Déployer des modèles IA"
+    ],
+    prerequisites: ["Python avancé", "Mathématiques", "Statistiques"],
+    isUpdated: false,
+    lastUpdateDate: "2024-03-05",
+    status: "bientôt_disponible",
+    icon: Cpu,
+    features: [
+      "GPU Cloud access",
+      "Projets IA réels",
+      "Certification ML Engineer",
+      "Mentorat par experts"
+    ],
+    schedule: "2x par semaine",
+    nextSession: "2024-06-01",
+    availableDate: "2024-06-01"
+  },
+  {
+    id: "cybersecurity-advanced",
+    title: "Cybersécurité Avancée & Ethical Hacking",
+    description: "Devenez expert en sécurité informatique et tests d'intrusion",
+    longDescription: "Formation spécialisée en cybersécurité avancée. Apprenez les techniques de pentesting, l'analyse de vulnérabilités et la protection des systèmes critiques.",
+    category: "Cybersécurité",
+    level: "avancé",
+    duration: "70 heures",
+    price: 1319920, // 2000 FCFA * 655,96
+    rating: 4.9,
+    reviews: 67,
+    students: 195,
+    instructor: "Jean-Pierre Ndiaye",
+    instructorTitle: "Cybersecurity Expert",
+    image: "/assets/Formateur Afrique.jpg",
+    tags: ["Pentesting", "Sécurité Réseau", "Cryptographie", "Forensics"],
+    objectives: [
+      "Effectuer des tests d'intrusion",
+      "Analyser les vulnérabilités",
+      "Mettre en place des défenses",
+      "Gérer les incidents de sécurité"
+    ],
+    prerequisites: ["Réseaux", "Linux", "Scripting"],
+    isUpdated: false,
+    lastUpdateDate: "2024-03-10",
+    status: "bientôt_disponible",
+    icon: Shield,
+    features: [
+      "Lab virtuels sécurisés",
+      "Scénarios d'attaque réels",
+      "Certification CEH",
+      "Accès outils professionnels"
+    ],
+    schedule: "Flexible",
+    nextSession: "2024-05-20",
+    availableDate: "2024-05-20"
   }
 ];
 
