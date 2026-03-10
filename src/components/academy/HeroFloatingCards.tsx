@@ -13,7 +13,7 @@ export function HeroFloatingCards() {
       </div>
 
       {/* Certificates Earned Card */}
-      <div className="absolute left-0 top-4 z-20 rounded-xl bg-background p-3 shadow-lg lg:left-2 lg:top-8 lg:p-4">
+      <div className="absolute left-0 top-4 z-20 rounded-xl bg-background p-3 shadow-lg lg:left-2 lg:top-8 lg:p-4 hidden lg:block">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-red-100">
             <Award className="h-4 w-4 text-red-500" />
@@ -42,7 +42,7 @@ export function HeroFloatingCards() {
       </div>
 
       {/* Course Card */}
-      <div className="absolute -right-2 bottom-20 z-20 w-44 rounded-xl bg-background p-3 shadow-lg lg:bottom-24 lg:right-0">
+      <div className="absolute -right-2 bottom-20 z-20 w-44 rounded-xl bg-background p-3 shadow-lg lg:bottom-24 lg:right-0 hidden lg:block">
         <div className="mb-2 h-16 w-full rounded-lg bg-gradient-to-br from-primary/20 to-primary/5" />
         <p className="text-xs font-semibold text-foreground">
           UI/UX Design Fundamentals
@@ -66,7 +66,7 @@ export function HeroFloatingCards() {
       </div>
 
       {/* Small floating icon */}
-      <div className="absolute bottom-24 left-2 z-20 flex h-8 w-8 items-center justify-center rounded-lg bg-pink-100 shadow-md lg:left-8">
+      <div className="absolute bottom-24 left-2 z-20 flex h-8 w-8 items-center justify-center rounded-lg bg-pink-100 shadow-md lg:left-8 hidden lg:block">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
           <rect x="3" y="3" width="18" height="18" rx="3" stroke="#ec4899" strokeWidth="2" />
           <path d="M8 12l3 3 5-5" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
