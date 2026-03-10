@@ -1,79 +1,79 @@
-"use client"
+"use client";
 
-import { useRef, useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { MasterclassCard, type MasterclassCardData } from "./MasterclassCards"
-import { cn } from "@/lib/utils"
+import { useRef, useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MasterclassCard, type MasterclassCardData } from "./MasterclassCards";
+import { cn } from "@/lib/utils";
 
 interface MasterclassCarouselProps {
-  data: MasterclassCardData[]
+  data: MasterclassCardData[];
 }
 
 export function MasterclassCarousel({ data }: MasterclassCarouselProps) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   const checkScroll = useCallback(() => {
-    const el = scrollRef.current
-    if (!el) return
-    setCanScrollLeft(el.scrollLeft > 0)
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
-  }, [])
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-    checkScroll()
-    el.addEventListener("scroll", checkScroll, { passive: true })
-    window.addEventListener("resize", checkScroll)
+    const el = scrollRef.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    window.addEventListener("resize", checkScroll);
     return () => {
-      el.removeEventListener("scroll", checkScroll)
-      window.removeEventListener("resize", checkScroll)
-    }
-  }, [checkScroll])
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [checkScroll]);
 
   useEffect(() => {
     if (isMobile && data.length > 1) {
       const interval = setInterval(() => {
-        const el = scrollRef.current
-        if (!el) return
-        
-        const maxScroll = el.scrollWidth - el.clientWidth
-        const currentScroll = el.scrollLeft
-        
+        const el = scrollRef.current;
+        if (!el) return;
+
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        const currentScroll = el.scrollLeft;
+
         if (currentScroll >= maxScroll) {
-          el.scrollTo({ left: 0, behavior: "smooth" })
+          el.scrollTo({ left: 0, behavior: "smooth" });
         } else {
-          el.scrollBy({ left: 280, behavior: "smooth" })
+          el.scrollBy({ left: 280, behavior: "smooth" });
         }
-      }, 3000)
-      
-      return () => clearInterval(interval)
+      }, 3000);
+
+      return () => clearInterval(interval);
     }
-  }, [isMobile, data.length])
+  }, [isMobile, data.length]);
 
   const scroll = (direction: "left" | "right") => {
-    const el = scrollRef.current
-    if (!el) return
-    const scrollAmount = window.innerWidth < 640 ? 280 : 320
+    const el = scrollRef.current;
+    if (!el) return;
+    const scrollAmount = window.innerWidth < 640 ? 280 : 320;
     el.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   return (
     <div className="relative w-full">
@@ -91,7 +91,7 @@ export function MasterclassCarousel({ data }: MasterclassCarouselProps) {
         ref={scrollRef}
         className={cn(
           "scrollbar-hide flex gap-3 sm:gap-4 overflow-x-auto scroll-smooth pb-2",
-          isMobile && "snap-x snap-mandatory"
+          isMobile && "snap-x snap-mandatory",
         )}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
@@ -110,5 +110,5 @@ export function MasterclassCarousel({ data }: MasterclassCarouselProps) {
         </button>
       )}
     </div>
-  )
+  );
 }

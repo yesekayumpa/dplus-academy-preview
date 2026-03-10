@@ -848,16 +848,16 @@ const TrainersPage = () => {
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.9, opacity: 0, y: 20 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-bordeaux-100"
+                  className="bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] flex flex-col shadow-2xl border border-bordeaux-100"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header fixe avec bordeaux */}
-                  <div className="flex items-start gap-4 p-6 border-b border-bordeaux-100 bg-gradient-to-r from-bordeaux-50 to-white flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border-b border-bordeaux-100 bg-gradient-to-r from-bordeaux-50 to-white flex-shrink-0">
                     <div className="relative flex-shrink-0">
                       <img
                         src={selectedTrainer.image}
                         alt={selectedTrainer.name}
-                        className="w-20 h-20 rounded-xl object-cover border-4 border-white shadow-xl"
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border-4 border-white shadow-xl"
                       />
                       {selectedTrainer.featured && (
                         <div className="absolute -top-2 -right-2">
@@ -871,24 +871,24 @@ const TrainersPage = () => {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between">
-                        <div>
-                          <h2 className="text-xl font-bold text-gray-900 mb-1">
+                        <div className="flex-1 min-w-0">
+                          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
                             {selectedTrainer.name}
                           </h2>
-                          <p className="text-sm text-gray-600 mb-2">
+                          <p className="text-xs sm:text-sm text-gray-600 mb-2">
                             {selectedTrainer.title}
                           </p>
-                          <div className="flex items-center gap-3">
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                             <div className="flex items-center gap-1 bg-bordeaux-50 px-2 py-1 rounded-lg">
-                              <Star className="w-4 h-4 fill-bordeaux-500 text-bordeaux-500" />
-                              <span className="font-bold text-bordeaux-700">
+                              <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-bordeaux-500 text-bordeaux-500" />
+                              <span className="font-bold text-bordeaux-700 text-xs sm:text-sm">
                                 {selectedTrainer.rating}
                               </span>
                               <span className="text-bordeaux-600 text-xs">
                                 ({selectedTrainer.reviews})
                               </span>
                             </div>
-                            <Badge className="bg-green-100 text-green-700 border-0 px-2 py-1">
+                            <Badge className="bg-green-100 text-green-700 border-0 px-2 py-1 text-xs">
                               <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
                               Disponible
                             </Badge>
@@ -896,9 +896,9 @@ const TrainersPage = () => {
                         </div>
                         <button
                           onClick={() => setSelectedTrainer(null)}
-                          className="w-8 h-8 bg-bordeaux-100 rounded-full flex items-center justify-center text-bordeaux-600 hover:bg-bordeaux-200 transition-colors hover:scale-110 flex-shrink-0"
+                          className="w-7 h-7 sm:w-8 sm:h-8 bg-bordeaux-100 rounded-full flex items-center justify-center text-bordeaux-600 hover:bg-bordeaux-200 transition-colors hover:scale-110 flex-shrink-0"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                     </div>
@@ -906,7 +906,7 @@ const TrainersPage = () => {
 
                   {/* Corps scrollable */}
                   <div
-                    className="flex-1 overflow-y-auto p-6"
+                    className="flex-1 overflow-y-auto p-4 sm:p-6"
                     style={{
                       scrollbarWidth: "thin",
                       scrollbarColor: "#b91c1c #fee2e2",
@@ -931,39 +931,39 @@ const TrainersPage = () => {
                     `}</style>
 
                     {/* Bio avec bordeaux */}
-                    <div className="mb-6 p-4 bg-gradient-to-br from-bordeaux-50 via-red-50 to-amber-50 rounded-xl border-l-4 border-bordeaux-500">
-                      <Quote className="w-5 h-5 text-bordeaux-500 mb-2" />
-                      <p className="text-sm text-gray-700 leading-relaxed">
+                    <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-br from-bordeaux-50 via-red-50 to-amber-50 rounded-xl border-l-4 border-bordeaux-500">
+                      <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-bordeaux-500 mb-2" />
+                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                         {selectedTrainer.bio}
                       </p>
                     </div>
 
                     {/* Stats principales */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                      <div className="text-center p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
-                        <Users className="w-5 h-5 text-bordeaux-500 mx-auto mb-1" />
-                        <div className="text-lg font-bold text-gray-900">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
+                        <Users className="w-4 h-4 sm:w-5 sm:h-5 text-bordeaux-500 mx-auto mb-1" />
+                        <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {(selectedTrainer.students / 1000).toFixed(1)}k
                         </div>
                         <div className="text-xs text-gray-500">Étudiants</div>
                       </div>
-                      <div className="text-center p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
-                        <Briefcase className="w-5 h-5 text-bordeaux-500 mx-auto mb-1" />
-                        <div className="text-lg font-bold text-gray-900">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
+                        <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-bordeaux-500 mx-auto mb-1" />
+                        <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.experience}
                         </div>
                         <div className="text-xs text-gray-500">Expérience</div>
                       </div>
-                      <div className="text-center p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
-                        <BookOpen className="w-5 h-5 text-bordeaux-500 mx-auto mb-1" />
-                        <div className="text-lg font-bold text-gray-900">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
+                        <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-bordeaux-500 mx-auto mb-1" />
+                        <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.courses.length}
                         </div>
                         <div className="text-xs text-gray-500">Cours</div>
                       </div>
-                      <div className="text-center p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
-                        <Globe className="w-5 h-5 text-bordeaux-500 mx-auto mb-1" />
-                        <div className="text-lg font-bold text-gray-900">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-bordeaux-100">
+                        <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-bordeaux-500 mx-auto mb-1" />
+                        <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.languages.length}
                         </div>
                         <div className="text-xs text-gray-500">Langues</div>
@@ -971,15 +971,15 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Statistiques avancées avec bordeaux */}
-                    <div className="grid grid-cols-3 gap-3 mb-6">
-                      <div className="p-3 bg-bordeaux-50 rounded-xl">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
+                      <div className="p-2 sm:p-3 bg-bordeaux-50 rounded-xl">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs text-bordeaux-700">
                             Taux de complétion
                           </span>
-                          <Target className="w-4 h-4 text-bordeaux-500" />
+                          <Target className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                         </div>
-                        <div className="text-lg font-bold text-bordeaux-700">
+                        <div className="text-sm sm:text-lg font-bold text-bordeaux-700">
                           {selectedTrainer.stats?.completion || 95}%
                         </div>
                         <div className="w-full bg-bordeaux-200 h-1.5 rounded-full mt-1">
@@ -991,14 +991,14 @@ const TrainersPage = () => {
                           />
                         </div>
                       </div>
-                      <div className="p-3 bg-red-50 rounded-xl">
+                      <div className="p-2 sm:p-3 bg-red-50 rounded-xl">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs text-red-700">
                             Satisfaction
                           </span>
-                          <Star className="w-4 h-4 text-red-500 fill-red-500" />
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 fill-red-500" />
                         </div>
-                        <div className="text-lg font-bold text-red-700">
+                        <div className="text-sm sm:text-lg font-bold text-red-700">
                           {selectedTrainer.stats?.satisfaction || 4.8}/5
                         </div>
                         <div className="w-full bg-red-200 h-1.5 rounded-full mt-1">
@@ -1010,14 +1010,14 @@ const TrainersPage = () => {
                           />
                         </div>
                       </div>
-                      <div className="p-3 bg-amber-50 rounded-xl">
+                      <div className="p-2 sm:p-3 bg-amber-50 rounded-xl">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs text-amber-700">
                             Employabilité
                           </span>
-                          <Trophy className="w-4 h-4 text-amber-500" />
+                          <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-amber-500" />
                         </div>
-                        <div className="text-lg font-bold text-amber-700">
+                        <div className="text-sm sm:text-lg font-bold text-amber-700">
                           {selectedTrainer.stats?.employment || 92}%
                         </div>
                         <div className="w-full bg-amber-200 h-1.5 rounded-full mt-1">
@@ -1032,16 +1032,16 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Expertises en badges avec bordeaux */}
-                    <div className="mb-6">
-                      <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-bordeaux-500" />
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
+                        <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                         Expertises
                       </h3>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
                         {selectedTrainer.specialties.map((specialty, idx) => (
                           <Badge
                             key={idx}
-                            className="bg-bordeaux-100 text-bordeaux-700 border-0 px-3 py-1.5 text-xs font-medium hover:bg-bordeaux-200 transition-colors"
+                            className="bg-bordeaux-100 text-bordeaux-700 border-0 px-2 py-1 text-xs font-medium hover:bg-bordeaux-200 transition-colors"
                           >
                             {specialty}
                           </Badge>
@@ -1050,38 +1050,38 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Informations de contact et disponibilité */}
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="space-y-3">
-                        <h3 className="text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-bordeaux-500" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                      <div className="space-y-2 sm:space-y-3">
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2 flex items-center gap-2">
+                          <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                           Contact
                         </h3>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Mail className="w-4 h-4 text-bordeaux-400" />
-                            <span className="truncate">
+                        <div className="space-y-1 sm:space-y-2">
+                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                            <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-400" />
+                            <span className="truncate text-xs">
                               {selectedTrainer.email}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Phone className="w-4 h-4 text-bordeaux-400" />
-                            <span>{selectedTrainer.phone}</span>
+                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                            <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-400" />
+                            <span className="text-xs">{selectedTrainer.phone}</span>
                           </div>
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <h3 className="text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-bordeaux-500" />
+                      <div className="space-y-2 sm:space-y-3">
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2 flex items-center gap-2">
+                          <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                           Disponibilité
                         </h3>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Clock className="w-4 h-4 text-bordeaux-400" />
-                            <span>{selectedTrainer.availability}</span>
+                        <div className="space-y-1 sm:space-y-2">
+                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                            <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-400" />
+                            <span className="text-xs">{selectedTrainer.availability}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Calendar className="w-4 h-4 text-bordeaux-400" />
-                            <span>
+                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                            <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-400" />
+                            <span className="text-xs">
                               Prochaine session: {selectedTrainer.nextSession}
                             </span>
                           </div>
@@ -1090,19 +1090,19 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Certifications avec bordeaux */}
-                    <div className="mb-6">
-                      <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <Award className="w-4 h-4 text-bordeaux-500" />
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
+                        <Award className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                         Certifications
                       </h3>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
                         {selectedTrainer.certificates?.map((cert, idx) => (
                           <Badge
                             key={idx}
                             variant="outline"
-                            className="border-bordeaux-200 text-bordeaux-700 bg-bordeaux-50 px-3 py-1.5 text-xs"
+                            className="border-bordeaux-200 text-bordeaux-700 bg-bordeaux-50 px-2 py-1 text-xs"
                           >
-                            <CheckCircle2 className="w-3 h-3 mr-1" />
+                            <CheckCircle2 className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
                             {cert}
                           </Badge>
                         ))}
@@ -1110,20 +1110,20 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Réalisations avec bordeaux */}
-                    <div className="mb-6">
-                      <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <Trophy className="w-4 h-4 text-bordeaux-500" />
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
+                        <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                         Réalisations
                       </h3>
-                      <div className="space-y-2">
+                      <div className="space-y-1 sm:space-y-2">
                         {selectedTrainer.achievements.map(
                           (achievement, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-3 p-3 bg-bordeaux-50 rounded-lg border border-bordeaux-100"
+                              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-bordeaux-50 rounded-lg border border-bordeaux-100"
                             >
-                              <CheckCircle2 className="w-5 h-5 text-bordeaux-600 flex-shrink-0" />
-                              <span className="text-sm text-gray-700">
+                              <CheckCircle2 className="w-4 h-4 text-bordeaux-600 flex-shrink-0" />
+                              <span className="text-xs sm:text-sm text-gray-700">
                                 {achievement}
                               </span>
                             </div>
@@ -1133,26 +1133,26 @@ const TrainersPage = () => {
                     </div>
 
                     {/* Cours populaires avec bordeaux */}
-                    <div className="mb-4">
-                      <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                        <BookOpen className="w-4 h-4 text-bordeaux-500" />
+                    <div className="mb-3 sm:mb-4">
+                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
+                        <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-500" />
                         Cours populaires
                       </h3>
-                      <div className="grid grid-cols-1 gap-2">
+                      <div className="grid grid-cols-1 gap-1 sm:gap-2">
                         {selectedTrainer.courses.map((course, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center justify-between p-3 bg-bordeaux-50 rounded-lg border border-bordeaux-100 hover:bg-bordeaux-100 transition-colors cursor-pointer"
+                            className="flex items-center justify-between p-2 sm:p-3 bg-bordeaux-50 rounded-lg border border-bordeaux-100 hover:bg-bordeaux-100 transition-colors cursor-pointer"
                           >
-                            <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 bg-bordeaux-200 rounded-lg flex items-center justify-center">
-                                <BookOpen className="w-4 h-4 text-bordeaux-700" />
+                            <div className="flex items-center gap-2 sm:gap-3">
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-bordeaux-200 rounded-lg flex items-center justify-center">
+                                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-700" />
                               </div>
-                              <span className="text-sm font-medium text-gray-700">
+                              <span className="text-xs sm:text-sm font-medium text-gray-700">
                                 {course}
                               </span>
                             </div>
-                            <ArrowRight className="w-4 h-4 text-bordeaux-400" />
+                            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-bordeaux-400" />
                           </div>
                         ))}
                       </div>
@@ -1160,17 +1160,17 @@ const TrainersPage = () => {
                   </div>
 
                   {/* Footer fixe avec bordeaux */}
-                  <div className="p-4 border-t border-bordeaux-100 bg-bordeaux-50 flex-shrink-0">
-                    <div className="flex items-center justify-between">
+                  <div className="p-3 sm:p-4 border-t border-bordeaux-100 bg-bordeaux-50 flex-shrink-0">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                       <div className="flex gap-2">
                         {selectedTrainer.social.linkedin && (
                           <a
                             href={selectedTrainer.social.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-bordeaux-500 hover:bg-bordeaux-100 hover:text-bordeaux-600 transition-all border border-bordeaux-200 hover:scale-110"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center text-bordeaux-500 hover:bg-bordeaux-100 hover:text-bordeaux-600 transition-all border border-bordeaux-200 hover:scale-110"
                           >
-                            <Linkedin className="w-5 h-5" />
+                            <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                           </a>
                         )}
                         {selectedTrainer.social.twitter && (
@@ -1178,23 +1178,16 @@ const TrainersPage = () => {
                             href={selectedTrainer.social.twitter}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-bordeaux-500 hover:bg-bordeaux-100 hover:text-bordeaux-600 transition-all border border-bordeaux-200 hover:scale-110"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center text-bordeaux-500 hover:bg-bordeaux-100 hover:text-bordeaux-600 transition-all border border-bordeaux-200 hover:scale-110"
                           >
-                            <Twitter className="w-5 h-5" />
+                            <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                           </a>
                         )}
                       </div>
-                      <div className="flex gap-3">
-                        <Button
-                          variant="outline"
-                          className="h-10 px-6 border-bordeaux-300 text-bordeaux-700 hover:bg-bordeaux-100 hover:text-bordeaux-800"
-                        >
-                          <MessageSquare className="w-4 h-4 mr-2" />
-                          Contacter
-                        </Button>
-                        <Button className="h-10 px-6 bg-gradient-to-r from-red-600 to-bordeaux-700 hover:from-red-700 hover:to-bordeaux-800 text-white">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+                        <Button className="h-8 sm:h-10 px-3 sm:px-6 bg-gradient-to-r from-red-600 to-bordeaux-700 hover:from-red-700 hover:to-bordeaux-800 text-white text-xs sm:text-sm">
                           Voir les cours
-                          <ArrowRight className="w-4 h-4 ml-2" />
+                          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2" />
                         </Button>
                       </div>
                     </div>

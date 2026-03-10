@@ -74,19 +74,20 @@ const ContactPage = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Téléphone",
-      info: "+224 620 000 000",
-      description: "Lundi - Vendredi, 9h - 18h"
+      info: "+221 33 829 58 79 ",
+      info2: "+221 76 663 82 19",
+      description: "Lundi - Vendredi, 9h - 17h"
     },
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      info: "contact@dmplus-academy.com",
+      info: "academy@dmplus-group.com",
       description: "Réponse sous 24h"
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Adresse",
-      info: "Conakry, Guinée",
+      info: "Dakar, Sénégal",
       description: "Bureau principal"
     }
   ];
@@ -193,7 +194,7 @@ const ContactPage = () => {
                             value={formData.phone}
                             onChange={handleInputChange}
                             className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent"
-                            placeholder="+224 XXX XXX XXX"
+                            placeholder="+221 XXX XXX XXX"
                           />
                         </div>
                       </div>
@@ -336,15 +337,7 @@ const ContactPage = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Lundi - Vendredi</span>
-                    <span className="font-medium">9h - 18h</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Samedi</span>
-                    <span className="font-medium">9h - 14h</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Dimanche</span>
-                    <span className="text-muted-foreground">Fermé</span>
+                    <span className="font-medium">9h - 17h</span>
                   </div>
                 </div>
               </Card>

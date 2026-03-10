@@ -38,6 +38,40 @@ import SalesFunnelExamples from "@/components/SalesFunnelExamples";
 // Données des cours enrichies
 const courses = [
   {
+    id: 9,
+    title: "Formation Graphisme",
+    instructor: "DIGITALMIND+ ACADEMY",
+    instructorTitle: "Formation Professionnelle",
+    instructorAvatar: "/assets/academy-white.png",
+    price: 4900,
+    originalPrice: 9900,
+    image: "/assets/pack-design-graphique-removebg-preview.png",
+    category: "Design",
+    level: "Débutant",
+    duration: "30h",
+    students: 2500,
+    rating: 4.7,
+    reviews: 180,
+    isUpdated: true,
+    updateVersion: "v1.0",
+    updateDate: "2024-03-15",
+    features: [
+      "Photoshop, Illustrator et Indesign",
+      "Pack en Marketing Digital",
+      "Pack en Montage vidéo",
+      "Certificat",
+    ],
+    icon: Palette,
+    color: "red",
+    studentsCount: 2500,
+    lastUpdated: "Mars 2024",
+    tags: ["Photoshop", "Illustrator", "Indesign", "Graphisme"],
+    modules: 15,
+    language: "Français",
+    certificate: true,
+    projects: 10,
+  },
+  {
     id: 1,
     title: "Python Bootcamp",
     instructor: "Dr. Marie Dubois",
@@ -486,8 +520,7 @@ const ElearningPage = () => {
           <div className="flex justify-end pt-4 border-t border-gray-100 mt-auto">
             <button
               onClick={() => {
-                setSelectedCourse(course);
-                setShowFunnels(true);
+                window.open('https://dmplus-tunnel-de-vente-cgpg.vercel.app/', '_blank');
               }}
               className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm font-medium rounded-lg hover:from-red-700 hover:to-red-800 transition-all shadow-md hover:shadow-lg flex items-center gap-1"
             >
@@ -607,13 +640,14 @@ const ElearningPage = () => {
         </nav>
 
         {/* Hero Section - Design épuré avec hauteur réduite */}
-        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[450px] flex items-center overflow-hidden">
+        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[600px] lg:min-h-[450px] flex items-center overflow-hidden">
           {/* Image de fond avec overlay sophistiqué */}
           <div className="absolute inset-0">
             <img
               src="/assets/E-learning2.jpg"
               alt="E-learning platform"
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover object-center opacity-40 lg:object-cover"
+              style={{ objectPosition: "center 20%" }}
             />
             {/* Overlay avec dégradé plus léger */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-950/90 via-red-900/80 to-red-800/70" />
@@ -624,14 +658,14 @@ const ElearningPage = () => {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-400/10 rounded-full blur-3xl" />
 
           {/* Contenu principal */}
-          <div className="relative container mx-auto px-4 py-12 max-w-7xl z-10">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="relative container mx-auto px-4 py-8 lg:py-12 max-w-7xl z-10">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
               {/* Colonne gauche - Texte */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
-                className="space-y-5"
+                className="space-y-4 lg:space-y-5"
               >
                 {/* Badge premium simplifié */}
                 <motion.div
@@ -653,7 +687,7 @@ const ElearningPage = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
-                    className="text-4xl lg:text-5xl font-bold text-white leading-tight"
+                    className="text-3xl lg:text-5xl font-bold text-white leading-tight"
                   >
                     Transformez votre
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-white">
@@ -666,78 +700,33 @@ const ElearningPage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.4 }}
-                    className="text-base text-gray-200 mt-2 max-w-lg"
+                    className="text-sm lg:text-base text-gray-200 mt-2 max-w-lg"
                   >
                     Maîtrisez les compétences les plus recherchées et accélérez votre carrière.
                   </motion.p>
                 </div>
 
-                {/* Mini-statistiques en ligne */}
+                {/* Mini-statistiques en ligne - responsive */}
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
-                  className="flex items-center gap-6 bg-white/5 backdrop-blur-sm rounded-xl px-4 py-2 max-w-md border border-white/10"
+                  className="flex items-center gap-4 lg:gap-6 bg-white/5 backdrop-blur-sm rounded-xl px-3 lg:px-4 py-2 max-w-md border border-white/10"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="text-lg font-bold text-white">50+</div>
+                    <div className="text-base lg:text-lg font-bold text-white">50+</div>
                     <div className="text-xs text-gray-300">Formations</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-lg font-bold text-white">15k+</div>
+                    <div className="text-base lg:text-lg font-bold text-white">15k+</div>
                     <div className="text-xs text-gray-300">Apprenants</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-lg font-bold text-white">4.8</div>
+                    <div className="text-base lg:text-lg font-bold text-white">4.8</div>
                     <div className="text-xs text-gray-300">Note</div>
                   </div>
-                </motion.div>
-
-                {/* Actions compactes */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
-                  className="flex flex-wrap gap-3 pt-2"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm font-semibold rounded-lg shadow-lg hover:shadow-red-600/20 transition-all flex items-center gap-2"
-                  >
-                    Commencer
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="px-5 py-2.5 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-semibold rounded-lg hover:bg-white/20 transition-all flex items-center gap-2"
-                  >
-                    <Play className="w-3.5 h-3.5" />
-                    Démo
-                  </motion.button>
-                </motion.div>
-
-                {/* Tags compacts */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.4 }}
-                  className="flex flex-wrap items-center gap-2 pt-2"
-                >
-                  <span className="text-xs text-gray-400">Populaires:</span>
-                  {["Développement", "Data", "Design", "Marketing"].map((tag, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedCategory(tag)}
-                      className="px-2.5 py-1 text-xs text-white bg-white/10 rounded-full hover:bg-red-600/30 transition-all border border-white/10"
-                    >
-                      #{tag}
-                    </button>
-                  ))}
                 </motion.div>
               </motion.div>
 
@@ -746,9 +735,9 @@ const ElearningPage = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="hidden lg:block relative"
+                className="lg:block relative mt-8 lg:mt-0 w-full"
               >
-                <div className="relative max-w-md mx-auto">
+                <div className="relative w-full max-w-sm mx-auto lg:max-w-md lg:mx-auto">
                   {/* Image principale avec overlay */}
                   <div className="relative rounded-xl overflow-hidden shadow-xl">
                     <img
@@ -756,20 +745,7 @@ const ElearningPage = () => {
                       alt="Student learning"
                       className="w-full h-auto object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-red-900/30 via-transparent to-transparent" />
                   </div>
-
-                  {/* Badge flottant unique et compact */}
-                  <motion.div 
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute -top-3 -right-3 bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-2 shadow-lg"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Award className="w-4 h-4 text-white" />
-                      <span className="text-xs font-medium text-white">Certifié</span>
-                    </div>
-                  </motion.div>
 
                   {/* Mini progress bar */}
                   <div className="absolute bottom-3 left-3 right-3">
@@ -795,26 +771,30 @@ const ElearningPage = () => {
         </section>
 
         {/* Filtres avancés */}
-        <section className="pt-12 pb-12">
+        <section className="pt-8 pb-8 lg:pt-12 lg:pb-12">
           <div className="container mx-auto px-4 max-w-7xl">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Nos formations
-                </h2>
-                <p className="text-gray-500">
-                  {filteredCourses.length} cours disponibles
-                </p>
+            <div className="flex flex-col gap-6 mb-8">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h2 className="text-lg lg:text-xl font-bold text-gray-900 mb-2">
+                    Nos formations
+                  </h2>
+                  <p className="text-gray-500 text-xs lg:text-sm">
+                    {filteredCourses.length} cours disponibles
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
-                {/* Filtre catégorie */}
-                <div className="flex items-center gap-2 p-1 bg-gray-100 rounded-lg">
+              {/* Filtres - Stack sur mobile */}
+              <div className="flex flex-col gap-4">
+                {/* Filtre catégorie - Full width sur mobile */}
+                <div className="flex items-center gap-2 p-1 bg-gray-100 rounded-lg overflow-x-auto">
                   {categories.slice(0, 4).map((category) => (
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                      className={`px-3 lg:px-4 py-2 text-xs lg:text-sm font-medium rounded-lg transition-all whitespace-nowrap ${
                         selectedCategory === category
                           ? "bg-white text-red-600 shadow-md"
                           : "text-gray-600 hover:text-red-600"
@@ -823,97 +803,33 @@ const ElearningPage = () => {
                       {category === "all" ? "Tous" : category}
                     </button>
                   ))}
-                  <button
-                    onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    className="px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-white rounded-lg transition-colors"
-                  >
-                    <Filter className="w-4 h-4" />
-                  </button>
                 </div>
 
-                {/* Filtre niveau */}
-                <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                >
-                  {levels.map((level) => (
-                    <option key={level} value={level}>
-                      {level === "all" ? "Tous niveaux" : level}
-                    </option>
-                  ))}
-                </select>
+                {/* Filtres secondaires - Horizontal sur mobile */}
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* Filtre niveau */}
+                  <select
+                    value={selectedLevel}
+                    onChange={(e) => setSelectedLevel(e.target.value)}
+                    className="px-3 lg:px-4 py-2 border border-gray-200 rounded-lg text-xs lg:text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 min-w-0"
+                  >
+                    {levels.map((level) => (
+                      <option key={level} value={level}>
+                        {level === "all" ? "Tous niveaux" : level}
+                      </option>
+                    ))}
+                  </select>
 
-                {/* Tri */}
-                <select className="px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500">
-                  <option>Plus populaires</option>
-                  <option>Mieux notés</option>
-                  <option>Prix croissant</option>
-                  <option>Prix décroissant</option>
-                </select>
+                  {/* Tri */}
+                  <select className="px-3 lg:px-4 py-2 border border-gray-200 rounded-lg text-xs lg:text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 min-w-0">
+                    <option>Plus populaires</option>
+                    <option>Mieux notés</option>
+                    <option>Prix croissant</option>
+                    <option>Prix décroissant</option>
+                  </select>
+                </div>
               </div>
             </div>
-
-            {/* Filtres avancés (expand) */}
-            <AnimatePresence>
-              {isFilterOpen && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden mb-6"
-                >
-                  <div className="p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Prix maximum
-                        </label>
-                        <input
-                          type="range"
-                          min="0"
-                          max="500"
-                          value={priceRange[1] / 655}
-                          onChange={(e) =>
-                            setPriceRange([0, parseInt(e.target.value) * 655])
-                          }
-                          className="w-full accent-red-600"
-                        />
-                        <div className="flex justify-between mt-2">
-                          <span className="text-sm text-gray-500">0 FCFA</span>
-                          <span className="text-sm font-medium text-red-600">
-                            {priceRange[1].toLocaleString()} FCFA
-                          </span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Durée
-                        </label>
-                        <select className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500">
-                          <option>Toutes durées</option>
-                          <option>Moins de 20h</option>
-                          <option>20h - 40h</option>
-                          <option>Plus de 40h</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Langue
-                        </label>
-                        <select className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500">
-                          <option>Toutes langues</option>
-                          <option>Français</option>
-                          <option>Anglais</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </section>
 

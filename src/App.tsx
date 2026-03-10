@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ContactPage from "./pages/ContactPage";
 import MasterclassPage from "./pages/MasterclassPage";
 import MasterclassesPage from "./pages/MasterclassesPage";
+import MasterclassDetailPage from "./pages/MasterclassDetailPage";
 import FormatsPage from "./pages/FormatsPage";
 import ElearningPage from "./pages/ElearningPage";
 import SurMesurePage from "./pages/SurMesurePage";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/nous-contacter" element={<ContactPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/masterclasses" element={<MasterclassesPage />} />
+          <Route path="/masterclass/:id" element={<MasterclassDetailPage />} />
           <Route path="/formats" element={<FormatsPage />} />
           <Route path="/e-learning" element={<ElearningPage />} />
           <Route path="/sur-mesure" element={<SurMesurePage />} />

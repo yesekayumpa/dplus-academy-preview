@@ -2,15 +2,15 @@ import { useState, useMemo } from "react";
 import { 
   Search, Calendar, Clock, Users, Play, BookOpen, ArrowRight, 
   Award, TrendingUp, Star, Filter, X, ChevronRight, Sparkles,
-  GraduationCap, Briefcase, LineChart, Globe, Zap, Shield, ShoppingCart,
+  GraduationCap, Briefcase, LineChart, Globe, Zap, Shield,
   CheckCircle2, Target, Eye, Download, Heart, Share2, Server,
   Database, Cloud, Cpu, Network, BarChart, PieChart, Brain,
   Code, Layers, GitBranch, Box, FileText, Trophy, Medal
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/layout/Layout";
-import { CartProvider, CartSidebar, CartButton, useCart } from "@/components/CartContext";
 import MasterclassRegistrationForm from "@/components/MasterclassRegistrationForm";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 // Données enrichies des masterclass avec structure détaillée
 const masterclassData = [
@@ -18,7 +18,7 @@ const masterclassData = [
     id: 1,
     title: "Big Data avec Apache Spark",
     subtitle: "Big Data & Apache Spark – Niveau Professionnel",
-    tagline: "💡 Une formation stratégique orientée carrière",
+    tagline: " Une formation stratégique orientée carrière",
     description: "La DM+ Academy lance un programme intensif dédié aux technologies Big Data modernes, centré sur Apache Spark, outil incontournable utilisé par les grandes entreprises technologiques.",
     instructor: "Antoine Bernard",
     instructorTitle: "Data Engineer, Datadog",
@@ -38,7 +38,7 @@ const masterclassData = [
     
     // Nouvelle structure enrichie
     positioning: {
-      title: "🚀 Positionnement Premium",
+      title: " Positionnement Premium",
       points: [
         "Former des profils immédiatement opérationnels",
         "Répondre aux besoins du marché africain et international",
@@ -48,19 +48,19 @@ const masterclassData = [
     },
     
     program: {
-      title: "🧠 Programme structuré en 6 modules",
+      title: " Programme structuré en 6 modules",
       modules: [
-        { number: 1, name: "Fondamentaux Big Data", icon: <Database className="w-3.5 h-3.5" /> },
-        { number: 2, name: "Architecture distribuée & Spark Core", icon: <Server className="w-3.5 h-3.5" /> },
-        { number: 3, name: "Spark SQL & DataFrames avancés", icon: <BarChart className="w-3.5 h-3.5" /> },
-        { number: 4, name: "Streaming & temps réel", icon: <Network className="w-3.5 h-3.5" /> },
-        { number: 5, name: "Machine Learning distribué", icon: <Brain className="w-3.5 h-3.5" /> },
-        { number: 6, name: "Projet Professionnel complet", icon: <Target className="w-3.5 h-3.5" /> }
+        { number: "1", name: "Fondamentaux Big Data" },
+        { number: "2", name: "Architecture distribuée & Spark Core" },
+        { number: "3", name: "Spark SQL & DataFrames avancés" },
+        { number: "4", name: "Streaming & temps réel" },
+        { number: "5", name: "Machine Learning distribué" },
+        { number: "6", name: "Projet Professionnel complet" }
       ]
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: " Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un pipeline Big Data complet",
@@ -72,17 +72,17 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
-        { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Professionnel" },
-        { icon: <Briefcase className="w-3.5 h-3.5" />, text: "Portfolio projet" },
-        { icon: <TrendingUp className="w-3.5 h-3.5" />, text: "Compétence valorisable sur CV et LinkedIn" }
+        { icon: "🎓", text: "Certificat Professionnel" },
+        { icon: "💼", text: "Portfolio projet" },
+        { icon: "📈", text: "Compétence valorisable sur CV et LinkedIn" }
       ]
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation orientée résultats",
         "Coaching personnalisé",
@@ -93,7 +93,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des Data Engineers capables de :",
       skills: [
         "Concevoir une architecture Big Data",
@@ -105,10 +105,100 @@ const masterclassData = [
   },
   
   {
+    id: 99,
+    title: "Formation Sur Mesure - Entreprise",
+    subtitle: "Personnalisée selon vos besoins",
+    tagline: "La solution parfaite pour votre équipe",
+    description: "Formation entièrement personnalisée selon les besoins spécifiques de votre entreprise. Notre équipe d'experts conçoit un programme adapté à vos objectifs métier.",
+    instructor: "Équipe DM+ Academy",
+    instructorTitle: "Experts Formateurs",
+    instructorImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    date: "Sur demande",
+    time: "Flexible",
+    duration: "Sur mesure",
+    status: "upcoming",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    participants: 0,
+    category: "Sur Mesure",
+    level: "Tous niveaux",
+    rating: 5.0,
+    highlights: ["Personnalisé", "Entreprise", "Flexibilité"],
+    color: "purple",
+    price: 0,
+    
+    positioning: {
+      title: "🎯 Approche Sur Mesure",
+      points: [
+        "Analyse des besoins personnalisée",
+        "Programme adapté à votre secteur",
+        "Formateurs experts dans votre domaine",
+        "Suivi post-formation inclus",
+        "Modularité et flexibilité"
+      ]
+    },
+    
+    program: {
+      title: "📋 Programme Personnalisé",
+      modules: [
+        { number: "1", name: "Audit et analyse des besoins" },
+        { number: "2", name: "Conception pédagogique" },
+        { number: "3", name: "Déploiement sur mesure" },
+        { number: "4", name: "Accompagnement pratique" },
+        { number: "5", name: "Évaluation et ajustement" },
+        { number: "6", name: "Suivi post-formation" }
+      ]
+    },
+    
+    finalProject: {
+      title: "🚀 Projet Entreprise",
+      description: "Application concrète dans votre contexte :",
+      deliverables: [
+        "Solution métier personnalisée",
+        "Documentation technique",
+        "Formation des équipes internes",
+        "Plan de déploiement",
+        "Métriques de succès"
+      ]
+    },
+    
+    certification: {
+      title: "🏅 Certification Entreprise",
+      description: "Validation des compétences acquises :",
+      benefits: [
+        { icon: "🎯", text: "Certificat personnalisé" },
+        { icon: "📊", text: "Rapport de progression" },
+        { icon: "🤝", text: "Accompagnement 6 mois" }
+      ]
+    },
+    
+    differentiation: {
+      title: "💎 Excellence Sur Mesure",
+      points: [
+        "Expertise sectorielle reconnue",
+        "Méthodologie éprouvée",
+        "Flexibilité totale",
+        "ROI garanti",
+        "Support prioritaire 24/7"
+      ]
+    },
+    
+    objective: {
+      title: "🎯 Objectif Entreprise",
+      description: "Transformer votre organisation :",
+      skills: [
+        "Automatiser vos processus",
+        "Optimiser vos performances",
+        "Développer les compétences internes",
+        "Créer de la valeur business"
+      ]
+    }
+  },
+  
+  {
     id: 7,
     title: "Analyse Technique pour Traders",
     subtitle: "Trading Pro – Maîtrise des Marchés Financiers",
-    tagline: "💡 Une formation intensive pour devenir trader professionnel",
+    tagline: " Une formation intensive pour devenir trader professionnel",
     description: "La DM+ Academy propose un programme complet d'analyse technique, enseigné par un ancien trader de la Société Générale, pour maîtriser les marchés financiers.",
     instructor: "Philippe Moreau",
     instructorTitle: "Trader Professionnel, ex-Société Générale",
@@ -149,7 +239,7 @@ const masterclassData = [
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: " Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un journal de trading professionnel",
@@ -161,7 +251,7 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
         { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Trader Professionnel" },
@@ -171,7 +261,7 @@ const masterclassData = [
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation par un trader institutionnel",
         "Accès à des données de marché professionnelles",
@@ -182,7 +272,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des traders capables de :",
       skills: [
         "Analyser n'importe quel graphique en quelques secondes",
@@ -197,7 +287,7 @@ const masterclassData = [
     id: 2,
     title: "Automatisation des Tâches avec Python",
     subtitle: "Python Automation – Niveau Expert",
-    tagline: "💡 Une formation pratique pour automatiser votre travail",
+    tagline: " Une formation pratique pour automatiser votre travail",
     description: "La DM+ Academy lance un programme intensif pour maîtriser l'automatisation avec Python, compétence clé pour gagner en productivité.",
     instructor: "Thomas Martin",
     instructorTitle: "Lead Developer, Google",
@@ -216,7 +306,7 @@ const masterclassData = [
     price: 249,
     
     positioning: {
-      title: "🚀 Positionnement Premium",
+      title: " Positionnement Premium",
       points: [
         "Former des profils capables d'automatiser les tâches répétitives",
         "Maîtriser les bibliothèques Python professionnelles",
@@ -226,7 +316,7 @@ const masterclassData = [
     },
     
     program: {
-      title: "🧠 Programme structuré en 6 modules",
+      title: " Programme structuré en 6 modules",
       modules: [
         { number: 1, name: "Fondamentaux Python pour l'automatisation", icon: <Code className="w-3.5 h-3.5" /> },
         { number: 2, name: "Manipulation de fichiers et dossiers", icon: <FileText className="w-3.5 h-3.5" /> },
@@ -238,7 +328,7 @@ const masterclassData = [
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: " Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un script d'automatisation complet",
@@ -250,7 +340,7 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
         { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Python Automation" },
@@ -260,7 +350,7 @@ const masterclassData = [
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation 100% pratique",
         "Cas réels d'entreprise",
@@ -271,7 +361,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des experts en automation capables de :",
       skills: [
         "Automatiser n'importe quelle tâche répétitive",
@@ -286,7 +376,7 @@ const masterclassData = [
     id: 3,
     title: "Data Visualization avec Tableau",
     subtitle: "Tableau Expert – Data Storytelling",
-    tagline: "💡 Une formation pour transformer les données en décisions",
+    tagline: " Une formation pour transformer les données en décisions",
     description: "La DM+ Academy propose un programme complet de data visualization avec Tableau, outil leader du marché.",
     instructor: "Sophie Laurent",
     instructorTitle: "Data Visualization Expert, Microsoft",
@@ -305,7 +395,7 @@ const masterclassData = [
     price: 379,
     
     positioning: {
-      title: "🚀 Positionnement Premium",
+      title: " Positionnement Premium",
       points: [
         "Former des experts en visualisation de données",
         "Maîtriser Tableau comme un professionnel",
@@ -315,7 +405,7 @@ const masterclassData = [
     },
     
     program: {
-      title: "🧠 Programme structuré en 6 modules",
+      title: " Programme structuré en 6 modules",
       modules: [
         { number: 1, name: "Fondamentaux Tableau", icon: <PieChart className="w-3.5 h-3.5" /> },
         { number: 2, name: "Préparation et nettoyage des données", icon: <Database className="w-3.5 h-3.5" /> },
@@ -327,7 +417,7 @@ const masterclassData = [
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: " Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un dashboard interactif complet",
@@ -339,7 +429,7 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
         { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Tableau Expert" },
@@ -349,7 +439,7 @@ const masterclassData = [
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation certifiante Tableau",
         "Projets réels d'entreprise",
@@ -360,7 +450,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des data storytellers capables de :",
       skills: [
         "Créer des visualisations percutantes",
@@ -375,7 +465,7 @@ const masterclassData = [
     id: 4,
     title: "Business Plan pour Startups",
     subtitle: "Startup Finance – Levée de Fonds",
-    tagline: "💡 Une formation pour transformer votre idée en entreprise",
+    tagline: " Une formation pour transformer votre idée en entreprise",
     description: "La DM+ Academy propose un programme intensif pour maîtriser l'art du business plan et convaincre les investisseurs.",
     instructor: "Jean-Pierre Rousseau",
     instructorTitle: "Serial Entrepreneur, Mentor Station F",
@@ -394,7 +484,7 @@ const masterclassData = [
     price: 449,
     
     positioning: {
-      title: "🚀 Positionnement Premium",
+      title: " Positionnement Premium",
       points: [
         "Former des entrepreneurs capables de lever des fonds",
         "Maîtriser la finance startup",
@@ -404,7 +494,7 @@ const masterclassData = [
     },
     
     program: {
-      title: "🧠 Programme structuré en 6 modules",
+      title: "Programme structuré en 6 modules",
       modules: [
         { number: 1, name: "Modèle économique et value proposition", icon: <Target className="w-3.5 h-3.5" /> },
         { number: 2, name: "Étude de marché et concurrence", icon: <LineChart className="w-3.5 h-3.5" /> },
@@ -416,7 +506,7 @@ const masterclassData = [
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: "Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un business plan complet",
@@ -428,7 +518,7 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
         { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Entrepreneuriat" },
@@ -438,7 +528,7 @@ const masterclassData = [
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation par entrepreneur confirmé",
         "Mentorat personnalisé",
@@ -449,7 +539,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des entrepreneurs capables de :",
       skills: [
         "Construire un business plan solide",
@@ -464,7 +554,7 @@ const masterclassData = [
     id: 5,
     title: "Leadership et Intelligence Émotionnelle",
     subtitle: "Leadership EQ – Manager Coach",
-    tagline: "💡 Une formation pour développer votre leadership authentique",
+    tagline: " Une formation pour développer votre leadership authentique",
     description: "La DM+ Academy propose un programme unique pour développer votre leadership grâce à l'intelligence émotionnelle.",
     instructor: "Dr. Marie Dubois",
     instructorTitle: "PhD Psychologie, Coach Exécutif",
@@ -483,7 +573,7 @@ const masterclassData = [
     price: 279,
     
     positioning: {
-      title: "🚀 Positionnement Premium",
+      title: " Positionnement Premium",
       points: [
         "Former des leaders inspirants",
         "Maîtriser l'intelligence émotionnelle",
@@ -493,7 +583,7 @@ const masterclassData = [
     },
     
     program: {
-      title: "🧠 Programme structuré en 6 modules",
+      title: " Programme structuré en 6 modules",
       modules: [
         { number: 1, name: "Fondamentaux de l'intelligence émotionnelle", icon: <Brain className="w-3.5 h-3.5" /> },
         { number: 2, name: "Conscience de soi et autogestion", icon: <Target className="w-3.5 h-3.5" /> },
@@ -505,7 +595,7 @@ const masterclassData = [
     },
     
     finalProject: {
-      title: "📊 Projet Final Academy",
+      title: " Projet Final Academy",
       description: "Les participants réalisent :",
       deliverables: [
         "Un plan de développement leadership",
@@ -517,7 +607,7 @@ const masterclassData = [
     },
     
     certification: {
-      title: "🏆 Certification DM+ Academy",
+      title: " Certification DM+ Academy",
       description: "À la fin du programme :",
       benefits: [
         { icon: <Award className="w-3.5 h-3.5" />, text: "Certificat Leadership EQ" },
@@ -527,7 +617,7 @@ const masterclassData = [
     },
     
     differentiation: {
-      title: "💎 Différenciation Academy",
+      title: " Différenciation Academy",
       points: [
         "Formation par psychologue clinicienne",
         "Approche scientifique validée",
@@ -538,7 +628,7 @@ const masterclassData = [
     },
     
     objective: {
-      title: "🎯 Objectif final",
+      title: " Objectif final",
       description: "Former des leaders capables de :",
       skills: [
         "Inspirer et motiver leurs équipes",
@@ -556,7 +646,8 @@ const categoryConfig = {
   "Outils Digitaux": { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", icon: <Zap className="w-3.5 h-3.5" /> },
   "Data": { bg: "bg-orange-50", text: "text-orange-700", border: "border-orange-200", icon: <Database className="w-3.5 h-3.5" /> },
   "Entrepreneuriat": { bg: "bg-green-50", text: "text-green-700", border: "border-green-200", icon: <Briefcase className="w-3.5 h-3.5" /> },
-  "Soft Skills": { bg: "bg-pink-50", text: "text-pink-700", border: "border-pink-200", icon: <Users className="w-3.5 h-3.5" /> }
+  "Soft Skills": { bg: "bg-pink-50", text: "text-pink-700", border: "border-pink-200", icon: <Users className="w-3.5 h-3.5" /> },
+  "Sur Mesure": { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", icon: <GraduationCap className="w-3.5 h-3.5" /> }
 };
 
 // Configuration des couleurs par niveau
@@ -568,6 +659,8 @@ const levelConfig = {
 };
 
 const MasterclassesPageContent = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "upcoming" | "past">("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -575,10 +668,10 @@ const MasterclassesPageContent = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [selectedMasterclass, setSelectedMasterclass] = useState<typeof masterclassData[0] | null>(null);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [detailsMasterclass, setDetailsMasterclass] = useState<typeof masterclassData[0] | null>(null);
   const [wishlist, setWishlist] = useState<number[]>([]);
-  const { addToCart } = useCart();
+
+  // Vérifier si l'URL demande les formations sur mesure
+  const isSurMesureMode = searchParams.get('type') === 'sur-mesure';
 
   const categories = useMemo(() => {
     const cats = [...new Set(masterclassData.map(mc => mc.category))];
@@ -591,6 +684,12 @@ const MasterclassesPageContent = () => {
   }, []);
 
   const filteredMasterclass = useMemo(() => {
+    // Si mode sur mesure activé, filtrer uniquement les formations sur mesure
+    if (isSurMesureMode) {
+      return masterclassData.filter(mc => mc.category === "Sur Mesure");
+    }
+    
+    // Sinon, appliquer les filtres normaux
     return masterclassData.filter(mc => {
       const matchesSearch = searchTerm === "" || 
         mc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -603,7 +702,7 @@ const MasterclassesPageContent = () => {
       
       return matchesSearch && matchesStatus && matchesCategory && matchesLevel;
     });
-  }, [searchTerm, filterStatus, selectedCategory, selectedLevel]);
+  }, [searchTerm, filterStatus, selectedCategory, selectedLevel, isSurMesureMode]);
 
   const upcomingMasterclass = filteredMasterclass.filter(mc => mc.status === "upcoming");
   const pastMasterclass = filteredMasterclass.filter(mc => mc.status === "past");
@@ -628,27 +727,11 @@ const MasterclassesPageContent = () => {
     setShowRegistrationForm(true);
   };
 
-  const handleAddToCart = (masterclass: typeof masterclassData[0]) => {
-    addToCart({
-      id: masterclass.id,
-      title: masterclass.title,
-      instructor: masterclass.instructor,
-      instructorTitle: masterclass.instructorTitle,
-      date: masterclass.date,
-      time: masterclass.time,
-      duration: masterclass.duration,
-      category: masterclass.category,
-      level: masterclass.level,
-      thumbnail: masterclass.thumbnail,
-      price: masterclass.price
-    });
-  };
-
   const handleShowDetails = (masterclass: typeof masterclassData[0]) => {
-    setDetailsMasterclass(masterclass);
-    setShowDetailsModal(true);
+    navigate(`/masterclass/${masterclass.id}`);
   };
 
+  
   const toggleWishlist = (id: number) => {
     setWishlist(prev => 
       prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
@@ -890,8 +973,8 @@ const MasterclassesPageContent = () => {
     </div>
 
     <div style="background: #0f172a; color: white; padding: 2rem; border-radius: 1rem; text-align: center;">
-        <div style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">{masterclass.price * 655} FCFA</div>
-        <p style="color: #94a3b8; margin-bottom: 1.5rem;">Formation certifiante - Places limitées</p>
+        <div style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Formation certifiante</div>
+        <p style="color: #94a3b8; margin-bottom: 1.5rem;">Places limitées</p>
         <a href="/inscription?masterclass=${masterclass.id}" style="display: inline-block; padding: 0.75rem 2rem; background: white; color: #0f172a; text-decoration: none; border-radius: 0.5rem; font-weight: 500;">S'inscrire maintenant</a>
     </div>
 </body>
@@ -903,45 +986,64 @@ const MasterclassesPageContent = () => {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <div className="relative h-[450px] overflow-hidden pt-8">
+        <section className="relative h-[500px] overflow-hidden">
           <div className="absolute inset-0">
             <img
               src="/assets/Masterclass.jpg"
               alt="Masterclass Background"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
           </div>
           
           <div className="relative container mx-auto px-4 h-full max-w-7xl flex items-center">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="max-w-2xl text-white"
+              transition={{ duration: 0.6 }}
+              className="max-w-3xl text-white"
             >
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-                <span className="text-xs font-medium text-white drop-shadow-lg">Formation d'excellence</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
+                <Sparkles className="w-4 h-4 text-yellow-300" />
+                <span className="text-sm font-medium text-white tracking-wide">
+                  {isSurMesureMode ? "Formations Sur Mesure" : "Formations d'excellence"}
+                </span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-black mb-3 tracking-tight leading-tight drop-shadow-lg">
-                Masterclass
-                <span className="block font-black text-5xl md:text-6xl text-white mt-2 drop-shadow-lg">
-                  Business Revente
-                </span>
+              <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tight leading-tight">
+                {isSurMesureMode ? (
+                  <>
+                    Masterclass
+                    <span className="block font-black text-6xl md:text-7xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-2">
+                      Sur Mesure
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Masterclass
+                    <span className="block font-black text-6xl md:text-7xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-2">
+                      Business Revente
+                    </span>
+                  </>
+                )}
               </h1>
               
-              <p className="text-xl text-white max-w-xl mb-8 leading-relaxed drop-shadow-lg">
-                Des formations exclusives animées par des experts reconnus pour votre réussite professionnelle.
+              <p className="text-xl text-white/90 max-w-2xl mb-8 leading-relaxed">
+                {isSurMesureMode 
+                  ? "Des formations entièrement personnalisées pour répondre aux besoins spécifiques de votre entreprise." 
+                  : "Des formations exclusives animées par des experts reconnus pour accélérer votre réussite professionnelle."
+                }
               </p>
               
-              <div className="flex items-center gap-4">
-                <button className="px-6 py-3 bg-white text-[hsl(var(--academy-primary))] text-sm font-semibold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
-                  Découvrir
+              <div className="flex flex-wrap items-center gap-4">
+                <button className="px-8 py-4 bg-white text-gray-900 text-sm font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                  {isSurMesureMode ? "Demander un devis" : "Explorer les formations"}
                 </button>
-                <button className="px-6 py-3 border-2 border-white text-white text-sm font-semibold rounded-full hover:bg-white hover:text-[hsl(var(--academy-primary))] transition-all">
-                  Programme
-                </button>
+                {!isSurMesureMode && (
+                  <button className="px-8 py-4 border-2 border-white/60 text-white text-sm font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all">
+                    Catalogue complet
+                  </button>
+                )}
               </div>
             </motion.div>
           </div>
@@ -951,146 +1053,71 @@ const MasterclassesPageContent = () => {
               <path fill="white" fillOpacity="1" d="M0,96L1440,32L1440,320L0,320Z"></path>
             </svg>
           </div>
-        </div>
-
-        {/* Stats minimales */}
-        <div className="container mx-auto px-4 max-w-7xl py-12 -mt-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { value: stats.total, label: "Masterclasses", icon: <BookOpen className="w-3.5 h-3.5" /> },
-              { value: stats.upcoming, label: "À venir", icon: <Calendar className="w-3.5 h-3.5" /> },
-              { value: stats.totalParticipants + '+', label: "Participants", icon: <Users className="w-3.5 h-3.5" /> },
-              { value: stats.avgRating, label: "Note moyenne", icon: <Star className="w-3.5 h-3.5" /> }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 * index }}
-                className="bg-white border border-gray-100 rounded-lg p-3"
-              >
-                <div className="flex items-center gap-2 text-gray-600 mb-1">
-                  {stat.icon}
-                  <span className="text-xs">{stat.label}</span>
-                </div>
-                <p className="text-xl font-semibold text-[hsl(var(--academy-primary))]">{stat.value}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Barre de recherche */}
-        <div className="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-gray-100 z-20">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <div className="flex items-center gap-2 py-3">
-              <div className="flex-1">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Rechercher une masterclass..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-gray-400"
-                  />
-                </div>
+        </section>
+        
+        {/* Section Filtres et Recherche */}
+        <section className="container mx-auto px-4 max-w-7xl py-8">
+          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            {/* En-tête de section */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
+                <p className="text-sm text-gray-600">Explorez notre catalogue de masterclasses</p>
               </div>
-
-              <button
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="lg:hidden px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-sm flex items-center gap-1.5"
-              >
-                <Filter className="w-3.5 h-3.5" />
-                Filtres
-              </button>
-
-              <div className="hidden lg:flex items-center gap-2">
-                <div className="flex border border-gray-200 rounded-md overflow-hidden">
-                  {[
-                    { value: "all", label: "Tout" },
-                    { value: "upcoming", label: "À venir" },
-                    { value: "past", label: "Replay" }
-                  ].map((status) => (
-                    <button
-                      key={status.value}
-                      onClick={() => setFilterStatus(status.value as typeof filterStatus)}
-                      className={`px-3 py-1.5 text-xs font-medium transition-colors ${
-                        filterStatus === status.value
-                          ? "bg-gray-900 text-white"
-                          : "bg-white text-gray-600 hover:bg-gray-50"
-                      }`}
-                    >
-                      {status.label}
-                    </button>
-                  ))}
-                </div>
-
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs focus:outline-none"
-                >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>
-                      {cat === "all" ? "Toutes catégories" : cat}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
-                  className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs focus:outline-none"
-                >
-                  {levels.map(level => (
-                    <option key={level} value={level}>
-                      {level === "all" ? "Tous niveaux" : level}
-                    </option>
-                  ))}
-                </select>
-
-                {(searchTerm || filterStatus !== "all" || selectedCategory !== "all" || selectedLevel !== "all") && (
-                  <button
-                    onClick={resetFilters}
-                    className="p-1.5 text-gray-400 hover:text-gray-600"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
+              <div className="text-right">
+                <p className="text-sm text-gray-500">
+                  <span className="text-lg font-bold text-[hsl(var(--academy-primary))]">{filteredMasterclass.length}</span> formation{filteredMasterclass.length > 1 ? 's' : ''} trouvée{filteredMasterclass.length > 1 ? 's' : ''}
+                </p>
               </div>
             </div>
 
-            <AnimatePresence>
-              {isFilterOpen && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="lg:hidden pb-3 space-y-2"
-                >
-                  <div className="flex gap-1">
+            {/* Barre de recherche principale */}
+            <div className="mb-6">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Rechercher une formation par mot-clé..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-xl text-base focus:outline-none focus:border-[hsl(var(--academy-primary))] focus:ring-2 focus:ring-[hsl(var(--academy-primary))]/20"
+                />
+              </div>
+            </div>
+
+            {/* Filtres avancés */}
+            <div className="space-y-4">
+              {/* Filtres desktop */}
+              <div className="hidden lg:flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Statut:</span>
+                  <div className="flex border border-gray-200 rounded-lg overflow-hidden">
                     {[
-                      { value: "all", label: "Tout" },
+                      { value: "all", label: "Toutes" },
                       { value: "upcoming", label: "À venir" },
                       { value: "past", label: "Replay" }
                     ].map((status) => (
                       <button
                         key={status.value}
                         onClick={() => setFilterStatus(status.value as typeof filterStatus)}
-                        className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md ${
+                        className={`px-4 py-2 text-sm font-medium transition-colors ${
                           filterStatus === status.value
-                            ? "bg-gray-900 text-white"
-                            : "bg-gray-100 text-gray-600"
+                            ? "bg-[hsl(var(--academy-primary))] text-white"
+                            : "bg-white text-gray-600 hover:bg-gray-50"
                         }`}
                       >
                         {status.label}
                       </button>
                     ))}
                   </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Catégorie:</span>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                   >
                     {categories.map(cat => (
                       <option key={cat} value={cat}>
@@ -1098,10 +1125,14 @@ const MasterclassesPageContent = () => {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Niveau:</span>
                   <select
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
-                    className="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md text-xs"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                   >
                     {levels.map(level => (
                       <option key={level} value={level}>
@@ -1109,170 +1140,189 @@ const MasterclassesPageContent = () => {
                       </option>
                     ))}
                   </select>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+                </div>
 
-        {/* Tags rapides */}
-        <div className="container mx-auto px-4 max-w-7xl py-3">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <TrendingUp className="w-3.5 h-3.5 text-gray-400" />
-            {["Data", "Finance", "Soft Skills", "Python", "Excel"].map((tag, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (tag === "Python" || tag === "Excel") {
-                    setSelectedCategory("Outils Digitaux");
-                  } else {
-                    setSelectedCategory(tag);
-                  }
-                }}
-                className="px-3 py-1 bg-gray-50 text-gray-600 text-xs rounded-full border border-gray-200 hover:border-gray-400 transition-colors"
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
+                {(searchTerm || filterStatus !== "all" || selectedCategory !== "all" || selectedLevel !== "all") && (
+                  <button
+                    onClick={resetFilters}
+                    className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Réinitialiser
+                  </button>
+                )}
+              </div>
 
-        {/* Résultats */}
-        <div className="container mx-auto px-4 max-w-7xl py-4">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs text-gray-500">
-              <span className="text-base font-medium text-[hsl(var(--academy-primary))]">{filteredMasterclass.length}</span> masterclass{filteredMasterclass.length > 1 ? 's' : ''}
-            </p>
-          </div>
-
-          {/* Section À venir */}
-          {filterStatus === "all" && upcomingMasterclass.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-sm font-medium text-[hsl(var(--academy-primary))] mb-3 flex items-center gap-2">
-                <span className="w-0.5 h-3.5 bg-gray-900 rounded-full" />
-                À venir
-                <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                  {upcomingMasterclass.length}
-                </span>
-              </h2>
-              <div className="grid grid-cols-1 gap-4">
-                {upcomingMasterclass.map((masterclass, index) => (
-                  <MasterclassCard 
-                    key={masterclass.id} 
-                    masterclass={masterclass} 
-                    index={index} 
-                    onRegister={handleRegister}
-                    onAddToCart={handleAddToCart}
-                    onShowDetails={handleShowDetails}
-                    onToggleWishlist={toggleWishlist}
-                    isWishlisted={wishlist.includes(masterclass.id)}
-                  />
+              {/* Tags rapides */}
+              <div className="flex flex-wrap items-center gap-2">
+                {["Data", "Finance", "Soft Skills", "Python", "Excel"].map((tag, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (tag === "Python" || tag === "Excel") {
+                        setSelectedCategory("Outils Digitaux");
+                      } else {
+                        setSelectedCategory(tag);
+                      }
+                    }}
+                    className="px-3 py-1.5 bg-white text-gray-600 text-sm rounded-full border border-gray-300 hover:border-[hsl(var(--academy-primary))] hover:text-[hsl(var(--academy-primary))] transition-colors"
+                  >
+                    {tag}
+                  </button>
                 ))}
               </div>
-            </section>
-          )}
-
-          {/* Section Replay */}
-          {filterStatus === "all" && pastMasterclass.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-sm font-medium text-[hsl(var(--academy-primary))] mb-3 flex items-center gap-2">
-                <span className="w-0.5 h-3.5 bg-gray-300 rounded-full" />
-                Replays disponibles
-                <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                  {pastMasterclass.length}
-                </span>
-              </h2>
-              <div className="grid grid-cols-1 gap-4">
-                {pastMasterclass.map((masterclass, index) => (
-                  <MasterclassCard 
-                    key={masterclass.id} 
-                    masterclass={masterclass} 
-                    index={index} 
-                    onRegister={handleRegister}
-                    onAddToCart={handleAddToCart}
-                    onShowDetails={handleShowDetails}
-                    onToggleWishlist={toggleWishlist}
-                    isWishlisted={wishlist.includes(masterclass.id)}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Vue filtrée */}
-          {filterStatus !== "all" && (
-            <div className="grid grid-cols-1 gap-4">
-              {filteredMasterclass.map((masterclass, index) => (
-                <MasterclassCard 
-                  key={masterclass.id} 
-                  masterclass={masterclass} 
-                  index={index} 
-                  onRegister={handleRegister}
-                  onAddToCart={handleAddToCart}
-                  onShowDetails={handleShowDetails}
-                  onToggleWishlist={toggleWishlist}
-                  isWishlisted={wishlist.includes(masterclass.id)}
-                />
-              ))}
             </div>
-          )}
+          </div>
+        </section>
 
-          {/* État vide */}
-          {filteredMasterclass.length === 0 && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-50 rounded-full mb-3">
-                <BookOpen className="w-5 h-5 text-gray-400" />
+        {/* Section Résultats */}
+        <section className="container mx-auto px-4 max-w-7xl py-8">
+          {isSurMesureMode ? (
+            // Mode sur mesure - afficher uniquement les formations sur mesure
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-6 bg-purple-600 rounded-full" />
+                <h2 className="text-2xl font-bold text-gray-900">Formations Sur Mesure</h2>
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 text-sm font-medium rounded-full">
+                  {filteredMasterclass.length} disponible{filteredMasterclass.length > 1 ? 's' : ''}
+                </span>
               </div>
-              <h3 className="text-sm font-medium text-[hsl(var(--academy-primary))] mb-1">Aucune masterclass</h3>
-              <p className="text-xs text-gray-500 mb-4">Essayez d'ajuster vos filtres</p>
-              <button
-                onClick={resetFilters}
-                className="px-4 py-1.5 bg-gray-900 text-white text-xs rounded-md hover:bg-gray-800 transition-colors"
-              >
-                Réinitialiser
-              </button>
-            </motion.div>
-          )}
-        </div>
+              <div className="grid grid-cols-1 gap-6">
+                {filteredMasterclass.map((masterclass, index) => (
+                  <MasterclassCard 
+                    key={masterclass.id} 
+                    masterclass={masterclass} 
+                    index={index} 
+                    onRegister={handleRegister}
+                    onShowDetails={handleShowDetails}
+                    onToggleWishlist={toggleWishlist}
+                    isWishlisted={wishlist.includes(masterclass.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Mode normal - afficher toutes les formations */}
+              {/* Section À venir */}
+              {filterStatus === "all" && upcomingMasterclass.length > 0 && (
+                <div className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-1 h-6 bg-[hsl(var(--academy-primary))] rounded-full" />
+                    <h2 className="text-2xl font-bold text-gray-900">Formations à venir</h2>
+                    <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
+                      {upcomingMasterclass.length} disponible{upcomingMasterclass.length > 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    {upcomingMasterclass.map((masterclass, index) => (
+                      <MasterclassCard 
+                        key={masterclass.id} 
+                        masterclass={masterclass} 
+                        index={index} 
+                        onRegister={handleRegister}
+                        onShowDetails={handleShowDetails}
+                        onToggleWishlist={toggleWishlist}
+                        isWishlisted={wishlist.includes(masterclass.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
-        {/* Newsletter */}
-        <div className="bg-gray-50 border-t border-gray-100 mt-8">
-          <div className="container mx-auto px-4 max-w-7xl py-8">
-            <div className="max-w-md mx-auto text-center">
-              <h2 className="text-sm font-medium text-[hsl(var(--academy-primary))] mb-1">Restez informé</h2>
-              <p className="text-xs text-gray-500 mb-3">Recevez les prochaines masterclasses</p>
-              <div className="flex gap-2">
+              {/* Section Replay */}
+              {filterStatus === "all" && pastMasterclass.length > 0 && (
+                <div className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-1 h-6 bg-gray-400 rounded-full" />
+                    <h2 className="text-2xl font-bold text-gray-900">Replays disponibles</h2>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full">
+                      {pastMasterclass.length} disponible{pastMasterclass.length > 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    {pastMasterclass.map((masterclass, index) => (
+                      <MasterclassCard 
+                        key={masterclass.id} 
+                        masterclass={masterclass} 
+                        index={index} 
+                        onRegister={handleRegister}
+                        onShowDetails={handleShowDetails}
+                        onToggleWishlist={toggleWishlist}
+                        isWishlisted={wishlist.includes(masterclass.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Résultats filtrés */}
+              {filterStatus !== "all" && (
+                <div className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-1 h-6 bg-orange-400 rounded-full" />
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      {filterStatus === "upcoming" ? "Formations à venir" : "Replays disponibles"}
+                    </h2>
+                    <span className="px-3 py-1 bg-orange-100 text-orange-700 text-sm font-medium rounded-full">
+                      {filteredMasterclass.length} disponible{filteredMasterclass.length > 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    {filteredMasterclass.map((masterclass, index) => (
+                      <MasterclassCard 
+                        key={masterclass.id} 
+                        masterclass={masterclass} 
+                        index={index} 
+                        onRegister={handleRegister}
+                        onShowDetails={handleShowDetails}
+                        onToggleWishlist={toggleWishlist}
+                        isWishlisted={wishlist.includes(masterclass.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Aucune formation trouvée */}
+              {filteredMasterclass.length === 0 && (
+                <div className="text-center py-12">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Aucune formation trouvée</h3>
+                  <p className="text-gray-600 mb-6">Essayez de modifier vos filtres ou votre recherche</p>
+                  <button
+                    onClick={resetFilters}
+                    className="px-6 py-3 bg-[hsl(var(--academy-primary))] text-white font-medium rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors"
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </section>
+
+        {/* Section Newsletter */}
+        <section className="bg-gray-50 border-t border-gray-200 mt-16">
+          <div className="container mx-auto px-4 max-w-7xl py-12">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">Restez informé des nouvelles formations</h2>
+              <p className="text-gray-600 mb-6">Recevez en avant-première les annonces de nos prochaines masterclasses</p>
+              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder="Votre email"
-                  className="flex-1 px-3 py-1.5 bg-white border border-gray-200 rounded-md text-sm focus:outline-none focus:border-gray-400"
+                  placeholder="Votre adresse email"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                 />
-                <button className="px-4 py-1.5 bg-[hsl(var(--academy-primary))] text-white text-xs rounded-md hover:bg-[hsl(var(--academy-primary))]/90 transition-colors">
-                  OK
+                <button className="px-6 py-3 bg-[hsl(var(--academy-primary))] text-white font-medium rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors">
+                  S'inscrire
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Modals */}
-      <AnimatePresence>
-        {showDetailsModal && detailsMasterclass && (
-          <DetailsModal
-            masterclass={detailsMasterclass}
-            onClose={() => setShowDetailsModal(false)}
-            onRegister={handleRegister}
-            onAddToCart={handleAddToCart}
-            onDownloadBrochure={handleDownloadBrochure}
-          />
-        )}
-      </AnimatePresence>
-
       <AnimatePresence>
         {showRegistrationForm && selectedMasterclass && (
           <RegistrationModal
@@ -1281,9 +1331,6 @@ const MasterclassesPageContent = () => {
           />
         )}
       </AnimatePresence>
-
-      <CartSidebar />
-      <CartButton />
     </Layout>
   );
 };
@@ -1293,7 +1340,6 @@ const MasterclassCard = ({
   masterclass, 
   index, 
   onRegister, 
-  onAddToCart, 
   onShowDetails,
   onToggleWishlist,
   isWishlisted 
@@ -1301,7 +1347,6 @@ const MasterclassCard = ({
   masterclass: typeof masterclassData[0], 
   index: number,
   onRegister: (masterclass: typeof masterclassData[0]) => void,
-  onAddToCart: (masterclass: typeof masterclassData[0]) => void,
   onShowDetails: (masterclass: typeof masterclassData[0]) => void,
   onToggleWishlist: (id: number) => void,
   isWishlisted: boolean
@@ -1363,7 +1408,7 @@ const MasterclassCard = ({
             <p className="text-xs text-gray-500">{masterclass.tagline}</p>
           </div>
 
-          {/* Description */}
+          {/* Description courte */}
           <p className="text-sm text-gray-600 mb-4 line-clamp-2">{masterclass.description}</p>
 
           {/* Instructor */}
@@ -1379,46 +1424,6 @@ const MasterclassCard = ({
             </div>
           </div>
 
-          {/* Programme modules - compact */}
-          <div className="mb-4">
-            <p className="text-xs font-medium text-gray-700 mb-2 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5" />
-              {masterclass.program.title}
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
-              {masterclass.program.modules.slice(0, 3).map((module, i) => (
-                <div key={i} className="flex items-center gap-1 text-[10px] text-gray-600 bg-gray-50 px-2 py-1 rounded">
-                  <span className="text-gray-400">{module.icon}</span>
-                  <span className="truncate">{module.name}</span>
-                </div>
-              ))}
-              {masterclass.program.modules.length > 3 && (
-                <div className="text-[10px] text-gray-500 bg-gray-50 px-2 py-1 rounded flex items-center">
-                  +{masterclass.program.modules.length - 3} modules
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Key benefits */}
-          <div className="mb-4">
-            <p className="text-xs font-medium text-gray-700 mb-2 flex items-center gap-1">
-              <Award className="w-3.5 h-3.5" />
-              Points clés
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {masterclass.highlights.map((h, i) => (
-                <span key={i} className="px-2 py-1 bg-gray-100 text-gray-700 text-[10px] rounded">
-                  {h}
-                </span>
-              ))}
-              <span className="px-2 py-1 bg-blue-50 text-blue-700 text-[10px] rounded flex items-center gap-0.5">
-                <Trophy className="w-3 h-3" />
-                Certifiant
-              </span>
-            </div>
-          </div>
-
           {/* Footer with meta and actions */}
           <div className="flex items-center justify-between pt-3 border-t border-gray-100">
             <div className="flex items-center gap-4">
@@ -1430,303 +1435,22 @@ const MasterclassCard = ({
                 <Clock className="w-3.5 h-3.5" />
                 <span>{masterclass.duration}</span>
               </div>
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                <Users className="w-3.5 h-3.5" />
-                <span>{masterclass.participants}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                <span className="text-xs font-medium text-gray-700">{masterclass.rating}</span>
-              </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-lg font-semibold text-[hsl(var(--academy-primary))]">{masterclass.price * 655} FCFA</span>
-              
               <button
                 onClick={() => onShowDetails(masterclass)}
-                className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1"
+                className="px-6 py-3 bg-red-900 text-white text-sm font-semibold rounded-xl flex items-center gap-2"
               >
-                Détails
+                <Eye className="w-4 h-4" />
+                Voir les détails
+                <ArrowRight className="w-4 h-4" />
               </button>
-              
-              {isUpcoming ? (
-                <>
-                  <button
-                    onClick={() => onAddToCart(masterclass)}
-                    className="p-1.5 text-gray-500 hover:text-gray-700 border border-gray-200 rounded hover:border-gray-300"
-                  >
-                    <ShoppingCart className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => onRegister(masterclass)}
-                    className="px-3 py-1.5 bg-[hsl(var(--academy-primary))] text-white text-xs rounded hover:bg-[hsl(var(--academy-primary))]/90 transition-colors"
-                  >
-                    S'inscrire
-                  </button>
-                </>
-              ) : (
-                <button className="px-4 py-1.5 bg-[hsl(var(--academy-primary))] text-white text-xs rounded-md hover:bg-[hsl(var(--academy-primary))]/90 transition-colors">
-                  Voir le replay
-                </button>
-              )}
             </div>
           </div>
         </div>
       </div>
     </motion.article>
-  );
-};
-
-// Modal de détails enrichi
-const DetailsModal = ({ 
-  masterclass, 
-  onClose, 
-  onRegister, 
-  onAddToCart,
-  onDownloadBrochure 
-}: { 
-  masterclass: typeof masterclassData[0], 
-  onClose: () => void,
-  onRegister: (masterclass: typeof masterclassData[0]) => void,
-  onAddToCart: (masterclass: typeof masterclassData[0]) => void,
-  onDownloadBrochure: (masterclass: typeof masterclassData[0]) => void
-}) => {
-  const categoryStyle = categoryConfig[masterclass.category as keyof typeof categoryConfig] || categoryConfig["Data"];
-  const levelStyle = levelConfig[masterclass.level as keyof typeof levelConfig] || levelConfig["Intermédiaire"];
-  const isUpcoming = masterclass.status === "upcoming";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header avec image */}
-        <div className="relative h-48 bg-gray-100">
-          <img
-            src={masterclass.thumbnail}
-            alt={masterclass.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          
-          <div className="absolute top-4 left-4 flex gap-2">
-            <span className={`px-3 py-1 text-xs font-medium rounded-md ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border}`}>
-              {masterclass.category}
-            </span>
-            <span className={`px-3 py-1 text-xs font-medium rounded-md ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border}`}>
-              {masterclass.level}
-            </span>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 bg-white/90 rounded-full hover:bg-white transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-
-          <div className="absolute bottom-4 left-4 text-white">
-            <h2 className="text-xl font-bold mb-1">{masterclass.title}</h2>
-            <p className="text-sm text-white/80">{masterclass.subtitle}</p>
-          </div>
-        </div>
-
-        {/* Contenu scrollable */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-192px)]">
-          {/* Tagline */}
-          <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-            <p className="text-sm text-blue-800">{masterclass.tagline}</p>
-          </div>
-
-          {/* Description et formateur */}
-          <div className="mb-6">
-            <p className="text-sm text-gray-700 mb-4">{masterclass.description}</p>
-            
-            <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-              <img
-                src={masterclass.instructorImage}
-                alt={masterclass.instructor}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-medium text-gray-900">{masterclass.instructor}</p>
-                <p className="text-sm text-gray-500">{masterclass.instructorTitle}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Informations pratiques */}
-          <div className="grid grid-cols-4 gap-3 mb-6">
-            <div className="bg-gray-50 p-3 rounded">
-              <div className="text-xs text-gray-500 mb-1">Date</div>
-              <div className="text-sm font-medium">
-                {new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}
-              </div>
-            </div>
-            <div className="bg-gray-50 p-3 rounded">
-              <div className="text-xs text-gray-500 mb-1">Horaire</div>
-              <div className="text-sm font-medium">{masterclass.time}</div>
-            </div>
-            <div className="bg-gray-50 p-3 rounded">
-              <div className="text-xs text-gray-500 mb-1">Durée</div>
-              <div className="text-sm font-medium">{masterclass.duration}</div>
-            </div>
-            <div className="bg-gray-50 p-3 rounded">
-              <div className="text-xs text-gray-500 mb-1">Participants</div>
-              <div className="text-sm font-medium">{masterclass.participants}</div>
-            </div>
-          </div>
-
-          {/* Positionnement */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">🚀</span>
-              {masterclass.positioning.title}
-            </h3>
-            <ul className="grid grid-cols-2 gap-2">
-              {masterclass.positioning.points.map((point, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm">
-                  <span className="text-green-600 mt-0.5">✓</span>
-                  <span className="text-gray-700">{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Programme */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">🧠</span>
-              {masterclass.program.title}
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {masterclass.program.modules.map((module) => (
-                <div key={module.number} className="flex items-center gap-2 p-2 bg-gray-50 rounded border border-gray-100">
-                  <span className="w-5 h-5 bg-gray-900 text-white text-xs rounded flex items-center justify-center">
-                    {module.number}
-                  </span>
-                  <span className="text-xs text-gray-700">{module.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Projet final */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">📊</span>
-              {masterclass.finalProject.title}
-            </h3>
-            <p className="text-sm text-gray-600 mb-2">{masterclass.finalProject.description}</p>
-            <ul className="grid grid-cols-2 gap-2">
-              {masterclass.finalProject.deliverables.map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm bg-gray-50 p-2 rounded">
-                  <span className="text-blue-600">📌</span>
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Certification */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">🏆</span>
-              {masterclass.certification.title}
-            </h3>
-            <p className="text-sm text-gray-600 mb-2">{masterclass.certification.description}</p>
-            <div className="grid grid-cols-3 gap-3">
-              {masterclass.certification.benefits.map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 p-3 bg-gradient-to-br from-gray-50 to-white rounded border border-gray-100">
-                  <span className="text-purple-600">{benefit.icon}</span>
-                  <span className="text-xs text-gray-700">{benefit.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Différenciation */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">💎</span>
-              {masterclass.differentiation.title}
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {masterclass.differentiation.points.map((point, i) => (
-                <div key={i} className="flex items-center gap-2 p-2 bg-amber-50 rounded border border-amber-100">
-                  <span className="text-amber-600">✦</span>
-                  <span className="text-xs text-amber-800">{point}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Objectifs */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-              <span className="text-xl">🎯</span>
-              {masterclass.objective.title}
-            </h3>
-            <p className="text-sm text-gray-600 mb-2">{masterclass.objective.description}</p>
-            <ul className="grid grid-cols-2 gap-2">
-              {masterclass.objective.skills.map((skill, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm">
-                  <span className="text-green-600 mt-0.5">✓</span>
-                  <span className="text-gray-700">{skill}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Footer avec actions */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-            <div>
-              <span className="text-2xl font-bold text-[hsl(var(--academy-primary))]">{masterclass.price * 655} FCFA</span>
-              <span className="text-sm text-gray-500 ml-2">TTC</span>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => onDownloadBrochure(masterclass)}
-                className="px-4 py-2 text-sm border border-gray-200 rounded hover:bg-gray-50 flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" />
-                Plaquette
-              </button>
-              
-              {isUpcoming && (
-                <button
-                  onClick={() => onAddToCart(masterclass)}
-                  className="px-4 py-2 text-sm border border-gray-200 rounded hover:bg-gray-50 flex items-center gap-2"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  Réserver
-                </button>
-              )}
-              
-              <button
-                onClick={() => onRegister(masterclass)}
-                className="px-6 py-2 bg-[hsl(var(--academy-primary))] text-white text-sm rounded hover:bg-[hsl(var(--academy-primary))]/90 transition-colors"
-              >
-                {isUpcoming ? "S'inscrire" : "Accéder au replay"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
   );
 };
 
@@ -1770,7 +1494,7 @@ const RegistrationModal = ({
           
           <div className="grid grid-cols-3 gap-4 bg-white/10 rounded-lg p-4">
             <div className="text-center">
-              <div className="text-2xl font-bold">{masterclass.price * 655} FCFA</div>
+              <div className="text-2xl font-bold">Formation certifiante</div>
               <div className="text-sm text-white/80">Tarif de la formation</div>
             </div>
             <div className="text-center">
@@ -1793,8 +1517,4 @@ const RegistrationModal = ({
   );
 };
 
-export default () => (
-  <CartProvider>
-    <MasterclassesPageContent />
-  </CartProvider>
-);
+export default MasterclassesPageContent;

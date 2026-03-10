@@ -66,6 +66,7 @@ import { Separator } from "@/components/ui/separator";
 import { popularCourses, type Course } from "@/data/courses";
 import Layout from "@/components/layout/Layout";
 import surMesureBg from "@/assets/woman-sitting-library-with-her-laptop.jpg";
+import MasterclassRegistrationForm from "@/components/MasterclassRegistrationForm";
 
 // Interface pour un créneau individuel
 interface TimeSlot {
@@ -122,8 +123,7 @@ const SurMesurePage = () => {
   });
   const [currentDay, setCurrentDay] = useState("");
   const [currentTimeSlot, setCurrentTimeSlot] = useState("");
-  const [showPlanningModal, setShowPlanningModal] = useState(false);
-  const [showOtherForm, setShowOtherForm] = useState(false);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [otherFormationData, setOtherFormationData] = useState({
     title: "",
     description: "",
@@ -133,12 +133,9 @@ const SurMesurePage = () => {
   });
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  // Gérer le scroll de la page principale quand les modals sont ouverts
+  // Gérer le scroll de la page principale quand le formulaire est ouvert
   useEffect(() => {
-    const isAnyModalOpen =
-      showAvailabilityForm || showPlanningModal || showOtherForm;
-
-    if (isAnyModalOpen) {
+    if (showRegistrationForm) {
       // Sauvegarder la position de scroll actuelle
       const scrollY = window.scrollY;
       
@@ -176,7 +173,7 @@ const SurMesurePage = () => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     };
-  }, [showAvailabilityForm, showPlanningModal, showOtherForm]);
+  }, [showRegistrationForm]);
 
   // Vérifier si un créneau est disponible (pas de conflit avec d'autres cours)
   const isTimeSlotAvailable = (
@@ -237,17 +234,7 @@ const SurMesurePage = () => {
 
   const handleCourseClick = (course: Course) => {
     setSelectedCourse(course);
-    // Réinitialiser le formulaire de planning
-    setCurrentSchedule({
-      days: [],
-      startDate: "",
-      customNote: "",
-      frequency: "hebdomadaire",
-    });
-    setCurrentDay("");
-    setCurrentTimeSlot("");
-    setEditingIndex(null);
-    setShowAvailabilityForm(true);
+    setShowRegistrationForm(true);
   };
 
   const handleAddToSelection = () => {
@@ -397,7 +384,7 @@ const SurMesurePage = () => {
     if (course.status === "disponible") {
       return (
         <Button
-          className="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
+          className="w-full bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
           onClick={() => handleCourseClick(course)}
         >
           <CalendarClock className="w-4 h-4 mr-2" />
@@ -407,7 +394,7 @@ const SurMesurePage = () => {
     } else if (course.status === "réservation") {
       return (
         <Button
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
+          className="w-full bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
           onClick={() => handleCourseClick(course)}
         >
           <CalendarRange className="w-4 h-4 mr-2" />
@@ -417,7 +404,7 @@ const SurMesurePage = () => {
     } else if (course.status === "coach") {
       return (
         <Button
-          className="w-full bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
+          className="w-full bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg h-9 text-sm"
           onClick={() => handleCourseClick(course)}
         >
           <UserCheck className="w-4 h-4 mr-2" />
@@ -428,7 +415,7 @@ const SurMesurePage = () => {
       return (
         <Button
           disabled
-          className="w-full bg-gradient-to-r from-orange-400 to-orange-300 text-white font-semibold shadow-lg cursor-not-allowed opacity-75 rounded-lg h-9 text-sm"
+          className="w-full bg-gradient-to-r from-[hsl(346,100%,20%)] to-[hsl(346,100%,25%)] text-white font-semibold shadow-lg cursor-not-allowed opacity-75 rounded-lg h-9 text-sm"
         >
           <Timer className="w-4 h-4 mr-2" />
           Bientôt disponible
@@ -747,21 +734,11 @@ const SurMesurePage = () => {
 
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowPlanningModal(true)}
-                    className="border-[hsl(346,100%,30%)] text-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,5%)] h-8 text-xs"
-                  >
-                    <Calendar className="w-3 h-3 mr-1" />
-                    Voir mon planning
-                  </Button>
-                  <Button
-                    size="sm"
-                    onClick={handleConfirmPlanning}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-8 text-xs"
+                    onClick={() => setShowRegistrationForm(true)}
+                    className="bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white h-8 text-xs"
                   >
                     <Check className="w-3 h-3 mr-1" />
-                    Confirmer le planning
+                    S'inscrire maintenant
                   </Button>
                 </div>
               </div>
@@ -795,670 +772,46 @@ const SurMesurePage = () => {
               pour vous.
             </p>
             <Button
-              onClick={() => setShowOtherForm(true)}
+              onClick={() => setShowRegistrationForm(true)}
               className="bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 h-9 text-sm"
             >
               <Plus className="w-3.5 h-3.5 mr-1.5" />
-              Proposer une autre formation
+              S'inscrire à une formation
             </Button>
           </motion.div>
         </div>
 
-        {/* Modal de planification avec créneaux multiples */}
+        {/* Formulaire d'inscription */}
         <AnimatePresence>
-          {showAvailabilityForm && selectedCourse && (
+          {showRegistrationForm && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setShowAvailabilityForm(false)}
+              onClick={() => setShowRegistrationForm(false)}
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
+                className="bg-white rounded-3xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl flex flex-col"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Header */}
-                <div className="relative h-32 bg-gradient-to-br from-[hsl(346,100%,25%)] via-[hsl(346,100%,30%)] to-[hsl(346,100%,35%)] p-5 flex-shrink-0">
+                <div className="relative">
                   <motion.button
                     whileHover={{ scale: 1.1, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowAvailabilityForm(false)}
-                    className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+                    onClick={() => setShowRegistrationForm(false)}
+                    className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-gray-700 hover:bg-white/30 transition-all duration-300 shadow-lg"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-5 h-5" />
                   </motion.button>
-                  <div className="text-white">
-                    <h2 className="text-xl font-bold mb-1">
-                      {editingIndex !== null ? "Modifier" : "Planifier"} : {selectedCourse.title}
-                    </h2>
-                    <p className="text-white/90 text-sm">
-                      Choisissez vos créneaux (plusieurs jours possibles)
-                    </p>
-
-                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-lg p-2 border border-white/20 mt-2">
-                      <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                        {selectedCourse.instructor
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-white font-semibold text-xs">
-                          {selectedCourse.instructor}
-                        </p>
-                        <p className="text-white/80 text-[10px]">
-                          {selectedCourse.instructorTitle}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="h-full overflow-y-auto">
+                    <MasterclassRegistrationForm />
                   </div>
                 </div>
-
-                <form
-                  onSubmit={handleAvailabilitySubmit}
-                  className="flex-1 overflow-y-auto p-5 space-y-4"
-                >
-                  {/* Fréquence */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-2">
-                      <Repeat className="w-3 h-3 inline mr-1" />
-                      Fréquence des cours
-                    </label>
-                    <div className="flex gap-3">
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          name="frequency"
-                          value="hebdomadaire"
-                          checked={currentSchedule.frequency === "hebdomadaire"}
-                          onChange={(e) =>
-                            setCurrentSchedule({
-                              ...currentSchedule,
-                              frequency: e.target.value as "hebdomadaire" | "mensuelle",
-                            })
-                          }
-                          className="text-[hsl(346,100%,35%)]"
-                        />
-                        <span className="text-sm">Hebdomadaire</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          name="frequency"
-                          value="mensuelle"
-                          checked={currentSchedule.frequency === "mensuelle"}
-                          onChange={(e) =>
-                            setCurrentSchedule({
-                              ...currentSchedule,
-                              frequency: e.target.value as "hebdomadaire" | "mensuelle",
-                            })
-                          }
-                          className="text-[hsl(346,100%,35%)]"
-                        />
-                        <span className="text-sm">Mensuelle</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Sélection des créneaux */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-2">
-                      <PlusCircle className="w-3 h-3 inline mr-1" />
-                      Ajouter un créneau
-                    </label>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                      <select
-                        value={currentDay}
-                        onChange={(e) => setCurrentDay(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)]"
-                      >
-                        <option value="">Choisir un jour</option>
-                        {daysOfWeek.map((day) => (
-                          <option key={day} value={day}>
-                            {day}
-                          </option>
-                        ))}
-                      </select>
-
-                      <select
-                        value={currentTimeSlot}
-                        onChange={(e) => setCurrentTimeSlot(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)]"
-                      >
-                        <option value="">Choisir un horaire</option>
-                        {timeSlots.map((slot) => (
-                          <option key={slot} value={slot}>
-                            {slot}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <Button
-                      type="button"
-                      onClick={handleAddTimeSlot}
-                      className="w-full bg-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,45%)] text-white text-sm h-9"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Ajouter ce créneau
-                    </Button>
-                  </div>
-
-                  {/* Liste des créneaux ajoutés */}
-                  {currentSchedule.days.length > 0 && (
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-2">
-                        Créneaux sélectionnés ({currentSchedule.days.length})
-                      </label>
-                      <div className="space-y-2">
-                        {currentSchedule.days.map((slot, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between bg-gray-50 p-2 rounded-lg border border-gray-200"
-                          >
-                            <div className="flex items-center gap-2">
-                              <CalendarDays className="w-4 h-4 text-[hsl(346,100%,35%)]" />
-                              <span className="text-sm">
-                                {slot.day} à {slot.timeSlot}
-                              </span>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => handleRemoveTimeSlot(index)}
-                              className="text-red-500 hover:text-red-700"
-                            >
-                              <MinusCircle className="w-4 h-4" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Date de début */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
-                      <Calendar className="w-3 h-3 inline mr-1" />
-                      Date de début souhaitée
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={currentSchedule.startDate}
-                      onChange={(e) =>
-                        setCurrentSchedule({
-                          ...currentSchedule,
-                          startDate: e.target.value,
-                        })
-                      }
-                      min={new Date().toISOString().split("T")[0]}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Note personnalisée */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
-                      <MessageSquare className="w-3 h-3 inline mr-1" />
-                      Note personnalisée (optionnel)
-                    </label>
-                    <textarea
-                      value={currentSchedule.customNote}
-                      onChange={(e) =>
-                        setCurrentSchedule({
-                          ...currentSchedule,
-                          customNote: e.target.value,
-                        })
-                      }
-                      rows={2}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-transparent"
-                      placeholder="Précisions sur vos attentes..."
-                    />
-                  </div>
-
-                  {/* Boutons d'action */}
-                  <div className="flex gap-3 pt-3">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => setShowAvailabilityForm(false)}
-                      className="flex-1 border-[hsl(346,100%,30%)] text-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,5%)] h-9 text-sm"
-                    >
-                      Annuler
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="flex-1 bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:to-[hsl(346,100%,45%)] text-white h-9 text-sm"
-                    >
-                      {editingIndex !== null ? "Modifier" : "Ajouter au planning"}
-                    </Button>
-                  </div>
-                </form>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Modal de visualisation du planning avec créneaux multiples */}
-        <AnimatePresence>
-          {showPlanningModal && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setShowPlanningModal(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Header */}
-                <div className="relative h-24 bg-gradient-to-br from-[hsl(346,100%,25%)] via-[hsl(346,100%,30%)] to-[hsl(346,100%,35%)] p-5 flex-shrink-0">
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowPlanningModal(false)}
-                    className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
-                  >
-                    <X className="w-4 h-4" />
-                  </motion.button>
-                  <div className="text-white">
-                    <h2 className="text-xl font-bold mb-1">
-                      Mon planning personnalisé
-                    </h2>
-                    <p className="text-white/90 text-sm">
-                      {selectedCoursesWithSchedule.length} formation
-                      {selectedCoursesWithSchedule.length > 1 ? "s" : ""} planifiée
-                      {selectedCoursesWithSchedule.length > 1 ? "s" : ""}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex-1 overflow-y-auto p-5">
-                  <div className="space-y-4">
-                    {selectedCoursesWithSchedule.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow"
-                      >
-                        <div className="flex items-start gap-4">
-                          {/* Image miniature */}
-                          <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                            <img
-                              src={item.course.image}
-                              alt={item.course.title}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-
-                          <div className="flex-1">
-                            <div className="flex items-start justify-between">
-                              <div>
-                                <h3 className="text-sm font-bold text-gray-900">
-                                  {item.course.title}
-                                </h3>
-                                <p className="text-xs text-gray-600 mt-1">
-                                  {item.course.description}
-                                </p>
-                              </div>
-                              <div className="flex gap-1">
-                                <button
-                                  onClick={() => handleEditSchedule(index)}
-                                  className="p-1.5 text-gray-500 hover:text-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,5%)] rounded-lg transition-colors"
-                                >
-                                  <Edit className="w-3.5 h-3.5" />
-                                </button>
-                                <button
-                                  onClick={() => handleRemoveFromSelection(index)}
-                                  className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                                >
-                                  <Trash2 className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-                            </div>
-
-                            <div className="mt-3">
-                              <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
-                                <User className="w-3.5 h-3.5 text-[hsl(346,100%,35%)]" />
-                                <span className="font-medium">{item.course.instructor}</span>
-                                <span className="text-gray-300">|</span>
-                                <Repeat className="w-3.5 h-3.5 text-[hsl(346,100%,35%)]" />
-                                <span className="capitalize">{item.schedule.frequency}</span>
-                              </div>
-                              
-                              <div className="space-y-1">
-                                {item.schedule.days.map((day, i) => (
-                                  <div key={i} className="flex items-center gap-2 text-xs text-gray-600 bg-gray-50 p-1.5 rounded">
-                                    <CalendarDays className="w-3 h-3 text-[hsl(346,100%,35%)]" />
-                                    <span className="font-medium">{day.day}</span>
-                                    <Clock3 className="w-3 h-3 text-[hsl(346,100%,35%)] ml-2" />
-                                    <span>{day.timeSlot}</span>
-                                  </div>
-                                ))}
-                              </div>
-
-                              <div className="flex items-center gap-2 text-xs text-gray-600 mt-2">
-                                <Calendar className="w-3.5 h-3.5 text-[hsl(346,100%,35%)]" />
-                                <span>
-                                  Début le {new Date(item.schedule.startDate).toLocaleDateString("fr-FR")}
-                                </span>
-                              </div>
-                            </div>
-
-                            {item.schedule.customNote && (
-                              <div className="mt-2 p-2 bg-gray-50 rounded-lg text-xs text-gray-600">
-                                <span className="font-medium">Note :</span>{" "}
-                                {item.schedule.customNote}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Récapitulatif des prix */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-[hsl(346,100%,25%)]/5 to-[hsl(346,100%,35%)]/5 rounded-xl border border-[hsl(346,100%,30%)]/20">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700">
-                        Total des formations
-                      </span>
-                      <span className="text-lg font-bold text-[hsl(346,100%,35%)]">
-                        {selectedCoursesWithSchedule
-                          .reduce((total, item) => total + item.course.price, 0)
-                          .toLocaleString("fr-FR")}{" "}
-                        <span className="text-xs text-gray-500">FCFA</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Boutons d'action */}
-                <div className="flex-shrink-0 border-t border-gray-200 p-4 bg-white">
-                  <div className="flex gap-3">
-                    <Button
-                      variant="outline"
-                      onClick={() => setShowPlanningModal(false)}
-                      className="flex-1 border-[hsl(346,100%,30%)] text-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,5%)] h-9 text-sm"
-                    >
-                      Continuer mes choix
-                    </Button>
-                    <Button
-                      onClick={handleConfirmPlanning}
-                      className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-9 text-sm"
-                    >
-                      <Check className="w-4 h-4 mr-2" />
-                      Confirmer le planning
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Modal Autre formation */}
-        <AnimatePresence>
-          {showOtherForm && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setShowOtherForm(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="bg-white rounded-3xl max-w-xl w-full max-h-[80vh] overflow-hidden shadow-2xl flex flex-col"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Header */}
-                <div className="relative h-24 bg-gradient-to-br from-[hsl(346,100%,25%)] via-[hsl(346,100%,30%)] to-[hsl(346,100%,35%)] p-5 flex-shrink-0 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
-
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowOtherForm(false)}
-                    className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-lg"
-                  >
-                    <X className="w-4 h-4" />
-                  </motion.button>
-
-                  <div className="relative z-10 text-white">
-                    <motion.h2
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="text-xl font-bold mb-1 drop-shadow-lg"
-                    >
-                      Proposer une formation
-                    </motion.h2>
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="text-white/90 text-sm drop-shadow-md"
-                    >
-                      Décrivez la formation que vous souhaitez
-                    </motion.p>
-                  </div>
-
-                  <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-white/5 rounded-full blur-2xl" />
-                  <div className="absolute -top-2 -left-2 w-12 h-12 bg-white/5 rounded-full blur-xl" />
-                </div>
-
-                <form
-                  onSubmit={handleOtherFormationSubmit}
-                  className="flex-1 overflow-y-auto p-4 space-y-3"
-                >
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <label className="block text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-4 h-4 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center shadow-md"
-                      >
-                        <BookOpen className="w-2 h-2 text-white" />
-                      </motion.div>
-                      <span className="text-gray-700">Titre de la formation</span>
-                    </label>
-                    <motion.input
-                      whileFocus={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      type="text"
-                      required
-                      value={otherFormationData.title}
-                      onChange={(e) =>
-                        setOtherFormationData({
-                          ...otherFormationData,
-                          title: e.target.value,
-                        })
-                      }
-                      className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)] transition-all duration-300 shadow-sm hover:shadow-md bg-white"
-                      placeholder="Ex: Marketing Digital Avancé"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <label className="block text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-4 h-4 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center shadow-md"
-                      >
-                        <FileText className="w-2 h-2 text-white" />
-                      </motion.div>
-                      <span className="text-gray-700">Description</span>
-                    </label>
-                    <motion.textarea
-                      whileFocus={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      required
-                      rows={3}
-                      value={otherFormationData.description}
-                      onChange={(e) =>
-                        setOtherFormationData({
-                          ...otherFormationData,
-                          description: e.target.value,
-                        })
-                      }
-                      className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)] transition-all duration-300 shadow-sm hover:shadow-md resize-none bg-white"
-                      placeholder="Décrivez le contenu et les objectifs de la formation..."
-                    />
-                  </motion.div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">
-                      <div className="w-4 h-4 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center">
-                        <Target className="w-2 h-2 text-white" />
-                      </div>
-                      Objectifs d'apprentissage
-                    </label>
-                    <textarea
-                      required
-                      rows={2}
-                      value={otherFormationData.objectives}
-                      onChange={(e) =>
-                        setOtherFormationData({
-                          ...otherFormationData,
-                          objectives: e.target.value,
-                        })
-                      }
-                      className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)] transition-all duration-300 shadow-sm hover:shadow-md resize-none"
-                      placeholder="Qu'allez-vous apprendre ? (séparez par des virgules)"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">
-                        <div className="w-4 h-4 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center">
-                          <Clock className="w-2 h-2 text-white" />
-                        </div>
-                        Durée estimée
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={otherFormationData.duration}
-                        onChange={(e) =>
-                          setOtherFormationData({
-                            ...otherFormationData,
-                            duration: e.target.value,
-                          })
-                        }
-                        className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)] transition-all duration-300 shadow-sm hover:shadow-md"
-                        placeholder="Ex: 40 heures"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">
-                        <div className="w-4 h-4 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center">
-                          <Award className="w-2 h-2 text-white" />
-                        </div>
-                        Niveau requis
-                      </label>
-                      <select
-                        value={otherFormationData.level}
-                        onChange={(e) =>
-                          setOtherFormationData({
-                            ...otherFormationData,
-                            level: e.target.value as any,
-                          })
-                        }
-                        className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[hsl(346,100%,30%)] focus:border-[hsl(346,100%,35%)] transition-all duration-300 shadow-sm hover:shadow-md"
-                      >
-                        <option value="débutant">Débutant</option>
-                        <option value="intermédiaire">Intermédiaire</option>
-                        <option value="avancé">Avancé</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="bg-gradient-to-r from-[hsl(346,100%,25%)]/10 via-[hsl(346,100%,30%)]/10 to-[hsl(346,100%,35%)]/10 rounded-xl p-4 border border-[hsl(346,100%,20%)]/30 shadow-lg backdrop-blur-sm"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="w-6 h-6 bg-gradient-to-br from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] rounded-full flex items-center justify-center shadow-lg"
-                      >
-                        <CheckCircle className="w-3 h-3 text-white" />
-                      </motion.div>
-                      <h3 className="text-sm font-bold text-gray-900">
-                        Prêt à soumettre votre proposition ?
-                      </h3>
-                    </div>
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      Une fois soumise, notre équipe étudiera votre demande et
-                      vous contactera sous 48h pour discuter des détails.
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 }}
-                    className="flex gap-3 pt-3"
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="flex-1"
-                    >
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setShowOtherForm(false)}
-                        className="w-full border-[hsl(346,100%,30%)] text-[hsl(346,100%,35%)] hover:bg-[hsl(346,100%,5%)] transition-all duration-300 h-9 rounded-lg text-sm"
-                      >
-                        <X className="w-3.5 h-3.5 mr-1" />
-                        Annuler
-                      </Button>
-                    </motion.div>
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="flex-1"
-                    >
-                      <Button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-[hsl(346,100%,25%)] via-[hsl(346,100%,30%)] to-[hsl(346,100%,35%)] hover:from-[hsl(346,100%,35%)] hover:via-[hsl(346,100%,40%)] hover:to-[hsl(346,100%,45%)] text-white transition-all duration-300 h-9 rounded-lg text-sm"
-                      >
-                        <Send className="w-3.5 h-3.5 mr-1" />
-                        Envoyer
-                      </Button>
-                    </motion.div>
-                  </motion.div>
-                </form>
               </motion.div>
             </motion.div>
           )}

@@ -10,7 +10,7 @@ const stats = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-background pt-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-16 pt-8 lg:grid-cols-2 lg:gap-8 lg:pb-24 lg:pt-12">
+      <div className="w-full grid items-center gap-12 px-6 pb-4 pt-8 lg:grid-cols-2 lg:gap-8 lg:pb-6 lg:pt-12">
         {/* Left Content */}
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-6">
@@ -41,25 +41,10 @@ export function HeroSection() {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="rounded-2xl p-6">
-            <div className="grid grid-cols-3 gap-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-1">
-                  <span className="text-xl font-bold text-foreground md:text-2xl">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-muted-foreground md:text-sm">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Right Side — Image + Floating Cards */}
-        <div className="relative hidden min-h-[480px] lg:block">
+        <div className="relative order-1 lg:order-1 min-h-[320px] lg:min-h-[480px] lg:block">
           <HeroFloatingCards />
         </div>
       </div>

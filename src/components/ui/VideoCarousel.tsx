@@ -116,9 +116,31 @@ export function TrainingCarousel({
                   </div>
                   <p className="text-gray-600 mb-6 flex-grow">{item.description}</p>
                   <div className="mt-auto">
-                    {item.title === "Masterclass" ? (
+                    {(item.title?.trim()?.toLowerCase() === "masterclass") ? (
                       <Link 
-                        to="/masterclass"
+                        to="/masterclasses"
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
+                          selectedItemId === item.id 
+                            ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
+                            : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'
+                        }`}
+                      >
+                        {buttonText}
+                      </Link>
+                    ) : (item.title?.trim()?.toLowerCase() === "e-learning") ? (
+                      <Link 
+                        to="/e-learning"
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
+                          selectedItemId === item.id 
+                            ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
+                            : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'
+                        }`}
+                      >
+                        {buttonText}
+                      </Link>
+                    ) : (item.title?.trim()?.toLowerCase() === "sur mesure") ? (
+                      <Link 
+                        to="/sur-mesure"
                         className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'

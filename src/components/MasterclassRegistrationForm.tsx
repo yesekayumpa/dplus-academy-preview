@@ -9,45 +9,111 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useNotification } from "@/components/Notification";
-import { 
-  User, Mail, MapPin, Phone, Briefcase, Code, BarChart3, 
-  GraduationCap, Award, BookOpen, Target, ArrowRight, Info,
-  CheckCircle2, Shield, Clock, Users, Star, Zap, ChevronRight,
-  Palette, Rocket, TrendingUp, Database, Cpu, PieChart, Sparkles,
-  Gem, Crown, Diamond, Award as AwardIcon, BadgeCheck, Heart,
-  Compass, Feather, Wind, Sun, Moon, Globe, Lock, Key, Brush,
-  GraduationCap as LearningIcon, LayoutGrid, Layers, Sliders, Gauge
+import {
+  User,
+  Mail,
+  MapPin,
+  Phone,
+  Briefcase,
+  Code,
+  BarChart3,
+  GraduationCap,
+  Award,
+  BookOpen,
+  Target,
+  ArrowRight,
+  Info,
+  CheckCircle2,
+  Shield,
+  Clock,
+  Users,
+  Star,
+  Zap,
+  ChevronRight,
+  Palette,
+  Rocket,
+  TrendingUp,
+  Database,
+  Cpu,
+  PieChart,
+  Sparkles,
+  Gem,
+  Crown,
+  Diamond,
+  Award as AwardIcon,
+  BadgeCheck,
+  Heart,
+  Compass,
+  Feather,
+  Wind,
+  Sun,
+  Moon,
+  Globe,
+  Lock,
+  Key,
+  Brush,
+  GraduationCap as LearningIcon,
+  LayoutGrid,
+  Layers,
+  Sliders,
+  Gauge,
 } from "lucide-react";
 
 // Schéma de validation Zod mis à jour
 const formSchema = z.object({
-  nomPrenom: z.string().min(2, "Le nom et prénom doivent contenir au moins 2 caractères"),
+  nomPrenom: z
+    .string()
+    .min(2, "Le nom et prénom doivent contenir au moins 2 caractères"),
   email: z.string().email("Veuillez entrer une adresse email valide"),
   adresse: z.string().min(5, "L'adresse doit contenir au moins 5 caractères"),
-  telephone: z.string().regex(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/, "Veuillez entrer un numéro de téléphone valide"),
-  profession: z.string().min(2, "La profession doit contenir au moins 2 caractères"),
-  statut: z.enum(["etudiant", "professionnel"], { required_error: "Veuillez choisir votre statut" }),
+  telephone: z
+    .string()
+    .regex(
+      /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/,
+      "Veuillez entrer un numéro de téléphone valide",
+    ),
+  profession: z
+    .string()
+    .min(2, "La profession doit contenir au moins 2 caractères"),
+  statut: z.enum(["etudiant", "professionnel"], {
+    required_error: "Veuillez choisir votre statut",
+  }),
   outils: z.array(z.string()).min(1, "Veuillez cocher au moins un outil"),
   autreOutil: z.string().optional(),
   autreOutilApprendre: z.string().optional(),
-  niveauProgrammation: z.enum(["debutant", "intermediaire1", "intermediaire2", "avance"], { 
-    required_error: "Veuillez choisir votre niveau" 
+  niveauProgrammation: z.enum(
+    ["debutant", "intermediaire1", "intermediaire2", "avance"],
+    {
+      required_error: "Veuillez choisir votre niveau",
+    },
+  ),
+  niveauExcel: z.enum(["basique", "intermediaire", "avance"], {
+    required_error: "Veuillez choisir votre niveau Excel",
   }),
-  niveauExcel: z.enum(["basique", "intermediaire", "avance"], { 
-    required_error: "Veuillez choisir votre niveau Excel" 
-  }),
-  niveauR: z.enum(["debutant", "intermediaire1", "intermediaire2", "avance"]).optional(),
+  niveauR: z
+    .enum(["debutant", "intermediaire1", "intermediaire2", "avance"])
+    .optional(),
   connaitShiny: z.enum(["OUI", "NON"]).optional(),
   experienceProvisionnement: z.enum(["OUI", "NON"]).optional(),
   attentes: z.string().optional(),
-  participeEdition2: z.enum(["OUI", "NON"], { required_error: "Veuillez choisir votre réponse" }),
+  participeEdition2: z.enum(["OUI", "NON"], {
+    required_error: "Veuillez choisir votre réponse",
+  }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -76,7 +142,8 @@ const themes = {
     from: "from-[hsl(345,70%,35%)]",
     to: "to-[hsl(345,75%,50%)]",
     via: "via-[hsl(345,75%,50%)]",
-    badge: "bg-[hsl(345,70%,95%)] text-[hsl(345,70%,35%)] border-[hsl(345,70%,35%)]/30",
+    badge:
+      "bg-[hsl(345,70%,95%)] text-[hsl(345,70%,35%)] border-[hsl(345,70%,35%)]/30",
   },
   blue: {
     name: "Bleu",
@@ -180,10 +247,20 @@ const themes = {
 type ThemeKey = keyof typeof themes;
 
 // Composant pour les champs élégants avec thème dynamique (sans shadow)
-const ElegantField = ({ icon: Icon, name, label, placeholder, type = "text", form, className = "", isRequired = true, theme }) => {
+const ElegantField = ({
+  icon: Icon,
+  name,
+  label,
+  placeholder,
+  type = "text",
+  form,
+  className = "",
+  isRequired = true,
+  theme,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const fieldValue = form.watch(name);
-  
+
   return (
     <FormField
       control={form.control}
@@ -191,13 +268,17 @@ const ElegantField = ({ icon: Icon, name, label, placeholder, type = "text", for
       render={({ field }) => (
         <FormItem className={`relative group ${className}`}>
           <div className="relative">
-            <FormLabel className={`
+            <FormLabel
+              className={`
               absolute -top-2 left-3 px-2 text-xs font-medium transition-all z-10
-              ${isFocused || field.value ? theme.text : 'text-gray-500'}
+              ${isFocused || field.value ? theme.text : "text-gray-500"}
               bg-white
-            `}>
+            `}
+            >
               <span className="flex items-center gap-1">
-                <Icon className={`w-3 h-3 ${isFocused || field.value ? theme.text : 'text-gray-400'}`} />
+                <Icon
+                  className={`w-3 h-3 ${isFocused || field.value ? theme.text : "text-gray-400"}`}
+                />
                 {label}
                 {isRequired && <span className={theme.text}>*</span>}
               </span>
@@ -208,12 +289,13 @@ const ElegantField = ({ icon: Icon, name, label, placeholder, type = "text", for
                   placeholder={isFocused ? placeholder : ""}
                   type={type}
                   className={`
-                    h-12 pt-2 text-sm border-2 transition-all duration-300
-                    ${form.formState.errors[name]
-                      ? 'border-red-300 focus:border-red-500' 
-                      : isFocused || field.value
-                        ? `${theme.border} focus:${theme.border}`
-                        : 'border-gray-200'
+                    h-10 sm:h-12 pt-2 text-xs sm:text-sm border-2 transition-all duration-300
+                    ${
+                      form.formState.errors[name]
+                        ? "border-red-300 focus:border-red-500"
+                        : isFocused || field.value
+                          ? `${theme.border} focus:${theme.border}`
+                          : "border-gray-200"
                     }
                     focus:ring-2 focus:${theme.ring} focus:${theme.border}
                     bg-white/80 backdrop-blur-sm
@@ -242,27 +324,41 @@ const ElegantField = ({ icon: Icon, name, label, placeholder, type = "text", for
 };
 
 // Composant simple pour les options radio (SANS AUCUN EFFET)
-const SimpleRadioOption = ({ value, id, label, description, icon: Icon, selected, theme }) => (
-  <div className={`
+const SimpleRadioOption = ({
+  value,
+  id,
+  label,
+  description,
+  icon: Icon,
+  selected,
+  theme,
+}) => (
+  <div
+    className={`
     flex items-start gap-4 p-4 rounded-xl border-2 transition-all cursor-pointer
     bg-white
-    ${selected === id 
-      ? `${theme.border} ${theme.bgLight}` 
-      : 'border-gray-200'
-    }
-  `}>
+    ${selected === id ? `${theme.border} ${theme.bgLight}` : "border-gray-200"}
+  `}
+  >
     <RadioGroupItem value={id} id={id} className={`mt-1 ${theme.text}`} />
     <div className="flex-1">
-      <Label htmlFor={id} className="text-base font-semibold text-gray-800 cursor-pointer flex items-center gap-2">
+      <Label
+        htmlFor={id}
+        className="text-base font-semibold text-gray-800 cursor-pointer flex items-center gap-2"
+      >
         {Icon && (
-          <div className={`
+          <div
+            className={`
             p-1.5 rounded-lg
-            ${selected === id ? theme.bgLight : 'bg-gray-100'}
-          `}>
-            <Icon className={`
+            ${selected === id ? theme.bgLight : "bg-gray-100"}
+          `}
+          >
+            <Icon
+              className={`
               w-4 h-4
-              ${selected === id ? theme.text : 'text-gray-500'}
-            `} />
+              ${selected === id ? theme.text : "text-gray-500"}
+            `}
+            />
           </div>
         )}
         {label}
@@ -272,7 +368,9 @@ const SimpleRadioOption = ({ value, id, label, description, icon: Icon, selected
       )}
     </div>
     {selected === id && (
-      <div className={`w-6 h-6 ${theme.bg} rounded-full flex items-center justify-center`}>
+      <div
+        className={`w-6 h-6 ${theme.bg} rounded-full flex items-center justify-center`}
+      >
         <CheckCircle2 className="w-4 h-4 text-white" />
       </div>
     )}
@@ -285,16 +383,21 @@ const SimpleSkillBadge = ({ label, selected, onClick, icon: Icon }) => (
     type="button"
     onClick={onClick}
     className={`
-      px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
-      flex items-center gap-2 min-w-[100px] justify-center
+      px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200
+      flex items-center gap-1.5 sm:gap-2 min-w-[80px] sm:min-w-[100px] justify-center
       border-2
-      ${selected 
-        ? 'bg-[hsl(345,70%,35%)] text-white border-[hsl(345,70%,35%)]' 
-        : 'bg-white text-gray-700 border-gray-200 hover:border-[hsl(345,70%,35%)]/30'
+      ${
+        selected
+          ? "bg-[hsl(345,70%,35%)] text-white border-[hsl(345,70%,35%)]"
+          : "bg-white text-gray-700 border-gray-200 hover:border-[hsl(345,70%,35%)]/30"
       }
     `}
   >
-    {Icon && <Icon className={`w-4 h-4 ${selected ? 'text-white' : 'text-gray-500'}`} />}
+    {Icon && (
+      <Icon
+        className={`w-4 h-4 ${selected ? "text-white" : "text-gray-500"}`}
+      />
+    )}
     <span>{label}</span>
   </button>
 );
@@ -304,7 +407,9 @@ const SimpleSectionHeader = ({ icon: Icon, title, subtitle, theme }) => {
   return (
     <div className="relative mb-6">
       <div className="flex items-center gap-4">
-        <div className={`w-12 h-12 ${theme.bg} rounded-xl flex items-center justify-center`}>
+        <div
+          className={`w-12 h-12 ${theme.bg} rounded-xl flex items-center justify-center`}
+        >
           <Icon className="w-6 h-6 text-white" />
         </div>
         <div>
@@ -318,12 +423,22 @@ const SimpleSectionHeader = ({ icon: Icon, title, subtitle, theme }) => {
 };
 
 // Composant pour les cartes de niveau
-const LevelCard = ({ title, icon: Icon, description, value, onChange, options, theme }) => {
+const LevelCard = ({
+  title,
+  icon: Icon,
+  description,
+  value,
+  onChange,
+  options,
+  theme,
+}) => {
   return (
     <div className="bg-white rounded-xl border-2 border-gray-100 overflow-hidden">
       <div className={`p-4 border-b-2 border-gray-100 bg-gray-50/50`}>
         <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 ${theme.bgLight} rounded-lg flex items-center justify-center`}>
+          <div
+            className={`w-10 h-10 ${theme.bgLight} rounded-lg flex items-center justify-center`}
+          >
             <Icon className={`w-5 h-5 ${theme.text}`} />
           </div>
           <div>
@@ -343,13 +458,22 @@ const LevelCard = ({ title, icon: Icon, description, value, onChange, options, t
               key={option.value}
               className={`
                 relative flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer
-                ${value === option.value 
-                  ? `${theme.border} ${theme.bgLight}` 
-                  : 'border-gray-200 hover:border-gray-300'}
+                ${
+                  value === option.value
+                    ? `${theme.border} ${theme.bgLight}`
+                    : "border-gray-200 hover:border-gray-300"
+                }
               `}
             >
-              <RadioGroupItem value={option.value} id={`${title}-${option.value}`} className={theme.text} />
-              <Label htmlFor={`${title}-${option.value}`} className="text-sm font-medium cursor-pointer flex-1">
+              <RadioGroupItem
+                value={option.value}
+                id={`${title}-${option.value}`}
+                className={theme.text}
+              />
+              <Label
+                htmlFor={`${title}-${option.value}`}
+                className="text-sm font-medium cursor-pointer flex-1"
+              >
                 {option.label}
               </Label>
               {value === option.value && (
@@ -385,8 +509,8 @@ const LevelsGrid = ({ form, theme }) => {
     { value: "avance", label: "Avancé" },
   ];
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <LevelCard
         title="Programmation"
         icon={Code}
@@ -396,7 +520,7 @@ const LevelsGrid = ({ form, theme }) => {
         options={programmationLevels}
         theme={theme}
       />
-      
+
       <LevelCard
         title="Excel"
         icon={PieChart}
@@ -406,7 +530,7 @@ const LevelsGrid = ({ form, theme }) => {
         options={excelLevels}
         theme={theme}
       />
-      
+
       <LevelCard
         title="R (optionnel)"
         icon={TrendingUp}
@@ -415,7 +539,7 @@ const LevelsGrid = ({ form, theme }) => {
         onChange={(value) => form.setValue("niveauR", value)}
         options={rLevels}
         theme={theme}
-        className="md:col-span-2"
+        className="md:col-span-2 lg:col-span-1"
       />
     </div>
   );
@@ -468,17 +592,25 @@ const MasterclassRegistrationForm = () => {
 
   const calculateProgress = (data: Partial<FormData>) => {
     const requiredFields = [
-      'nomPrenom', 'email', 'adresse', 'telephone', 'profession',
-      'statut', 'outils', 'niveauProgrammation', 'niveauExcel', 'participeEdition2'
+      "nomPrenom",
+      "email",
+      "adresse",
+      "telephone",
+      "profession",
+      "statut",
+      "outils",
+      "niveauProgrammation",
+      "niveauExcel",
+      "participeEdition2",
     ];
-    
+
     let filled = 0;
-    requiredFields.forEach(field => {
-      if (field === 'outils') {
+    requiredFields.forEach((field) => {
+      if (field === "outils") {
         if (data.outils && data.outils.length > 0) filled++;
       } else if (data[field as keyof FormData]) filled++;
     });
-    
+
     return Math.min((filled / requiredFields.length) * 100, 100);
   };
 
@@ -491,47 +623,53 @@ const MasterclassRegistrationForm = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    
+
     try {
       console.log("Données du formulaire:", data);
-      
+
       // Préparer les données pour l'email
       const emailData = {
-        to: 'academy@dmplus-group.com',
+        to: "academy@dmplus-group.com",
         subject: `Nouvelle inscription - ${data.nomPrenom}`,
         formData: {
           ...data,
-          submittedAt: new Date().toLocaleString('fr-FR'),
-          formType: 'Masterclass Registration'
-        }
+          submittedAt: new Date().toLocaleString("fr-FR"),
+          formType: "Masterclass Registration",
+        },
       };
 
       // Envoyer l'email via l'API
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
+      const response = await fetch("/api/send-email", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(emailData),
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors de l\'envoi de l\'email');
+        throw new Error("Erreur lors de l'envoi de l'email");
       }
 
       const result = await response.json();
-      console.log('Email envoyé avec succès:', result);
-      
+      console.log("Email envoyé avec succès:", result);
+
       // Notification de succès
-      addNotification('success', `Votre inscription a été envoyée avec succès à l'academy ! Un email de confirmation vous sera envoyé à ${data.email}`);
-      
+      addNotification(
+        "success",
+        `Votre inscription a été envoyée avec succès à l'academy ! Un email de confirmation vous sera envoyé à ${data.email}`,
+      );
+
       setIsSubmitted(true);
     } catch (error) {
-      console.error('Erreur:', error);
-      
+      console.error("Erreur:", error);
+
       // Notification d'erreur
-      addNotification('error', 'Une erreur est survenue lors de l\'envoi de votre inscription. Veuillez réessayer ou contacter l\'academy directement.');
-      
+      addNotification(
+        "error",
+        "Une erreur est survenue lors de l'envoi de votre inscription. Veuillez réessayer ou contacter l'academy directement.",
+      );
+
       // En cas d'erreur, on peut quand même marquer comme soumis pour l'UX
       // mais vous pourriez vouloir garder le formulaire ouvert
       // setIsSubmitted(true);
@@ -541,10 +679,30 @@ const MasterclassRegistrationForm = () => {
   };
 
   const tabs = [
-    { value: "infos", label: "Informations", icon: User, description: "Coordonnées personnelles" },
-    { value: "competences", label: "Compétences", icon: Code, description: "Outils et technologies" },
-    { value: "niveaux", label: "Expertise", icon: BarChart3, description: "Niveaux de maîtrise" },
-    { value: "attentes", label: "Finalisation", icon: Target, description: "Projet et confirmation" },
+    {
+      value: "infos",
+      label: "Informations",
+      icon: User,
+      description: "Coordonnées personnelles",
+    },
+    {
+      value: "competences",
+      label: "Compétences",
+      icon: Code,
+      description: "Outils et technologies",
+    },
+    {
+      value: "niveaux",
+      label: "Expertise",
+      icon: BarChart3,
+      description: "Niveaux de maîtrise",
+    },
+    {
+      value: "attentes",
+      label: "Finalisation",
+      icon: Target,
+      description: "Projet et confirmation",
+    },
   ];
 
   if (isSubmitted) {
@@ -560,21 +718,21 @@ const MasterclassRegistrationForm = () => {
             <motion.div
               key={i}
               className="absolute"
-              initial={{ 
+              initial={{
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                scale: 0 
+                scale: 0,
               }}
-              animate={{ 
+              animate={{
                 y: [null, -100],
                 scale: [0, 1, 0],
-                rotate: [0, 180, 360]
+                rotate: [0, 180, 360],
               }}
-              transition={{ 
+              transition={{
                 duration: 2,
                 delay: i * 0.1,
                 repeat: Infinity,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
             >
               {i % 2 === 0 ? (
@@ -588,14 +746,19 @@ const MasterclassRegistrationForm = () => {
 
         <Card className="max-w-md w-full border-0 overflow-hidden relative">
           {/* Bande décorative */}
-          <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${theme.from} ${theme.via} ${theme.to}`} />
-          
+          <div
+            className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${theme.from} ${theme.via} ${theme.to}`}
+          />
+
           {/* Motif de fond */}
           <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, ${theme.primary} 1px, transparent 0)`,
-              backgroundSize: '30px 30px'
-            }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, ${theme.primary} 1px, transparent 0)`,
+                backgroundSize: "30px 30px",
+              }}
+            />
           </div>
 
           <CardContent className="relative p-8 text-center space-y-6">
@@ -614,7 +777,9 @@ const MasterclassRegistrationForm = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h2 className={`text-3xl font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}>
+              <h2
+                className={`text-3xl font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}
+              >
                 Félicitations !
               </h2>
               <p className="text-sm text-gray-600 mt-2">
@@ -630,19 +795,38 @@ const MasterclassRegistrationForm = () => {
               className={`inline-flex items-center gap-2 px-4 py-2 ${theme.bgLight} rounded-full border ${theme.border}`}
             >
               <BadgeCheck className={`w-4 h-4 ${theme.text}`} />
-              <span className={`text-xs font-medium ${theme.text}`}>Inscription #MC2024-{Math.floor(Math.random() * 1000)}</span>
+              <span className={`text-xs font-medium ${theme.text}`}>
+                Inscription #MC2024-{Math.floor(Math.random() * 1000)}
+              </span>
             </motion.div>
 
             {/* Timeline des prochaines étapes */}
-            <div className={`bg-gradient-to-br from-gray-50 ${theme.bgVeryLight} rounded-xl p-5 space-y-3`}>
+            <div
+              className={`bg-gradient-to-br from-gray-50 ${theme.bgVeryLight} rounded-xl p-5 space-y-3`}
+            >
               <h3 className="text-xs font-semibold text-gray-700 flex items-center gap-2">
                 <Rocket className={`w-4 h-4 ${theme.text}`} />
                 Votre parcours en 3 étapes
               </h3>
               {[
-                { time: "J+1", text: "Email de confirmation", icon: Mail, done: true },
-                { time: "J+2", text: "Appel de validation", icon: Phone, done: false },
-                { time: "J+3", text: "Programme personnalisé", icon: BookOpen, done: false },
+                {
+                  time: "J+1",
+                  text: "Email de confirmation",
+                  icon: Mail,
+                  done: true,
+                },
+                {
+                  time: "J+2",
+                  text: "Appel de validation",
+                  icon: Phone,
+                  done: false,
+                },
+                {
+                  time: "J+3",
+                  text: "Programme personnalisé",
+                  icon: BookOpen,
+                  done: false,
+                },
               ].map((step, i) => (
                 <motion.div
                   key={i}
@@ -651,14 +835,20 @@ const MasterclassRegistrationForm = () => {
                   transition={{ delay: 0.5 + i * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className={`
+                  <div
+                    className={`
                     w-8 h-8 rounded-full flex items-center justify-center
-                    ${step.done ? 'bg-green-100' : 'bg-gray-100'}
-                  `}>
-                    <step.icon className={`w-4 h-4 ${step.done ? 'text-green-600' : 'text-gray-500'}`} />
+                    ${step.done ? "bg-green-100" : "bg-gray-100"}
+                  `}
+                  >
+                    <step.icon
+                      className={`w-4 h-4 ${step.done ? "text-green-600" : "text-gray-500"}`}
+                    />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="text-xs font-medium text-gray-900">{step.text}</p>
+                    <p className="text-xs font-medium text-gray-900">
+                      {step.text}
+                    </p>
                     <p className="text-[10px] text-gray-500">{step.time}</p>
                   </div>
                   {step.done && (
@@ -696,55 +886,85 @@ const MasterclassRegistrationForm = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 relative overflow-hidden ${
-      theme.bgVeryLight
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-500 relative overflow-hidden ${
+        theme.bgVeryLight
+      }`}
+    >
       {/* Container de notifications */}
       <NotificationContainer />
-      
+
       {/* Éléments de fond élégants */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Cercles flous */}
-        <div className={`absolute top-0 -left-48 w-96 h-96 ${theme.bg} rounded-full blur-3xl opacity-5`} />
-        <div className={`absolute bottom-0 -right-48 w-96 h-96 ${theme.bg} rounded-full blur-3xl opacity-5`} />
-        
+        <div
+          className={`absolute top-0 -left-48 w-96 h-96 ${theme.bg} rounded-full blur-3xl opacity-5`}
+        />
+        <div
+          className={`absolute bottom-0 -right-48 w-96 h-96 ${theme.bg} rounded-full blur-3xl opacity-5`}
+        />
+
         {/* Motif de points */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, ${theme.primary} 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
-        
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${theme.primary} 1px, transparent 0)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+
         {/* Lignes de force */}
-        <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="absolute top-0 left-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor={theme.primary} stopOpacity="0.1" />
               <stop offset="100%" stopColor={theme.primary} stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path d="M0,100 Q400,50 800,100 T1600,100" stroke="url(#grad1)" strokeWidth="2" fill="none" />
-          <path d="M0,200 Q400,150 800,200 T1600,200" stroke="url(#grad1)" strokeWidth="2" fill="none" />
+          <path
+            d="M0,100 Q400,50 800,100 T1600,100"
+            stroke="url(#grad1)"
+            strokeWidth="2"
+            fill="none"
+          />
+          <path
+            d="M0,200 Q400,150 800,200 T1600,200"
+            stroke="url(#grad1)"
+            strokeWidth="2"
+            fill="none"
+          />
         </svg>
       </div>
 
       {/* Header premium */}
-      <div className={`sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b ${theme.border}`}>
-        <div className="container mx-auto px-4 py-3">
+      <div
+        className={`sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b ${theme.border}`}
+      >
+        <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center justify-between">
             {/* Logo et titre */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-2 sm:gap-4"
             >
               <div className="relative">
-                <div className={`absolute inset-0 bg-gradient-to-r ${theme.from} ${theme.to} rounded-xl blur-lg opacity-50`} />
-                <div className={`relative w-10 h-10 bg-gradient-to-br ${theme.from} ${theme.to} rounded-xl flex items-center justify-center`}>
-                  <GraduationCap className="w-5 h-5 text-white" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${theme.from} ${theme.to} rounded-xl blur-lg opacity-50`}
+                />
+                <div
+                  className={`relative w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${theme.from} ${theme.to} rounded-xl flex items-center justify-center`}
+                >
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className={`text-lg font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}>
+                <h1
+                  className={`text-base sm:text-lg font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}
+                >
                   Master Class R & Shiny
                 </h1>
                 <p className="text-xs text-gray-500 flex items-center gap-1">
@@ -755,37 +975,39 @@ const MasterclassRegistrationForm = () => {
             </motion.div>
 
             {/* Indicateurs de progression premium */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3 sm:gap-6">
               {/* Progression circulaire */}
-              <div className="relative w-10 h-10">
-                <svg className="w-10 h-10 transform -rotate-90">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10">
+                <svg className="w-8 h-8 sm:w-10 sm:h-10 transform -rotate-90">
                   <circle
-                    cx="20"
-                    cy="20"
-                    r="16"
+                    cx="16"
+                    cy="16"
+                    r="12"
                     stroke="#e5e7eb"
-                    strokeWidth="3"
+                    strokeWidth="2"
                     fill="none"
                   />
                   <circle
-                    cx="20"
-                    cy="20"
-                    r="16"
+                    cx="16"
+                    cy="16"
+                    r="12"
                     stroke={theme.primary}
-                    strokeWidth="3"
+                    strokeWidth="2"
                     fill="none"
-                    strokeDasharray={`${2 * Math.PI * 16}`}
-                    strokeDashoffset={`${2 * Math.PI * 16 * (1 - progress / 100)}`}
+                    strokeDasharray={`${2 * Math.PI * 12}`}
+                    strokeDashoffset={`${2 * Math.PI * 12 * (1 - progress / 100)}`}
                     className="transition-all duration-500"
                   />
                 </svg>
-                <span className={`absolute inset-0 flex items-center justify-center text-xs font-bold ${theme.text}`}>
+                <span
+                  className={`absolute inset-0 flex items-center justify-center text-[10px] sm:text-xs font-bold ${theme.text}`}
+                >
                   {Math.round(progress)}%
                 </span>
               </div>
 
               {/* Badges de sections */}
-              <div className="flex gap-2">
+              <div className="flex gap-1 sm:gap-2">
                 {tabs.map((tab, i) => (
                   <motion.div
                     key={tab.value}
@@ -793,15 +1015,16 @@ const MasterclassRegistrationForm = () => {
                     onHoverStart={() => setHoveredTab(i)}
                     onHoverEnd={() => setHoveredTab(null)}
                     className={`
-                      w-8 h-8 rounded-lg flex items-center justify-center transition-all cursor-pointer
-                      ${activeTab === tab.value 
-                        ? `bg-gradient-to-br ${theme.from} ${theme.to} text-white` 
-                        : 'bg-gray-100 text-gray-500'
+                      w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all cursor-pointer
+                      ${
+                        activeTab === tab.value
+                          ? `bg-gradient-to-br ${theme.from} ${theme.to} text-white`
+                          : "bg-gray-100 text-gray-500"
                       }
                     `}
                     onClick={() => setActiveTab(tab.value)}
                   >
-                    <tab.icon className="w-4 h-4" />
+                    <tab.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                   </motion.div>
                 ))}
               </div>
@@ -835,7 +1058,9 @@ const MasterclassRegistrationForm = () => {
                             setShowThemePicker(false);
                           }}
                           className={`w-8 h-8 rounded-lg ${themes[key].bg} ${
-                            currentTheme === key ? 'ring-2 ring-offset-2 ring-gray-400' : ''
+                            currentTheme === key
+                              ? "ring-2 ring-offset-2 ring-gray-400"
+                              : ""
                           }`}
                           title={themes[key].name}
                         />
@@ -850,17 +1075,19 @@ const MasterclassRegistrationForm = () => {
       </div>
 
       {/* Contenu principal */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 py-4 sm:px-4 sm:py-6 lg:px-4 lg:py-8">
         <div className="max-w-5xl mx-auto">
           {/* Tabs premium */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-            <TabsList className={`grid grid-cols-4 p-1 bg-white/80 backdrop-blur-sm border ${theme.border} rounded-2xl`}>
+            <TabsList
+              className={`grid grid-cols-4 p-1 bg-white/80 backdrop-blur-sm border ${theme.border} rounded-2xl gap-1`}
+            >
               {tabs.map((tab, index) => (
                 <TabsTrigger
                   key={tab.value}
                   value={tab.value}
                   className={`
-                    relative overflow-hidden text-sm py-3 transition-all duration-300
+                    relative overflow-hidden text-xs sm:text-sm py-2.5 sm:py-3 transition-all duration-300
                     data-[state=active]:bg-gradient-to-r data-[state=active]:${theme.from} data-[state=active]:${theme.to}
                     data-[state=active]:text-white
                   `}
@@ -870,12 +1097,16 @@ const MasterclassRegistrationForm = () => {
                       layoutId="activeTab"
                       className={`absolute inset-0 bg-gradient-to-r ${theme.from} ${theme.to}`}
                       initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
                     />
                   )}
-                  <span className="relative flex items-center justify-center gap-2">
-                    <tab.icon className="w-4 h-4" />
-                    <span className="hidden md:inline">{tab.label}</span>
+                  <span className="relative flex items-center justify-center gap-1 sm:gap-2">
+                    <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <span className="hidden xs:inline sm:inline">{tab.label}</span>
                   </span>
                 </TabsTrigger>
               ))}
@@ -890,9 +1121,11 @@ const MasterclassRegistrationForm = () => {
             >
               <Card className="mt-4 border-0 bg-white/90 backdrop-blur-xl overflow-hidden">
                 {/* Bande décorative supérieure */}
-                <div className={`h-1 bg-gradient-to-r ${theme.from} ${theme.via} ${theme.to}`} />
-                
-                <CardContent className="p-8">
+                <div
+                  className={`h-1 bg-gradient-to-r ${theme.from} ${theme.via} ${theme.to}`}
+                />
+
+                <CardContent className="p-4 sm:p-6 lg:p-8">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                       {/* Tab 1: Informations personnelles */}
@@ -904,7 +1137,7 @@ const MasterclassRegistrationForm = () => {
                           theme={theme}
                         />
 
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                           <ElegantField
                             form={form}
                             name="nomPrenom"
@@ -954,15 +1187,19 @@ const MasterclassRegistrationForm = () => {
                           name="statut"
                           render={({ field }) => (
                             <FormItem className="mt-4">
-                              <FormLabel className={`text-sm font-semibold text-gray-700 flex items-center gap-2`}>
-                                <GraduationCap className={`w-4 h-4 ${theme.text}`} />
+                              <FormLabel
+                                className={`text-sm font-semibold text-gray-700 flex items-center gap-2`}
+                              >
+                                <GraduationCap
+                                  className={`w-4 h-4 ${theme.text}`}
+                                />
                                 Statut actuel
                               </FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
                                   value={field.value}
-                                  className="grid grid-cols-2 gap-4 mt-2"
+                                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-2"
                                 >
                                   <SimpleRadioOption
                                     value={field.value}
@@ -991,7 +1228,10 @@ const MasterclassRegistrationForm = () => {
                       </TabsContent>
 
                       {/* Tab 2: Compétences techniques */}
-                      <TabsContent value="competences" className="mt-0 space-y-6">
+                      <TabsContent
+                        value="competences"
+                        className="mt-0 space-y-6"
+                      >
                         <SimpleSectionHeader
                           icon={Code}
                           title="Compétences techniques"
@@ -1010,7 +1250,7 @@ const MasterclassRegistrationForm = () => {
                               <FormDescription className="text-xs mb-4">
                                 Sélectionnez tous les outils que vous connaissez
                               </FormDescription>
-                              <div className="grid grid-cols-3 gap-3">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                                 {outilsOptions.map((outil, index) => (
                                   <SimpleSkillBadge
                                     key={outil.id}
@@ -1018,8 +1258,12 @@ const MasterclassRegistrationForm = () => {
                                     icon={outil.icon}
                                     selected={field.value?.includes(outil.id)}
                                     onClick={() => {
-                                      const newValue = field.value?.includes(outil.id)
-                                        ? field.value.filter(v => v !== outil.id)
+                                      const newValue = field.value?.includes(
+                                        outil.id,
+                                      )
+                                        ? field.value.filter(
+                                            (v) => v !== outil.id,
+                                          )
                                         : [...(field.value || []), outil.id];
                                       field.onChange(newValue);
                                     }}
@@ -1035,7 +1279,7 @@ const MasterclassRegistrationForm = () => {
                           {showAutreOutil && (
                             <motion.div
                               initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
+                              animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               className="space-y-4 overflow-hidden mt-4"
                             >
@@ -1065,7 +1309,8 @@ const MasterclassRegistrationForm = () => {
                               </div>
                               <p className="text-xs text-gray-500 italic flex items-center gap-1">
                                 <Sparkles className="w-3 h-3 text-[hsl(345,70%,35%)]" />
-                                Dites-nous ce que vous voulez apprendre pour personnaliser votre parcours
+                                Dites-nous ce que vous voulez apprendre pour
+                                personnaliser votre parcours
                               </p>
                             </motion.div>
                           )}
@@ -1096,7 +1341,9 @@ const MasterclassRegistrationForm = () => {
                         <div className="space-y-6">
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <h4 className="text-sm font-semibold text-gray-700 mb-2">Connaissance de Shiny</h4>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                                Connaissance de Shiny
+                              </h4>
                               <FormField
                                 control={form.control}
                                 name="connaitShiny"
@@ -1106,15 +1353,33 @@ const MasterclassRegistrationForm = () => {
                                       <RadioGroup
                                         onValueChange={field.onChange}
                                         value={field.value}
-                                        className="flex gap-4"
+                                        className="flex flex-col sm:flex-row gap-2 sm:gap-4"
                                       >
                                         <div className="flex items-center gap-2">
-                                          <RadioGroupItem value="OUI" id="shiny-oui" className={theme.text} />
-                                          <Label htmlFor="shiny-oui" className="text-sm cursor-pointer">Oui</Label>
+                                          <RadioGroupItem
+                                            value="OUI"
+                                            id="shiny-oui"
+                                            className={theme.text}
+                                          />
+                                          <Label
+                                            htmlFor="shiny-oui"
+                                            className="text-sm cursor-pointer"
+                                          >
+                                            Oui
+                                          </Label>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                          <RadioGroupItem value="NON" id="shiny-non" className={theme.text} />
-                                          <Label htmlFor="shiny-non" className="text-sm cursor-pointer">Non</Label>
+                                          <RadioGroupItem
+                                            value="NON"
+                                            id="shiny-non"
+                                            className={theme.text}
+                                          />
+                                          <Label
+                                            htmlFor="shiny-non"
+                                            className="text-sm cursor-pointer"
+                                          >
+                                            Non
+                                          </Label>
                                         </div>
                                       </RadioGroup>
                                     </FormControl>
@@ -1124,7 +1389,9 @@ const MasterclassRegistrationForm = () => {
                             </div>
 
                             <div>
-                              <h4 className="text-sm font-semibold text-gray-700 mb-2">Expérience provisionnement</h4>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                                Expérience provisionnement
+                              </h4>
                               <FormField
                                 control={form.control}
                                 name="experienceProvisionnement"
@@ -1134,15 +1401,33 @@ const MasterclassRegistrationForm = () => {
                                       <RadioGroup
                                         onValueChange={field.onChange}
                                         value={field.value}
-                                        className="flex gap-4"
+                                        className="flex flex-col sm:flex-row gap-2 sm:gap-4"
                                       >
                                         <div className="flex items-center gap-2">
-                                          <RadioGroupItem value="OUI" id="prov-oui" className={theme.text} />
-                                          <Label htmlFor="prov-oui" className="text-sm cursor-pointer">Oui</Label>
+                                          <RadioGroupItem
+                                            value="OUI"
+                                            id="prov-oui"
+                                            className={theme.text}
+                                          />
+                                          <Label
+                                            htmlFor="prov-oui"
+                                            className="text-sm cursor-pointer"
+                                          >
+                                            Oui
+                                          </Label>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                          <RadioGroupItem value="NON" id="prov-non" className={theme.text} />
-                                          <Label htmlFor="prov-non" className="text-sm cursor-pointer">Non</Label>
+                                          <RadioGroupItem
+                                            value="NON"
+                                            id="prov-non"
+                                            className={theme.text}
+                                          />
+                                          <Label
+                                            htmlFor="prov-non"
+                                            className="text-sm cursor-pointer"
+                                          >
+                                            Non
+                                          </Label>
                                         </div>
                                       </RadioGroup>
                                     </FormControl>
@@ -1153,7 +1438,9 @@ const MasterclassRegistrationForm = () => {
                           </div>
 
                           <div>
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">Vos attentes</h4>
+                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                              Vos attentes
+                            </h4>
                             <FormField
                               control={form.control}
                               name="attentes"
@@ -1172,7 +1459,9 @@ const MasterclassRegistrationForm = () => {
                           </div>
 
                           <div>
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">Participation à la 2ème édition *</h4>
+                            <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                              Participation à la 2ème édition *
+                            </h4>
                             <FormField
                               control={form.control}
                               name="participeEdition2"
@@ -1182,7 +1471,7 @@ const MasterclassRegistrationForm = () => {
                                     <RadioGroup
                                       onValueChange={field.onChange}
                                       value={field.value}
-                                      className="grid grid-cols-2 gap-4"
+                                      className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
                                     >
                                       <SimpleRadioOption
                                         value={field.value}
@@ -1214,14 +1503,16 @@ const MasterclassRegistrationForm = () => {
 
                       {/* Navigation et soumission */}
                       <div className="mt-8 pt-6 border-t border-gray-100">
-                        <div className="flex items-center justify-between">
-                          <div className="flex gap-3">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
                             {activeTab !== "infos" && (
                               <Button
                                 type="button"
                                 variant="outline"
                                 onClick={() => {
-                                  const currentIndex = tabs.findIndex(t => t.value === activeTab);
+                                  const currentIndex = tabs.findIndex(
+                                    (t) => t.value === activeTab,
+                                  );
                                   setActiveTab(tabs[currentIndex - 1].value);
                                 }}
                                 className={`border-2 border-gray-200 ${theme.borderHover} ${theme.bgHover} transition-all`}
@@ -1230,12 +1521,14 @@ const MasterclassRegistrationForm = () => {
                                 Précédent
                               </Button>
                             )}
-                            
+
                             {activeTab !== "attentes" && (
                               <Button
                                 type="button"
                                 onClick={() => {
-                                  const currentIndex = tabs.findIndex(t => t.value === activeTab);
+                                  const currentIndex = tabs.findIndex(
+                                    (t) => t.value === activeTab,
+                                  );
                                   setActiveTab(tabs[currentIndex + 1].value);
                                 }}
                                 className={`bg-gradient-to-r ${theme.from} ${theme.to} hover:${theme.from} hover:${theme.to} text-white transition-all`}
@@ -1251,10 +1544,11 @@ const MasterclassRegistrationForm = () => {
                               type="submit"
                               disabled={progress < 80 || isSubmitting}
                               className={`
-                                px-8 py-6 text-base font-semibold transition-all
-                                ${progress >= 80 && !isSubmitting
-                                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white'
-                                  : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                px-4 sm:px-6 py-3 sm:py-6 text-sm sm:text-base font-semibold transition-all
+                                ${
+                                  progress >= 80 && !isSubmitting
+                                    ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
+                                    : "bg-gray-200 text-gray-500 cursor-not-allowed"
                                 }
                               `}
                             >
@@ -1272,7 +1566,8 @@ const MasterclassRegistrationForm = () => {
                               ) : (
                                 <>
                                   <Lock className="w-4 h-4 mr-2" />
-                                  {Math.round(progress)}% - Complétez le formulaire
+                                  {Math.round(progress)}% - Complétez le
+                                  formulaire
                                 </>
                               )}
                             </Button>
@@ -1280,8 +1575,8 @@ const MasterclassRegistrationForm = () => {
                         </div>
 
                         {/* Message de confidentialité élégant */}
-                        <div className="mt-4 flex items-center justify-between text-[10px] text-gray-500">
-                          <div className="flex items-center gap-4">
+                        <div className="mt-4 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-4 text-[10px] text-gray-500">
+                          <div className="flex flex-col xs:flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                             <span className="flex items-center gap-1">
                               <Shield className={`w-3 h-3 ${theme.text}`} />
                               Données confidentielles
@@ -1295,7 +1590,9 @@ const MasterclassRegistrationForm = () => {
                               RGPD
                             </span>
                           </div>
-                          <span className={theme.text}>* Champs obligatoires</span>
+                          <span className={theme.text}>
+                            * Champs obligatoires
+                          </span>
                         </div>
                       </div>
                     </form>
@@ -1312,16 +1609,23 @@ const MasterclassRegistrationForm = () => {
             transition={{ delay: 0.5 }}
             className={`mt-6 bg-white/80 backdrop-blur-sm rounded-2xl border ${theme.border} p-4`}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-col lg:flex-row items-start lg:items-center gap-2 sm:gap-4">
                 <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 ${theme.bg} rounded-full animate-pulse`} />
-                  <span className="text-xs font-medium text-gray-700">Récapitulatif</span>
+                  <div
+                    className={`w-2 h-2 ${theme.bg} rounded-full animate-pulse`}
+                  />
+                  <span className="text-xs font-medium text-gray-700">
+                    Récapitulatif
+                  </span>
                 </div>
-                
-                <Separator orientation="vertical" className={`h-4 ${theme.bgLight}`} />
-                
-                <div className="flex items-center gap-4">
+
+                <Separator
+                  orientation="vertical"
+                  className={`h-4 ${theme.bgLight}`}
+                />
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                   <span className="flex items-center gap-1 text-xs">
                     <User className={`w-3.5 h-3.5 ${theme.text}`} />
                     {form.watch("nomPrenom") || "Non renseigné"}
@@ -1332,13 +1636,15 @@ const MasterclassRegistrationForm = () => {
                   </span>
                   <span className="flex items-center gap-1 text-xs">
                     <BarChart3 className={`w-3.5 h-3.5 ${theme.text}`} />
-                    {form.watch("niveauProgrammation") ? "Niveau défini" : "À définir"}
+                    {form.watch("niveauProgrammation")
+                      ? "Niveau défini"
+                      : "À définir"}
                   </span>
                 </div>
               </div>
-              
+
               <Badge className={theme.badge}>
-                {tabs.findIndex(t => t.value === activeTab) + 1}/4 étapes
+                {tabs.findIndex((t) => t.value === activeTab) + 1}/4 étapes
               </Badge>
             </div>
           </motion.div>
