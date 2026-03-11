@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Clock, Award, User, Star } from 'lucide-react';
 import { Button } from './button';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 export type TrainingFormat = {
   id: number;
@@ -36,6 +37,8 @@ export function TrainingCarousel({
   onItemClick
 }: TrainingCarouselProps) {
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
 
   const handleItemClick = (item: TrainingFormat) => {
     setSelectedItemId(item.id);
@@ -43,8 +46,21 @@ export function TrainingCarousel({
       onItemClick(item);
     }
   };
-  // Les états et gestionnaires de modale ont été supprimés car non nécessaires
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on('select', onSelect);
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!autoPlay || !emblaApi) return;
@@ -68,11 +84,11 @@ export function TrainingCarousel({
   const scrollNext = () => emblaApi && emblaApi.scrollNext();
 
   return (
-    <div className="relative px-12">
-      <div className="overflow-hidden" ref={emblaRef}>
+    <div className="relative px-4 sm:px-8 md:px-12">
+      <div className="overflow-hidden rounded-xl" ref={emblaRef}>
         <div className="flex">
           {items.map((item) => (
-            <div key={item.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4 pb-8 group">
+            <div key={item.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 sm:px-3 md:px-4 pb-8 group">
               <motion.div 
                 className={`bg-white rounded-2xl shadow-lg transition-all h-full flex flex-col overflow-hidden border ${
                   selectedItemId === item.id 
@@ -175,21 +191,38 @@ export function TrainingCarousel({
       <Button 
         variant="ghost" 
         size="icon" 
-        className="absolute -left-1 sm:-left-3 md:-left-6 lg:-left-12 top-1/2 -translate-y-1/2 z-10 rounded-full w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shadow-md bg-white/90 hover:bg-white/90 text-academy hover:text-academy transition-all transform hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-academy/50 focus:ring-offset-1"
+        className="absolute left-0 sm:-left-1 md:-left-3 lg:-left-6 top-1/2 -translate-y-1/2 z-10 rounded-full w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shadow-lg bg-white/95 hover:bg-white text-academy hover:text-academy transition-all transform hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-academy/50 focus:ring-offset-1"
         onClick={scrollPrev}
         aria-label="Précédent"
       >
-        <ArrowLeft className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5" />
+        <ArrowLeft className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5" />
       </Button>
       <Button 
         variant="ghost" 
         size="icon" 
-        className="absolute -right-1 sm:-right-3 md:-right-6 lg:-right-12 top-1/2 -translate-y-1/2 z-10 rounded-full w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shadow-md bg-white/90 hover:bg-white/90 text-academy hover:text-academy transition-all transform hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-academy/50 focus:ring-offset-1"
+        className="absolute right-0 sm:-right-1 md:-right-3 lg:-right-6 top-1/2 -translate-y-1/2 z-10 rounded-full w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shadow-lg bg-white/95 hover:bg-white text-academy hover:text-academy transition-all transform hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-academy/50 focus:ring-offset-1"
         onClick={scrollNext}
         aria-label="Suivant"
       >
         <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
       </Button>
+      
+      {/* Dot indicators for mobile */}
+      <div className="flex justify-center mt-4 gap-2 md:hidden">
+        {items.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => emblaApi?.scrollTo(index)}
+            className={cn(
+              "w-2 h-2 rounded-full transition-all duration-300",
+              selectedIndex === index 
+                ? "bg-academy w-8" 
+                : "bg-gray-300 hover:bg-gray-400"
+            )}
+            aria-label={`Aller à la diapositive ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ const NotreMissionSection = () => {
                 Renforcer les capacités par la technologie
               </h3>
 
-              <span className="text-primary text-6xl leading-none">“</span>
+              <span className="text-primary text-6xl leading-none">"</span>
 
               <p className="text-muted-foreground leading-relaxed mt-2">
                 Renforcer les capacités individuelles et collectives à travers

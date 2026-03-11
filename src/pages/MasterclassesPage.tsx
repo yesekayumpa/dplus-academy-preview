@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { 
   Search, Calendar, Clock, Users, Play, BookOpen, ArrowRight, 
   Award, TrendingUp, Star, Filter, X, ChevronRight, Sparkles,
@@ -662,6 +662,11 @@ const MasterclassesPageContent = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Scroller en haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [filterStatus, setFilterStatus] = useState<"all" | "upcoming" | "past">("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedLevel, setSelectedLevel] = useState<string>("all");

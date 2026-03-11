@@ -110,6 +110,11 @@ const SurMesurePage = () => {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  // Scroller en haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [availabilityFilter, setAvailabilityFilter] = useState<string>("all");
   const [showAvailabilityForm, setShowAvailabilityForm] = useState(false);
   const [selectedCoursesWithSchedule, setSelectedCoursesWithSchedule] = useState<

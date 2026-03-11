@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BookOpen,
@@ -329,6 +329,11 @@ const ElearningPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showFunnels, setShowFunnels] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(courses[0]);
+
+  // Scroller en haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [savedCourses, setSavedCourses] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState("all");
   const [priceRange, setPriceRange] = useState<[number, number]>([

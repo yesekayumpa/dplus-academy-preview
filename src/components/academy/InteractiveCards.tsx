@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BarChart, Globe, Rocket, Users } from "lucide-react";
@@ -105,7 +105,9 @@ const cardsData: CardData[] = [
 const InteractiveCards = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = () => {
     navigate("/sur-mesure");
@@ -122,155 +124,134 @@ const InteractiveCards = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Auto-scroll for mobile - DISABLED
   useEffect(() => {
-    if (isMobile) {
-      const interval = setInterval(() => {
-        setHoveredCard(prev => {
-          if (prev === null) return 1;
-          return prev >= cardsData.length ? 1 : prev + 1;
-        });
-      }, 3000);
-      
-      return () => clearInterval(interval);
-    }
-  }, [isMobile]);
+    // Auto-scroll functionality removed
+    return () => {};
+  }, [isMobile, isPaused]);
 
+  
   return (
     <div className="w-full py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
-          className={cn(
-            "flex gap-4 items-center justify-center",
-            isMobile && "flex-col gap-6"
-          )}
-          layout
-        >
-          <AnimatePresence>
-            {cardsData.map((card) => {
-              const isHovered = hoveredCard === card.id;
-              const isAnyHovered = hoveredCard !== null;
-              const isFirstCardDefaultHovered = card.id === 1 && hoveredCard === null && !isMobile;
-              const shouldShowHoveredState = isHovered || isFirstCardDefaultHovered;
-              
-              return (
-                <motion.div
-                  key={card.id}
-                  className="relative cursor-pointer"
-                  layout
-                  onHoverStart={!isMobile ? () => setHoveredCard(card.id) : undefined}
-                  onHoverEnd={!isMobile ? () => setHoveredCard(null) : undefined}
-                  onClick={handleCardClick}
-                  initial={{ 
-                    width: isMobile ? "100%" : "200px", 
-                    height: isMobile ? "300px" : "400px" 
-                  }}
-                  animate={{
-                    width: shouldShowHoveredState ? (isMobile ? "100%" : "400px") : (isMobile ? "100%" : "200px"),
-                    height: isMobile ? "300px" : "400px",
-                    borderRadius: shouldShowHoveredState ? "24px" : "16px",
-                    scale: 1
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  whileHover={!isMobile ? {
-                    zIndex: 50
-                  } : undefined}
-                >
+        {/* Mobile: Horizontal scroll container */}
+        {isMobile ? (
+          <div 
+            ref={scrollRef}
+            className="overflow-x-auto scrollbar-hide"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div className="flex gap-4 pb-4" style={{ width: 'max-content' }}>
+              {cardsData.map((card) => {
+                const isHovered = hoveredCard === card.id;
+                const shouldShowHoveredState = isHovered;
+                
+                return (
                   <motion.div
-                    className="absolute inset-0 overflow-hidden rounded-[inherit]"
+                    key={card.id}
+                    className="relative cursor-pointer"
                     layout
+                    onHoverStart={() => setHoveredCard(card.id)}
+                    onHoverEnd={() => setHoveredCard(null)}
+                    onClick={handleCardClick}
+                    initial={{ 
+                      width: "280px", 
+                      height: "300px" 
+                    }}
+                    animate={{
+                      width: shouldShowHoveredState ? "320px" : "280px",
+                      height: "300px",
+                      borderRadius: shouldShowHoveredState ? "24px" : "16px",
+                      scale: 1
+                    }}
+                    transition={{
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{
+                      zIndex: 50
+                    }}
                   >
-                    {/* Background Image */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${card.backgroundImage})` }}
-                    />
-                    
-                    {/* Color overlay with reduced opacity */}
-                    <div 
-                      className={cn(
-                        "absolute inset-0 bg-gradient-to-t transition-all duration-400",
-                        shouldShowHoveredState 
-                          ? "from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" 
-                          : "from-black/60 via-black/40 to-black/20"
-                      )} 
-                    />
-                    
-                    {/* Pattern Overlay */}
-                    <div className="absolute inset-0 opacity-10">
-                      <div 
-                        className="absolute inset-0"
-                        style={{
-                          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                          backgroundSize: '60px 60px'
-                        }}
-                      />
-                    </div>
-                    
-                    {/* Content */}
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 p-4 text-white"
+                      className="absolute inset-0 overflow-hidden rounded-[inherit]"
                       layout
-                      style={{ padding: isMobile ? "16px" : "16px" }}
                     >
-                      {/* Icon */}
+                      {/* Background Image */}
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${card.backgroundImage})` }}
+                      />
+                      
+                      {/* Color overlay - always use visible gradient on mobile */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-t from-[#800020]/80 via-[#800020]/60 to-[#800020]/40 transition-all duration-400"
+                      />
+                      
+                      {/* Pattern Overlay */}
+                      <div className="absolute inset-0 opacity-10">
+                        <div 
+                          className="absolute inset-0"
+                          style={{
+                            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                            backgroundSize: '60px 60px'
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Content */}
                       <motion.div
-                        className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3"
-                        animate={{
-                          scale: shouldShowHoveredState ? 1.1 : 1
-                        }}
-                        transition={{ duration: 0.3 }}
+                        className="absolute bottom-0 left-0 right-0 p-4 text-white"
+                        layout
+                        style={{ padding: "16px" }}
                       >
-                        {card.icon}
-                      </motion.div>
-                      
-                      {/* Title */}
-                      <motion.h3
-                        className="font-bold text-lg mb-2"
-                        animate={{
-                          fontSize: shouldShowHoveredState ? (isMobile ? "1.125rem" : "1.25rem") : (isMobile ? "1rem" : "1rem"),
-                          marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {card.title}
-                      </motion.h3>
-                      
-                      {/* Description */}
-                      <motion.p
-                        className="text-white text-sm leading-relaxed"
-                        animate={{
-                          fontSize: shouldShowHoveredState ? (isMobile ? "0.8rem" : "0.875rem") : (isMobile ? "0.75rem" : "0.75rem"),
-                          opacity: shouldShowHoveredState ? 0.9 : 0.7,
-                          display: shouldShowHoveredState ? "block" : "-webkit-box"
-                        }}
-                        transition={{ duration: 0.3 }}
-                        style={{
-                          WebkitLineClamp: shouldShowHoveredState ? "none" : 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden"
-                        }}
-                      >
-                        {card.description}
-                      </motion.p>
-                      
-                      {/* Topics count - only show when not hovered */}
-                      {!shouldShowHoveredState && (
-                        <div className="mt-2">
-                          <span className="text-white/90 text-xs">
-                            {card.topics} modules
-                          </span>
-                        </div>
-                      )}
-                      
-                      {/* Expanded content - only show when hovered */}
-                      {shouldShowHoveredState && (
+                        {/* Icon */}
                         <motion.div
-                          initial={{ opacity: 0 }}
+                          className={cn(
+                            "rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3",
+                            isMobile ? "w-8 h-8" : "w-12 h-12"
+                          )}
+                          animate={{
+                            scale: shouldShowHoveredState ? 1.1 : 1
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className={cn(isMobile ? "w-4 h-4" : "w-6 h-6")}>
+                            {card.icon}
+                          </div>
+                        </motion.div>
+                        
+                        {/* Title */}
+                        <motion.h3
+                          className="font-bold text-lg mb-2"
+                          animate={{
+                            fontSize: shouldShowHoveredState ? "1.125rem" : "1rem",
+                            marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {card.title}
+                        </motion.h3>
+                        
+                        {/* Description - always visible on mobile */}
+                        <motion.p
+                          className="text-white text-sm leading-relaxed"
+                          animate={{
+                            fontSize: "0.8rem",
+                            opacity: 0.9,
+                            display: "block"
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {card.description}
+                        </motion.p>
+                        
+                        {/* Always show expanded content on mobile */}
+                        <motion.div
+                          initial={{ opacity: 1 }}
                           animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
                           <div className="mt-4 space-y-2">
@@ -289,7 +270,7 @@ const InteractiveCards = () => {
                           
                           <motion.button
                             className="mt-4 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.2, delay: 0.1 }}
                             whileHover={{ scale: 1.05 }}
@@ -298,14 +279,187 @@ const InteractiveCards = () => {
                             Explorer ce domaine
                           </motion.button>
                         </motion.div>
-                      )}
+                      </motion.div>
                     </motion.div>
                   </motion.div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          // Desktop: Original layout
+          <motion.div 
+            className="flex gap-4 items-center justify-center"
+            layout
+          >
+            <AnimatePresence>
+              {cardsData.map((card) => {
+                const isHovered = hoveredCard === card.id;
+                const isAnyHovered = hoveredCard !== null;
+                const isFirstCardDefaultHovered = card.id === 1 && hoveredCard === null;
+                const shouldShowHoveredState = isHovered || isFirstCardDefaultHovered;
+                
+                return (
+                  <motion.div
+                    key={card.id}
+                    className="relative cursor-pointer"
+                    layout
+                    onHoverStart={() => setHoveredCard(card.id)}
+                    onHoverEnd={() => setHoveredCard(null)}
+                    onClick={handleCardClick}
+                    initial={{ 
+                      width: "200px", 
+                      height: "400px" 
+                    }}
+                    animate={{
+                      width: shouldShowHoveredState ? "400px" : "200px",
+                      height: "400px",
+                      borderRadius: shouldShowHoveredState ? "24px" : "16px",
+                      scale: 1
+                    }}
+                    transition={{
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{
+                      zIndex: 50
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 overflow-hidden rounded-[inherit]"
+                      layout
+                    >
+                      {/* Background Image */}
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${card.backgroundImage})` }}
+                      />
+                      
+                      {/* Color overlay - different behavior for desktop and mobile */}
+                      <div 
+                        className={cn(
+                          "absolute inset-0 bg-gradient-to-t transition-all duration-400",
+                          shouldShowHoveredState 
+                            ? "from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" 
+                            : "from-black/60 via-black/40 to-black/20"
+                        )} 
+                      />
+                      
+                      {/* Pattern Overlay */}
+                      <div className="absolute inset-0 opacity-10">
+                        <div 
+                          className="absolute inset-0"
+                          style={{
+                            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                            backgroundSize: '60px 60px'
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 p-4 text-white"
+                        layout
+                        style={{ padding: "16px" }}
+                      >
+                        {/* Icon */}
+                        <motion.div
+                          className={cn(
+                            "rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3",
+                            isMobile ? "w-8 h-8" : "w-12 h-12"
+                          )}
+                          animate={{
+                            scale: shouldShowHoveredState ? 1.1 : 1
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className={cn(isMobile ? "w-4 h-4" : "w-6 h-6")}>
+                            {card.icon}
+                          </div>
+                        </motion.div>
+                        
+                        {/* Title */}
+                        <motion.h3
+                          className="font-bold text-lg mb-2"
+                          animate={{
+                            fontSize: shouldShowHoveredState ? "1.25rem" : "1rem",
+                            marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {card.title}
+                        </motion.h3>
+                        
+                        {/* Description - different behavior for desktop and mobile */}
+                        <motion.p
+                          className="text-white text-sm leading-relaxed"
+                          animate={{
+                            fontSize: shouldShowHoveredState ? "0.875rem" : "0.8rem",
+                            opacity: shouldShowHoveredState ? 0.9 : 0.7,
+                            display: shouldShowHoveredState ? "block" : "-webkit-box"
+                          }}
+                          transition={{ duration: 0.3 }}
+                          style={{
+                            WebkitLineClamp: !shouldShowHoveredState ? 2 : "none",
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden"
+                          }}
+                        >
+                          {card.description}
+                        </motion.p>
+                        
+                        {/* Content - different behavior for desktop and mobile */}
+                        <>
+                          {!shouldShowHoveredState && (
+                            <div className="mt-2">
+                              <span className="text-white/90 text-xs">
+                                {card.topics} modules
+                              </span>
+                            </div>
+                          )}
+                          
+                          {shouldShowHoveredState && (
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <div className="mt-4 space-y-2">
+                                {card.details.slice(0, 3).map((detail, index) => (
+                                  <div
+                                    key={detail}
+                                    className="flex items-center gap-2"
+                                  >
+                                    <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
+                                    <span className="text-white/80 text-xs">
+                                      {detail}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                              
+                              <motion.button
+                                className="mt-4 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.2, delay: 0.1 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                Explorer ce domaine
+                              </motion.button>
+                            </motion.div>
+                          )}
+                        </>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
         </h3>
         <p className="text-xs text-muted-foreground">{data.instructor}</p>
 
-        <div className="mt-1 flex flex-col sm:flex-row sm:items-center gap-2">
+        <div className="mt-2 flex items-center justify-between">
           <div className="flex flex-wrap gap-1 sm:gap-2">
             {data.isBestseller && (
               <span className="rounded-sm bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-800">
@@ -75,18 +75,15 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
             )}
           </div>
           
-          <div className="flex items-center gap-1 sm:mt-0 mt-2">
+          <div className="flex items-center gap-1 flex-shrink-0">
             <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-amber-400 text-amber-400" />
             <span className="text-xs font-semibold text-foreground">
               {data.rating.toFixed(1).replace(".", ",")}
             </span>
-            <span className="text-xs text-muted-foreground hidden sm:inline">
-              {data.reviewCount} avis
+            <span className="text-xs text-muted-foreground">
+              ({data.reviewCount})
             </span>
           </div>
-          <span className="text-xs text-muted-foreground sm:hidden">
-            {data.reviewCount} avis
-          </span>
         </div>
       </div>
     </div>
