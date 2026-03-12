@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   GraduationCap,
   BookOpen,
@@ -11,24 +10,23 @@ import {
   Briefcase,
   UserPlus,
   Award,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import MasterclassSection from "./MasterclassSection";
 import InteractiveCards from "./InteractiveCards";
 
 const AcademySection = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true, 
+    loop: false, 
     align: 'start',
     slidesToScroll: 1,
-    containScroll: false
+    containScroll: false,
+    dragFree: false
   });
-  const [selectedAudience, setSelectedAudience] = useState(0);
 
   // Auto-play pour mobile uniquement
   useEffect(() => {
@@ -54,27 +52,34 @@ const AcademySection = () => {
     };
   }, [emblaApi]);
 
-  // Données des 3 cartes du carrousel
+  // Données des 4 cartes du carrousel
   const carouselItems = [
     {
       id: 1,
       title: "Masterclass",
-      description: "Sessions intensives avec des experts sur des thématiques précises.",
-      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      description: "Sessions intensives de 2h à 2 jours <br />sur des thématiques précises <br />avec des experts du domaine",
+      image: "/assets/Masterclass.jpg",
       link: "/masterclasses"
     },
     {
       id: 2,
       title: "E-learning",
-      description: "Formations en ligne accessibles à tout moment à votre rythme.",
-      image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+      description: "Formations en ligne accessibles <br />à tout moment <br />pour apprendre à votre rythme",
+      image: "/assets/E-learning2.jpg",
       link: "/e-learning"
     },
     {
       id: 3,
-      title: "Sur mesure",
-      description: "Formations personnalisées adaptées à votre entreprise.",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1484&q=80",
+      title: "Corporate Programs",
+      description: "Programmes de formation conçus <br />spécifiquement pour les entreprises, <br />adaptés à leurs objectifs et secteur",
+      image: "/images/Corporate.jpg",
+      link: "/corporate-programs"
+    },
+    {
+      id: 4,
+      title: "Mentored Courses",
+      description: "Formations sur mesure conçues <br />pour répondre aux objectifs stratégiques <br />et aux défis spécifiques de votre organisation",
+      image: "/images/Mentored Courses.jpg",
       link: "/sur-mesure"
     }
   ];
@@ -82,92 +87,184 @@ const AcademySection = () => {
   const scrollPrev = () => emblaApi && emblaApi.scrollPrev();
   const scrollNext = () => emblaApi && emblaApi.scrollNext();
 
-  const CarouselCard = ({ item }: { item: any }) => {
-    const [localHover, setLocalHover] = useState(false);
-
+  const CarouselCard = ({ item, isDesktop = false }: { item: any; isDesktop?: boolean }) => {
     return (
-      <div className="flex-[0_0_100%] md:flex-[0_0_33.333%] px-2 min-w-0">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ y: -5 }}
-          className="min-h-[20vh] md:min-h-[45vh] lg:min-h-[50vh]"
+      <div className={isDesktop ? "px-2" : "flex-[0_0_100%] md:flex-[0_0_33.333%] px-2 min-w-0"}>
+        <section
           style={{
-            padding: "10px 6px",
-            background: "#ffffff",
+            padding: isDesktop ? "12px 4px" : "12px 4px",
+            backgroundColor: "#fff",
             color: "#1a1a1a",
-            fontFamily: "Arial, sans-serif",
+            fontFamily: "Inter, sans-serif",
+            minHeight: isDesktop ? "28vh" : "30vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: "8px",
-            border: "1px solid rgba(128, 0, 32, 0.1)",
-            transition: "border-color 0.3s ease",
-            ...(localHover && { borderColor: "#800020" })
+            borderRadius: "12px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+            border: "none",
+            transition: "all 0.3s ease",
+            position: "relative",
+            overflow: "hidden"
           }}
         >
-          <div
-            style={{
-              maxWidth: "450px",
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              flexWrap: "wrap",
-            }}
-          >
-            {/* Image à gauche */}
-            <motion.div 
-              className="flex-1 md:flex-[1.5] min-w-[160px] md:min-w-[220px] lg:min-w-[260px]"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+          {isDesktop ? (
+            // Version Desktop: image en haut, texte au milieu, bouton en bas (taille réduite)
+            <div
+              style={{
+                maxWidth: "320px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "12px",
+              }}
             >
-              <div style={{ position: "relative" }}>
+              {/* Image en haut */}
+              <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-auto rounded-md md:max-h-[140px] lg:max-h-[180px] max-h-[120px] object-cover"
+                  style={{ 
+                    maxWidth: "100%", 
+                    height: isDesktop ? "160px" : "auto",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+                    transition: "transform 0.3s ease"
+                  }}
                 />
               </div>
-            </motion.div>
-            
-            {/* Contenu à droite */}
-            <div className="flex-1 md:flex-[1] min-w-[100px] md:min-w-[100px] lg:min-w-[160px] text-left">
-              <h2
-                className="text-base md:text-base lg:text-lg font-bold mb-1 text-gray-900 pl-2"
-                style={{
-                  borderLeft: "2px solid #800020",
-                  paddingLeft: "6px"
-                }}
-              >
-                {item.title}
-              </h2>
-              <p
-                className="text-xs md:text-xs lg:text-sm text-gray-600 mb-2 leading-snug"
-              >
-                {item.description}
-              </p>
               
-              {/* Bouton */}
-              <div className="text-left">
-                <Link
-                  to={item.link}
-                  className="inline-block px-3 md:px-3 lg:px-4 py-1 text-xs md:text-xs lg:text-sm font-medium text-white rounded-full transition-all"
+              {/* Contenu au milieu */}
+              <div style={{ width: "100%", textAlign: "center" }}>
+                <h2
                   style={{
-                    background: "#800020",
+                    fontSize: "1.1rem",
+                    fontWeight: "bold",
+                    marginBottom: "8px",
+                    lineHeight: "1.2",
+                    color: "#1a1a1a",
                   }}
-                  onMouseEnter={() => setLocalHover(true)}
-                  onMouseLeave={() => setLocalHover(false)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  En savoir plus
-                </Link>
+                  {item.title}
+                </h2>
+                <p
+                  style={{
+                    fontSize: isDesktop ? "0.8rem" : "0.8rem",
+                    fontWeight: "400",
+                    marginBottom: isDesktop ? "16px" : "15px",
+                    lineHeight: "1.4",
+                    color: "#1a1a1a",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
+                
+                {/* Bouton en bas */}
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    style={{
+                      background: "linear-gradient(135deg, hsl(346, 100%, 25%) 0%, hsl(346, 100%, 35%) 100%)",
+                      color: "#ffffff",
+                      border: "none",
+                      padding: "10px 24px",
+                      fontSize: "0.8rem",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      borderRadius: "8px",
+                      fontWeight: "600",
+                      boxShadow: "0 4px 12px rgba(229, 62, 62, 0.3)",
+                      letterSpacing: "0.5px",
+                      textTransform: "uppercase"
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={() => window.open(item.link, "_blank")}
+                  >
+                    En savoir plus
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          ) : (
+            // Version Mobile: image à gauche, texte à droite avec bouton aligné en bas
+            <div
+              style={{
+                maxWidth: "500px",
+                width: "100%",
+                display: "flex",
+                alignItems: "flex-end",
+                gap: "15px",
+                flexWrap: "wrap",
+              }}
+            >
+              {/* Image à gauche */}
+              <div style={{ flex: 1, minWidth: "180px" }}>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ 
+                    maxWidth: "100%", 
+                    height: "180px", 
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+                    transition: "transform 0.3s ease"
+                  }}
+                />
+              </div>
+              
+              {/* Contenu à droite */}
+              <div style={{ flex: 1, minWidth: "150px", textAlign: "left" }}>
+                <h2
+                  style={{
+                    fontSize: "0.95rem",
+                    fontWeight: "bold",
+                    marginBottom: "8px",
+                    lineHeight: "1.2",
+                    color: "#1a1a1a",
+                  }}
+                >
+                  {item.title}
+                </h2>
+                <p
+                  style={{
+                    fontSize: "0.8rem",
+                    fontWeight: "400",
+                    marginBottom: "15px",
+                    lineHeight: "1.3",
+                    color: "#1a1a1a",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
+                
+                {/* Bouton aligné à gauche */}
+                <div style={{ textAlign: "left" }}>
+                  <button
+                    style={{
+                      background: "linear-gradient(135deg, hsl(346, 100%, 25%) 0%, hsl(346, 100%, 35%) 100%)",
+                      color: "#ffffff",
+                      border: "none",
+                      padding: "10px 24px",
+                      fontSize: "0.8rem",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      borderRadius: "8px",
+                      fontWeight: "600",
+                      boxShadow: "0 4px 12px rgba(229, 62, 62, 0.3)",
+                      letterSpacing: "0.5px"
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={() => window.open(item.link, "_blank")}
+                  >
+                    En savoir plus
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
       </div>
     );
   };
@@ -198,14 +295,14 @@ const AcademySection = () => {
       title: "Entrepreneuriat",
       icon: <Rocket className="w-6 h-6" />,
       description:
-        "Développement de projets entrepreneuriaux et gestion d'entreprise",
+        "",
       type: "entrepreneurship",
     },
     {
       title: "Soft skills & Leadership",
       icon: <Users className="w-6 h-6" />,
       description:
-        "Développement des compétences relationnelles et managériales",
+        "",
       type: "soft-skills",
     },
   ];
@@ -233,112 +330,100 @@ const AcademySection = () => {
 
   return (
     <div className="space-y-4">
-      {/* Carrousel de 3 cartes */}
-      <div style={{ 
-        position: 'relative',
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '10px 20px',
-        paddingTop: '30px'
-      }}>
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div style={{ 
-            display: 'flex',
-            gap: '0'
-          }}>
-            {carouselItems.map((item) => (
-              <CarouselCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-        
-        {/* Boutons de navigation - cachés */}
-        <motion.button
-          className="hidden"
-          onClick={scrollPrev}
-        >
-          <ChevronLeft />
-        </motion.button>
-        
-        <motion.button
-          className="hidden"
-          onClick={scrollNext}
-        >
-          <ChevronRight />
-        </motion.button>
-      </div>
-
-      {/* Piliers de formation */}
-      <section className="relative py-1">
+      {/* Piliers de formation – Version Premium */}
+      <section className="relative py-2">
+        {/* Fond subtil */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
         <div className="relative container mx-auto px-4 max-w-6xl">
           {/* Header */}
-          <motion.div 
-            className="text-center mb-8 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+          <div className="text-center mb-12 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
               Nos Piliers de Formation
             </h2>
-            <p className="text-muted-foreground text-sm mb-3">
-              Une approche structurée pour un apprentissage durable
+            <p className="text-sm md:text-base text-muted-foreground mb-4">
+              Une approche structurée pour un apprentissage durable et impactant
             </p>
-            <div className="w-16 h-0.5 rounded-full bg-burgundy-600 mx-auto" />
-          </motion.div>
+            <div className="w-20 h-1 rounded-full bg-gradient-to-r from-academy to-academy-light mx-auto" />
+          </div>
 
           <InteractiveCards />
         </div>
       </section>
 
+      {/* Header pour le carousel */}
+      <div className="text-center mb-8 max-w-2xl mx-auto">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
+          Nos formats pédagogiques
+        </h2>
+        <p className="text-sm md:text-base text-muted-foreground mb-4">
+          Des approches variées pour répondre à vos besoins spécifiques
+        </p>
+        <div className="w-20 h-1 rounded-full bg-gradient-to-r from-academy to-academy-light mx-auto" />
+      </div>
+
+     {/* Carrousel de 4 cartes - 4 visibles sur web, 1 sur mobile avec auto-scroll */}
+      <div style={{ 
+        position: 'relative',
+        maxWidth: '1400px',
+        margin: '0 auto',
+        padding: '30px 20px'
+      }}>
+        {/* Desktop: 4 cartes sur une ligne */}
+        <div className="hidden md:block">
+          <div className="flex gap-0 justify-center">
+            {carouselItems.map((item) => (
+              <div key={item.id} className="flex-1 max-w-xs">
+                <CarouselCard item={item} isDesktop={true} />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Mobile: carrousel avec auto-scroll */}
+        <div className="block md:hidden">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div style={{ 
+              display: 'flex',
+              gap: '0'
+            }}>
+              {carouselItems.map((item) => (
+                <CarouselCard key={item.id} item={item} isDesktop={false} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Vidéo d'introduction */}
-      <section className="py-2">
+      <section className="py-4">
         <div className="container mx-auto px-4 max-w-6xl">
-          <motion.h2 
-            className="text-2xl font-bold text-center mb-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Découvrez notre formation en vidéo
-          </motion.h2>
-          <motion.p 
-            className="text-muted-foreground text-center text-sm max-w-3xl mx-auto mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground text-center max-w-3xl mx-auto mb-8">
             Plongez dans l'univers de notre formation à travers cette vidéo de
-            présentation.
-          </motion.p>
-          <motion.div 
-            className="relative max-w-3xl mx-auto"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+            présentation qui vous donnera un aperçu de notre approche
+            pédagogique et de nos valeurs.
+          </p>
+          <div className="relative max-w-3xl mx-auto">
             {/* Ordinateur portable avec vidéo intégrée */}
-            <div className="relative scale-70">
+            <div className="relative scale-75">
               {/* Écran de l'ordinateur */}
-              <div className="relative bg-gray-900 rounded-t-2xl p-1">
+              <div className="relative bg-gray-900 rounded-t-2xl p-1.5 shadow-2xl">
                 {/* Barre supérieure de l'écran */}
-                <div className="flex items-center justify-between mb-1 px-1">
+                <div className="flex items-center justify-between mb-1.5 px-1.5">
                   <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 bg-red-500 rounded-full"></div>
-                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
-                    <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                   </div>
                   <div className="text-xs text-gray-400 font-medium">DM+ Academy</div>
                   <div className="w-10"></div>
                 </div>
                 
                 {/* Conteneur de la vidéo */}
-                <div className="aspect-video bg-black rounded overflow-hidden">
+                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
                   <video
                     className="w-full h-full"
                     controls
@@ -352,113 +437,62 @@ const AcademySection = () => {
               </div>
               
               {/* Clavier du laptop */}
-              <div className="relative bg-gray-800 h-10 rounded-b-2xl">
+              <div className="relative bg-gray-800 h-12 rounded-b-2xl shadow-2xl">
                 {/* Trackpad */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-14 h-6 bg-gray-700 rounded"></div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Formats pédagogiques */}
-      <MasterclassSection />
-
-      {/* Publics cibles - Design épuré rouge bordeaux avec meilleure visibilité */}
-      <section className="py-8 bg-white">
-        <div className="container mx-auto max-w-4xl px-4">
-          <motion.div className="text-center mb-8">
-            <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-2">
-              Pour qui ?
-            </h2>
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Nos formations s'adressent à différents profils
-            </p>
-          </motion.div>
-          
-          {/* Modèle horizontal avec onglets interactifs - Version améliorée */}
-          <div className="max-w-4xl mx-auto">
-            {/* Onglets avec meilleure visibilité */}
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              {targetAudiences.map((audience, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedAudience(index)}
-                  className={`
-                    px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                    ${selectedAudience === index
-                      ? 'bg-burgundy-600 text-white border-2 border-burgundy-600' 
-                      : 'bg-burgundy-50 text-burgundy-700 border-2 border-burgundy-300 hover:bg-burgundy-100 hover:border-burgundy-400'
-                    }
-                  `}
-                >
-                  {audience.title.split(' ')[0]}
-                </button>
-              ))}
-            </div>
-
-            {/* Contenu sélectionné */}
-            <motion.div
-              key={selectedAudience}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-burgundy-50 p-6 rounded-xl border-2 border-burgundy-200"
-            >
-              {/* Contenu textuel */}
-              <div className="text-center">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
-                  {targetAudiences[selectedAudience].title}
-                </h3>
-                <p className="text-base text-gray-700 mb-4 leading-relaxed">
-                  {targetAudiences[selectedAudience].description}
-                </p>
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-700 rounded-lg shadow-inner"></div>
                 
-                {/* Points forts */}
-                <div className="flex flex-wrap gap-2 justify-center">
-                  <span className="px-3 py-1.5 bg-white rounded-full text-xs font-medium text-burgundy-700 border border-burgundy-300">
-                    Formation personnalisée
-                  </span>
-                  <span className="px-3 py-1.5 bg-white rounded-full text-xs font-medium text-burgundy-700 border border-burgundy-300">
-                    Accompagnement continu
-                  </span>
-                  <span className="px-3 py-1.5 bg-white rounded-full text-xs font-medium text-burgundy-700 border border-burgundy-300">
-                    Certification reconnue
-                  </span>
+                {/* Indicateurs lumineux */}
+                <div className="absolute bottom-1 left-2 flex gap-0.5">
+                  <div className="w-0.5 h-0.5 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-0.5 h-0.5 bg-gray-600 rounded-full"></div>
                 </div>
               </div>
-
-              {/* CTA */}
-              <div className="text-center mt-5">
-                <button className="inline-flex items-center px-6 py-2.5 bg-burgundy-600 hover:bg-burgundy-700 text-white font-medium rounded-full text-sm transition-all duration-300 border border-burgundy-600 hover:border-burgundy-700">
-                  Commencer ma formation
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Indicateurs de progression */}
-            <div className="flex justify-center gap-2 mt-4">
-              {targetAudiences.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedAudience(index)}
-                  className={`
-                    h-2 rounded-full transition-all duration-300
-                    ${selectedAudience === index
-                      ? 'w-6 bg-burgundy-600' 
-                      : 'w-2 bg-burgundy-300 hover:bg-burgundy-400'
-                    }
-                  `}
-                />
-              ))}
+              
+              {/* Base du laptop */}
+              <div className="relative h-2 bg-gray-900 rounded-b-3xl shadow-2xl transform scale-105"></div>
+            </div>
+            
+            {/* Effet de reflet sur l'écran */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-3xl"></div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Formats pédagogiques */}
+      
+      <MasterclassSection />
+
+      {/* Publics cibles */}
+      <section className="pb-4">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+            Nos publics cibles
+          </h2>
+          <div className="w-12 h-0.5 bg-gradient-to-r from-academy to-academy-light mx-auto mb-4"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            {targetAudiences.map((audience, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="bg-card p-3 md:p-4 rounded-lg border border-border text-center hover:shadow-lg transition-all min-h-[140px] md:min-h-[160px]"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-1 md:mb-2">
+                  <div className="flex items-center justify-center w-4 h-4 md:w-6 md:h-6">
+                    {audience.icon}
+                  </div>
+                </div>
+                <h3 className="font-semibold text-xs md:text-sm mb-1 leading-tight">{audience.title}</h3>
+                <p className="text-muted-foreground text-xs md:text-sm leading-tight">{audience.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

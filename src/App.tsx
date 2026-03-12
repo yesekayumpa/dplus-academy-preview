@@ -11,6 +11,7 @@ import MasterclassDetailPage from "./pages/MasterclassDetailPage";
 import FormatsPage from "./pages/FormatsPage";
 import ElearningPage from "./pages/ElearningPage";
 import SurMesurePage from "./pages/SurMesurePage";
+import CorporateProgramsPage from "./pages/CorporateProgramsPage";
 import TrainersPage from "./pages/TrainersPage";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/masterclass/:id" element={<MasterclassDetailPage />} />
           <Route path="/formats" element={<FormatsPage />} />
           <Route path="/e-learning" element={<ElearningPage />} />
+          <Route path="/corporate-programs" element={<CorporateProgramsPage />} />
           <Route path="/sur-mesure" element={<SurMesurePage />} />
           <Route path="/nos-formateurs" element={<TrainersPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

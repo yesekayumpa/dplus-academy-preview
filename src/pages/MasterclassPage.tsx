@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, Filter, Calendar, Clock, Users, Play, FileText } from "lucide-react";
+import { Search, Filter, Calendar, Clock, Users, Play, FileText, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -120,8 +120,12 @@ const MasterclassPage = () => {
 
   // Formater la date
   const formatDate = (dateString: string) => {
+    if (dateString === "Sur demande") {
+      return dateString;
+    }
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR', { 
+      weekday: 'long', 
       day: 'numeric', 
       month: 'long', 
       year: 'numeric' 
@@ -276,6 +280,10 @@ const MasterclassPage = () => {
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(masterclass.date)}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          <span>{masterclass.location}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <Clock className="w-4 h-4" />

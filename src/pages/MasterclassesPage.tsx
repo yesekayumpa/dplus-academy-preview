@@ -5,7 +5,7 @@ import {
   GraduationCap, Briefcase, LineChart, Globe, Zap, Shield,
   CheckCircle2, Target, Eye, Download, Heart, Share2, Server,
   Database, Cloud, Cpu, Network, BarChart, PieChart, Brain,
-  Code, Layers, GitBranch, Box, FileText, Trophy, Medal
+  Code, Layers, GitBranch, Box, FileText, Trophy, Medal, MapPin
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -22,12 +22,14 @@ const masterclassData = [
     description: "La DM+ Academy lance un programme intensif dédié aux technologies Big Data modernes, centré sur Apache Spark, outil incontournable utilisé par les grandes entreprises technologiques.",
     instructor: "Antoine Bernard",
     instructorTitle: "Data Engineer, Datadog",
-    instructorImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "2024-04-12",
     time: "10:00",
     duration: "4h",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "online",
     status: "upcoming",
-    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 156,
     category: "Data",
     level: "Avancé",
@@ -112,12 +114,14 @@ const masterclassData = [
     description: "Formation entièrement personnalisée selon les besoins spécifiques de votre entreprise. Notre équipe d'experts conçoit un programme adapté à vos objectifs métier.",
     instructor: "Équipe DM+ Academy",
     instructorTitle: "Experts Formateurs",
-    instructorImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "Sur demande",
     time: "Flexible",
     duration: "Sur mesure",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "hybrid",
     status: "upcoming",
-    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 0,
     category: "Sur Mesure",
     level: "Tous niveaux",
@@ -202,12 +206,14 @@ const masterclassData = [
     description: "La DM+ Academy propose un programme complet d'analyse technique, enseigné par un ancien trader de la Société Générale, pour maîtriser les marchés financiers.",
     instructor: "Philippe Moreau",
     instructorTitle: "Trader Professionnel, ex-Société Générale",
-    instructorImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "2024-03-28",
     time: "18:00",
     duration: "3h",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "in-person",
     status: "upcoming",
-    thumbnail: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 178,
     category: "Finance",
     level: "Avancé",
@@ -291,12 +297,14 @@ const masterclassData = [
     description: "La DM+ Academy lance un programme intensif pour maîtriser l'automatisation avec Python, compétence clé pour gagner en productivité.",
     instructor: "Thomas Martin",
     instructorTitle: "Lead Developer, Google",
-    instructorImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "2024-03-20",
     time: "10:00",
     duration: "3h",
+    location: "Présentiel (DM+ Academy ) ou En ligne",
+    mode: "online",
     status: "upcoming",
-    thumbnail: "https://images.unsplash.com/photo-1526379095098-4000743ab122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 189,
     category: "Outils Digitaux",
     level: "Débutant",
@@ -380,12 +388,14 @@ const masterclassData = [
     description: "La DM+ Academy propose un programme complet de data visualization avec Tableau, outil leader du marché.",
     instructor: "Sophie Laurent",
     instructorTitle: "Data Visualization Expert, Microsoft",
-    instructorImage: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "2024-02-28",
     time: "15:00",
     duration: "2h30",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "online",
     status: "past",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 312,
     category: "Data",
     level: "Intermédiaire",
@@ -473,8 +483,10 @@ const masterclassData = [
     date: "2024-02-15",
     time: "09:00",
     duration: "4h",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "in-person",
     status: "past",
-    thumbnail: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 156,
     category: "Entrepreneuriat",
     level: "Avancé",
@@ -558,12 +570,14 @@ const masterclassData = [
     description: "La DM+ Academy propose un programme unique pour développer votre leadership grâce à l'intelligence émotionnelle.",
     instructor: "Dr. Marie Dubois",
     instructorTitle: "PhD Psychologie, Coach Exécutif",
-    instructorImage: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    instructorImage: "/assets/Formateur Afrique.jpg",
     date: "2024-03-25",
     time: "14:00",
     duration: "2h",
+    location: "Présentiel (DM+ Academy) ou En ligne",
+    mode: "in-person",
     status: "upcoming",
-    thumbnail: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/assets/Masterclass.jpg",
     participants: 98,
     category: "Soft Skills",
     level: "Tous niveaux",
@@ -880,7 +894,7 @@ const MasterclassesPageContent = () => {
         <div class="grid">
             <div class="info-item">
                 <div style="font-size: 0.875rem; color: #64748b;">Date</div>
-                <div style="font-weight: 600;">${new Date(masterclass.date).toLocaleDateString('fr-FR', { 
+                <div style="font-weight: 600;">${masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { 
                   weekday: 'long', 
                   year: 'numeric', 
                   month: 'long', 
@@ -991,7 +1005,7 @@ const MasterclassesPageContent = () => {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative h-[500px] overflow-hidden">
+        <section className="relative h-[500px] overflow-hidden pt-8 md:pt-12">
           <div className="absolute inset-0">
             <img
               src="/assets/Masterclass.jpg"
@@ -1010,30 +1024,30 @@ const MasterclassesPageContent = () => {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
                 <Sparkles className="w-4 h-4 text-yellow-300" />
-                <span className="text-sm font-medium text-white tracking-wide">
+                <span className="text-xs md:text-sm font-medium text-white tracking-wide">
                   {isSurMesureMode ? "Formations Sur Mesure" : "Formations d'excellence"}
                 </span>
               </div>
               
-              <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight leading-tight">
                 {isSurMesureMode ? (
                   <>
                     Masterclass
-                    <span className="block font-black text-6xl md:text-7xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-2">
+                    <span className="block font-black text-4xl md:text-6xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-2">
                       Sur Mesure
                     </span>
                   </>
                 ) : (
                   <>
                     Masterclass
-                    <span className="block font-black text-6xl md:text-7xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-2">
+                    <span className="block font-black text-4xl md:text-6xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-2">
                       Business Revente
                     </span>
                   </>
                 )}
               </h1>
               
-              <p className="text-xl text-white/90 max-w-2xl mb-8 leading-relaxed">
+              <p className="text-sm md:text-xl text-white/90 max-w-2xl mb-8 leading-relaxed">
                 {isSurMesureMode 
                   ? "Des formations entièrement personnalisées pour répondre aux besoins spécifiques de votre entreprise." 
                   : "Des formations exclusives animées par des experts reconnus pour accélérer votre réussite professionnelle."
@@ -1041,11 +1055,11 @@ const MasterclassesPageContent = () => {
               </p>
               
               <div className="flex flex-wrap items-center gap-4">
-                <button className="px-8 py-4 bg-white text-gray-900 text-sm font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                <button className="px-4 md:px-8 py-2 md:py-4 bg-white text-gray-900 text-xs md:text-sm font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
                   {isSurMesureMode ? "Demander un devis" : "Explorer les formations"}
                 </button>
                 {!isSurMesureMode && (
-                  <button className="px-8 py-4 border-2 border-white/60 text-white text-sm font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all">
+                  <button className="px-4 md:px-8 py-2 md:py-4 border-2 border-white/60 text-white text-xs md:text-sm font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all">
                     Catalogue complet
                   </button>
                 )}
@@ -1214,7 +1228,7 @@ const MasterclassesPageContent = () => {
                 <div className="mb-12">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-[hsl(var(--academy-primary))] rounded-full" />
-                    <h2 className="text-2xl font-bold text-gray-900">Formations à venir</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Nos formats pédagogiques</h2>
                     <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
                       {upcomingMasterclass.length} disponible{upcomingMasterclass.length > 1 ? 's' : ''}
                     </span>
@@ -1365,32 +1379,32 @@ const MasterclassCard = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.02 }}
-      className="group bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all overflow-hidden"
+      className="group bg-white border border-gray-200/50 rounded-2xl hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-xl hover:shadow-[hsl(var(--academy-primary))]/10 transition-all duration-300 overflow-hidden backdrop-blur-sm"
     >
       <div className="flex flex-col md:flex-row">
         {/* Image section */}
-        <div className="md:w-64 lg:w-72 relative bg-gray-100">
+        <div className="md:w-64 lg:w-72 relative bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
           <img
             src={masterclass.thumbnail}
             alt={masterclass.title}
-            className="w-full h-48 md:h-full object-cover"
+            className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
-              e.currentTarget.src = "https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+              e.currentTarget.src = "/assets/Masterclass.jpg";
             }}
           />
           
-          <div className="absolute top-3 left-3 flex gap-1.5">
-            <span className={`px-2 py-1 text-xs font-medium rounded-md ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border}`}>
+          <div className="absolute top-3 left-3 flex gap-2">
+            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border} backdrop-blur-sm shadow-sm`}>
               {masterclass.category}
             </span>
-            <span className={`px-2 py-1 text-xs font-medium rounded-md ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border}`}>
+            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border} backdrop-blur-sm shadow-sm`}>
               {masterclass.level}
             </span>
           </div>
 
           <button
             onClick={() => onToggleWishlist(masterclass.id)}
-            className="absolute top-3 right-3 p-1.5 bg-white/90 rounded-full hover:bg-white transition-colors"
+            className="absolute top-3 right-3 p-2 bg-white/95 backdrop-blur-sm rounded-full hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg"
           >
             <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} />
           </button>
@@ -1405,39 +1419,43 @@ const MasterclassCard = ({
         </div>
 
         {/* Content section */}
-        <div className="flex-1 p-5">
+        <div className="flex-1 p-6 md:p-7 bg-gradient-to-br from-white to-gray-50/30">
           {/* Header */}
-          <div className="mb-3">
-            <h3 className="text-lg font-semibold text-[hsl(var(--academy-primary))] mb-1">{masterclass.title}</h3>
-            <p className="text-sm text-gray-600 mb-1">{masterclass.subtitle}</p>
-            <p className="text-xs text-gray-500">{masterclass.tagline}</p>
+          <div className="mb-4">
+            <h3 className="text-xl md:text-2xl font-bold text-[hsl(var(--academy-primary))] mb-2 group-hover:text-[hsl(var(--academy-primary))]/80 transition-colors">{masterclass.title}</h3>
+            <p className="text-sm md:text-base text-gray-700 mb-2 font-medium">{masterclass.subtitle}</p>
+            <p className="text-xs md:text-sm text-gray-500 italic">{masterclass.tagline}</p>
           </div>
 
           {/* Description courte */}
-          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{masterclass.description}</p>
+          <p className="text-sm md:text-base text-gray-600 mb-5 line-clamp-2 leading-relaxed">{masterclass.description}</p>
 
           {/* Instructor */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-3 mb-5 p-3 bg-gray-50/50 rounded-xl border border-gray-100/50">
             <img
               src={masterclass.instructorImage}
               alt={masterclass.instructor}
-              className="w-8 h-8 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
             />
-            <div>
-              <p className="text-sm font-medium text-[hsl(var(--academy-primary))]">{masterclass.instructor}</p>
-              <p className="text-xs text-gray-500">{masterclass.instructorTitle}</p>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-[hsl(var(--academy-primary))]">{masterclass.instructor}</p>
+              <p className="text-xs text-gray-600">{masterclass.instructorTitle}</p>
             </div>
           </div>
 
           {/* Footer with meta and actions */}
-          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                <Calendar className="w-3.5 h-3.5" />
-                <span>{new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-gray-200/50 gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+                <Calendar className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
+                <span>{masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                <Clock className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+                <MapPin className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
+                <span>{masterclass.location}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+                <Clock className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.duration}</span>
               </div>
             </div>
@@ -1445,7 +1463,7 @@ const MasterclassCard = ({
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onShowDetails(masterclass)}
-                className="px-6 py-3 bg-red-900 text-white text-sm font-semibold rounded-xl flex items-center gap-2"
+                className="px-6 py-3 bg-red-900 text-white text-sm font-bold rounded-xl flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all duration-200 shadow-md"
               >
                 <Eye className="w-4 h-4" />
                 Voir les détails

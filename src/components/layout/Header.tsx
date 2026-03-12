@@ -22,7 +22,7 @@ const formats = [
   },
   {
     id: 3,
-    label: "Sur mesure",
+    label: "Mentored Courses",
     href: "/sur-mesure",
     description: "Formations personnalisées",
   },
@@ -52,7 +52,7 @@ const Header = () => {
   const navItems = [
     { label: "Masterclass", href: "/masterclasses" },
     { label: "E-learning", href: "/e-learning" },
-    { label: "Sur mesure", href: "/sur-mesure" },
+    { label: "Mentored Courses", href: "/sur-mesure" },
     { label: "Nos formateurs", href: "/nos-formateurs" },
   ];
 

@@ -65,13 +65,6 @@ export function HeroFloatingCards() {
         </div>
       </div>
 
-      {/* Small floating icon */}
-      <div className="absolute bottom-24 left-2 z-20 flex h-8 w-8 items-center justify-center rounded-lg bg-pink-100 shadow-md lg:left-8 hidden lg:block">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="3" width="18" height="18" rx="3" stroke="#ec4899" strokeWidth="2" />
-          <path d="M8 12l3 3 5-5" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-    </div>
+          </div>
   );
 }

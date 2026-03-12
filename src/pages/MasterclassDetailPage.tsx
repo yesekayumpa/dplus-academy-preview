@@ -62,7 +62,7 @@ const masterclassData: Masterclass[] = [
     instructor: {
       name: "Antoine Bernard",
       title: "Data Engineer, Datadog",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      image: "/assets/Formateur Afrique.jpg",
       bio: "Ancien Data Engineer chez Google, Antoine a plus de 8 ans d'expérience dans le traitement de données à grande échelle. Il a formé plus de 500 professionnels aux technologies Big Data. Passionné par la transmission, il a développé une pédagogie unique qui rend accessibles les concepts complexes du Big Data.",
       expertise: ["Spark", "Hadoop", "Python", "Cloud"],
       social: {
@@ -351,9 +351,10 @@ const MasterclassDetailPage = () => {
                         <span className="text-xs text-gray-500">Date</span>
                       </div>
                       <div className="font-medium text-sm">
-                        {new Date(masterclass.date).toLocaleDateString('fr-FR', { 
+                        {masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { 
                           day: 'numeric',
-                          month: 'short'
+                          month: 'long',
+                          year: 'numeric'
                         })}
                       </div>
                     </div>
@@ -368,7 +369,15 @@ const MasterclassDetailPage = () => {
 
                     <div className="bg-gray-50 p-3 rounded-lg">
                       <div className="flex items-center gap-2 mb-1">
-                        <Clock4 className="w-3 h-3 text-gray-400" />
+                        <MapPin className="w-3 h-3 text-gray-400" />
+                        <span className="text-xs text-gray-500">Lieu</span>
+                      </div>
+                      <div className="font-medium text-sm">{masterclass.location}</div>
+                    </div>
+
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Clock className="w-3 h-3 text-gray-400" />
                         <span className="text-xs text-gray-500">Durée</span>
                       </div>
                       <div className="font-medium text-sm">{masterclass.duration}</div>

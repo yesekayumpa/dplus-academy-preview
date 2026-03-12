@@ -109,9 +109,6 @@ const InteractiveCards = () => {
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleCardClick = () => {
-    navigate("/sur-mesure");
-  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -134,47 +131,39 @@ const InteractiveCards = () => {
   return (
     <div className="w-full py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile: Horizontal scroll container */}
+        {/* Mobile: Vertical stack instead of horizontal scroll */}
         {isMobile ? (
-          <div 
-            ref={scrollRef}
-            className="overflow-x-auto scrollbar-hide"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-          >
-            <div className="flex gap-4 pb-4" style={{ width: 'max-content' }}>
+          <div className="flex flex-col gap-4">
+            <AnimatePresence>
               {cardsData.map((card) => {
-                const isHovered = hoveredCard === card.id;
-                const shouldShowHoveredState = isHovered;
-                
-                return (
-                  <motion.div
-                    key={card.id}
-                    className="relative cursor-pointer"
-                    layout
-                    onHoverStart={() => setHoveredCard(card.id)}
-                    onHoverEnd={() => setHoveredCard(null)}
-                    onClick={handleCardClick}
-                    initial={{ 
-                      width: "280px", 
-                      height: "300px" 
-                    }}
-                    animate={{
-                      width: shouldShowHoveredState ? "320px" : "280px",
-                      height: "300px",
-                      borderRadius: shouldShowHoveredState ? "24px" : "16px",
-                      scale: 1
-                    }}
-                    transition={{
-                      duration: 0.4,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }}
-                    whileHover={{
-                      zIndex: 50
-                    }}
-                  >
+              const isHovered = hoveredCard === card.id;
+              const shouldShowHoveredState = isHovered;
+              
+              return (
+                <motion.div
+                  key={card.id}
+                  className="relative mx-auto"
+                  layout
+                  onHoverStart={() => setHoveredCard(card.id)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  initial={{ 
+                    width: "280px", 
+                    height: "300px" 
+                  }}
+                  animate={{
+                    width: shouldShowHoveredState ? "320px" : "280px",
+                    height: "300px",
+                    borderRadius: shouldShowHoveredState ? "24px" : "16px",
+                    scale: 1
+                  }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{
+                    zIndex: 50
+                  }}
+                >
                     <motion.div
                       className="absolute inset-0 overflow-hidden rounded-[inherit]"
                       layout
@@ -284,7 +273,7 @@ const InteractiveCards = () => {
                   </motion.div>
                 );
               })}
-            </div>
+            </AnimatePresence>
           </div>
         ) : (
           // Desktop: Original layout
@@ -302,12 +291,11 @@ const InteractiveCards = () => {
                 return (
                   <motion.div
                     key={card.id}
-                    className="relative cursor-pointer"
+                    className="relative"
                     layout
                     onHoverStart={() => setHoveredCard(card.id)}
                     onHoverEnd={() => setHoveredCard(null)}
-                    onClick={handleCardClick}
-                    initial={{ 
+                                        initial={{ 
                       width: "200px", 
                       height: "400px" 
                     }}

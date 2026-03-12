@@ -81,7 +81,7 @@ const courses = [
     price: 299 * 655,
     originalPrice: 599 * 655,
     image:
-      "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "/assets/E-learning2.jpg",
     category: "Programmation",
     level: "Débutant",
     duration: "40h",
@@ -113,11 +113,11 @@ const courses = [
     instructor: "Prof. Jean Martin",
     instructorTitle: "Data Scientist, ex-IBM",
     instructorAvatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "/assets/Formateur Afrique.jpg",
     price: 499 * 655,
     originalPrice: 899 * 655,
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "/assets/E-learning2.jpg",
     category: "Data Science",
     level: "Avancé",
     duration: "60h",
@@ -645,7 +645,7 @@ const ElearningPage = () => {
         </nav>
 
         {/* Hero Section - Design épuré avec hauteur réduite */}
-        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[600px] lg:min-h-[450px] flex items-center overflow-hidden">
+        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[500px] md:min-h-[550px] lg:min-h-[450px] flex items-center overflow-hidden">
           {/* Image de fond avec overlay sophistiqué */}
           <div className="absolute inset-0">
             <img
@@ -663,8 +663,8 @@ const ElearningPage = () => {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-400/10 rounded-full blur-3xl" />
 
           {/* Contenu principal */}
-          <div className="relative container mx-auto px-4 py-8 lg:py-12 max-w-7xl z-10">
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+          <div className="relative container mx-auto px-4 py-6 md:py-8 lg:py-12 max-w-7xl z-10">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center">
               {/* Colonne gauche - Texte */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -692,7 +692,7 @@ const ElearningPage = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
-                    className="text-3xl lg:text-5xl font-bold text-white leading-tight"
+                    className="text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-tight"
                   >
                     Transformez votre
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-white">
@@ -705,7 +705,7 @@ const ElearningPage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.4 }}
-                    className="text-sm lg:text-base text-gray-200 mt-2 max-w-lg"
+                    className="text-xs md:text-sm lg:text-base text-gray-200 mt-2 max-w-lg"
                   >
                     Maîtrisez les compétences les plus recherchées et accélérez votre carrière.
                   </motion.p>
@@ -716,20 +716,20 @@ const ElearningPage = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
-                  className="flex items-center gap-4 lg:gap-6 bg-white/5 backdrop-blur-sm rounded-xl px-3 lg:px-4 py-2 max-w-md border border-white/10"
+                  className="flex items-center gap-2 md:gap-3 lg:gap-4 bg-white/5 backdrop-blur-sm rounded-lg md:rounded-xl px-2 md:px-3 lg:px-4 py-2 max-w-xs md:max-w-md border border-white/10"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="text-base lg:text-lg font-bold text-white">50+</div>
+                    <div className="text-sm md:text-base lg:text-lg font-bold text-white">50+</div>
                     <div className="text-xs text-gray-300">Formations</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-base lg:text-lg font-bold text-white">15k+</div>
+                    <div className="text-sm md:text-base lg:text-lg font-bold text-white">15k+</div>
                     <div className="text-xs text-gray-300">Apprenants</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-base lg:text-lg font-bold text-white">4.8</div>
+                    <div className="text-sm md:text-base lg:text-lg font-bold text-white">4.8</div>
                     <div className="text-xs text-gray-300">Note</div>
                   </div>
                 </motion.div>
