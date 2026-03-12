@@ -390,7 +390,7 @@ const TrainersPage = () => {
             {trainer.specialties.slice(0, 2).map((specialty, idx) => (
               <Badge
                 key={idx}
-                className="bg-[#fbe7ea] text-[#b23a4a] border-0 text-[10px] px-1.5 py-0"
+                className="bg-[#fbe7ea] text-[#b23a4a] border-0 text-[10px] px-1.5 py-0 hover:bg-[#b23a4a] hover:text-white transition-colors"
               >
                 {specialty}
               </Badge>
@@ -421,8 +421,14 @@ const TrainersPage = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-[#fbe7ea]/30">
-        {/* Hero Section avec fond bordeaux */}
-        <section className="relative overflow-hidden py-16 px-4 bg-gradient-to-br from-[#46181e] to-[#8e2e3b]">
+        {/* Hero Section avec fond bordeaux et image de fond */}
+        <section className="relative overflow-hidden py-24 px-4 bg-gradient-to-br from-[#46181e] to-[#8e2e3b]">
+          {/* Image de fond avec overlay */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: "url('/office-workers-using-finance-graphs.jpg')" }}
+          />
+          <div className="absolute " />
           <div className="relative container mx-auto max-w-5xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -512,7 +518,7 @@ const TrainersPage = () => {
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.9, opacity: 0, y: 20 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] flex flex-col shadow-2xl border border-[#f5cbd1]"
+                  className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] sm:max-h-[80vh] flex flex-col shadow-2xl border border-[#f5cbd1]"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header fixe avec bordeaux */}
@@ -633,68 +639,6 @@ const TrainersPage = () => {
                         <div className="text-xs text-gray-500">Langues</div>
                       </div>
                     </div>
-
-                    {/* Statistiques avancées avec bordeaux */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-[#fbe7ea] rounded-xl">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs text-[#8e2e3b]">
-                            Taux de complétion
-                          </span>
-                          <Target className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                        </div>
-                        <div className="text-sm sm:text-lg font-bold text-[#8e2e3b]">
-                          {selectedTrainer.stats?.completion || 95}%
-                        </div>
-                        <div className="w-full bg-[#f5cbd1] h-1.5 rounded-full mt-1">
-                          <div
-                            className="bg-[#b23a4a] h-1.5 rounded-full"
-                            style={{
-                              width: `${selectedTrainer.stats?.completion || 95}%`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="p-2 sm:p-3 bg-[#fbe7ea] rounded-xl">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs text-[#8e2e3b]">
-                            Satisfaction
-                          </span>
-                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a] fill-[#b23a4a]" />
-                        </div>
-                        <div className="text-sm sm:text-lg font-bold text-[#8e2e3b]">
-                          {selectedTrainer.stats?.satisfaction || 4.8}/5
-                        </div>
-                        <div className="w-full bg-[#f5cbd1] h-1.5 rounded-full mt-1">
-                          <div
-                            className="bg-[#b23a4a] h-1.5 rounded-full"
-                            style={{
-                              width: `${(selectedTrainer.stats?.satisfaction || 4.8) * 20}%`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="p-2 sm:p-3 bg-[#fbe7ea] rounded-xl">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs text-[#8e2e3b]">
-                            Employabilité
-                          </span>
-                          <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                        </div>
-                        <div className="text-sm sm:text-lg font-bold text-[#8e2e3b]">
-                          {selectedTrainer.stats?.employment || 92}%
-                        </div>
-                        <div className="w-full bg-[#f5cbd1] h-1.5 rounded-full mt-1">
-                          <div
-                            className="bg-[#b23a4a] h-1.5 rounded-full"
-                            style={{
-                              width: `${selectedTrainer.stats?.employment || 92}%`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Expertises en badges avec bordeaux */}
                     <div className="mb-4 sm:mb-6">
                       <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
@@ -705,51 +649,11 @@ const TrainersPage = () => {
                         {selectedTrainer.specialties.map((specialty, idx) => (
                           <Badge
                             key={idx}
-                            className="bg-[#fbe7ea] text-[#b23a4a] border-0 px-2 py-1 text-xs font-medium hover:bg-[#f5cbd1] transition-colors"
+                            className="bg-[#fbe7ea] text-[#b23a4a] border-0 px-2 py-1 text-xs font-medium hover:bg-[#b23a4a] hover:text-white transition-colors"
                           >
                             {specialty}
                           </Badge>
                         ))}
-                      </div>
-                    </div>
-
-                    {/* Informations de contact et disponibilité */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                      <div className="space-y-2 sm:space-y-3">
-                        <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2 flex items-center gap-2">
-                          <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                          Contact
-                        </h3>
-                        <div className="space-y-1 sm:space-y-2">
-                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                            <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                            <span className="truncate text-xs">
-                              {selectedTrainer.email}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                            <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                            <span className="text-xs">{selectedTrainer.phone}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="space-y-2 sm:space-y-3">
-                        <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-2 flex items-center gap-2">
-                          <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                          Disponibilité
-                        </h3>
-                        <div className="space-y-1 sm:space-y-2">
-                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                            <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                            <span className="text-xs">{selectedTrainer.availability}</span>
-                          </div>
-                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                            <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                            <span className="text-xs">
-                              Prochaine session: {selectedTrainer.nextSession}
-                            </span>
-                          </div>
-                        </div>
                       </div>
                     </div>
 
@@ -769,55 +673,6 @@ const TrainersPage = () => {
                             <CheckCircle2 className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
                             {cert}
                           </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Réalisations avec bordeaux */}
-                    <div className="mb-4 sm:mb-6">
-                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
-                        <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                        Réalisations
-                      </h3>
-                      <div className="space-y-1 sm:space-y-2">
-                        {selectedTrainer.achievements.map(
-                          (achievement, idx) => (
-                            <div
-                              key={idx}
-                              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[#fbe7ea] rounded-lg border border-[#f5cbd1]"
-                            >
-                              <CheckCircle2 className="w-4 h-4 text-[#b23a4a] flex-shrink-0" />
-                              <span className="text-xs sm:text-sm text-gray-700">
-                                {achievement}
-                              </span>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Cours populaires avec bordeaux */}
-                    <div className="mb-3 sm:mb-4">
-                      <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2">
-                        <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                        Cours populaires
-                      </h3>
-                      <div className="grid grid-cols-1 gap-1 sm:gap-2">
-                        {selectedTrainer.courses.map((course, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center justify-between p-2 sm:p-3 bg-[#fbe7ea] rounded-lg border border-[#f5cbd1] hover:bg-[#f5cbd1] transition-colors cursor-pointer"
-                          >
-                            <div className="flex items-center gap-2 sm:gap-3">
-                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-[#f5cbd1] rounded-lg flex items-center justify-center">
-                                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                              </div>
-                              <span className="text-xs sm:text-sm font-medium text-gray-700">
-                                {course}
-                              </span>
-                            </div>
-                            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-[#b23a4a]" />
-                          </div>
                         ))}
                       </div>
                     </div>
