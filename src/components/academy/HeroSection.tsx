@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { HeroFloatingCards } from "@/components/academy/HeroFloatingCards";
+import AnimatedTyping from "@/components/ui/AnimatedTyping";
 
 const stats = [
   { value: "+30", label: "Masterclasses" },
@@ -16,8 +17,11 @@ export function HeroSection() {
           <div className="flex flex-col gap-8 order-first lg:order-first pt-8 lg:pt-4">
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl lg:text-6xl">
-                Développez vos compétences{" "}
-                <span className="italic text-primary">Dès aujourd'hui</span>
+                <AnimatedTyping 
+                  text="Développez vos compétences "
+                  coloredText="Dès aujourd'hui"
+                  speed={50}
+                />
               </h1>
               <p className="max-w-lg text-base leading-relaxed text-muted-foreground lg:text-lg">
                 Maîtrisez les compétences très demandées auprès d'experts du secteur. Apprenez à votre rythme, suivez votre évolution et gardez une longueur d'avance.

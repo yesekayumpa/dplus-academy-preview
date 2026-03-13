@@ -129,7 +129,7 @@ const InteractiveCards = () => {
 
   
   return (
-    <div className="w-full py-12 px-4">
+    <div className="w-full py-12 px-4 pt-24">
       <div className="max-w-7xl mx-auto">
         {/* Mobile: Vertical stack instead of horizontal scroll */}
         {isMobile ? (
@@ -151,9 +151,9 @@ const InteractiveCards = () => {
                     height: "300px" 
                   }}
                   animate={{
-                    width: shouldShowHoveredState ? "320px" : "280px",
+                    width: shouldShowHoveredState ? "300px" : "280px",
                     height: "300px",
-                    borderRadius: shouldShowHoveredState ? "24px" : "16px",
+                    borderRadius: shouldShowHoveredState ? "18px" : "16px",
                     scale: 1
                   }}
                   transition={{
@@ -161,7 +161,7 @@ const InteractiveCards = () => {
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
                   whileHover={{
-                    zIndex: 50
+                    zIndex: 10
                   }}
                 >
                     <motion.div
@@ -300,9 +300,9 @@ const InteractiveCards = () => {
                       height: "400px" 
                     }}
                     animate={{
-                      width: shouldShowHoveredState ? "400px" : "200px",
+                      width: shouldShowHoveredState ? "320px" : "200px",
                       height: "400px",
-                      borderRadius: shouldShowHoveredState ? "24px" : "16px",
+                      borderRadius: shouldShowHoveredState ? "20px" : "16px",
                       scale: 1
                     }}
                     transition={{
@@ -310,7 +310,7 @@ const InteractiveCards = () => {
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
                     whileHover={{
-                      zIndex: 50
+                      zIndex: 10
                     }}
                   >
                     <motion.div

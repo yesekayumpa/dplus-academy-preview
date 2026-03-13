@@ -335,27 +335,27 @@ const SimpleRadioOption = ({
 }) => (
   <div
     className={`
-    flex items-start gap-4 p-4 rounded-xl border-2 transition-all cursor-pointer
+    flex items-start gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl border-2 transition-all cursor-pointer
     bg-white
     ${selected === id ? `${theme.border} ${theme.bgLight}` : "border-gray-200"}
   `}
   >
-    <RadioGroupItem value={id} id={id} className={`mt-1 ${theme.text}`} />
+    <RadioGroupItem value={id} id={id} className={`mt-1 ${theme.text} w-3 h-3 sm:w-4 sm:h-4`} />
     <div className="flex-1">
       <Label
         htmlFor={id}
-        className="text-base font-semibold text-gray-800 cursor-pointer flex items-center gap-2"
+        className="text-sm sm:text-base font-semibold text-gray-800 cursor-pointer flex items-center gap-2"
       >
         {Icon && (
           <div
             className={`
-            p-1.5 rounded-lg
+            p-1 sm:p-1.5 rounded-lg
             ${selected === id ? theme.bgLight : "bg-gray-100"}
           `}
           >
             <Icon
               className={`
-              w-4 h-4
+              w-3 h-3 sm:w-4 sm:h-4
               ${selected === id ? theme.text : "text-gray-500"}
             `}
             />
@@ -369,9 +369,9 @@ const SimpleRadioOption = ({
     </div>
     {selected === id && (
       <div
-        className={`w-6 h-6 ${theme.bg} rounded-full flex items-center justify-center`}
+        className={`w-4 h-4 sm:w-6 sm:h-6 ${theme.bg} rounded-full flex items-center justify-center`}
       >
-        <CheckCircle2 className="w-4 h-4 text-white" />
+        <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
       </div>
     )}
   </div>
@@ -434,30 +434,30 @@ const LevelCard = ({
 }) => {
   return (
     <div className="bg-white rounded-xl border-2 border-gray-100 overflow-hidden">
-      <div className={`p-4 border-b-2 border-gray-100 bg-gray-50/50`}>
-        <div className="flex items-center gap-3">
+      <div className={`p-3 sm:p-4 border-b-2 border-gray-100 bg-gray-50/50`}>
+        <div className="flex items-center gap-2 sm:gap-3">
           <div
-            className={`w-10 h-10 ${theme.bgLight} rounded-lg flex items-center justify-center`}
+            className={`w-8 h-8 sm:w-10 sm:h-10 ${theme.bgLight} rounded-lg flex items-center justify-center`}
           >
-            <Icon className={`w-5 h-5 ${theme.text}`} />
+            <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${theme.text}`} />
           </div>
           <div>
-            <h4 className="font-semibold text-gray-800">{title}</h4>
+            <h4 className="font-semibold text-gray-800 text-sm sm:text-base">{title}</h4>
             <p className="text-xs text-gray-500">{description}</p>
           </div>
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <RadioGroup
           onValueChange={onChange}
           value={value}
-          className="grid grid-cols-2 gap-3"
+          className="grid grid-cols-2 gap-2 sm:gap-3"
         >
           {options.map((option) => (
             <div
               key={option.value}
               className={`
-                relative flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer
+                relative flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border-2 transition-all cursor-pointer
                 ${
                   value === option.value
                     ? `${theme.border} ${theme.bgLight}`
@@ -472,7 +472,7 @@ const LevelCard = ({
               />
               <Label
                 htmlFor={`${title}-${option.value}`}
-                className="text-sm font-medium cursor-pointer flex-1"
+                className="text-xs sm:text-sm font-medium cursor-pointer flex-1"
               >
                 {option.label}
               </Label>
@@ -510,7 +510,7 @@ const LevelsGrid = ({ form, theme }) => {
   ];
 
       return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 px-1">
       <LevelCard
         title="Programmation"
         icon={Code}
@@ -1137,7 +1137,7 @@ const MasterclassRegistrationForm = () => {
                           theme={theme}
                         />
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 px-1">
                           <ElegantField
                             form={form}
                             name="nomPrenom"
@@ -1177,7 +1177,7 @@ const MasterclassRegistrationForm = () => {
                             label="Adresse"
                             placeholder="75001 Paris"
                             icon={MapPin}
-                            className="col-span-2"
+                            className="col-span-1 sm:col-span-2"
                             theme={theme}
                           />
                         </div>
@@ -1186,12 +1186,12 @@ const MasterclassRegistrationForm = () => {
                           control={form.control}
                           name="statut"
                           render={({ field }) => (
-                            <FormItem className="mt-4">
+                            <FormItem className="mt-4 px-1">
                               <FormLabel
-                                className={`text-sm font-semibold text-gray-700 flex items-center gap-2`}
+                                className={`text-xs sm:text-sm font-semibold text-gray-700 flex items-center gap-2`}
                               >
                                 <GraduationCap
-                                  className={`w-4 h-4 ${theme.text}`}
+                                  className={`w-3 h-3 sm:w-4 sm:h-4 ${theme.text}`}
                                 />
                                 Statut actuel
                               </FormLabel>
@@ -1243,14 +1243,14 @@ const MasterclassRegistrationForm = () => {
                           control={form.control}
                           name="outils"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="px-1">
                               <FormLabel className="text-sm font-semibold text-gray-700 mb-3 block">
                                 Outils et langages maîtrisés
                               </FormLabel>
                               <FormDescription className="text-xs mb-4">
                                 Sélectionnez tous les outils que vous connaissez
                               </FormDescription>
-                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 px-1">
                                 {outilsOptions.map((outil, index) => (
                                   <SimpleSkillBadge
                                     key={outil.id}
@@ -1281,9 +1281,9 @@ const MasterclassRegistrationForm = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="space-y-4 overflow-hidden mt-4"
+                              className="space-y-4 overflow-hidden mt-4 px-1"
                             >
-                              <div className="grid grid-cols-2 gap-4">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                 <div className="space-y-2">
                                   <Label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                                     <Zap className="w-4 h-4 text-[hsl(345,70%,35%)]" />
@@ -1601,53 +1601,6 @@ const MasterclassRegistrationForm = () => {
               </Card>
             </motion.div>
           </Tabs>
-
-          {/* Récapitulatif élégant */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className={`mt-6 bg-white/80 backdrop-blur-sm rounded-2xl border ${theme.border} p-4`}
-          >
-            <div className="flex flex-col sm:flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-              <div className="flex flex-col sm:flex-col lg:flex-row items-start lg:items-center gap-2 sm:gap-4">
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`w-2 h-2 ${theme.bg} rounded-full animate-pulse`}
-                  />
-                  <span className="text-xs font-medium text-gray-700">
-                    Récapitulatif
-                  </span>
-                </div>
-
-                <Separator
-                  orientation="vertical"
-                  className={`h-4 ${theme.bgLight}`}
-                />
-
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                  <span className="flex items-center gap-1 text-xs">
-                    <User className={`w-3.5 h-3.5 ${theme.text}`} />
-                    {form.watch("nomPrenom") || "Non renseigné"}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs">
-                    <Code className={`w-3.5 h-3.5 ${theme.text}`} />
-                    {form.watch("outils")?.length || 0} outils
-                  </span>
-                  <span className="flex items-center gap-1 text-xs">
-                    <BarChart3 className={`w-3.5 h-3.5 ${theme.text}`} />
-                    {form.watch("niveauProgrammation")
-                      ? "Niveau défini"
-                      : "À définir"}
-                  </span>
-                </div>
-              </div>
-
-              <Badge className={theme.badge}>
-                {tabs.findIndex((t) => t.value === activeTab) + 1}/4 étapes
-              </Badge>
-            </div>
-          </motion.div>
         </div>
       </div>
     </div>

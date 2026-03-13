@@ -57,7 +57,7 @@ export const popularCourses: Course[] = [
     students: 450,
     instructor: "Dr. Marie Dubois",
     instructorTitle: "Data Scientist Senior",
-    image: "/assets/E-learning2.jpg",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
     tags: ["R", "Shiny", "Data Visualization", "Web Apps"],
     objectives: [
       "Créer des applications web interactives",
@@ -93,7 +93,7 @@ export const popularCourses: Course[] = [
     students: 680,
     instructor: "Jean-Marc Martin",
     instructorTitle: "ML Engineer",
-    image: "/assets/E-learning2.jpg",
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop&crop=center",
     tags: ["Python", "Pandas", "Machine Learning", "NumPy"],
     objectives: [
       "Manipuler des données avec pandas",
@@ -129,7 +129,7 @@ export const popularCourses: Course[] = [
     students: 320,
     instructor: "Sophie Laurent",
     instructorTitle: "Expert Excel",
-    image: "/assets/Masterclass.jpg",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
     tags: ["Excel", "VBA", "Power Query", "Automatisation"],
     objectives: [
       "Maîtriser les fonctions complexes",
@@ -163,7 +163,7 @@ export const popularCourses: Course[] = [
     students: 410,
     instructor: "Thomas Bernard",
     instructorTitle: "Full Stack Developer",
-    image: "/assets/dakar-city.webp",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop&crop=center",
     tags: ["React", "JavaScript", "CSS", "Web Design"],
     objectives: [
       "Maîtriser React et ses hooks",
@@ -199,7 +199,7 @@ export const popularCourses: Course[] = [
     students: 280,
     instructor: "Claire Petit",
     instructorTitle: "BI Consultant",
-    image: "/assets/Masterclass.jpg",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
     tags: ["Power BI", "Tableau", "Data Analysis", "KPIs"],
     objectives: [
       "Maîtriser Power BI et Tableau",
@@ -233,7 +233,7 @@ export const popularCourses: Course[] = [
     students: 390,
     instructor: "Marc Rousseau",
     instructorTitle: "Security Analyst",
-    image: "/assets/Formateur Afrique.jpg",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
     tags: ["Sécurité", "Réseaux", "Cryptographie", "Best Practices"],
     objectives: [
       "Comprendre les menaces cybersécurité",
@@ -269,7 +269,7 @@ export const popularCourses: Course[] = [
     students: 120,
     instructor: "Dr. Alexandre Kofi",
     instructorTitle: "Blockchain Architect",
-    image: "/assets/dmplus-tech.webp",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop&crop=center",
     tags: ["Blockchain", "Ethereum", "Smart Contracts", "Web3"],
     objectives: [
       "Développer des smart contracts",
@@ -306,7 +306,7 @@ export const popularCourses: Course[] = [
     students: 280,
     instructor: "Dr. Marie Claire",
     instructorTitle: "AI Research Scientist",
-    image: "/assets/vr-headset.webp",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop&crop=center",
     tags: ["Machine Learning", "Deep Learning", "Neural Networks", "NLP"],
     objectives: [
       "Maîtriser les algorithmes de ML",
@@ -343,7 +343,7 @@ export const popularCourses: Course[] = [
     students: 195,
     instructor: "Jean-Pierre Ndiaye",
     instructorTitle: "Cybersecurity Expert",
-    image: "/assets/Formateur Afrique.jpg",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
     tags: ["Pentesting", "Sécurité Réseau", "Cryptographie", "Forensics"],
     objectives: [
       "Effectuer des tests d'intrusion",

@@ -10,6 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import MasterclassRegistrationForm from "@/components/MasterclassRegistrationForm";
+import { RegistrationForm } from "@/components/ui/RegistrationForm";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 // Données enrichies des masterclass avec structure détaillée
@@ -1005,7 +1006,7 @@ const MasterclassesPageContent = () => {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative h-[500px] overflow-hidden pt-8 md:pt-12">
+        <section className="relative h-[400px] sm:h-[500px] overflow-hidden pt-6 sm:pt-8 md:pt-12">
           <div className="absolute inset-0">
             <img
               src="/assets/Masterclass.jpg"
@@ -1014,59 +1015,54 @@ const MasterclassesPageContent = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
           </div>
-          
-          <div className="relative container mx-auto px-4 h-full max-w-7xl flex items-center">
+          <div className="relative container mx-auto px-4 sm:px-6 h-full max-w-7xl flex items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-3xl text-white"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
-                <Sparkles className="w-4 h-4 text-yellow-300" />
-                <span className="text-xs md:text-sm font-medium text-white tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-4 sm:mb-6">
+                <Sparkles className="w-3 h-3 sm:w-4 h-4 text-yellow-300" />
+                <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
                   {isSurMesureMode ? "Formations Sur Mesure" : "Formations d'excellence"}
                 </span>
               </div>
-              
-              <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 tracking-tight leading-tight">
                 {isSurMesureMode ? (
                   <>
                     Masterclass
-                    <span className="block font-black text-4xl md:text-6xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-2">
+                    <span className="block font-black text-3xl sm:text-5xl md:text-6xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-1 sm:mt-2">
                       Sur Mesure
                     </span>
                   </>
                 ) : (
                   <>
                     Masterclass
-                    <span className="block font-black text-4xl md:text-6xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-2">
+                    <span className="block font-black text-3xl sm:text-5xl md:text-6xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-1 sm:mt-2">
                       Business Revente
                     </span>
                   </>
                 )}
               </h1>
-              
-              <p className="text-sm md:text-xl text-white/90 max-w-2xl mb-8 leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-xl text-white/90 max-w-2xl mb-4 sm:mb-6 leading-relaxed">
                 {isSurMesureMode 
                   ? "Des formations entièrement personnalisées pour répondre aux besoins spécifiques de votre entreprise." 
                   : "Des formations exclusives animées par des experts reconnus pour accélérer votre réussite professionnelle."
                 }
               </p>
-              
-              <div className="flex flex-wrap items-center gap-4">
-                <button className="px-4 md:px-8 py-2 md:py-4 bg-white text-gray-900 text-xs md:text-sm font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+              <div className="flex flex-wrap gap-2 sm:gap-4">
+                <button className="px-3 sm:px-6 py-1.5 sm:py-3 bg-white text-gray-900 text-xs sm:text-sm font-bold rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
                   {isSurMesureMode ? "Demander un devis" : "Explorer les formations"}
                 </button>
                 {!isSurMesureMode && (
-                  <button className="px-4 md:px-8 py-2 md:py-4 border-2 border-white/60 text-white text-xs md:text-sm font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all">
+                  <button className="px-3 sm:px-6 py-1.5 sm:py-3 border-2 border-white/60 text-white text-xs sm:text-sm font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all">
                     Catalogue complet
                   </button>
                 )}
               </div>
             </motion.div>
           </div>
-
           <div className="absolute bottom-0 left-0 right-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
               <path fill="white" fillOpacity="1" d="M0,96L1440,32L1440,320L0,320Z"></path>
@@ -1076,22 +1072,22 @@ const MasterclassesPageContent = () => {
         
         {/* Section Filtres et Recherche */}
         <section className="container mx-auto px-4 max-w-7xl py-8">
-          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+          <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 border border-gray-200">
             {/* En-tête de section */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
                 <p className="text-sm text-gray-600">Explorez notre catalogue de masterclasses</p>
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-500">
-                  <span className="text-lg font-bold text-[hsl(var(--academy-primary))]">{filteredMasterclass.length}</span> formation{filteredMasterclass.length > 1 ? 's' : ''} trouvée{filteredMasterclass.length > 1 ? 's' : ''}
+                  <span className="text-base sm:text-lg font-bold text-[hsl(var(--academy-primary))]">{filteredMasterclass.length}</span> formation{filteredMasterclass.length > 1 ? 's' : ''} trouvée{filteredMasterclass.length > 1 ? 's' : ''}
                 </p>
               </div>
             </div>
 
             {/* Barre de recherche principale */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -1099,7 +1095,7 @@ const MasterclassesPageContent = () => {
                   placeholder="Rechercher une formation par mot-clé..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-xl text-base focus:outline-none focus:border-[hsl(var(--academy-primary))] focus:ring-2 focus:ring-[hsl(var(--academy-primary))]/20"
+                  className="w-full pl-12 pr-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl text-sm sm:text-base focus:outline-none focus:border-[hsl(var(--academy-primary))] focus:ring-2 focus:ring-[hsl(var(--academy-primary))]/20"
                 />
               </div>
             </div>
@@ -1172,6 +1168,74 @@ const MasterclassesPageContent = () => {
                 )}
               </div>
 
+              {/* Filtres mobile */}
+              <div className="lg:hidden space-y-3">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">Statut:</span>
+                    <div className="flex border border-gray-200 rounded-lg overflow-hidden flex-1">
+                      {[
+                        { value: "all", label: "Toutes" },
+                        { value: "upcoming", label: "À venir" },
+                        { value: "past", label: "Replay" }
+                      ].map((status) => (
+                        <button
+                          key={status.value}
+                          onClick={() => setFilterStatus(status.value as typeof filterStatus)}
+                          className={`flex-1 px-3 py-2 text-xs font-medium transition-colors ${
+                            filterStatus === status.value
+                              ? "bg-[hsl(var(--academy-primary))] text-white"
+                              : "bg-white text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          {status.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">Catégorie:</span>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                    >
+                      {categories.map(cat => (
+                        <option key={cat} value={cat}>
+                          {cat === "all" ? "Toutes catégories" : cat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">Niveau:</span>
+                    <select
+                      value={selectedLevel}
+                      onChange={(e) => setSelectedLevel(e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                    >
+                      {levels.map(level => (
+                        <option key={level} value={level}>
+                          {level === "all" ? "Tous niveaux" : level}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {(searchTerm || filterStatus !== "all" || selectedCategory !== "all" || selectedLevel !== "all") && (
+                    <button
+                      onClick={resetFilters}
+                      className="w-full px-4 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors flex items-center justify-center gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      Réinitialiser
+                    </button>
+                  )}
+                </div>
+              </div>
+
               {/* Tags rapides */}
               <div className="flex flex-wrap items-center gap-2">
                 {["Data", "Finance", "Soft Skills", "Python", "Excel"].map((tag, index) => (
@@ -1228,8 +1292,8 @@ const MasterclassesPageContent = () => {
                 <div className="mb-12">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-[hsl(var(--academy-primary))] rounded-full" />
-                    <h2 className="text-2xl font-bold text-gray-900">Nos formats pédagogiques</h2>
-                    <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Nos formats pédagogiques</h2>
+                    <span className="hidden sm:inline px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
                       {upcomingMasterclass.length} disponible{upcomingMasterclass.length > 1 ? 's' : ''}
                     </span>
                   </div>
@@ -1254,8 +1318,8 @@ const MasterclassesPageContent = () => {
                 <div className="mb-12">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-gray-400 rounded-full" />
-                    <h2 className="text-2xl font-bold text-gray-900">Replays disponibles</h2>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Replays disponibles</h2>
+                    <span className="hidden sm:inline px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full">
                       {pastMasterclass.length} disponible{pastMasterclass.length > 1 ? 's' : ''}
                     </span>
                   </div>
@@ -1280,10 +1344,10 @@ const MasterclassesPageContent = () => {
                 <div className="mb-12">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-orange-400 rounded-full" />
-                    <h2 className="text-2xl font-bold text-gray-900">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                       {filterStatus === "upcoming" ? "Formations à venir" : "Replays disponibles"}
                     </h2>
-                    <span className="px-3 py-1 bg-orange-100 text-orange-700 text-sm font-medium rounded-full">
+                    <span className="hidden sm:inline px-3 py-1 bg-orange-100 text-orange-700 text-sm font-medium rounded-full">
                       {filteredMasterclass.length} disponible{filteredMasterclass.length > 1 ? 's' : ''}
                     </span>
                   </div>
@@ -1321,11 +1385,11 @@ const MasterclassesPageContent = () => {
         </section>
 
         {/* Section Newsletter */}
-        <section className="bg-gray-50 border-t border-gray-200 mt-16">
-          <div className="container mx-auto px-4 max-w-7xl py-12">
+        <section className="bg-gray-50 border-t border-gray-200 mt-2">
+          <div className="container mx-auto px-4 max-w-7xl py-2">
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">Restez informé des nouvelles formations</h2>
-              <p className="text-gray-600 mb-6">Recevez en avant-première les annonces de nos prochaines masterclasses</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Restez informé des nouvelles formations</h2>
+              <p className="text-gray-600 mb-4">Recevez en avant-première les annonces de nos prochaines masterclasses</p>
               <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
@@ -1379,7 +1443,7 @@ const MasterclassCard = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.02 }}
-      className="group bg-white border border-gray-200/50 rounded-2xl hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-xl hover:shadow-[hsl(var(--academy-primary))]/10 transition-all duration-300 overflow-hidden backdrop-blur-sm"
+      className="group bg-white border border-gray-200/50 rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm"
     >
       <div className="flex flex-col md:flex-row">
         {/* Image section */}
@@ -1419,42 +1483,42 @@ const MasterclassCard = ({
         </div>
 
         {/* Content section */}
-        <div className="flex-1 p-6 md:p-7 bg-gradient-to-br from-white to-gray-50/30">
+        <div className="flex-1 p-3 md:p-5 bg-gradient-to-br from-white to-gray-50/30">
           {/* Header */}
-          <div className="mb-4">
-            <h3 className="text-xl md:text-2xl font-bold text-[hsl(var(--academy-primary))] mb-2 group-hover:text-[hsl(var(--academy-primary))]/80 transition-colors">{masterclass.title}</h3>
-            <p className="text-sm md:text-base text-gray-700 mb-2 font-medium">{masterclass.subtitle}</p>
-            <p className="text-xs md:text-sm text-gray-500 italic">{masterclass.tagline}</p>
+          <div className="mb-2">
+            <h3 className="text-sm md:text-lg font-bold text-[hsl(var(--academy-primary))] mb-2 group-hover:text-[hsl(var(--academy-primary))]/80 transition-colors">{masterclass.title}</h3>
+            <p className="text-xs md:text-xs text-gray-700 mb-1 font-medium">{masterclass.subtitle}</p>
+            <p className="text-xs md:text-xs text-gray-500 italic">{masterclass.tagline}</p>
           </div>
 
           {/* Description courte */}
-          <p className="text-sm md:text-base text-gray-600 mb-5 line-clamp-2 leading-relaxed">{masterclass.description}</p>
+          <p className="text-xs md:text-xs text-gray-600 mb-3 line-clamp-2 leading-relaxed">{masterclass.description}</p>
 
           {/* Instructor */}
-          <div className="flex items-center gap-3 mb-5 p-3 bg-gray-50/50 rounded-xl border border-gray-100/50">
+          <div className="flex items-center gap-3 mb-3 p-2 bg-gray-50/50 rounded-xl border border-gray-100/50">
             <img
               src={masterclass.instructorImage}
               alt={masterclass.instructor}
               className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
             />
             <div className="flex-1">
-              <p className="text-sm font-semibold text-[hsl(var(--academy-primary))]">{masterclass.instructor}</p>
-              <p className="text-xs text-gray-600">{masterclass.instructorTitle}</p>
+              <p className="text-xs md:text-xs font-semibold text-[hsl(var(--academy-primary))]">{masterclass.instructor}</p>
+              <p className="text-xs md:text-xs text-gray-600">{masterclass.instructorTitle}</p>
             </div>
           </div>
 
           {/* Footer with meta and actions */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-gray-200/50 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-2 border-t border-gray-200/50 gap-4">
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
                 <Calendar className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
                 <MapPin className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.location}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
                 <Clock className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.duration}</span>
               </div>
@@ -1463,11 +1527,10 @@ const MasterclassCard = ({
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onShowDetails(masterclass)}
-                className="px-6 py-3 bg-red-900 text-white text-sm font-bold rounded-xl flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all duration-200 shadow-md"
+                className="px-3 md:px-5 py-1.5 md:py-2 bg-red-900 text-white text-xs md:text-xs font-bold rounded-xl flex items-center gap-2 hover:scale-105 transition-all duration-200 shadow-md"
               >
                 <Eye className="w-4 h-4" />
                 Voir les détails
-                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -1533,7 +1596,10 @@ const RegistrationModal = ({
 
         {/* Contenu du formulaire */}
         <div className="overflow-y-auto max-h-[calc(95vh-200px)]">
-          <MasterclassRegistrationForm />
+          <RegistrationForm 
+            trainingTitle={masterclass.title}
+            onClose={onClose}
+          />
         </div>
       </motion.div>
     </motion.div>

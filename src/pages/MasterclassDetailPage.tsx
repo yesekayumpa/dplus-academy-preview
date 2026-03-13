@@ -1,11 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { 
   Calendar, Clock, Users, BookOpen, ArrowRight, 
   Award, X, ChevronRight, Sparkles,
   Briefcase, LineChart, Globe, Zap, Shield,
   CheckCircle2, Target, Download, Heart, Share2,
   Database, BarChart, Brain, Code, FileText, 
-  UserCircle, ArrowLeft, MapPin, Clock3, Star,
+  UserCircle, ArrowLeft, MapPin, Clock3,
   Mail, Phone, Linkedin, Twitter, Info,
   CreditCard, Tag, Percent, Gift, ShieldCheck,
   Clock4, Video, Languages, GraduationCap
@@ -111,6 +111,56 @@ const MasterclassDetailPage = () => {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showInstructorPopup, setShowInstructorPopup] = useState(false);
   
+  // Bloquer le défilement du body et du conteneur principal quand un popup est ouvert
+  useEffect(() => {
+    const isAnyPopupOpen = showRegistrationForm || showInstructorPopup;
+    const htmlElement = document.documentElement;
+    const bodyElement = document.body;
+    
+    if (isAnyPopupOpen) {
+      // Sauvegarder la position de défilement actuelle
+      const scrollY = window.scrollY;
+      
+      // Appliquer les styles pour bloquer le défilement
+      htmlElement.style.overflow = 'hidden';
+      htmlElement.style.position = 'fixed';
+      htmlElement.style.width = '100%';
+      htmlElement.style.top = `-${scrollY}px`;
+      bodyElement.style.overflow = 'hidden';
+      
+      // Stocker la position pour la restaurer plus tard
+      (htmlElement as any).dataset.scrollY = scrollY.toString();
+    } else {
+      // Restaurer la position de défilement
+      const scrollY = (htmlElement as any).dataset.scrollY || '0';
+      
+      htmlElement.style.overflow = '';
+      htmlElement.style.position = '';
+      htmlElement.style.width = '';
+      htmlElement.style.top = '';
+      bodyElement.style.overflow = '';
+      
+      // Restaurer la position de défilement
+      window.scrollTo(0, parseInt(scrollY, 10));
+      
+      // Nettoyer le dataset
+      delete (htmlElement as any).dataset.scrollY;
+    }
+    
+    // Nettoyage quand le composant est démonté
+    return () => {
+      htmlElement.style.overflow = '';
+      htmlElement.style.position = '';
+      htmlElement.style.width = '';
+      htmlElement.style.top = '';
+      bodyElement.style.overflow = '';
+      
+      const scrollY = (htmlElement as any).dataset.scrollY || '0';
+      window.scrollTo(0, parseInt(scrollY, 10));
+      delete (htmlElement as any).dataset.scrollY;
+    };
+  }, [showRegistrationForm, showInstructorPopup]);
+  
   const masterclass = useMemo(() => {
     return masterclassData.find(mc => mc.id === parseInt(id || "0"));
   }, [id]);
@@ -125,6 +175,158 @@ const MasterclassDetailPage = () => {
 
   const handleRegister = () => setShowRegistrationForm(true);
 
+  const handleDownloadBrochure = async () => {
+    // Import dynamique de jsPDF
+    const { default: jsPDF } = await import('jspdf');
+    
+    // Créer un PDF
+    const doc = new jsPDF();
+    
+    // Configuration des polices
+    doc.setFont('helvetica');
+    
+    // Titre
+    doc.setFontSize(20);
+    doc.setTextColor(70, 24, 30); // Couleur bordeaux
+    doc.text('PLAQUETTE DE FORMATION', 105, 20, { align: 'center' });
+    
+    // Ligne de séparation
+    doc.setDrawColor(70, 24, 30);
+    doc.setLineWidth(0.5);
+    doc.line(20, 25, 190, 25);
+    
+    // Titre de la formation
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    const splitTitle = doc.splitTextToSize(masterclass.title, 170);
+    doc.text(splitTitle, 105, 35, { align: 'center' });
+    
+    // Sous-titre
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.text(masterclass.subtitle, 105, 50, { align: 'center' });
+    
+    let yPosition = 65;
+    
+    // Section Description
+    doc.setFontSize(14);
+    doc.setTextColor(70, 24, 30);
+    doc.text('DESCRIPTION', 20, yPosition);
+    yPosition += 8;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const splitDescription = doc.splitTextToSize(masterclass.description, 170);
+    doc.text(splitDescription, 20, yPosition);
+    yPosition += splitDescription.length * 5 + 10;
+    
+    // Section Formateur
+    doc.setFontSize(14);
+    doc.setTextColor(70, 24, 30);
+    doc.text('FORMATEUR', 20, yPosition);
+    yPosition += 8;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`${masterclass.instructor.name}`, 20, yPosition);
+    yPosition += 6;
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text(masterclass.instructor.title, 20, yPosition);
+    yPosition += 6;
+    
+    const splitBio = doc.splitTextToSize(masterclass.instructor.bio, 170);
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(splitBio, 20, yPosition);
+    yPosition += splitBio.length * 5 + 10;
+    
+    // Section Détails
+    doc.setFontSize(14);
+    doc.setTextColor(70, 24, 30);
+    doc.text('DÉTAILS DE LA FORMATION', 20, yPosition);
+    yPosition += 8;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Durée: ${masterclass.duration}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Niveau: ${masterclass.level}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Prix: ${masterclass.price * 655} FCFA`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Format: ${masterclass.format}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Date: ${masterclass.date}`, 20, yPosition);
+    yPosition += 10;
+    
+    // Section Programme
+    doc.setFontSize(14);
+    doc.setTextColor(70, 24, 30);
+    doc.text('PROGRAMME', 20, yPosition);
+    yPosition += 8;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    masterclass.highlights.forEach((highlight, index) => {
+      if (yPosition > 270) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      const splitHighlight = doc.splitTextToSize(`• ${highlight}`, 170);
+      doc.text(splitHighlight, 20, yPosition);
+      yPosition += splitHighlight.length * 5 + 3;
+    });
+    yPosition += 5;
+    
+    // Section Prérequis
+    if (masterclass.prerequisites && masterclass.prerequisites.length > 0) {
+      if (yPosition > 250) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      doc.setFontSize(14);
+      doc.setTextColor(70, 24, 30);
+      doc.text('PRÉREQUIS', 20, yPosition);
+      yPosition += 8;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(0, 0, 0);
+      masterclass.prerequisites.forEach((prereq, index) => {
+        const splitPrereq = doc.splitTextToSize(`• ${prereq}`, 170);
+        doc.text(splitPrereq, 20, yPosition);
+        yPosition += splitPrereq.length * 5 + 3;
+      });
+      yPosition += 5;
+    }
+    
+    // Section Contact
+    if (yPosition > 230) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    doc.setFontSize(14);
+    doc.setTextColor(70, 24, 30);
+    doc.text('CONTACT', 20, yPosition);
+    yPosition += 8;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Email: info@dmplus-academy.com', 20, yPosition);
+    yPosition += 6;
+    doc.text('Téléphone: +221 XX XX XX XX', 20, yPosition);
+    yPosition += 6;
+    doc.text('Site web: www.dmplus-academy.com', 20, yPosition);
+    
+    // Pied de page
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text('© 2024 DM+ Academy - Tous droits réservés', 105, 285, { align: 'center' });
+    
+    // Téléchargement du PDF
+    doc.save(`plaquette-${masterclass.title.replace(/\s+/g, '-')}.pdf`);
+  };
+
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50">
@@ -132,13 +334,17 @@ const MasterclassDetailPage = () => {
         <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="flex items-center justify-between h-14">
-              <button 
-                onClick={() => navigate("/masterclasses")}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-medium">Toutes les formations</span>
-              </button>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => navigate("/masterclasses")}
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span className="text-sm font-medium">Retour</span>
+                </button>
+                <div className="h-6 w-px bg-gray-300" />
+                <span className="text-sm text-gray-500">Toutes les formations</span>
+              </div>
               <span className="text-sm text-gray-500 truncate max-w-xs">{masterclass.title}</span>
             </div>
           </div>
@@ -146,6 +352,17 @@ const MasterclassDetailPage = () => {
 
         {/* Contenu principal */}
         <div className="container mx-auto px-4 max-w-6xl py-8">
+          {/* Bouton Retour en haut du contenu */}
+          <div className="flex justify-start mb-6">
+            <button 
+              onClick={() => navigate("/masterclasses")}
+              className="flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Retour aux formations
+            </button>
+          </div>
+
           {/* Fil d'Ariane */}
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
             <span>Accueil</span>
@@ -198,13 +415,7 @@ const MasterclassDetailPage = () => {
                   </div>
 
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      <span className="font-medium text-gray-900">{masterclass.rating}</span>
-                      <span className="text-gray-500">({masterclass.participants} avis)</span>
-                    </div>
-                    <div className="w-px h-4 bg-gray-300" />
-                    <div className="flex items-center gap-1 text-gray-600">
+                                        <div className="flex items-center gap-1 text-gray-600">
                       <Users className="w-4 h-4" />
                       <span>{masterclass.participants} participants</span>
                     </div>
@@ -299,7 +510,7 @@ const MasterclassDetailPage = () => {
             {/* Colonne latérale - 1/3 */}
             <div className="lg:col-span-1 space-y-6">
               {/* Carte d'inscription - PRIX AMÉLIORÉ */}
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden sticky top-20">
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 {/* En-tête avec badge promo */}
                 <div className="bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%] px-6 py-4">
                   <div className="flex items-center justify-between text-white">
@@ -333,6 +544,14 @@ const MasterclassDetailPage = () => {
                     >
                       {isUpcoming ? "S'inscrire maintenant" : "Accéder au replay"}
                       <ArrowRight className="w-4 h-4" />
+                    </button>
+                    
+                    <button 
+                      onClick={handleDownloadBrochure}
+                      className="w-full px-4 py-3 bg-white text-[hsl(var(--academy-primary))] font-semibold rounded-lg border-2 border-[hsl(var(--academy-primary))] hover:bg-[hsl(var(--academy-primary))]/5 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Download className="w-4 h-4" />
+                      Télécharger la plaquette
                     </button>
                   </div>
                 </div>
@@ -476,81 +695,83 @@ const NotFoundState = ({ onBack }: { onBack: () => void }) => (
   </Layout>
 );
 
-// Popup formateur - TAILLE RÉDUITE
+// Popup formateur - TAILLE RÉDUITE ET RESPONSIVE
 const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4 overscroll-none"
+    style={{ touchAction: 'none' }}
     onClick={onClose}
   >
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
-      className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-hidden"
+      className="bg-white rounded-xl w-full max-w-md max-h-[85vh] sm:max-h-[80vh] overflow-hidden overscroll-contain mx-auto"
+      style={{ touchAction: 'pan-y' }}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* En-tête plus compact */}
-      <div className="relative h-20 bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%]">
+      {/* En-tête responsive */}
+      <div className="relative h-16 sm:h-20 bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%]">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 p-1.5 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+          className="absolute top-2 sm:top-3 right-2 sm:right-3 p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
         >
-          <X className="w-4 h-4 text-white" />
+          <X className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
         </button>
       </div>
 
-      {/* Contenu plus compact */}
-      <div className="relative px-5 pb-5">
-        {/* Avatar plus petit */}
-        <div className="absolute -top-10 left-5">
+      {/* Contenu responsive */}
+      <div className="relative px-3 sm:px-5 pb-3 sm:pb-5">
+        {/* Avatar responsive */}
+        <div className="absolute -top-8 sm:-top-10 left-3 sm:left-5">
           <div className="relative">
             <img 
               src={instructor.image} 
               alt={instructor.name}
-              className="w-16 h-16 rounded-full object-cover border-3 border-white shadow-md"
+              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-3 border-white shadow-md"
             />
           </div>
         </div>
 
-        {/* Contenu avec espacement réduit */}
-        <div className="pt-10">
-          <h3 className="text-lg font-bold text-gray-900 mb-0.5">{instructor.name}</h3>
-          <p className="text-sm text-[hsl(var(--academy-primary))] font-medium mb-3">{instructor.title}</p>
+        {/* Contenu avec espacement responsive */}
+        <div className="pt-8 sm:pt-10">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-0.5">{instructor.name}</h3>
+          <p className="text-xs sm:text-sm text-[hsl(var(--academy-primary))] font-medium mb-2 sm:mb-3">{instructor.title}</p>
           
-          {/* Bio avec texte plus petit */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-gray-900 mb-1.5">À propos</h4>
+          {/* Bio responsive */}
+          <div className="mb-3 sm:mb-4">
+            <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">À propos</h4>
             <p className="text-xs text-gray-600 leading-relaxed">{instructor.bio}</p>
           </div>
 
-          {/* Expertise avec espacement réduit */}
-          <div className="mb-3">
-            <h4 className="text-sm font-semibold text-gray-900 mb-1.5">Expertise</h4>
-            <div className="flex flex-wrap gap-1.5">
+          {/* Expertise responsive */}
+          <div className="mb-2 sm:mb-3">
+            <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">Expertise</h4>
+            <div className="flex flex-wrap gap-1 sm:gap-1.5">
               {instructor.expertise.map((item: string, index: number) => (
-                <span key={index} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">
+                <span key={index} className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 text-gray-600 text-xs rounded-md">
                   {item}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Réseaux sociaux plus compacts */}
+          {/* Réseaux sociaux responsive */}
           {instructor.social && (
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 mb-1.5">Réseaux</h4>
-              <div className="flex items-center gap-1.5">
+              <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">Réseaux</h4>
+              <div className="flex items-center gap-1 sm:gap-1.5">
                 {instructor.social.linkedin && (
-                  <a href="#" className="p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                    <Linkedin className="w-4 h-4 text-gray-600" />
+                  <a href="#" className="p-1 sm:p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                   </a>
                 )}
                 {instructor.social.twitter && (
-                  <a href="#" className="p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                    <Twitter className="w-4 h-4 text-gray-600" />
+                  <a href="#" className="p-1 sm:p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                   </a>
                 )}
               </div>
@@ -562,40 +783,42 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
   </motion.div>
 );
 
-// RegistrationModal - CORRIGÉ AVEC SCROLL ET SANS LA PARTIE BLEUE
+// RegistrationModal - RESPONSIVE ET CORRIGÉ AVEC SCROLL
 const RegistrationModal = ({ masterclass, onClose }: any) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4 overscroll-none"
+    style={{ touchAction: 'none' }}
     onClick={onClose}
   >
     <motion.div
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.95, opacity: 0 }}
-      className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+      className="bg-white rounded-xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] flex flex-col overflow-hidden overscroll-contain mx-auto"
+      style={{ touchAction: 'pan-y' }}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Header - fixe */}
-      <div className="p-6 border-b border-gray-200 flex-shrink-0">
+      {/* Header responsive - fixe */}
+      <div className="p-4 sm:p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">Inscription à la formation</h2>
-            <p className="text-sm text-gray-500 mt-1">{masterclass.title}</p>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 truncate">Inscription à la formation</h2>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1 truncate">{masterclass.title}</p>
           </div>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0 ml-2"
           >
-            <X className="w-5 h-5 text-gray-500" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
           </button>
         </div>
       </div>
 
-      {/* Formulaire - scrollable */}
-      <div className="flex-1 overflow-y-auto p-6">
+      {/* Formulaire - scrollable responsive */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
         <MasterclassRegistrationForm />
       </div>
     </motion.div>

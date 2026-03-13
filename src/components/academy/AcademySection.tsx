@@ -13,12 +13,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import MasterclassSection from "./MasterclassSection";
 import InteractiveCards from "./InteractiveCards";
 
 const AcademySection = () => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: false, 
@@ -58,28 +60,28 @@ const AcademySection = () => {
       id: 1,
       title: "Masterclass",
       description: "Sessions intensives de 2h à 2 jours <br />sur des thématiques précises <br />avec des experts du domaine",
-      image: "/assets/Masterclass.jpg",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center",
       link: "/masterclasses"
     },
     {
       id: 2,
       title: "E-learning",
       description: "Formations en ligne accessibles <br />à tout moment <br />pour apprendre à votre rythme",
-      image: "/assets/E-learning2.jpg",
+      image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop&crop=center",
       link: "/e-learning"
     },
     {
       id: 3,
       title: "Corporate Programs",
       description: "Programmes de formation conçus <br />spécifiquement pour les entreprises, <br />adaptés à leurs objectifs et secteur",
-      image: "/images/Corporate.jpg",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center",
       link: "/corporate-programs"
     },
     {
       id: 4,
       title: "Mentored Courses",
       description: "Formations sur mesure conçues <br />pour répondre aux objectifs stratégiques <br />et aux défis spécifiques de votre organisation",
-      image: "/images/Mentored Courses.jpg",
+      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop&crop=center",
       link: "/sur-mesure"
     }
   ];
@@ -92,7 +94,7 @@ const AcademySection = () => {
       <div className={isDesktop ? "px-2" : "flex-[0_0_100%] md:flex-[0_0_33.333%] px-2 min-w-0"}>
         <section
           style={{
-            padding: isDesktop ? "12px 4px" : "12px 4px",
+            padding: isDesktop ? "4px 4px 12px 4px" : "12px 4px",
             backgroundColor: "#fff",
             color: "#1a1a1a",
             fontFamily: "Inter, sans-serif",
@@ -117,17 +119,18 @@ const AcademySection = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "12px",
+                gap: "8px",
+                alignSelf: "flex-start"
               }}
             >
               {/* Image en haut */}
-              <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+              <div style={{ width: "100%", marginTop: "0" }}>
                 <img
                   src={item.image}
                   alt={item.title}
                   style={{ 
-                    maxWidth: "100%", 
-                    height: isDesktop ? "160px" : "auto",
+                    width: "100%", 
+                    height: "160px", 
                     objectFit: "cover",
                     borderRadius: "8px",
                     boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
@@ -179,7 +182,7 @@ const AcademySection = () => {
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => window.open(item.link, "_blank")}
+                    onClick={() => navigate(item.link)}
                   >
                     En savoir plus
                   </button>
@@ -256,7 +259,7 @@ const AcademySection = () => {
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => window.open(item.link, "_blank")}
+                    onClick={() => navigate(item.link)}
                   >
                     En savoir plus
                   </button>
@@ -465,7 +468,7 @@ const AcademySection = () => {
       <MasterclassSection />
 
       {/* Publics cibles */}
-      <section className="pb-4">
+      <section className="pt-8 pb-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
             Nos publics cibles

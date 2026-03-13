@@ -1,6 +1,5 @@
 "use client"
 
-import { Star } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 export interface MasterclassCardData {
@@ -75,16 +74,7 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
             )}
           </div>
           
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-amber-400 text-amber-400" />
-            <span className="text-xs font-semibold text-foreground">
-              {data.rating.toFixed(1).replace(".", ",")}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              ({data.reviewCount})
-            </span>
-          </div>
-        </div>
+                  </div>
       </div>
     </div>
   )

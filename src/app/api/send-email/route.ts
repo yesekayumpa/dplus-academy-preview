@@ -135,6 +135,32 @@ function createEmailContent(formData: any, subject: string): string {
           display: inline-block;
           min-width: 150px;
         }
+        
+        /* Responsive styles for mobile */
+        @media (max-width: 600px) {
+          body {
+            padding: 10px;
+          }
+          .container {
+            padding: 20px;
+          }
+          .field {
+            padding: 6px;
+            margin-bottom: 8px;
+          }
+          .field strong {
+            display: block;
+            min-width: auto;
+            margin-bottom: 4px;
+            font-size: 14px;
+          }
+          .header h1 {
+            font-size: 20px;
+          }
+          .section h2 {
+            font-size: 16px;
+          }
+        }
         .footer {
           margin-top: 30px;
           padding-top: 20px;

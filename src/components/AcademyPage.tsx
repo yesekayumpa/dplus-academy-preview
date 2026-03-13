@@ -111,6 +111,17 @@ const AcademyPage = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* Bouton Voir plus */}
+          <div className="text-center mt-6">
+            <Link
+              to="/nos-formateurs"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-academy to-academy-light text-white font-semibold hover:from-academy/90 hover:to-academy-light/90 transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              Voir plus de formateurs
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

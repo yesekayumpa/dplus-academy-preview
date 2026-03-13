@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   BookOpen, 
@@ -26,12 +26,12 @@ import {
   X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { popularCourses, type Course } from "@/data/courses";
 import Layout from "@/components/layout/Layout";
 import surMesureBg from "@/assets/woman-sitting-library-with-her-laptop.jpg";
+import { RegistrationForm } from '@/components/ui/RegistrationForm';
 
 // Couleurs de la charte graphique
 const colors = {
@@ -51,8 +51,24 @@ const colors = {
 
 const SurMesurePage = () => {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [registrationCourse, setRegistrationCourse] = useState<Course | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  // Empêcher le scroll de la page principale quand une modal est ouverte
+  useEffect(() => {
+    if (selectedCourse || showRegistrationForm) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Nettoyer quand le composant est démonté
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCourse, showRegistrationForm]);
 
   const getStatusIcon = (status: Course['status']) => {
     switch (status) {
@@ -76,11 +92,11 @@ const SurMesurePage = () => {
 
   const getStatusColor = (status: Course['status']) => {
     switch (status) {
-      case 'disponible': return 'bg-green-100 text-green-700 border-green-200';
-      case 'réservation': return 'bg-blue-100 text-blue-700 border-blue-200';
-      case 'achat': return 'bg-purple-100 text-purple-700 border-purple-200';
-      case 'coach': return 'bg-orange-100 text-orange-700 border-orange-200';
-      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+      case 'disponible': return 'bg-green-100 text-green-700 border-green-200 hover:bg-green-600 hover:text-white hover:border-green-600';
+      case 'réservation': return 'bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-600 hover:text-white hover:border-blue-600';
+      case 'achat': return 'bg-purple-100 text-purple-700 border-purple-200 hover:bg-purple-600 hover:text-white hover:border-purple-600';
+      case 'coach': return 'bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-600 hover:text-white hover:border-orange-600';
+      default: return 'bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-600 hover:text-white hover:border-gray-600';
     }
   };
 
@@ -216,8 +232,8 @@ const SurMesurePage = () => {
         </div>
 
         {/* Liste des cours simplifiée */}
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="container mx-auto px-6 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {popularCourses.map((course, index) => (
               <motion.div
                 key={course.id}
@@ -225,33 +241,42 @@ const SurMesurePage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="h-full border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <Card className="h-full border border-gray-200 transition-shadow overflow-hidden">
+                  {/* Image du cours */}
+                  <div className="h-48 overflow-hidden rounded-t-lg">
+                    <img 
+                      src={course.image} 
+                      alt={course.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  
                   {/* Header simplifié avec couleur bordeaux */}
-                  <div className="h-32 bg-gradient-to-r from-[#46181e] to-[#8e2e3b] p-4 rounded-t-lg">
+                  <div className="h-20 bg-gradient-to-r from-[#46181e] to-[#8e2e3b] p-3 relative -mt-8 rounded-t-lg">
                     <div className="flex justify-between items-start">
-                      <Badge className="bg-white/20 text-white border-0">
+                      <Badge className="bg-white/20 text-white border-0 text-[10px]">
                         {course.category}
                       </Badge>
                       {course.isUpdated && (
-                        <Badge className="bg-green-500 text-white border-0 text-xs">
+                        <Badge className="bg-green-500 text-white border-0 text-[10px]">
                           Nouveau
                         </Badge>
                       )}
                     </div>
-                    <h3 className="text-white font-bold mt-2 line-clamp-2">
+                    <h3 className="text-white font-bold mt-1 line-clamp-2 text-[10px]">
                       {course.title}
                     </h3>
                   </div>
 
-                  <CardContent className="p-4">
+                  <CardContent className="p-3">
                     {/* Métriques simplifiées */}
-                    <div className="flex items-center justify-between mb-3 text-sm">
+                    <div className="flex items-center justify-between mb-2 text-[10px]">
                       <div className="flex items-center gap-2">
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-3 h-3 ${
+                              className={`w-2 h-2 ${
                                 i < Math.floor(course.rating)
                                   ? 'text-yellow-400 fill-yellow-400'
                                   : 'text-gray-300'
@@ -259,43 +284,43 @@ const SurMesurePage = () => {
                             />
                           ))}
                         </div>
-                        <span className="font-medium">{course.rating}</span>
+                        <span className="font-medium text-[10px]">{course.rating}</span>
                       </div>
                       <div className="flex items-center gap-1 text-gray-500">
-                        <Users className="w-3 h-3" />
-                        <span>{course.students}</span>
+                        <Users className="w-2 h-2" />
+                        <span className="text-[10px]">{course.students}</span>
                       </div>
                     </div>
 
                     {/* Tags simplifiés */}
-                    <div className="flex flex-wrap gap-1 mb-3">
+                    <div className="flex flex-wrap gap-1 mb-2">
                       {course.tags.slice(0, 2).map((tag, i) => (
-                        <Badge key={i} variant="outline" className="text-xs border-gray-200">
+                        <Badge key={i} variant="outline" className="text-[10px] border-gray-200">
                           {tag}
                         </Badge>
                       ))}
                       {course.tags.length > 2 && (
-                        <Badge variant="outline" className="text-xs border-gray-200">
+                        <Badge variant="outline" className="text-[10px] border-gray-200">
                           +{course.tags.length - 2}
                         </Badge>
                       )}
                     </div>
 
                     {/* Statut et durée */}
-                    <div className="flex items-center justify-between text-sm mb-3">
+                    <div className="flex items-center justify-between text-[10px] mb-2">
                       <div className="flex items-center gap-1 text-gray-500">
-                        <Clock className="w-3 h-3" />
+                        <Clock className="w-2 h-2" />
                         <span>{course.duration}</span>
                       </div>
-                      <Badge className={`${getStatusColor(course.status)} text-xs`}>
+                      <Badge className={`${getStatusColor(course.status)} text-[10px]`}>
                         {getStatusIcon(course.status)}
-                        <span className="ml-1">{getStatusText(course.status)}</span>
+                        <span className="ml-1 text-[10px]">{getStatusText(course.status)}</span>
                       </Badge>
                     </div>
 
                     {/* Bouton uniforme */}
                     <Button 
-                      className="w-full bg-[#b23a4a] hover:bg-[#8e2e3b] text-white"
+                      className="w-full bg-[#b23a4a] hover:bg-[#8e2e3b] text-white text-sm h-10 font-semibold"
                       onClick={() => setSelectedCourse(course)}
                     >
                       Voir le détail
@@ -324,11 +349,20 @@ const SurMesurePage = () => {
                 className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Image du cours */}
+                <div className="h-64 overflow-hidden rounded-t-lg">
+                  <img 
+                    src={selectedCourse.image} 
+                    alt={selectedCourse.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                
                 {/* Header avec couleur bordeaux */}
                 <div className="bg-gradient-to-r from-[#46181e] to-[#8e2e3b] p-6 relative">
                   <button
                     onClick={() => setSelectedCourse(null)}
-                    className="absolute top-4 right-4 text-white/80 hover:text-white"
+                    className="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 rounded-full p-1"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -417,12 +451,49 @@ const SurMesurePage = () => {
                       </Button>
                       <Button 
                         className="flex-1 bg-[#b23a4a] hover:bg-[#8e2e3b] text-white"
+                        onClick={() => {
+                          setRegistrationCourse(selectedCourse);
+                          setSelectedCourse(null);
+                          setTimeout(() => setShowRegistrationForm(true), 100);
+                        }}
                       >
                         S'inscrire
                       </Button>
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Formulaire d'inscription */}
+        <AnimatePresence>
+          {showRegistrationForm && registrationCourse && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+              onClick={() => setShowRegistrationForm(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <RegistrationForm
+                  trainingTitle={registrationCourse.title}
+                  onClose={() => {
+                    setShowRegistrationForm(false);
+                    setRegistrationCourse(null);
+                  }}
+                  onSuccess={() => {
+                    setShowRegistrationForm(false);
+                    setRegistrationCourse(null);
+                  }}
+                />
               </motion.div>
             </motion.div>
           )}
