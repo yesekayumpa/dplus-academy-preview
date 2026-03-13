@@ -350,9 +350,9 @@ const TrainersPage = () => {
       className="group cursor-pointer"
       onClick={onClick}
     >
-      <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white">
+      <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full flex flex-col">
         {/* Image avec overlay bordeaux */}
-        <div className="relative h-36 overflow-hidden">
+        <div className="relative h-36 overflow-hidden flex-shrink-0">
           <img
             src={trainer.image}
             alt={trainer.name}
@@ -368,7 +368,7 @@ const TrainersPage = () => {
           )}
         </div>
 
-        <CardContent className="p-3">
+        <CardContent className="p-3 flex-1 flex flex-col">
           {/* Nom et titre */}
           <h3 className="font-semibold text-gray-900 text-sm mb-1">{trainer.name}</h3>
           <p className="text-xs text-gray-500 mb-2 line-clamp-1">{trainer.title}</p>
@@ -409,8 +409,11 @@ const TrainersPage = () => {
             </div>
           </div>
 
+          {/* Espace flexible pour pousser le bouton en bas */}
+          <div className="flex-1"></div>
+
           {/* Bouton bordeaux */}
-          <Button className="w-full bg-[#b23a4a] hover:bg-[#8e2e3b] text-white text-xs h-7">
+          <Button className="w-full bg-[#b23a4a] hover:bg-[#8e2e3b] text-white text-xs h-7 mt-auto">
             Voir le profil
           </Button>
         </CardContent>
