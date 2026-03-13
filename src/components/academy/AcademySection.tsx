@@ -330,13 +330,13 @@ const AcademySection = () => {
   return (
     <div className="space-y-4">
       {/* Piliers de formation – Version Premium */}
-      <section className="relative py-2">
+      <section className="relative py-12 bg-white">
         {/* Fond subtil */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
         <div className="relative container mx-auto px-4 max-w-6xl">
           {/* Header */}
-          <div className="text-center mb-12 max-w-2xl mx-auto">
+          <div className="text-center mb-6 max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
               Nos Piliers de Formation
             </h2>
