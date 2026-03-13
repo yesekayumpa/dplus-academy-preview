@@ -53,6 +53,7 @@ const Header = () => {
     { label: "Masterclass", href: "/masterclasses" },
     { label: "E-learning", href: "/e-learning" },
     { label: "Mentored Courses", href: "/sur-mesure" },
+    { label: "Corporate", href: "/corporate-programs" },
     { label: "Nos formateurs", href: "/nos-formateurs" },
   ];
 

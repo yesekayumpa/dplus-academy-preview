@@ -322,6 +322,13 @@ const TrainersPage = () => {
   >(null);
   const [activeFilter, setActiveFilter] = useState("all");
 
+  // Forcer le scroll vers le haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
   const specialties = [
     ...new Set(trainers.flatMap((trainer) => trainer.specialties)),
   ];

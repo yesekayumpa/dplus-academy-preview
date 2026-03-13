@@ -187,8 +187,8 @@ const InteractiveCards = () => {
                       scale: 1
                     }}
                     transition={{
-                      duration: 0.4,
-                      ease: [0.25, 0.46, 0.45, 0.94]
+                      duration: 0.3,
+                      ease: [0.4, 0.0, 0.2, 1]
                     }}
                     whileHover={{
                       zIndex: 10
@@ -206,7 +206,7 @@ const InteractiveCards = () => {
                       
                       {/* Color overlay - always use visible gradient on mobile */}
                       <div 
-                        className="absolute inset-0 bg-gradient-to-t from-[#800020]/80 via-[#800020]/60 to-[#800020]/40 transition-all duration-400"
+                        className="absolute inset-0 bg-gradient-to-t from-[#800020]/80 via-[#800020]/60 to-[#800020]/40 transition-all duration-200"
                       />
                       
                       {/* Pattern Overlay */}
@@ -235,7 +235,7 @@ const InteractiveCards = () => {
                           animate={{
                             scale: shouldShowHoveredState ? 1.1 : 1
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <div className={cn(isMobile ? "w-4 h-4" : "w-6 h-6")}>
                             {card.icon}
@@ -249,7 +249,7 @@ const InteractiveCards = () => {
                             fontSize: shouldShowHoveredState ? "1.125rem" : "1rem",
                             marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           {card.title}
                         </motion.h3>
@@ -262,7 +262,7 @@ const InteractiveCards = () => {
                             opacity: 0.9,
                             display: "block"
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           {card.description}
                         </motion.p>
@@ -291,7 +291,7 @@ const InteractiveCards = () => {
                             className="mt-4 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
                             initial={{ opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.2, delay: 0.1 }}
+                            transition={{ duration: 0.15, delay: 0.05 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
@@ -367,8 +367,8 @@ const InteractiveCards = () => {
                       scale: 1
                     }}
                     transition={{
-                      duration: 0.4,
-                      ease: [0.25, 0.46, 0.45, 0.94]
+                      duration: 0.3,
+                      ease: [0.4, 0.0, 0.2, 1]
                     }}
                     whileHover={{
                       zIndex: 10
@@ -387,7 +387,7 @@ const InteractiveCards = () => {
                       {/* Color overlay - different behavior for desktop and mobile */}
                       <div 
                         className={cn(
-                          "absolute inset-0 bg-gradient-to-t transition-all duration-400",
+                          "absolute inset-0 bg-gradient-to-t transition-all duration-200",
                           shouldShowHoveredState 
                             ? "from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" 
                             : "from-black/60 via-black/40 to-black/20"
@@ -420,7 +420,7 @@ const InteractiveCards = () => {
                           animate={{
                             scale: shouldShowHoveredState ? 1.1 : 1
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <div className={cn(isMobile ? "w-4 h-4" : "w-6 h-6")}>
                             {card.icon}
@@ -434,7 +434,7 @@ const InteractiveCards = () => {
                             fontSize: shouldShowHoveredState ? "1.25rem" : "1rem",
                             marginBottom: shouldShowHoveredState ? "0.5rem" : "0.25rem"
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           {card.title}
                         </motion.h3>
@@ -447,7 +447,7 @@ const InteractiveCards = () => {
                             opacity: shouldShowHoveredState ? 0.9 : 0.7,
                             display: shouldShowHoveredState ? "block" : "-webkit-box"
                           }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                           style={{
                             WebkitLineClamp: !shouldShowHoveredState ? 2 : "none",
                             WebkitBoxOrient: "vertical",
@@ -492,7 +492,7 @@ const InteractiveCards = () => {
                                 className="mt-4 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2, delay: 0.1 }}
+                                transition={{ duration: 0.15, delay: 0.05 }}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >

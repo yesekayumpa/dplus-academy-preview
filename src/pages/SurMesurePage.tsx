@@ -32,6 +32,7 @@ import { popularCourses, type Course } from "@/data/courses";
 import Layout from "@/components/layout/Layout";
 import surMesureBg from "@/assets/woman-sitting-library-with-her-laptop.jpg";
 import { RegistrationForm } from '@/components/ui/RegistrationForm';
+import { useNavigate } from "react-router-dom";
 
 // Couleurs de la charte graphique
 const colors = {
@@ -55,6 +56,7 @@ const SurMesurePage = () => {
   const [registrationCourse, setRegistrationCourse] = useState<Course | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const navigate = useNavigate();
 
   // Empêcher le scroll de la page principale quand une modal est ouverte
   useEffect(() => {
@@ -321,7 +323,10 @@ const SurMesurePage = () => {
                     {/* Bouton uniforme */}
                     <Button 
                       className="w-full bg-[#b23a4a] hover:bg-[#8e2e3b] text-white text-sm h-10 font-semibold"
-                      onClick={() => setSelectedCourse(course)}
+                      onClick={() => {
+                        navigate(`/sur-mesure/${course.id}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       Voir le détail
                     </Button>

@@ -413,7 +413,7 @@ const CorporateProgramsPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-[#b23a4a]/30"
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-[#b23a4a]/30 flex flex-col h-full"
                   onClick={() => setSelectedProgram(program)}
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -436,7 +436,7 @@ const CorporateProgramsPage = () => {
                     </div>
                   </div>
                   
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <h3 className="text-xl font-bold mb-2 text-[#46181e]">{program.title}</h3>
                     <p className="text-gray-600 mb-4 line-clamp-2">{program.description}</p>
                     
@@ -459,7 +459,7 @@ const CorporateProgramsPage = () => {
                       ))}
                     </div>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mt-auto">
                       <div className="flex flex-col">
                         <span className="text-lg font-bold text-[#46181e]">{program.price}</span>
                         <span className="text-xs text-gray-500">par employé</span>

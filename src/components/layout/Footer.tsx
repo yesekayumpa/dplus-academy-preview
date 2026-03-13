@@ -109,27 +109,36 @@ const Footer = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <a
-                  href="mailto:contact@dmplus-group.com"
+                  href="mailto:academy@dmplus-group.com"
                   className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
                 >
                   <Mail className="w-5 h-5" />
-                  contact@dmplus-group.com
+                  academy@dmplus-group.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+33123456789"
+                  href="tel:+221 33 829 58 79"
                   className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
                 >
                   <Phone className="w-5 h-5" />
-                  +33 1 23 45 67 89
+                  +221 33 829 58 79
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+221 76 663 82 19"
+                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
+                >
+                  <Phone className="w-5 h-5" />
+                  +221 76 663 82 19
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/70">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <span>
-                  123 Avenue de l'Innovation<br />
-                  75008 Paris, France
+                  Dakar Medina<br />
+                  Sénégal
                 </span>
               </li>
             </ul>

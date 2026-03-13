@@ -24,8 +24,44 @@ const AcademyPage = () => {
 
   // Fonction pour naviguer avec scroll vers le haut
   const handleNavigateToTrainers = () => {
-    window.scrollTo(0, 0);
-    navigate("/nos-formateurs");
+    // Détecter si on est sur mobile
+    const isMobile = window.innerWidth < 768;
+    
+    // Forcer le scroll vers le haut immédiatement
+    if (isMobile) {
+      // Comportement spécifique pour mobile
+      document.body.scrollIntoView({ behavior: 'instant', block: 'start' });
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      
+      // Double garantie pour mobile
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        navigate("/nos-formateurs");
+      }, 100);
+    } else {
+      // Comportement pour desktop/web - plus robuste
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      document.body.scrollIntoView({ behavior: 'instant', block: 'start' });
+      
+      // Triple garantie pour desktop
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        navigate("/nos-formateurs");
+      }, 50);
+      
+      // Garantie supplémentaire après navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }, 150);
+    }
   };
 
   // Équipe DM+ Academy
