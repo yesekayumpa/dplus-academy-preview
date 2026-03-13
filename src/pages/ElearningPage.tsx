@@ -337,10 +337,13 @@ const TypewriterText = ({ text, delay = 0, className = "" }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            duration: 0.2,
-            delay: delay + index * 0.08, // 80ms entre chaque lettre
+            duration: 0.15,
+            delay: delay + index * 0.06, // Réduit à 60ms entre chaque lettre pour mobile
           }}
-          style={{ display: 'inline-block' }}
+          style={{ 
+            display: 'inline-block',
+            whiteSpace: 'pre-wrap' // Meilleure gestion des espaces
+          }}
         >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
@@ -747,7 +750,7 @@ const ElearningPage = () => {
                 </motion.div>
 
                 <div>
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-snug sm:leading-tight">
                     <TypewriterText text="Transformez votre" delay={0.2} />
                     <span className="block mt-1">
                       <TypewriterText 
