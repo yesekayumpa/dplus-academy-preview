@@ -106,6 +106,7 @@ const InteractiveCards = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -121,6 +122,30 @@ const InteractiveCards = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Track scroll position for dots indicator
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current && isMobile) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const scrollWidth = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+        const position = scrollWidth > 0 ? (scrollLeft / scrollWidth) * 100 : 0;
+        setScrollPosition(position);
+      }
+    };
+
+    const scrollElement = scrollRef.current;
+    if (scrollElement && isMobile) {
+      scrollElement.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial position
+    }
+
+    return () => {
+      if (scrollElement) {
+        scrollElement.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [isMobile]);
+
   // Auto-scroll for mobile - DISABLED
   useEffect(() => {
     // Auto-scroll functionality removed
@@ -131,39 +156,44 @@ const InteractiveCards = () => {
   return (
     <div className="w-full py-12 px-4 pt-24">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile: Vertical stack instead of horizontal scroll */}
+        {/* Mobile: Horizontal scroll */}
         {isMobile ? (
-          <div className="flex flex-col gap-4">
-            <AnimatePresence>
-              {cardsData.map((card) => {
-              const isHovered = hoveredCard === card.id;
-              const shouldShowHoveredState = isHovered;
-              
-              return (
-                <motion.div
-                  key={card.id}
-                  className="relative mx-auto"
-                  layout
-                  onHoverStart={() => setHoveredCard(card.id)}
-                  onHoverEnd={() => setHoveredCard(null)}
-                  initial={{ 
-                    width: "280px", 
-                    height: "300px" 
-                  }}
-                  animate={{
-                    width: shouldShowHoveredState ? "300px" : "280px",
-                    height: "300px",
-                    borderRadius: shouldShowHoveredState ? "18px" : "16px",
-                    scale: 1
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  whileHover={{
-                    zIndex: 10
-                  }}
-                >
+          <div>
+            <div 
+              ref={scrollRef}
+              className="overflow-x-auto"
+            >
+              <div className="flex gap-4 pb-4" style={{ width: 'max-content' }}>
+              <AnimatePresence>
+                {cardsData.map((card) => {
+                const isHovered = hoveredCard === card.id;
+                const shouldShowHoveredState = isHovered;
+                
+                return (
+                  <motion.div
+                    key={card.id}
+                    className="relative flex-shrink-0"
+                    layout
+                    onHoverStart={() => setHoveredCard(card.id)}
+                    onHoverEnd={() => setHoveredCard(null)}
+                    initial={{ 
+                      width: "280px", 
+                      height: "300px" 
+                    }}
+                    animate={{
+                      width: shouldShowHoveredState ? "300px" : "280px",
+                      height: "300px",
+                      borderRadius: shouldShowHoveredState ? "18px" : "16px",
+                      scale: 1
+                    }}
+                    transition={{
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{
+                      zIndex: 10
+                    }}
+                  >
                     <motion.div
                       className="absolute inset-0 overflow-hidden rounded-[inherit]"
                       layout
@@ -275,8 +305,39 @@ const InteractiveCards = () => {
               })}
             </AnimatePresence>
           </div>
+        </div>
+        {/* Scroll dots indicator for mobile */}
+        <div className="flex justify-center gap-2 mt-4">
+          {cardsData.map((_, index) => {
+            const dotPosition = (index / (cardsData.length - 1)) * 100;
+            const isActive = Math.abs(scrollPosition - dotPosition) < 15;
+            
+            return (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  isActive 
+                    ? 'bg-[#800020] w-6' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                onClick={() => {
+                  if (scrollRef.current) {
+                    const scrollWidth = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+                    const targetScroll = (dotPosition / 100) * scrollWidth;
+                    scrollRef.current.scrollTo({
+                      left: targetScroll,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                aria-label={`Aller à la carte ${index + 1}`}
+              />
+            );
+          })}
+        </div>
+      </div>
         ) : (
-          // Desktop: Original layout
+          // Desktop: Horizontal layout with all 5 cards visible
           <motion.div 
             className="flex gap-4 items-center justify-center"
             layout

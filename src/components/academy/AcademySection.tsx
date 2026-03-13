@@ -29,15 +29,24 @@ const AcademySection = () => {
     containScroll: false,
     dragFree: false
   });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Fonction pour naviguer avec scroll vers le haut
+  const handleNavigateWithScroll = (link: string) => {
+    window.scrollTo(0, 0);
+    navigate(link);
+  };
 
   // Auto-play pour mobile uniquement
   useEffect(() => {
     if (!emblaApi) return;
 
     // Détecter si on est sur mobile
-    const isMobile = window.innerWidth < 768;
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
     
-    if (!isMobile) return; // Pas d'auto-play sur desktop
+    if (!mobile) return; // Pas d'auto-play sur desktop
 
     let autoplayTimer: NodeJS.Timeout;
 
@@ -53,6 +62,32 @@ const AcademySection = () => {
       if (autoplayTimer) clearTimeout(autoplayTimer);
     };
   }, [emblaApi]);
+
+  // Track selected slide for dots
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on('select', onSelect);
+    onSelect(); // Set initial selected index
+
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi]);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Données des 4 cartes du carrousel
   const carouselItems = [
@@ -88,6 +123,12 @@ const AcademySection = () => {
 
   const scrollPrev = () => emblaApi && emblaApi.scrollPrev();
   const scrollNext = () => emblaApi && emblaApi.scrollNext();
+
+  const scrollTo = (index: number) => {
+    if (emblaApi) {
+      emblaApi.scrollTo(index);
+    }
+  };
 
   const CarouselCard = ({ item, isDesktop = false }: { item: any; isDesktop?: boolean }) => {
     return (
@@ -180,7 +221,7 @@ const AcademySection = () => {
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => navigate(item.link)}
+                    onClick={() => handleNavigateWithScroll(item.link)}
                   >
                     En savoir plus
                   </button>
@@ -255,7 +296,7 @@ const AcademySection = () => {
                     }}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => navigate(item.link)}
+                    onClick={() => handleNavigateWithScroll(item.link)}
                   >
                     En savoir plus
                   </button>
@@ -390,6 +431,21 @@ const AcademySection = () => {
                 <CarouselCard key={item.id} item={item} isDesktop={false} />
               ))}
             </div>
+          </div>
+          {/* Scroll dots indicator for mobile */}
+          <div className="flex justify-center gap-2 mt-4">
+            {carouselItems.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  selectedIndex === index 
+                    ? 'bg-[#800020] w-6' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                onClick={() => scrollTo(index)}
+                aria-label={`Aller à la carte ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

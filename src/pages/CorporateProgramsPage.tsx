@@ -242,24 +242,25 @@ const CorporateProgramsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex justify-center mb-6">
-                <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                  <Building2 className="w-12 h-12 text-white" />
+              <div className="flex justify-center mb-6 md:mb-8">
+                <div className="p-3 md:p-4 bg-white/15 backdrop-blur-lg rounded-2xl border border-white/30 shadow-2xl">
+                  <Building2 className="w-12 h-12 md:w-16 md:h-16 text-white drop-shadow-lg" />
                 </div>
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white leading-tight">
                 Programmes
-                <span className="block text-yellow-300">Corporate</span>
+                <span className="block text-yellow-300 drop-shadow-md">Corporate</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl lg:text-2xl text-white/95 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
                 Des programmes de formation conçus spécifiquement pour les entreprises, 
+                <br className="hidden sm:block" />
                 adaptés à leurs objectifs, leur secteur et leurs équipes.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex justify-center gap-2 sm:gap-4 px-2 sm:px-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="px-4 py-2 sm:px-6 sm:py-3 bg-yellow-400 text-gray-900 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm"
                   onClick={() => handleContactExpert()}
                 >
                   Demander un devis
@@ -267,8 +268,8 @@ const CorporateProgramsPage = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-xl font-semibold shadow-lg hover:bg-white/20 transition-all"
-                  onClick={() => window.open('/catalogue-entreprise.pdf', '_blank')}
+                  className="px-4 py-2 sm:px-6 sm:py-3 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-xl font-semibold shadow-lg hover:bg-white/20 transition-all text-xs sm:text-sm"
+                  onClick={() => window.open('/catalogue-corporate.pdf', '_blank')}
                 >
                   Télécharger le catalogue
                 </motion.button>
@@ -280,7 +281,8 @@ const CorporateProgramsPage = () => {
         {/* Stats Section avec couleurs bordeaux */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+            <div className="md:flex items-center justify-between gap-4 hidden md:flex md:overflow-visible">
               {[
                 { number: "500+", label: "Entreprises formées", icon: Building2 },
                 { number: "15K+", label: "Employés formés", icon: Users },
@@ -289,22 +291,81 @@ const CorporateProgramsPage = () => {
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center"
+                  className="flex items-center gap-3 group"
                 >
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-xl shadow-lg">
-                      <stat.icon className="w-6 h-6 text-white" />
+                  <div className="relative">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                      <stat.icon className="w-5 h-5 text-white" />
                     </div>
+                    {index < 3 && (
+                      <div className="absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-[#b23a4a]/30 to-transparent" />
+                    )}
                   </div>
-                  <div className="text-3xl font-bold text-[#46181e] mb-2">{stat.number}</div>
-                  <div className="text-gray-600">{stat.label}</div>
+                  <div>
+                    <div className="text-lg md:text-xl font-bold text-[#46181e] group-hover:text-[#b23a4a] transition-colors">{stat.number}</div>
+                    <div className="text-xs text-gray-600">{stat.label}</div>
+                  </div>
                 </motion.div>
               ))}
             </div>
+            
+            {/* Version mobile avec défilement */}
+            <div className="flex items-center justify-between gap-2 overflow-x-auto md:hidden">
+              <div className="flex animate-scroll">
+                {[
+                  { number: "500+", label: "Entreprises formées", icon: Building2 },
+                  { number: "15K+", label: "Employés formés", icon: Users },
+                  { number: "98%", label: "Satisfaction", icon: Star },
+                  { number: "35%", label: "ROI moyen", icon: TrendingUp }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex items-center gap-2 group flex-shrink-0 px-2"
+                  >
+                    <div className="relative">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                        <stat.icon className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-[#46181e]">{stat.number}</div>
+                      <div className="text-xs text-gray-600">{stat.label}</div>
+                    </div>
+                  </motion.div>
+                ))}
+                {/* Duplication pour défilement infini sur mobile */}
+                {[
+                  { number: "500+", label: "Entreprises formées", icon: Building2 },
+                  { number: "15K+", label: "Employés formés", icon: Users },
+                  { number: "98%", label: "Satisfaction", icon: Star },
+                  { number: "35%", label: "ROI moyen", icon: TrendingUp }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={`duplicate-${index}`}
+                    className="flex items-center gap-2 group flex-shrink-0 px-2"
+                  >
+                    <div className="relative">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                        <stat.icon className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-[#46181e]">{stat.number}</div>
+                      <div className="text-xs text-gray-600">{stat.label}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
           </div>
         </section>
 
@@ -352,7 +413,7 @@ const CorporateProgramsPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all overflow-hidden group cursor-pointer border border-gray-100"
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer border border-gray-100 hover:border-[#b23a4a]/30"
                   onClick={() => setSelectedProgram(program)}
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -363,7 +424,7 @@ const CorporateProgramsPage = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a]">
+                      <span className="px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a] shadow-lg border border-white/20">
                         {program.category}
                       </span>
                     </div>
@@ -392,17 +453,20 @@ const CorporateProgramsPage = () => {
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {program.highlights.slice(0, 3).map((highlight, idx) => (
-                        <span key={idx} className="px-2 py-1 bg-[#fbe7ea] text-[#b23a4a] rounded-lg text-xs">
+                        <span key={idx} className="px-3 py-1.5 bg-gradient-to-r from-[#fbe7ea] to-[#f5cbd1] text-[#b23a4a] rounded-lg text-xs font-medium shadow-sm border border-[#b23a4a]/10">
                           {highlight}
                         </span>
                       ))}
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-[#b23a4a]">{program.price}</span>
-                      <button className="text-[#b23a4a] hover:text-[#8e2e3b] font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <div className="flex flex-col">
+                        <span className="text-lg font-bold text-[#46181e]">{program.price}</span>
+                        <span className="text-xs text-gray-500">par employé</span>
+                      </div>
+                      <button className="px-4 py-2 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white rounded-lg font-medium shadow-md hover:shadow-lg hover:from-[#8e2e3b] hover:to-[#b23a4a] transition-all duration-300 text-sm flex items-center gap-1 group">
                         En savoir plus
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>

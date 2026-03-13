@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   Play,
@@ -15,10 +15,18 @@ import NotreMissionSection from "@/components/academy/NotreMissionSection";
 import MasterclassSection from "@/components/academy/MasterclassSection";
 
 const AcademyPage = () => {
+  const navigate = useNavigate();
+  
   // Récupérer les données de l'academy
   const academy = subsidiaries.find((s) => s.id === "academy");
 
   const Icon = academy.icon;
+
+  // Fonction pour naviguer avec scroll vers le haut
+  const handleNavigateToTrainers = () => {
+    window.scrollTo(0, 0);
+    navigate("/nos-formateurs");
+  };
 
   // Équipe DM+ Academy
   const teamMembers = [
@@ -113,14 +121,14 @@ const AcademyPage = () => {
           </div>
           
           {/* Bouton Voir plus */}
-          <div className="text-center mt-12">
-            <Link
-              to="/nos-formateurs"
+          <div className="text-center mt-8 mb-8">
+            <button
+              onClick={handleNavigateToTrainers}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-academy to-academy-light text-white font-semibold hover:from-academy/90 hover:to-academy-light/90 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               Voir plus de formateurs
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </section>

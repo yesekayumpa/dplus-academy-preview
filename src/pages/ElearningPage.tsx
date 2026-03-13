@@ -337,12 +337,13 @@ const TypewriterText = ({ text, delay = 0, className = "" }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
-            duration: 0.15,
-            delay: delay + index * 0.06, // Réduit à 60ms entre chaque lettre pour mobile
+            duration: 0.1,
+            delay: delay + index * 0.04, // Plus rapide pour mobile
           }}
           style={{ 
             display: 'inline-block',
-            whiteSpace: 'pre-wrap' // Meilleure gestion des espaces
+            whiteSpace: 'pre-wrap',
+            fontSize: 'inherit' // Hérite la taille du parent
           }}
         >
           {letter === " " ? "\u00A0" : letter}
@@ -681,7 +682,7 @@ const ElearningPage = () => {
         </nav>
 
         {/* Hero Section avec animation lettre par lettre */}
-        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[400px] md:min-h-[450px] lg:min-h-[400px] flex items-center overflow-hidden">
+        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[600px] sm:min-h-[500px] md:min-h-[450px] lg:min-h-[400px] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <img
               src="/assets/E-learning2.jpg"
@@ -719,13 +720,13 @@ const ElearningPage = () => {
             className="absolute bottom-0 left-0 w-48 h-48 bg-red-400/10 rounded-full blur-3xl" 
           />
 
-          <div className="relative container mx-auto px-4 py-8 max-w-7xl z-10">
-            <div className="grid lg:grid-cols-2 gap-6 items-center">
+          <div className="relative container mx-auto px-4 py-16 sm:py-12 md:py-8 max-w-7xl z-10">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-6 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
-                className="space-y-4"
+                className="space-y-6 sm:space-y-4"
               >
                 <motion.div
                   initial={{ opacity: 0, y: -5 }}
@@ -749,23 +750,23 @@ const ElearningPage = () => {
                   </motion.div>
                 </motion.div>
 
-                <div>
-                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-snug sm:leading-tight">
-                    <TypewriterText text="Transformez votre" delay={0.2} />
-                    <span className="block mt-1">
+                <div className="mb-4 sm:mb-4 md:mb-2">
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight">
+                    <TypewriterText text="Transformez votre" delay={0.1} />
+                    <div className="mt-1">
                       <TypewriterText 
-                        text="avenir numérique" 
-                        delay={0.2 + "Transformez votre".length * 0.08 + 0.2}
-                        className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-white"
+                        text=" avenir numérique" 
+                        delay={0.1 + "Transformez votre".length * 0.05 + 0.1}
+                        className="text-white font-bold"
                       />
-                    </span>
+                    </div>
                   </h1>
 
                   <motion.p 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 + "Transformez votre avenir numérique".length * 0.08 + 0.4 }}
-                    className="text-sm text-gray-200 mt-2 max-w-lg"
+                    transition={{ delay: 0.1 + ("Transformez votre avenir".length + " avenir numérique".length) * 0.05 + 0.3 }}
+                    className="text-xs sm:text-sm text-gray-200 mt-2 max-w-lg"
                   >
                     Maîtrisez les compétences les plus recherchées.
                   </motion.p>
@@ -774,21 +775,21 @@ const ElearningPage = () => {
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + "Transformez votre avenir numérique".length * 0.08 + 0.6 }}
-                  className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 max-w-md border border-white/10"
+                  transition={{ delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.4 }}
+                  className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 max-w-full sm:max-w-md border border-white/10"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="text-sm font-bold text-white">50+</div>
+                    <div className="text-sm sm:text-sm font-bold text-white">50+</div>
                     <div className="text-xs text-gray-300">Formations</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-sm font-bold text-white">15k+</div>
+                    <div className="text-sm sm:text-sm font-bold text-white">15k+</div>
                     <div className="text-xs text-gray-300">Apprenants</div>
                   </div>
                   <div className="w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">
-                    <div className="text-sm font-bold text-white">4.8</div>
+                    <div className="text-sm sm:text-sm font-bold text-white">4.8</div>
                     <div className="text-xs text-gray-300">Note</div>
                   </div>
                 </motion.div>
@@ -797,7 +798,7 @@ const ElearningPage = () => {
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + "Transformez votre avenir numérique".length * 0.08 + 0.3 }}
+                transition={{ duration: 0.5, delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.2 }}
                 className="hidden lg:block relative"
               >
                 <div className="relative max-w-sm mx-auto">
@@ -819,7 +820,41 @@ const ElearningPage = () => {
                           <motion.div 
                             initial={{ width: "0%" }}
                             animate={{ width: "78%" }}
-                            transition={{ duration: 1.5, delay: 0.2 + "Transformez votre avenir numérique".length * 0.08 + 0.8, ease: "easeOut" }}
+                            transition={{ duration: 1.5, delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.6, ease: "easeOut" }}
+                            className="h-full bg-gradient-to-r from-red-400 to-red-600 rounded-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Version mobile de l'image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.5 }}
+                className="lg:hidden mt-8 relative"
+              >
+                <div className="relative max-w-xs mx-auto">
+                  <div className="relative rounded-xl overflow-hidden shadow-xl">
+                    <img
+                      src="/assets/E-learning2.jpg"
+                      alt="Student learning"
+                      className="w-full h-auto object-cover"
+                    />
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-lg px-2 py-1.5">
+                        <div className="flex items-center justify-between text-white text-xs mb-1">
+                          <span>Formation en cours</span>
+                          <span className="font-medium">78%</span>
+                        </div>
+                        <div className="h-1 bg-white/30 rounded-full overflow-hidden">
+                          <motion.div 
+                            initial={{ width: "0%" }}
+                            animate={{ width: "78%" }}
+                            transition={{ duration: 1.5, delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.7, ease: "easeOut" }}
                             className="h-full bg-gradient-to-r from-red-400 to-red-600 rounded-full"
                           />
                         </div>

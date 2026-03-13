@@ -49,6 +49,7 @@ interface Masterclass {
   languages: string[];
   prerequisites: string[];
   certificate: boolean;
+  location?: string;
 }
 
 // Données enrichies
@@ -86,6 +87,41 @@ const masterclassData: Masterclass[] = [
     languages: ["Français"],
     prerequisites: ["Connaissances de base en Python", "Notions de SQL"],
     certificate: true
+  },
+  {
+    id: 2,
+    title: "Data Science Présentiel - Medina",
+    subtitle: "Formation en présentiel au cœur de Medina",
+    tagline: "Apprentissage pratique - En présentiel à Medina",
+    description: "Formation pratique en présentiel dans notre centre de Medina. Apprenez les fondamentaux de la data science avec des exercices pratiques et du mentorat direct. Une expérience immersive pour maîtriser rapidement les compétences essentielles.",
+    instructor: {
+      name: "Dr. Marie Sène",
+      title: "Data Science Consultant",
+      image: "/assets/Formateur Afrique.jpg",
+      bio: "Expert en data science avec plus de 10 ans d'expérience en formation et consulting. Spécialisée dans l'apprentissage pratique et l'accompagnement personnalisé pour garantir la réussite des participants.",
+      expertise: ["Python", "Machine Learning", "Statistiques", "Visualisation"],
+      social: {
+        linkedin: "#",
+        twitter: "#"
+      }
+    },
+    date: "2024-04-15",
+    time: "09:00",
+    duration: "6h",
+    status: "upcoming",
+    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    participants: 25,
+    category: "Data",
+    level: "Intermédiaire",
+    rating: 4.8,
+    highlights: ["Python", "Pandas", "Machine Learning", "Projets pratiques"],
+    color: "green",
+    price: 799,
+    format: "Présentiel",
+    languages: ["Français"],
+    prerequisites: ["Base en programmation", "Mathématiques de base"],
+    certificate: true,
+    location: "Medina"
   }
 ];
 
@@ -111,56 +147,7 @@ const MasterclassDetailPage = () => {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showInstructorPopup, setShowInstructorPopup] = useState(false);
   
-  // Bloquer le défilement du body et du conteneur principal quand un popup est ouvert
-  useEffect(() => {
-    const isAnyPopupOpen = showRegistrationForm || showInstructorPopup;
-    const htmlElement = document.documentElement;
-    const bodyElement = document.body;
     
-    if (isAnyPopupOpen) {
-      // Sauvegarder la position de défilement actuelle
-      const scrollY = window.scrollY;
-      
-      // Appliquer les styles pour bloquer le défilement
-      htmlElement.style.overflow = 'hidden';
-      htmlElement.style.position = 'fixed';
-      htmlElement.style.width = '100%';
-      htmlElement.style.top = `-${scrollY}px`;
-      bodyElement.style.overflow = 'hidden';
-      
-      // Stocker la position pour la restaurer plus tard
-      (htmlElement as any).dataset.scrollY = scrollY.toString();
-    } else {
-      // Restaurer la position de défilement
-      const scrollY = (htmlElement as any).dataset.scrollY || '0';
-      
-      htmlElement.style.overflow = '';
-      htmlElement.style.position = '';
-      htmlElement.style.width = '';
-      htmlElement.style.top = '';
-      bodyElement.style.overflow = '';
-      
-      // Restaurer la position de défilement
-      window.scrollTo(0, parseInt(scrollY, 10));
-      
-      // Nettoyer le dataset
-      delete (htmlElement as any).dataset.scrollY;
-    }
-    
-    // Nettoyage quand le composant est démonté
-    return () => {
-      htmlElement.style.overflow = '';
-      htmlElement.style.position = '';
-      htmlElement.style.width = '';
-      htmlElement.style.top = '';
-      bodyElement.style.overflow = '';
-      
-      const scrollY = (htmlElement as any).dataset.scrollY || '0';
-      window.scrollTo(0, parseInt(scrollY, 10));
-      delete (htmlElement as any).dataset.scrollY;
-    };
-  }, [showRegistrationForm, showInstructorPopup]);
-  
   const masterclass = useMemo(() => {
     return masterclassData.find(mc => mc.id === parseInt(id || "0"));
   }, [id]);
@@ -330,322 +317,535 @@ const MasterclassDetailPage = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50">
-        {/* Navigation simplifiée */}
-        <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="flex items-center justify-between h-14">
-              <div className="flex items-center gap-4">
+        {/* Navigation professionnelle - Responsive */}
+        <div className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center gap-3 sm:gap-6">
                 <button 
                   onClick={() => navigate("/masterclasses")}
-                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
+                  className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200 group"
                 >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span className="text-sm font-medium">Retour</span>
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+                  <span className="text-sm font-medium hidden sm:inline">Retour</span>
                 </button>
-                <div className="h-6 w-px bg-gray-300" />
-                <span className="text-sm text-gray-500">Toutes les formations</span>
+                <div className="hidden sm:block h-6 w-px bg-gray-200" />
+                <nav className="hidden sm:flex items-center gap-2">
+                  <span className="text-sm text-gray-500">Formations</span>
+                  <ChevronRight className="w-3 h-3 text-gray-400" />
+                  <span className="text-sm font-medium text-gray-900">{masterclass.category}</span>
+                </nav>
               </div>
-              <span className="text-sm text-gray-500 truncate max-w-xs">{masterclass.title}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Contenu principal */}
-        <div className="container mx-auto px-4 max-w-6xl py-8">
-          {/* Bouton Retour en haut du contenu */}
-          <div className="flex justify-start mb-6">
-            <button 
-              onClick={() => navigate("/masterclasses")}
-              className="flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Retour aux formations
-            </button>
-          </div>
-
-          {/* Fil d'Ariane */}
-          <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-            <span>Accueil</span>
-            <ChevronRight className="w-3 h-3" />
-            <span>Formations</span>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-gray-900 font-medium">{masterclass.category}</span>
-          </div>
-
-          {/* Layout en 2 colonnes */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Colonne principale - 2/3 */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Carte principale de la formation */}
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                {/* Image */}
-                <div className="relative h-64 md:h-80">
-                  <img
-                    src={masterclass.thumbnail}
-                    alt={masterclass.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
-                  {/* Badges */}
-                  <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border}`}>
-                      {masterclass.category}
-                    </span>
-                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border}`}>
-                      {masterclass.level}
-                    </span>
-                    {masterclass.certificate && (
-                      <span className="px-3 py-1.5 text-xs font-medium rounded-full bg-amber-50 text-amber-700 border border-amber-200">
-                        Certifiante
-                      </span>
-                    )}
-                  </div>
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-full">
+                  <Sparkles className="w-3 h-3 text-amber-600" />
+                  <span className="text-xs font-medium text-amber-700">Populaire</span>
                 </div>
-
-                {/* Contenu de la carte */}
-                <div className="p-6">
-                  <div className="mb-4">
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                      {masterclass.title}
-                    </h1>
-                    <p className="text-lg text-gray-600">
-                      {masterclass.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-6">
-                                        <div className="flex items-center gap-1 text-gray-600">
-                      <Users className="w-4 h-4" />
-                      <span>{masterclass.participants} participants</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-700 leading-relaxed">
-                    {masterclass.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Section formateur - EN PREMIER POSITION APRÈS LA DESCRIPTION */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Votre formateur</h2>
-                
-                <div className="flex items-center gap-6">
-                  {/* Image cliquable */}
-                  <button 
-                    onClick={() => setShowInstructorPopup(true)}
-                    className="relative group flex-shrink-0"
-                  >
-                    <div className="relative">
-                      <img 
-                        src={masterclass.instructor.image} 
-                        alt={masterclass.instructor.name}
-                        className="w-24 h-24 rounded-full object-cover border-3 border-[hsl(var(--academy-primary))] group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Info className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                  </button>
-
-                  {/* Infos formateur */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-xl font-bold text-gray-900">{masterclass.instructor.name}</h3>
-                      <button 
-                        onClick={() => setShowInstructorPopup(true)}
-                        className="p-1.5 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-                        title="Voir la bio complète"
-                      >
-                        <Info className="w-4 h-4 text-gray-600" />
-                      </button>
-                    </div>
-                    <p className="text-[hsl(var(--academy-primary))] font-medium mb-2">{masterclass.instructor.title}</p>
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">{masterclass.instructor.bio}</p>
-                    
-                    {/* Expertise tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {masterclass.instructor.expertise.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
-                          {item}
-                        </span>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500 hidden sm:block">Note</div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm font-bold text-gray-900">{masterclass.rating}</span>
+                    <div className="flex text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className={`w-3 h-3 ${i < Math.floor(masterclass.rating) ? 'fill-current' : 'fill-gray-300'}`} viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              {/* Points clés de la formation */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Ce que vous allez apprendre</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {masterclass.highlights.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle2 className="w-3 h-3 text-green-600" />
+        {/* Contenu principal avec espacement amélioré - Responsive */}
+        <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-8">
+          {/* Layout en 2 colonnes avec meilleur espacement - Mobile first */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
+            {/* Colonne principale - 2/3 */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Carte principale de la formation - Design amélioré */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* Image avec overlay amélioré - Responsive */}
+                <div className="relative h-56 sm:h-64 md:h-80 lg:h-96 group">
+                  <img
+                    src={masterclass.thumbnail}
+                    alt={masterclass.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  
+                  {/* Badges premium - Responsive */}
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2">
+                    <span className={`px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border} backdrop-blur-sm`}>
+                      {masterclass.category}
+                    </span>
+                    <span className={`px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold rounded-full ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border} backdrop-blur-sm`}>
+                      {masterclass.level}
+                    </span>
+                    {masterclass.certificate && (
+                      <span className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold rounded-full bg-amber-500/90 text-white border border-amber-400 backdrop-blur-sm flex items-center gap-1">
+                        <Award className="w-3 h-3" />
+                        <span className="hidden sm:inline">Certifiante</span>
+                        <span className="sm:hidden">Cert.</span>
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Badge de statut - Responsive */}
+                  {isUpcoming && (
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
+                      <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full flex items-center gap-1 backdrop-blur-sm">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" />
+                        <span className="hidden sm:inline">À venir</span>
+                        <span className="sm:hidden">New</span>
                       </div>
-                      <span className="text-sm text-gray-700">{item}</span>
                     </div>
-                  ))}
+                  )}
+                  
+                  {/* Informations sur l'image - Responsive */}
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-white">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm font-medium">{masterclass.participants} participants</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm font-medium">{masterclass.duration}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 self-start sm:self-auto">
+                        <span className="text-xs sm:text-sm font-medium">{masterclass.rating}</span>
+                        <div className="flex text-amber-400">
+                          {[...Array(5)].map((_, i) => (
+                            <svg key={i} className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${i < Math.floor(masterclass.rating) ? 'fill-current' : 'fill-gray-400'}`} viewBox="0 0 20 20">
+                              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Prérequis */}
-              {masterclass.prerequisites && masterclass.prerequisites.length > 0 && (
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Prérequis</h2>
-                  <ul className="space-y-2">
-                    {masterclass.prerequisites.map((item, index) => (
-                      <li key={index} className="flex items-center gap-2 text-gray-600">
-                        <div className="w-1.5 h-1.5 bg-[hsl(var(--academy-primary))] rounded-full" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                {/* Contenu de la carte avec design amélioré - Responsive */}
+                <div className="p-4 sm:p-6 lg:p-8">
+                  <div className="mb-4 sm:mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-3">
+                      <div className="flex-1">
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
+                          {masterclass.title}
+                        </h1>
+                        <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+                          {masterclass.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Tagline - Responsive */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-[hsl(var(--academy-primary))/10] to-[hsl(var(--academy-primary))/5] border border-[hsl(var(--academy-primary))/20] rounded-full mb-3 sm:mb-4">
+                      <Target className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--academy-primary))]" />
+                      <span className="text-xs sm:text-sm font-medium text-[hsl(var(--academy-primary))]">{masterclass.tagline}</span>
+                    </div>
+                  </div>
+
+                  {/* Description avec mise en forme - Responsive */}
+                  <div className="prose prose-gray max-w-none mb-6">
+                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                      {masterclass.description}
+                    </p>
+                  </div>
+                  
+                  {/* Méta-informations en bas - Responsive */}
+                  <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span className="text-xs sm:text-sm">{new Date(masterclass.date).toLocaleDateString('fr-FR', { 
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Video className="w-4 h-4" />
+                          <span className="text-xs sm:text-sm">{masterclass.format}</span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={handleRegister}
+                        className="w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-[hsl(var(--academy-primary))] text-white font-semibold rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[hsl(var(--academy-primary))/20%] hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                      >
+                        {isUpcoming ? "S'inscrire maintenant" : "Accéder au replay"}
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              )}
+              </motion.div>
+
+              {/* Section formateur - Design compact */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="bg-white rounded-xl border border-gray-100 p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    {/* Photo compacte */}
+                    <div className="relative group cursor-pointer" onClick={() => setShowInstructorPopup(true)}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/60%] rounded-full blur-lg opacity-20 group-hover:opacity-30 transition-opacity" />
+                      <img 
+                        src={masterclass.instructor.image} 
+                        alt={masterclass.instructor.name}
+                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-lg group-hover:scale-105 transition-transform duration-300 relative"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 border-2 border-white rounded-full flex items-center justify-center">
+                        <svg className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    {/* Infos compactes */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">{masterclass.instructor.name}</h3>
+                        <div className="px-1.5 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full flex items-center gap-1">
+                          <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="text-xs sm:text-sm text-[hsl(var(--academy-primary))] font-medium">{masterclass.instructor.title}</p>
+                      <div className="flex items-center gap-3 mt-1">
+                        <span className="text-xs text-gray-500">8+ ans d'exp</span>
+                        <span className="text-xs text-gray-500">4.9 ⭐</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Bouton pour voir le profil complet */}
+                  <button 
+                    onClick={() => setShowInstructorPopup(true)}
+                    className="px-3 py-2 text-xs sm:text-sm font-medium text-[hsl(var(--academy-primary))] hover:bg-[hsl(var(--academy-primary))]/5 rounded-lg transition-colors flex items-center gap-2 border border-[hsl(var(--academy-primary))]/20"
+                  >
+                    <Info className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="hidden sm:inline">Voir le profil</span>
+                    <span className="sm:hidden">Profil</span>
+                  </button>
+                </div>
+              </motion.div>
+
+              {/* Points clés de la formation - Design moderne */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                {/* En-tête de section - Responsive */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-b border-green-100">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                      <Target className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-lg sm:text-xl font-bold text-gray-900">Ce que vous allez apprendre</h2>
+                      <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Les compétences clés que vous maîtriserez</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-4 sm:p-6 lg:p-8">
+                  {/* TEXTE CORRIGÉ AVEC ANIMATION */}
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 + ("Transformez votre avenir".length + " avenir numérique".length) * 0.05 + 0.3 }}
+                    className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 max-w-lg"
+                  >
+                    Transformez votre <span className="whitespace-nowrap">avenir numérique</span>
+                  </motion.p>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    {masterclass.highlights.map((item, index) => (
+                      <motion.div 
+                        key={index} 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
+                        className="group flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-xl hover:border-green-200 hover:shadow-md transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-gray-800 font-medium leading-relaxed text-sm sm:text-base">{item}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  {/* Footer de section - Responsive */}
+                  <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                        <Award className="w-3 h-3 sm:w-4 sm:h-4" />
+                        <span>Certification incluse à la fin de la formation</span>
+                      </div>
+                      <button 
+                        onClick={handleRegister}
+                        className="text-xs sm:text-sm font-medium text-green-600 hover:text-green-700 transition-colors flex items-center gap-1"
+                      >
+                        <span className="hidden sm:inline">Voir le programme détaillé</span>
+                        <span className="sm:hidden">Programme</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
-            {/* Colonne latérale - 1/3 */}
-            <div className="lg:col-span-1 space-y-6">
-              {/* Carte d'inscription - PRIX AMÉLIORÉ */}
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                {/* En-tête avec badge promo */}
-                <div className="bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%] px-6 py-4">
-                  <div className="flex items-center justify-between text-white">
+            {/* Colonne latérale - Design premium & Responsive */}
+            <div className="lg:col-span-1 space-y-4 sm:space-y-6">
+              {/* Carte d'inscription - Design premium */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                {/* En-tête avec badge promo amélioré - Responsive */}
+                <div className="bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%] px-4 py-3 sm:px-6 sm:py-4 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+                  <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between text-white gap-2">
                     <div className="flex items-center gap-2">
-                      <Tag className="w-4 h-4" />
-                      <span className="text-sm font-medium">Offre spéciale</span>
-                    </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">-15%</span>
-                  </div>
-                </div>
-
-                {/* Prix */}
-                <div className="p-6 border-b border-gray-100">
-                  <div className="flex items-baseline justify-center gap-2 mb-2">
-                    <span className="text-xl font-bold text-[hsl(var(--academy-primary))]">
-                      {masterclass.price * 655} FCFA
-                    </span>
-                    <span className="text-gray-400 line-through text-lg">
-                      {Math.round(masterclass.price * 655 * 1.15)} FCFA
-                    </span>
-                  </div>
-                  <div className="text-center mb-4">
-                    <span className="text-sm text-gray-500">TTC - Formation certifiante</span>
-                  </div>
-
-                  {/* Boutons d'action */}
-                  <div className="space-y-3">
-                    <button 
-                      onClick={handleRegister}
-                      className="w-full px-4 py-3 bg-[hsl(var(--academy-primary))] text-white font-semibold rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[hsl(var(--academy-primary))/20%]"
-                    >
-                      {isUpcoming ? "S'inscrire maintenant" : "Accéder au replay"}
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    
-                    <button 
-                      onClick={handleDownloadBrochure}
-                      className="w-full px-4 py-3 bg-white text-[hsl(var(--academy-primary))] font-semibold rounded-lg border-2 border-[hsl(var(--academy-primary))] hover:bg-[hsl(var(--academy-primary))]/5 transition-colors flex items-center justify-center gap-2"
-                    >
-                      <Download className="w-4 h-4" />
-                      Télécharger la plaquette
-                    </button>
-                  </div>
-                </div>
-
-                {/* Informations détaillées */}
-                <div className="p-6 space-y-4">
-                  <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                    <Info className="w-4 h-4 text-gray-400" />
-                    Détails de la formation
-                  </h3>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Calendar className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Date</span>
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                        <Tag className="w-3 h-3 sm:w-4 sm:h-4" />
                       </div>
-                      <div className="font-medium text-sm">
+                      <div>
+                        <span className="text-xs sm:text-sm font-semibold">Offre spéciale</span>
+                        <div className="text-xs opacity-90 hidden sm:block">Limitée dans le temps</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg sm:text-2xl font-bold">-15%</div>
+                      <div className="text-xs opacity-90 hidden sm:block">Économisez</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Informations détaillées - Responsive */}
+                <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="text-center">
+                    <h3 className="font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center justify-center gap-2">
+                      <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
+                      <span className="text-sm sm:text-base">Détails de la formation</span>
+                    </h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-blue-100 rounded-lg flex items-center justify-center">
+                          <Calendar className="w-2 h-2 sm:w-3 sm:h-3 text-blue-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Date</span>
+                      </div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">
                         {masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { 
                           day: 'numeric',
-                          month: 'long',
+                          month: 'short',
                           year: 'numeric'
                         })}
                       </div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Clock className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Horaire</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-green-100 rounded-lg flex items-center justify-center">
+                          <Clock className="w-2 h-2 sm:w-3 sm:h-3 text-green-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Horaire</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.time}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.time}</div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Lieu</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-purple-100 rounded-lg flex items-center justify-center">
+                          <MapPin className="w-2 h-2 sm:w-3 sm:h-3 text-purple-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Lieu</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.location}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.location || "En ligne"}</div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Clock className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Durée</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-orange-100 rounded-lg flex items-center justify-center">
+                          <Clock className="w-2 h-2 sm:w-3 sm:h-3 text-orange-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Durée</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.duration}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.duration}</div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Video className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Format</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-red-100 rounded-lg flex items-center justify-center">
+                          <Video className="w-2 h-2 sm:w-3 sm:h-3 text-red-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Format</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.format}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.format}</div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Languages className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Langue</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-indigo-100 rounded-lg flex items-center justify-center">
+                          <Languages className="w-2 h-2 sm:w-3 sm:h-3 text-indigo-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Langue</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.languages[0]}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.languages[0]}</div>
                     </div>
 
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <GraduationCap className="w-3 h-3 text-gray-400" />
-                        <span className="text-xs text-gray-500">Niveau</span>
+                    <div className="group p-2 sm:p-3 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-lg hover:border-[hsl(var(--academy-primary))]/30 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 bg-amber-100 rounded-lg flex items-center justify-center">
+                          <GraduationCap className="w-2 h-2 sm:w-3 sm:h-3 text-amber-600" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">Niveau</span>
                       </div>
-                      <div className="font-medium text-sm">{masterclass.level}</div>
+                      <div className="font-semibold text-xs sm:text-sm text-gray-900">{masterclass.level}</div>
                     </div>
                   </div>
                 </div>
-              </div>
+                
+                {/* Prix et actions - Design premium & Responsive */}
+                <div className="border-t border-gray-100">
+                  <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-white">
+                    {/* Prix avec animation - Responsive */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.5 }}
+                      className="text-center mb-4 sm:mb-6"
+                    >
+                      <div className="flex items-baseline justify-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                        <span className="text-2xl sm:text-3xl font-bold text-[hsl(var(--academy-primary))]">
+                          {masterclass.price * 655} FCFA
+                        </span>
+                        <span className="text-gray-400 line-through text-sm sm:text-lg">
+                          {Math.round(masterclass.price * 655 * 1.15)} FCFA
+                        </span>
+                      </div>
+                      <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 bg-green-100 text-green-700 text-xs sm:text-sm font-medium rounded-full">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse" />
+                        <span className="hidden sm:inline">TTC - Formation certifiante</span>
+                        <span className="sm:hidden">Certifiante</span>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Boutons d'action avec effets - Responsive */}
+                    <div className="space-y-2 sm:space-y-3">
+                      <motion.button 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleRegister}
+                        className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/90%] text-white font-bold rounded-xl hover:from-[hsl(var(--academy-primary))/90%] hover:to-[hsl(var(--academy-primary))/80%] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-[hsl(var(--academy-primary))/25%] hover:shadow-xl group"
+                      >
+                        <span className="text-sm sm:text-base">{isUpcoming ? "S'inscrire maintenant" : "Accéder au replay"}</span>
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                      </motion.button>
+                      
+                      <motion.button 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleDownloadBrochure}
+                        className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-white text-[hsl(var(--academy-primary))] font-bold rounded-xl border-2 border-[hsl(var(--academy-primary))] hover:bg-[hsl(var(--academy-primary))]/5 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group"
+                      >
+                        <Download className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-bounce" />
+                        <span className="text-sm sm:text-base">Télécharger la plaquette</span>
+                      </motion.button>
+                    </div>
+                    
+                    {/* Garanties - Responsive */}
+                    <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+                      <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <ShieldCheck className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                          </div>
+                          <span className="text-xs text-gray-600 hidden sm:block">Satisfait ou remboursé</span>
+                          <span className="text-xs text-gray-600 sm:hidden">Remboursé</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <Award className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                          </div>
+                          <span className="text-xs text-gray-600">Certification</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <Users className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
+                          </div>
+                          <span className="text-xs text-gray-600 hidden sm:block">Support illimité</span>
+                          <span className="text-xs text-gray-600 sm:hidden">Support</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
-              {/* Tags et catégories */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <h3 className="font-semibold text-gray-900 mb-3">Catégories</h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm rounded-lg">
+              {/* Tags et catégories - Design moderne & Responsive */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                    <Tag className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
+                  </div>
+                  <span className="text-sm sm:text-base">Catégories et labels</span>
+                </h3>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 text-xs sm:text-sm font-medium rounded-lg border border-blue-200">
                     {masterclass.category}
                   </span>
-                  <span className="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm rounded-lg">
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-green-50 to-green-100 text-green-700 text-xs sm:text-sm font-medium rounded-lg border border-green-200">
                     {masterclass.level}
                   </span>
                   {masterclass.languages.map((lang, index) => (
-                    <span key={index} className="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm rounded-lg">
+                    <span key={index} className="px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 text-xs sm:text-sm font-medium rounded-lg border border-purple-200">
                       {lang}
                     </span>
                   ))}
+                  {masterclass.certificate && (
+                    <span className="px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 text-xs sm:text-sm font-medium rounded-lg border border-amber-200 flex items-center gap-1">
+                      <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                      <span className="hidden sm:inline">Certifiante</span>
+                      <span className="sm:hidden">Cert.</span>
+                    </span>
+                  )}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -660,7 +860,7 @@ const MasterclassDetailPage = () => {
           )}
         </AnimatePresence>
 
-        {/* Popup formateur - TAILLE RÉDUITE */}
+        {/* Popup formateur - TAILLE RÉDUITE ET POLICE PLUS PETITE */}
         <AnimatePresence>
           {showInstructorPopup && (
             <InstructorPopup
@@ -695,7 +895,7 @@ const NotFoundState = ({ onBack }: { onBack: () => void }) => (
   </Layout>
 );
 
-// Popup formateur - TAILLE RÉDUITE ET RESPONSIVE
+// Popup formateur - TAILLE RÉDUITE ET POLICE PLUS PETITE
 const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }}
@@ -709,74 +909,96 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
-      className="bg-white rounded-xl w-full max-w-md max-h-[85vh] sm:max-h-[80vh] overflow-hidden overscroll-contain mx-auto"
+      className="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto overscroll-contain mx-auto shadow-xl"
       style={{ touchAction: 'pan-y' }}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* En-tête responsive */}
-      <div className="relative h-16 sm:h-20 bg-gradient-to-r from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%]">
+      {/* En-tête avec bouton de fermeture - Plus compact */}
+      <div className="relative bg-gradient-to-r from-gray-50 to-white px-3 sm:px-4 py-3 border-b border-gray-100">
         <button
           onClick={onClose}
-          className="absolute top-2 sm:top-3 right-2 sm:right-3 p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+          className="absolute top-3 right-3 p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
         >
-          <X className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+          <X className="w-4 h-4 text-gray-600" />
         </button>
-      </div>
-
-      {/* Contenu responsive */}
-      <div className="relative px-3 sm:px-5 pb-3 sm:pb-5">
-        {/* Avatar responsive */}
-        <div className="absolute -top-8 sm:-top-10 left-3 sm:left-5">
-          <div className="relative">
-            <img 
-              src={instructor.image} 
-              alt={instructor.name}
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-3 border-white shadow-md"
-            />
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 bg-gradient-to-br from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/80%] rounded-lg flex items-center justify-center">
+            <UserCircle className="w-3.5 h-3.5 text-white" />
+          </div>
+          <div>
+            <h2 className="text-base font-semibold text-gray-900">Formateur</h2>
+            <p className="text-xs text-gray-500">Expert du domaine</p>
           </div>
         </div>
-
-        {/* Contenu avec espacement responsive */}
-        <div className="pt-8 sm:pt-10">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-0.5">{instructor.name}</h3>
-          <p className="text-xs sm:text-sm text-[hsl(var(--academy-primary))] font-medium mb-2 sm:mb-3">{instructor.title}</p>
-          
-          {/* Bio responsive */}
-          <div className="mb-3 sm:mb-4">
-            <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">À propos</h4>
-            <p className="text-xs text-gray-600 leading-relaxed">{instructor.bio}</p>
-          </div>
-
-          {/* Expertise responsive */}
-          <div className="mb-2 sm:mb-3">
-            <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">Expertise</h4>
-            <div className="flex flex-wrap gap-1 sm:gap-1.5">
-              {instructor.expertise.map((item: string, index: number) => (
-                <span key={index} className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 text-gray-600 text-xs rounded-md">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Réseaux sociaux responsive */}
-          {instructor.social && (
-            <div>
-              <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 sm:mb-1.5">Réseaux</h4>
-              <div className="flex items-center gap-1 sm:gap-1.5">
-                {instructor.social.linkedin && (
-                  <a href="#" className="p-1 sm:p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                    <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
-                  </a>
-                )}
-                {instructor.social.twitter && (
-                  <a href="#" className="p-1 sm:p-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                    <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
-                  </a>
-                )}
+      </div>
+      
+      {/* Contenu principal - Plus compact */}
+      <div className="p-4">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          {/* Image plus petite */}
+          <div className="relative group flex-shrink-0 mx-auto sm:mx-0">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/60%] rounded-full blur-md opacity-20" />
+              <img 
+                src={instructor.image} 
+                alt={instructor.name}
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white shadow-md"
+              />
+              {/* Badge de vérification - Plus petit */}
+              <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full flex items-center justify-center">
+                <svg className="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
               </div>
             </div>
-          )}
+          </div>
+
+          {/* Infos formateur - Police réduite */}
+          <div className="flex-1 min-w-0 text-center sm:text-left">
+            <div className="mb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                <h3 className="text-base font-semibold text-gray-900">{instructor.name}</h3>
+                <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-xs rounded-full inline-flex items-center gap-0.5 w-fit mx-auto sm:mx-0">
+                  <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Vérifié</span>
+                </span>
+              </div>
+              <p className="text-sm text-[hsl(var(--academy-primary))] font-medium mb-2">{instructor.title}</p>
+              
+              {/* Bio courte */}
+              <p className="text-xs text-gray-600 leading-relaxed mb-3">{instructor.bio}</p>
+              
+              {/* Statistiques - Plus compactes */}
+              <div className="grid grid-cols-3 gap-2 mb-3">
+                <div className="text-center p-1.5 bg-gray-50 rounded-lg">
+                  <div className="text-sm font-bold text-gray-900">8+</div>
+                  <div className="text-xs text-gray-500">ans</div>
+                </div>
+                <div className="text-center p-1.5 bg-gray-50 rounded-lg">
+                  <div className="text-sm font-bold text-gray-900">500+</div>
+                  <div className="text-xs text-gray-500">étudiants</div>
+                </div>
+                <div className="text-center p-1.5 bg-gray-50 rounded-lg">
+                  <div className="text-sm font-bold text-gray-900">4.9</div>
+                  <div className="text-xs text-gray-500">note</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Expertise tags - Plus petits */}
+            <div>
+              <h4 className="text-xs font-medium text-gray-700 mb-2">Expertise</h4>
+              <div className="flex flex-wrap gap-1">
+                {instructor.expertise.map((item: string, index: number) => (
+                  <span key={index} className="px-2 py-0.5 bg-gradient-to-r from-[hsl(var(--academy-primary))/10] to-[hsl(var(--academy-primary))/5] border border-[hsl(var(--academy-primary))/20] text-[hsl(var(--academy-primary))] text-xs rounded-md">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

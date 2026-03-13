@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Clock, Award, User, Star } from 'lucide-react';
 import { Button } from './button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 export type TrainingFormat = {
@@ -36,9 +36,16 @@ export function TrainingCarousel({
   buttonText = 'En savoir plus',
   onItemClick
 }: TrainingCarouselProps) {
+  const navigate = useNavigate();
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+
+  // Fonction pour naviguer avec scroll vers le haut
+  const handleNavigateWithScroll = (link: string) => {
+    window.scrollTo(0, 0);
+    navigate(link);
+  };
 
   const handleItemClick = (item: TrainingFormat) => {
     setSelectedItemId(item.id);
@@ -133,8 +140,8 @@ export function TrainingCarousel({
                   <p className="text-gray-600 mb-6 flex-grow">{item.description}</p>
                   <div className="mt-auto">
                     {(item.title?.trim()?.toLowerCase() === "masterclass") ? (
-                      <Link 
-                        to="/masterclasses"
+                      <button 
+                        onClick={() => handleNavigateWithScroll("/masterclasses")}
                         className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
@@ -142,10 +149,10 @@ export function TrainingCarousel({
                         }`}
                       >
                         {buttonText}
-                      </Link>
+                      </button>
                     ) : (item.title?.trim()?.toLowerCase() === "e-learning") ? (
-                      <Link 
-                        to="/e-learning"
+                      <button 
+                        onClick={() => handleNavigateWithScroll("/e-learning")}
                         className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
@@ -153,10 +160,10 @@ export function TrainingCarousel({
                         }`}
                       >
                         {buttonText}
-                      </Link>
+                      </button>
                     ) : (item.title?.trim()?.toLowerCase() === "sur mesure") ? (
-                      <Link 
-                        to="/sur-mesure"
+                      <button 
+                        onClick={() => handleNavigateWithScroll("/sur-mesure")}
                         className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
@@ -164,7 +171,7 @@ export function TrainingCarousel({
                         }`}
                       >
                         {buttonText}
-                      </Link>
+                      </button>
                     ) : (
                       <Button 
                         onClick={(e) => {
