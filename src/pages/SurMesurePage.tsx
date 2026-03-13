@@ -203,7 +203,7 @@ const SurMesurePage = () => {
         </div>
 
         {/* Section de recherche */}
-        <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
           <div className="container mx-auto px-4 py-3">
             <div className="flex gap-3">
               <div className="flex-1 relative">
@@ -241,7 +241,7 @@ const SurMesurePage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="h-full border border-gray-200 transition-shadow overflow-hidden">
+                <Card className="h-full border border-gray-200 overflow-hidden">
                   {/* Image du cours */}
                   <div className="h-48 overflow-hidden rounded-t-lg">
                     <img 

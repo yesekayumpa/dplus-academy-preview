@@ -23,7 +23,7 @@ const AcademySection = () => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: false, 
+    loop: true, 
     align: 'start',
     slidesToScroll: 1,
     containScroll: false,
@@ -74,7 +74,7 @@ const AcademySection = () => {
       id: 3,
       title: "Corporate Programs",
       description: "Programmes de formation conçus <br />spécifiquement pour les entreprises, <br />adaptés à leurs objectifs et secteur",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center",
+      image: "/assets/E-learning2.jpg",
       link: "/corporate-programs"
     },
     {
@@ -103,8 +103,8 @@ const AcademySection = () => {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "12px",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            border: "none",
+            boxShadow: isDesktop ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
+            border: isDesktop ? "none" : "1px solid #e5e7eb",
             transition: "all 0.3s ease",
             position: "relative",
             overflow: "hidden"
@@ -133,7 +133,6 @@ const AcademySection = () => {
                     height: "160px", 
                     objectFit: "cover",
                     borderRadius: "8px",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
                     transition: "transform 0.3s ease"
                   }}
                 />
@@ -176,7 +175,6 @@ const AcademySection = () => {
                       transition: "all 0.3s ease",
                       borderRadius: "8px",
                       fontWeight: "600",
-                      boxShadow: "0 4px 12px rgba(229, 62, 62, 0.3)",
                       letterSpacing: "0.5px",
                       textTransform: "uppercase"
                     }}
@@ -211,7 +209,6 @@ const AcademySection = () => {
                     height: "180px", 
                     objectFit: "cover",
                     borderRadius: "8px",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
                     transition: "transform 0.3s ease"
                   }}
                 />
@@ -254,7 +251,6 @@ const AcademySection = () => {
                       transition: "all 0.3s ease",
                       borderRadius: "8px",
                       fontWeight: "600",
-                      boxShadow: "0 4px 12px rgba(229, 62, 62, 0.3)",
                       letterSpacing: "0.5px"
                     }}
                     onMouseEnter={() => setIsHovered(true)}
@@ -482,7 +478,7 @@ const AcademySection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="bg-card p-3 md:p-4 rounded-lg border border-border text-center hover:shadow-lg transition-all min-h-[140px] md:min-h-[160px]"
+                className="bg-card p-3 md:p-4 rounded-lg border border-border text-center hover:transition-all min-h-[140px] md:min-h-[160px]"
               >
                 <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-1 md:mb-2">
                   <div className="flex items-center justify-center w-4 h-4 md:w-6 md:h-6">

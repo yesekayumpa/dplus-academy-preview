@@ -226,7 +226,7 @@ const CorporateProgramsPage = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: `url(/images/Corporate.jpg)`,
+              backgroundImage: `url(/assets/E-learning2.jpg)`,
             }}
           />
           
