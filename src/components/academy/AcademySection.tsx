@@ -335,14 +335,14 @@ const AcademySection = () => {
       title: "Entrepreneuriat",
       icon: <Rocket className="w-6 h-6" />,
       description:
-        "",
+        "Développement de projets entrepreneuriaux et gestion d'entreprise",
       type: "entrepreneurship",
     },
     {
       title: "Soft skills & Leadership",
       icon: <Users className="w-6 h-6" />,
       description:
-        "",
+        "Développement des compétences relationnelles et managériales",
       type: "soft-skills",
     },
   ];
@@ -370,18 +370,18 @@ const AcademySection = () => {
 
   return (
     <div className="space-y-4">
-      {/* Piliers de formation – Version Premium */}
-      <section className="relative py-12 bg-white">
+       {/* Piliers de formation – Version Premium */}
+      <section className="relative py-24">
         {/* Fond subtil */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
         <div className="relative container mx-auto px-4 max-w-6xl">
           {/* Header */}
-          <div className="text-center mb-6 max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
+          <div className="text-center mb-20 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Nos Piliers de Formation
             </h2>
-            <p className="text-sm md:text-base text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-6">
               Une approche structurée pour un apprentissage durable et impactant
             </p>
             <div className="w-20 h-1 rounded-full bg-gradient-to-r from-academy to-academy-light mx-auto" />

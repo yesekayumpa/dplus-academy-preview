@@ -1384,26 +1384,7 @@ const MasterclassesPageContent = () => {
           )}
         </section>
 
-        {/* Section Newsletter */}
-        <section className="bg-gray-50 border-t border-gray-200 mt-2">
-          <div className="container mx-auto px-4 max-w-7xl py-2">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Restez informé des nouvelles formations</h2>
-              <p className="text-gray-600 mb-4">Recevez en avant-première les annonces de nos prochaines masterclasses</p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Votre adresse email"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[hsl(var(--academy-primary))]"
-                />
-                <button className="px-6 py-3 bg-[hsl(var(--academy-primary))] text-white font-medium rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors">
-                  S'inscrire
-                </button>
               </div>
-            </div>
-          </div>
-        </section>
-      </div>
 
       {/* Modals */}
       <AnimatePresence>

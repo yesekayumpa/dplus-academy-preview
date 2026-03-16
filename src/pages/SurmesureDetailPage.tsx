@@ -26,7 +26,8 @@ import {
   Brain,
   Lightbulb,
   BarChart,
-  Layers
+  Layers,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -63,6 +64,7 @@ const SurmesureDetailPage = () => {
   const navigate = useNavigate();
   const [course, setCourse] = useState<Course | null>(null);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [showInstructorModal, setShowInstructorModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -270,6 +272,44 @@ const SurmesureDetailPage = () => {
                 </Card>
               </motion.div>
 
+              {/* Formateur */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.225 }}
+              >
+                <Card className="border border-gray-200 shadow-md bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-md p-1.5">
+                        <User className="w-4 h-4 text-white" />
+                      </div>
+                      <h2 className="text-base font-bold text-[#46181e]">Formateur</h2>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 cursor-pointer hover:scale-105 transition-transform border-2 border-white shadow-md"
+                        onClick={() => setShowInstructorModal(true)}
+                      >
+                        <img 
+                          src="/assets/Formateur Afrique.jpg" 
+                          alt={course.instructor || "Formateur"}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-base text-gray-900">
+                          {course.instructor || "Expert certifié"}
+                        </h3>
+                        <p className="text-xs text-gray-600 mt-1">
+                          {course.title}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
               {/* Compétences */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -455,6 +495,96 @@ const SurmesureDetailPage = () => {
                 onClose={() => setShowRegistrationForm(false)}
                 onSuccess={() => setShowRegistrationForm(false)}
               />
+            </motion.div>
+          </div>
+        )}
+
+        {/* Modal du formateur */}
+        {showInstructorModal && course && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+            >
+              <div className="p-6">
+                {/* Header du modal */}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-gray-900">Informations du formateur</h3>
+                  <button
+                    onClick={() => setShowInstructorModal(false)}
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Contenu du formateur */}
+                <div className="space-y-4">
+                  {/* Photo et nom */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
+                      <img 
+                        src="/assets/Formateur Afrique.jpg" 
+                        alt={course.instructor || "Formateur"}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900">
+                        {course.instructor || "Expert certifié"}
+                      </h4>
+                      <p className="text-sm text-gray-600">
+                        {course.instructorTitle || "Formateur professionnel spécialisé"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Expertise */}
+                  <div>
+                    <h5 className="text-sm font-semibold text-gray-900 mb-2">Domaines d'expertise</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {course.instructorExpertise?.map((skill, index) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {skill}
+                        </Badge>
+                      )) || [
+                        <Badge key="0" variant="secondary" className="text-xs">Expertise métier</Badge>,
+                        <Badge key="1" variant="secondary" className="text-xs">Pédagogie</Badge>,
+                        <Badge key="2" variant="secondary" className="text-xs">Certification</Badge>
+                      ]}
+                    </div>
+                  </div>
+
+                  {/* Biographie */}
+                  <div>
+                    <h5 className="text-sm font-semibold text-gray-900 mb-2">Biographie</h5>
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {course.instructorBio || "Professionnel expérimenté avec une solide expertise dans le domaine. Passionné par la transmission de connaissances et l'accompagnement des apprenants vers l'excellence."}
+                    </p>
+                  </div>
+
+                  {/* Statistiques */}
+                  <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-200">
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-[#d44c5e]">15+</div>
+                      <div className="text-xs text-gray-600">Années d'expérience</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-[#d44c5e]">500+</div>
+                      <div className="text-xs text-gray-600">Apprenants formés</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-[#d44c5e]">4.9</div>
+                      <div className="text-xs text-gray-600">Note moyenne</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         )}

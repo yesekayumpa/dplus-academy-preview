@@ -318,7 +318,7 @@ const MasterclassDetailPage = () => {
     <Layout>
       <div className="min-h-screen bg-gray-50">
         {/* Navigation professionnelle - Responsive */}
-        <div className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div className="bg-white border-b border-gray-100 sticky top-16 z-40 shadow-sm">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center gap-3 sm:gap-6">
@@ -360,9 +360,9 @@ const MasterclassDetailPage = () => {
         </div>
 
         {/* Contenu principal avec espacement amélioré - Responsive */}
-        <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-8">
+        <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-8 pt-20">
           {/* Layout en 2 colonnes avec meilleur espacement - Mobile first */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 pt-16">
             {/* Colonne principale - 2/3 */}
             <div className="lg:col-span-2 space-y-6">
               {/* Carte principale de la formation - Design amélioré */}
@@ -382,7 +382,7 @@ const MasterclassDetailPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   
                   {/* Badges premium - Responsive */}
-                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2">
+                  <div className="absolute top-8 sm:top-10 left-3 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2">
                     <span className={`px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border} backdrop-blur-sm`}>
                       {masterclass.category}
                     </span>
@@ -400,7 +400,7 @@ const MasterclassDetailPage = () => {
                   
                   {/* Badge de statut - Responsive */}
                   {isUpcoming && (
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
+                    <div className="absolute top-8 sm:top-10 right-3 sm:right-4">
                       <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full flex items-center gap-1 backdrop-blur-sm">
                         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" />
                         <span className="hidden sm:inline">À venir</span>
@@ -604,20 +604,11 @@ const MasterclassDetailPage = () => {
                         <Award className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>Certification incluse à la fin de la formation</span>
                       </div>
-                      <button 
-                        onClick={handleRegister}
-                        className="text-xs sm:text-sm font-medium text-green-600 hover:text-green-700 transition-colors flex items-center gap-1"
-                      >
-                        <span className="hidden sm:inline">Voir le programme détaillé</span>
-                        <span className="sm:hidden">Programme</span>
-                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                      </button>
                     </div>
                   </div>
                 </div>
               </motion.div>
             </div>
-
             {/* Colonne latérale - Design premium & Responsive */}
             <div className="lg:col-span-1 space-y-4 sm:space-y-6">
               {/* Carte d'inscription - Design premium */}

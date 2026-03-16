@@ -682,7 +682,7 @@ const ElearningPage = () => {
         </nav>
 
         {/* Hero Section avec animation lettre par lettre */}
-        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[600px] sm:min-h-[500px] md:min-h-[450px] lg:min-h-[400px] flex items-center overflow-hidden">
+        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[400px] sm:min-h-[450px] md:min-h-[450px] lg:min-h-[400px] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <img
               src="/assets/E-learning2.jpg"
@@ -776,7 +776,7 @@ const ElearningPage = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.4 }}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 max-w-full sm:max-w-md border border-white/10"
+                  className="flex flex-row items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 max-w-full sm:max-w-md border border-white/10 overflow-x-auto"
                 >
                   <div className="flex items-center gap-2">
                     <div className="text-sm sm:text-sm font-bold text-white">50+</div>
