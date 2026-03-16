@@ -182,6 +182,21 @@ const CorporateProgramsPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Scroll automatique vers le haut au chargement de la page
+  useEffect(() => {
+    // Forcer le scroll vers le haut immédiatement
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Double garantie pour s'assurer qu'on est bien en haut
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 50);
+  }, []);
+
   const filteredPrograms = corporatePrograms.filter(program => {
     const matchesSearch = program.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          program.description.toLowerCase().includes(searchTerm.toLowerCase());

@@ -72,6 +72,21 @@ const SurMesurePage = () => {
     };
   }, [selectedCourse, showRegistrationForm]);
 
+  // Scroll automatique vers le haut au chargement de la page
+  useEffect(() => {
+    // Forcer le scroll vers le haut immédiatement
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Double garantie pour s'assurer qu'on est bien en haut
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 50);
+  }, []);
+
   const getStatusIcon = (status: Course['status']) => {
     switch (status) {
       case 'disponible': return <CheckCircle className="w-4 h-4" />;
