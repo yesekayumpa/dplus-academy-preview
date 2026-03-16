@@ -726,6 +726,41 @@ const TrainersPage = () => {
             </>
           )}
         </AnimatePresence>
+
+        {/* Section Rejoignez notre équipe */}
+        <section className="py-6 relative overflow-hidden">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url('/images/study-group-african-people_23-2149156428.jpg')",
+            }}
+          />
+
+          {/* Red Bordeaux Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" />
+
+          <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto">
+              <Briefcase className="w-16 h-16 text-white/60 mx-auto mb-6" />
+              <h2 className="font-montserrat font-bold text-4xl md:text-5xl text-white mb-6">
+                Rejoignez notre équipe
+              </h2>
+              <p className="text-xl text-white/80 mb-8">
+                Nous recherchons des talents passionnés pour renforcer nos
+                équipes.
+              </p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-foreground font-semibold hover:bg-white/90 transition-all duration-300 hover:scale-105 shadow-lg"
+              >
+                Voir les offres
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );
