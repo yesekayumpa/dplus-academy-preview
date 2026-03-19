@@ -116,9 +116,36 @@ const BecomeTrainerPage = () => {
 
   return (
     <Layout>
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 15s linear infinite;
+          width: fit-content;
+        }
+        
+        /* Pause l'animation au survol */
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+        
+        /* Responsive : animation seulement sur mobile */
+        @media (min-width: 768px) {
+          .animate-scroll {
+            animation: none;
+          }
+        }
+      `}</style>
       <div className="min-h-screen bg-white">
         {/* Hero Section avec image de fond */}
-        <section className="relative bg-[#800020] min-h-[600px] flex items-center overflow-hidden">
+        <section className="relative bg-[#800020] min-h-[500px] flex items-center overflow-hidden">
           {/* Image de fond avec overlay */}
           <div className="absolute inset-0">
             <img 
@@ -130,12 +157,12 @@ const BecomeTrainerPage = () => {
           </div>
           
           {/* Contenu hero réduit */}
-          <div className="relative container mx-auto px-4 py-16 lg:py-20">
+          <div className="relative container mx-auto px-4 py-8 md:py-16 lg:py-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-3xl"
+              className="max-w-3xl pt-8 md:pt-0"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full mb-4 border border-white/20">
                 <Sparkles className="w-4 h-4 text-white" />
@@ -175,24 +202,27 @@ const BecomeTrainerPage = () => {
                 </motion.a>
               </div>
 
-              {/* Mini stats */}
-              <div className="flex flex-wrap gap-6 mt-8">
-                {stats.map((stat, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className="text-white/80">{stat.icon}</div>
-                    <div>
-                      <div className="text-white font-bold text-sm">{stat.value}</div>
-                      <div className="text-white/60 text-xs">{stat.label}</div>
+              {/* Mini stats - défilement automatique sur mobile */}
+              <div className="relative mt-6 overflow-hidden">
+                <div className="flex gap-3 animate-scroll">
+                  {/* Double les stats pour un défilement infini */}
+                  {[...stats, ...stats].map((stat, index) => (
+                    <div key={index} className="flex items-center gap-1.5 flex-shrink-0">
+                      <div className="text-white/80">{stat.icon}</div>
+                      <div>
+                        <div className="text-white font-bold text-xs">{stat.value}</div>
+                        <div className="text-white/60 text-xs leading-tight">{stat.label}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* Benefits Section - Plus compact */}
-        <section id="benefits" className="py-16 lg:py-20 bg-white">
+        <section id="benefits" className="py-12 lg:py-16 bg-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -231,37 +261,8 @@ const BecomeTrainerPage = () => {
           </div>
         </section>
 
-        {/* Témoignages rapides */}
-        <section className="py-12 bg-gray-50 border-y border-gray-200">
-          <div className="container mx-auto px-4">
-            <div className="flex overflow-x-auto gap-4 pb-2">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="flex-none w-64 bg-white p-4 rounded-xl border border-gray-200"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 bg-[#800020]/10 rounded-full flex items-center justify-center">
-                      <MessageCircle className="w-4 h-4 text-[#800020]" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm">{testimonial.name}</div>
-                      <div className="text-xs text-gray-500">{testimonial.role}</div>
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-600 italic">"{testimonial.quote}"</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Requirements Section - Plus compact */}
-        <section className="py-16 lg:py-20 bg-white">
+        <section className="py-8 lg:py-12 bg-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
