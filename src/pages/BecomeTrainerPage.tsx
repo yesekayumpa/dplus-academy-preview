@@ -30,6 +30,7 @@ const BecomeTrainerPage = () => {
     email: "",
     phone: "",
     expertise: "",
+    otherExpertise: "",
     experience: "",
     motivation: "",
     linkedin: "",
@@ -456,6 +457,30 @@ const BecomeTrainerPage = () => {
                           <ChevronRight className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none rotate-90" />
                         </div>
                       </div>
+                      
+                      {/* Champ "Autre" qui apparaît conditionnellement */}
+                      {formData.expertise === "other" && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="relative"
+                        >
+                          <input
+                            type="text"
+                            name="otherExpertise"
+                            value={formData.otherExpertise}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-3 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:border-[#800020] focus:bg-white focus:outline-none transition-all duration-300 peer"
+                            placeholder=" "
+                          />
+                          <label className="absolute left-3 -top-2 text-xs text-[#800020] bg-white px-1 transition-all duration-300 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-xs peer-placeholder-shown:top-2.5 peer-placeholder-shown:bg-transparent">
+                            Précisez votre domaine *
+                          </label>
+                        </motion.div>
+                      )}
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="relative">
