@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { BarChart, Globe, Rocket, Users } from "lucide-react";
 import outils from "@/assets/woman-sitting-library-with-her-laptop.jpg";
@@ -102,10 +103,35 @@ const cardsData: CardData[] = [
 ];
 
 const InteractiveCards = () => {
+  const navigate = useNavigate();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Fonction pour naviguer vers la page appropriée selon le type de carte
+  const handleNavigate = (type: string) => {
+    switch (type) {
+      case "finance":
+        navigate("/finance-investment");
+        break;
+      case "informatique":
+        navigate("/outils-digitaux-automatisation");
+        break;
+      case "data":
+        navigate("/data-analytics");
+        break;
+      case "entrepreneurship":
+        navigate("/entrepreneuriat");
+        break;
+      case "soft-skills":
+        navigate("/soft-skills-leadership");
+        break;
+      default:
+        // Par défaut, rester sur la page actuelle
+        break;
+    }
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -313,6 +339,7 @@ const InteractiveCards = () => {
                                 transition={{ duration: 0.2, delay: 0.1 }}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                onClick={() => handleNavigate(card.type)}
                               >
                                 Explorer ce domaine
                               </motion.button>
@@ -516,6 +543,7 @@ const InteractiveCards = () => {
                             transition={{ duration: 0.2, delay: 0.1 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => handleNavigate(card.type)}
                           >
                             Explorer ce domaine
                           </motion.button>

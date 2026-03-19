@@ -14,6 +14,12 @@ import SurMesurePage from "./pages/SurMesurePage";
 import SurmesureDetailPage from "./pages/SurmesureDetailPage";
 import CorporateProgramsPage from "./pages/CorporateProgramsPage";
 import TrainersPage from "./pages/TrainersPage";
+import BecomeTrainerPage from "./pages/BecomeTrainerPage";
+import FinanceInvestmentPage from "./pages/FinanceInvestmentPage";
+import DigitalToolsAutomationPage from "./pages/DigitalToolsAutomationPage";
+import DataAnalyticsPage from "./pages/DataAnalyticsPage";
+import EntrepreneurshipPage from "./pages/EntrepreneurshipPage";
+import SoftSkillsLeadershipPage from "./pages/SoftSkillsLeadershipPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +34,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/nous-contacter" element={<ContactPage />} />
+          <Route path="/devenir-formateur" element={<BecomeTrainerPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/masterclasses" element={<MasterclassesPage />} />
           <Route path="/masterclass/:id" element={<MasterclassDetailPage />} />
@@ -37,6 +44,11 @@ const App = () => (
           <Route path="/sur-mesure" element={<SurMesurePage />} />
           <Route path="/sur-mesure/:id" element={<SurmesureDetailPage />} />
           <Route path="/nos-formateurs" element={<TrainersPage />} />
+          <Route path="/finance-investment" element={<FinanceInvestmentPage />} />
+          <Route path="/outils-digitaux-automatisation" element={<DigitalToolsAutomationPage />} />
+          <Route path="/data-analytics" element={<DataAnalyticsPage />} />
+          <Route path="/entrepreneuriat" element={<EntrepreneurshipPage />} />
+          <Route path="/soft-skills-leadership" element={<SoftSkillsLeadershipPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

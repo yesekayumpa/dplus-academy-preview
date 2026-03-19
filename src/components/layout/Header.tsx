@@ -199,7 +199,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <Link
-              to="/contact"
+              to="/devenir-formateur"
               className="px-6 py-3 rounded-3xl transition-all duration-300 bg-gradient-to-tr from-primary to-primary-light text-white"
             >
               Devenir formateur
@@ -345,8 +345,14 @@ const Header = () => {
                   </div>
                 ))}
                 <Link
+                  to="/devenir-formateur"
+                  className="block w-full px-4 py-3 rounded-xl bg-gradient-to-tr from-primary to-primary-light text-white text-center font-semibold mt-4"
+                >
+                  Devenir formateur
+                </Link>
+                <Link
                   to="/nous-contacter"
-                  className="block w-full px-4 py-3 rounded-xl bg-primary text-primary-foreground text-center font-semibold mt-4"
+                  className="block w-full px-4 py-3 rounded-xl bg-white text-primary border border-primary text-center font-semibold mt-2"
                 >
                   Nous contacter
                 </Link>

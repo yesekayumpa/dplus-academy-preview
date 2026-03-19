@@ -16,7 +16,7 @@ const academyItems = [
   { id: 2, name: "Nos formations", slug: "about" },
   { id: 3, name: "Voir les masterclass", slug: "trainings" },
   { id: 4, name: "Nos formateurs", slug: "blog" },
-  { id: 5, name: "Devenir formateur", slug: "contact" },
+  { id: 5, name: "Devenir formateur", slug: "devenir-formateur" },
 ];
 
 const Footer = () => {

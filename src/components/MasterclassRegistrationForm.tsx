@@ -451,13 +451,13 @@ const LevelCard = ({
         <RadioGroup
           onValueChange={onChange}
           value={value}
-          className="grid grid-cols-2 gap-2 sm:gap-3"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3"
         >
           {options.map((option) => (
             <div
               key={option.value}
               className={`
-                relative flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border-2 transition-all cursor-pointer
+                relative flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border-2 transition-all cursor-pointer min-w-0
                 ${
                   value === option.value
                     ? `${theme.border} ${theme.bgLight}`
@@ -472,7 +472,7 @@ const LevelCard = ({
               />
               <Label
                 htmlFor={`${title}-${option.value}`}
-                className="text-xs sm:text-sm font-medium cursor-pointer flex-1"
+                className="text-xs sm:text-sm font-medium cursor-pointer flex-1 whitespace-nowrap"
               >
                 {option.label}
               </Label>
@@ -510,7 +510,7 @@ const LevelsGrid = ({ form, theme }) => {
   ];
 
       return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 px-1">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 sm:gap-4 px-1">
       <LevelCard
         title="Programmation"
         icon={Code}
@@ -1080,14 +1080,14 @@ const MasterclassRegistrationForm = () => {
           {/* Tabs premium */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
             <TabsList
-              className={`grid grid-cols-4 p-1 bg-white/80 backdrop-blur-sm border ${theme.border} rounded-2xl gap-1`}
+              className={`flex p-1 bg-white/80 backdrop-blur-sm border ${theme.border} rounded-2xl gap-1 overflow-x-auto`}
             >
               {tabs.map((tab, index) => (
                 <TabsTrigger
                   key={tab.value}
                   value={tab.value}
                   className={`
-                    relative overflow-hidden text-xs sm:text-sm py-2.5 sm:py-3 transition-all duration-300
+                    relative overflow-hidden text-xs sm:text-sm py-2.5 sm:py-3 px-3 sm:px-4 transition-all duration-300 whitespace-nowrap
                     data-[state=active]:bg-gradient-to-r data-[state=active]:${theme.from} data-[state=active]:${theme.to}
                     data-[state=active]:text-white
                   `}
@@ -1105,8 +1105,8 @@ const MasterclassRegistrationForm = () => {
                     />
                   )}
                   <span className="relative flex items-center justify-center gap-1 sm:gap-2">
-                    <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    <span className="hidden xs:inline sm:inline">{tab.label}</span>
+                    <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium truncate">{tab.label}</span>
                   </span>
                 </TabsTrigger>
               ))}
