@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import Timer from "@/components/ui/timer-clocking";
 import { cn } from '@/lib/utils';
 
 const SalesFunnelHeader = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   
@@ -85,16 +84,13 @@ const SalesFunnelHeader = () => {
           <div className="flex items-center">
               <div className="flex items-center">
                 <div className="ml-2 -mt-1 -mb-1">
-                  <button 
-                    onClick={() => navigate('/e-learning')}
-                    className="hover:opacity-80 transition-opacity duration-200"
-                  >
+                  <Link to="/e-learning" className="hover:opacity-80 transition-opacity duration-200">
                     <img 
                       src="/Copie de LOGOTYPE [Récupéré]-18.png" 
                       alt="DM+ ACADEMY" 
                       className="h-16 md:h-20 w-auto cursor-pointer"
                     />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
