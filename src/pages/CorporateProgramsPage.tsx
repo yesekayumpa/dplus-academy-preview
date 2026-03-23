@@ -257,21 +257,21 @@ const CorporateProgramsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex justify-center mb-6 md:mb-8">
-                <div className="p-3 md:p-4 bg-white/15 backdrop-blur-lg rounded-2xl border border-white/30 shadow-2xl">
-                  <Building2 className="w-12 h-12 md:w-16 md:h-16 text-white drop-shadow-lg" />
+              <div className="flex justify-center mb-4 md:mb-6">
+                <div className="p-2 md:p-3 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl">
+                  <Building2 className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-lg" />
                 </div>
               </div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white leading-tight">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white leading-tight">
                 Programmes
                 <span className="block text-yellow-300 drop-shadow-md">Corporate</span>
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-white/95 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-white/95 mb-4 md:mb-6 max-w-3xl mx-auto leading-relaxed">
                 Des programmes de formation conçus spécifiquement pour les entreprises, 
                 <br className="hidden sm:block" />
                 adaptés à leurs objectifs, leur secteur et leurs équipes.
               </p>
-              <div className="flex justify-center gap-2 sm:gap-4 px-2 sm:px-4">
+              <div className="flex justify-center gap-2 sm:gap-3 px-2 sm:px-3">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -283,7 +283,7 @@ const CorporateProgramsPage = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 sm:px-6 sm:py-3 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-xl font-semibold shadow-lg hover:bg-white/20 transition-all text-xs sm:text-sm"
+                  className="px-4 py-2 sm:px-6 sm:py-3 bg-white/5 backdrop-blur-md border-2 border-white/20 text-white rounded-xl font-semibold shadow-lg hover:bg-white/15 transition-all text-xs sm:text-sm"
                   onClick={() => window.open('/catalogue-corporate.pdf', '_blank')}
                 >
                   Télécharger le catalogue
@@ -439,7 +439,7 @@ const CorporateProgramsPage = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a] shadow-lg border border-white/20">
+                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a] shadow-lg border border-white/10">
                         {program.category}
                       </span>
                     </div>
@@ -498,7 +498,7 @@ const CorporateProgramsPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4"
               onClick={() => setSelectedProgram(null)}
             >
               <motion.div
@@ -517,12 +517,12 @@ const CorporateProgramsPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   <button
                     onClick={() => setSelectedProgram(null)}
-                    className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
+                    className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
                   <div className="absolute bottom-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a]">
+                    <span className="px-3 py-1 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-[#b23a4a]">
                       {selectedProgram.category}
                     </span>
                   </div>
@@ -610,7 +610,7 @@ const CorporateProgramsPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4"
               onClick={() => setShowContactModal(false)}
             >
               <motion.div
@@ -756,19 +756,9 @@ const CorporateProgramsPage = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 justify-center"
-                  onClick={() => handleContactExpert()}
                 >
                   <MessageCircle className="w-5 h-5" />
                   Contacter un expert
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-xl font-semibold shadow-lg hover:bg-white/20 transition-all flex items-center gap-2 justify-center"
-                  onClick={handleScheduleCall}
-                >
-                  <Phone className="w-5 h-5" />
-                  Planifier un appel
                 </motion.button>
               </div>
             </motion.div>

@@ -22,7 +22,9 @@ import {
   Bot,
   Smartphone,
   Laptop,
-  Database
+  Database,
+  ChevronRight,
+  Sparkles
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { popularCourses, getCoursesByCategory } from "@/data/courses";
@@ -37,7 +39,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "débutant",
     duration: "40 heures",
-    price: 524768, // 800 FCFA * 655,96
+    price: 524768,
     rating: 4.8,
     reviews: 189,
     students: 650,
@@ -73,7 +75,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "intermédiaire",
     duration: "35 heures",
-    price: 459168, // 700 FCFA * 655,96
+    price: 459168,
     rating: 4.7,
     reviews: 156,
     students: 480,
@@ -109,7 +111,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "débutant",
     duration: "30 heures",
-    price: 393576, // 600 FCFA * 655,96
+    price: 393576,
     rating: 4.6,
     reviews: 112,
     students: 380,
@@ -119,7 +121,7 @@ const digitalToolsCourses = [
     tags: ["No-Code", "Bubble", "Webflow", "Automation"],
     objectives: [
       "Utiliser les plateformes no-code",
-      "Créer des applications web",
+      "CrÃ©er des applications web",
       "Automatiser les workflows",
       "Déployer des solutions rapides"
     ],
@@ -145,7 +147,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "intermédiaire",
     duration: "45 heures",
-    price: 655960, // 1000 FCFA * 655,96
+    price: 655960,
     rating: 4.8,
     reviews: 89,
     students: 290,
@@ -181,7 +183,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "avancé",
     duration: "40 heures",
-    price: 590364, // 900 FCFA * 655,96
+    price: 590364,
     rating: 4.7,
     reviews: 78,
     students: 220,
@@ -217,7 +219,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "intermédiaire",
     duration: "25 heures",
-    price: 327980, // 500 FCFA * 655,96
+    price: 327980,
     rating: 4.6,
     reviews: 94,
     students: 310,
@@ -253,7 +255,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "avancé",
     duration: "35 heures",
-    price: 524768, // 800 FCFA * 655,96
+    price: 524768,
     rating: 4.5,
     reviews: 67,
     students: 180,
@@ -290,7 +292,7 @@ const digitalToolsCourses = [
     category: "Outils Digitaux",
     level: "avancé",
     duration: "50 heures",
-    price: 787152, // 1200 FCFA * 655,96
+    price: 787152,
     rating: 4.8,
     reviews: 103,
     students: 250,
@@ -355,19 +357,19 @@ const DigitalToolsAutomationPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "disponible": return "bg-green-100 text-green-800 border-green-200";
-      case "réservation": return "bg-blue-100 text-blue-800 border-blue-200";
-      case "bientôt_disponible": return "bg-orange-100 text-orange-800 border-orange-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "disponible": return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "réservation": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "bientôt_disponible": return "bg-amber-50 text-amber-700 border-amber-200";
+      default: return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "débutant": return "bg-emerald-100 text-emerald-800 border-emerald-200";
-      case "intermédiaire": return "bg-amber-100 text-amber-800 border-amber-200";
-      case "avancé": return "bg-rose-100 text-rose-800 border-rose-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "débutant": return "bg-emerald-50 text-emerald-700";
+      case "intermédiaire": return "bg-amber-50 text-amber-700";
+      case "avancé": return "bg-rose-50 text-rose-700";
+      default: return "bg-gray-50 text-gray-700";
     }
   };
 
@@ -379,46 +381,50 @@ const DigitalToolsAutomationPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
-          <div className="absolute inset-0 bg-black/20"></div>
-          <div className="relative container mx-auto px-4 py-16 lg:py-24">
+      <div className="min-h-screen bg-white">
+        {/* Hero Section avec image de fond */}
+        <section className="relative bg-[#800020] overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: "url('/dmplus-tech.jpg')" }}
+          />
+          <div className="absolute inset-0 bg-[#800020]" />
+          <div className="relative container mx-auto px-4 py-16 lg:py-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto"
+              className="text-center max-w-3xl mx-auto"
             >
-              <div className="flex justify-center mb-6">
-                <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                  <Zap className="w-8 h-8" />
+              <div className="flex justify-center mb-4">
+                <div className="p-2 bg-white/10 rounded-full border border-white/20">
+                  <Zap className="w-5 h-5 text-white" />
                 </div>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold mb-6 font-montserrat">
+              <h1 className="text-3xl lg:text-4xl font-bold mb-3 text-white">
                 Outils Digitaux & Automatisation
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-purple-100 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg mb-6 text-white/80 max-w-2xl mx-auto">
                 Automatisez vos processus et boostez votre productivité avec les outils digitaux modernes
               </p>
               
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.total}</div>
-                  <div className="text-purple-100">Formations</div>
+                  <div className="text-xl font-bold text-white mb-1">{stats.total}</div>
+                  <div className="text-xs text-white/70">Formations</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.available}</div>
-                  <div className="text-purple-100">Disponibles</div>
+                  <div className="text-xl font-bold text-white mb-1">{stats.available}</div>
+                  <div className="text-xs text-white/70">Disponibles</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.students.toLocaleString()}</div>
-                  <div className="text-purple-100">Apprenants</div>
+                  <div className="text-xl font-bold text-white mb-1">{stats.students.toLocaleString()}</div>
+                  <div className="text-xs text-white/70">Apprenants</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.avgRating}</div>
-                  <div className="text-purple-100">Note moyenne</div>
+                  <div className="text-xl font-bold text-white mb-1">{stats.avgRating}</div>
+                  <div className="text-xs text-white/70">Note moyenne</div>
                 </div>
               </div>
             </motion.div>
@@ -426,28 +432,28 @@ const DigitalToolsAutomationPage = () => {
         </section>
 
         {/* Search and Filters */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex flex-col lg:flex-row gap-4 mb-6">
+        <section className="container mx-auto px-4 -mt-6 relative z-10">
+          <div className="bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex flex-col lg:flex-row gap-3">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Rechercher une formation..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:border-[#800020] focus:outline-none transition-colors"
                 />
               </div>
               
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-sm border border-gray-200"
               >
                 <Filter className="w-4 h-4" />
                 Filtres
                 {(selectedLevel !== "all" || selectedStatus !== "all") && (
-                  <span className="bg-purple-500 text-white text-xs px-2 py-1 rounded-full">
+                  <span className="bg-[#800020] text-white text-xs px-1.5 py-0.5 rounded-full">
                     {[
                       selectedLevel !== "all" && selectedLevel,
                       selectedStatus !== "all" && selectedStatus
@@ -459,10 +465,10 @@ const DigitalToolsAutomationPage = () => {
               {(searchTerm || selectedLevel !== "all" || selectedStatus !== "all") && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-2 px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-lg transition-colors text-sm border border-gray-200"
                 >
                   <X className="w-4 h-4" />
-                  Réinitialiser
+                  Reset
                 </button>
               )}
             </div>
@@ -473,12 +479,12 @@ const DigitalToolsAutomationPage = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="border-t pt-6"
+                  transition={{ duration: 0.2 }}
+                  className="border-t border-gray-200 mt-4 pt-4"
                 >
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
                         Niveau
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -486,20 +492,20 @@ const DigitalToolsAutomationPage = () => {
                           <button
                             key={level}
                             onClick={() => setSelectedLevel(level)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${
                               selectedLevel === level
-                                ? "bg-purple-500 text-white border-purple-500"
-                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                                ? "bg-[#800020] text-white border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                             }`}
                           >
-                            {level === "all" ? "Tous les niveaux" : level.charAt(0).toUpperCase() + level.slice(1)}
+                            {level === "all" ? "Tous" : level}
                           </button>
                         ))}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
                         Statut
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -507,15 +513,15 @@ const DigitalToolsAutomationPage = () => {
                           <button
                             key={status}
                             onClick={() => setSelectedStatus(status)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${
                               selectedStatus === status
-                                ? "bg-purple-500 text-white border-purple-500"
-                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                                ? "bg-[#800020] text-white border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                             }`}
                           >
-                            {status === "all" ? "Tous les statuts" : 
-                             status === "disponible" ? "Disponible" :
-                             status === "réservation" ? "Réservation" : "Bientôt disponible"}
+                            {status === "all" ? "Tous" : 
+                             status === "disponible" ? "Dispo" :
+                             status === "réservation" ? "Résa" : "Bientôt"}
                           </button>
                         ))}
                       </div>
@@ -528,119 +534,96 @@ const DigitalToolsAutomationPage = () => {
         </section>
 
         {/* Courses Grid */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''} disponible{filteredCourses.length > 1 ? 's' : ''}
+        <section className="container mx-auto px-4 py-12">
+          <div className="mb-6">
+            <h2 className="text-lg font-medium text-gray-900 mb-1">
+              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''}
             </h2>
-            <p className="text-gray-600">
-              Explorez nos formations en outils digitaux et automatisation
+            <p className="text-sm text-gray-500">
+              {filteredCourses.length === digitalToolsCourses.length 
+                ? "Toutes nos formations en automatisation" 
+                : "Résultats de votre recherche"}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredCourses.map((course, index) => (
               <motion.div
                 key={course.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                transition={{ delay: index * 0.05 }}
+                className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group"
+                onClick={() => navigate(`/formation/${course.id}`)}
               >
-                <div className="relative">
+                <div className="relative h-32 overflow-hidden bg-gray-100">
                   <img 
                     src={course.image} 
                     alt={course.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(course.status)}`}>
+                  <div className="absolute top-2 left-2">
+                    <span className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getStatusColor(course.status)}`}>
                       {course.status === "disponible" ? "Disponible" :
-                       course.status === "réservation" ? "Réservation" : "Bientôt disponible"}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
-                      {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
+                       course.status === "réservation" ? "Réservation" : "Bientôt"}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <course.icon className="w-6 h-6 text-purple-600" />
-                    <h3 className="text-xl font-bold text-gray-900 line-clamp-2">
+                <div className="p-3">
+                  <div className="flex items-start gap-2 mb-2">
+                    <course.icon className="w-4 h-4 text-[#800020] flex-shrink-0 mt-0.5" />
+                    <h3 className="text-sm font-medium text-gray-900 line-clamp-2">
                       {course.title}
                     </h3>
                   </div>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2">
+                  <p className="text-xs text-gray-500 mb-2 line-clamp-2">
                     {course.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {course.tags.slice(0, 3).map((tag) => (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {course.tags.slice(0, 2).map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-lg"
+                        className="px-1.5 py-0.5 bg-gray-50 text-gray-600 text-[10px] rounded border border-gray-200"
                       >
                         {tag}
                       </span>
                     ))}
-                    {course.tags.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-lg">
-                        +{course.tags.length - 3}
+                    {course.tags.length > 2 && (
+                      <span className="px-1.5 py-0.5 bg-gray-50 text-gray-600 text-[10px] rounded border border-gray-200">
+                        +{course.tags.length - 2}
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Clock className="w-4 h-4" />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Users className="w-4 h-4" />
-                      <span>{course.students} apprenants</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Star className="w-4 h-4 text-yellow-500" />
-                      <span>{course.rating} ({course.reviews} avis)</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Award className="w-4 h-4" />
-                      <span>Certificat</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <div className="text-2xl font-bold text-gray-900">
-                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${getLevelColor(course.level)}`}>
+                        {course.level}
+                      </span>
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <Clock className="w-3 h-3" />
+                        <span className="text-[10px]">{course.duration}</span>
                       </div>
-                      {course.price > 0 && (
-                        <div className="text-sm text-gray-500">
-                          {(course.price / 655.96 / 1000).toFixed(1)}k XOF
-                        </div>
-                      )}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-3 h-3 text-amber-400" />
+                      <span className="text-xs font-medium">{course.rating}</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => navigate(`/formation/${course.id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-                    >
-                      Voir détails
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    {course.status === "disponible" && (
-                      <button
-                        className="px-4 py-2 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors"
-                      >
-                        S'inscrire
-                      </button>
-                    )}
+                  <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                      <span className="text-sm font-bold text-gray-900">
+                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 text-[#800020] text-xs font-medium">
+                      Détails
+                      <ChevronRight className="w-3 h-3" />
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -649,18 +632,18 @@ const DigitalToolsAutomationPage = () => {
 
           {filteredCourses.length === 0 && (
             <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
+              <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                <Search className="w-5 h-5 text-gray-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-sm font-medium text-gray-900 mb-1">
                 Aucune formation trouvée
               </h3>
-              <p className="text-gray-600 mb-4">
-                Essayez de modifier vos filtres ou termes de recherche
+              <p className="text-xs text-gray-500 mb-3">
+                Essayez de modifier vos filtres
               </p>
               <button
                 onClick={resetFilters}
-                className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                className="px-4 py-2 bg-[#800020] text-white text-sm rounded-lg hover:bg-[#600018] transition-colors"
               >
                 Réinitialiser les filtres
               </button>
@@ -669,28 +652,25 @@ const DigitalToolsAutomationPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-16">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold mb-4">
+        <section className="bg-gray-50 border-t border-gray-200 py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center">
+              <Sparkles className="w-6 h-6 text-[#800020] mx-auto mb-3" />
+              <h2 className="text-xl font-bold text-gray-900 mb-2">
                 Prêt à automatiser votre travail ?
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto text-purple-100">
-                Rejoignez nos formations et gagnez jusqu'à 10 heures par semaine grâce à l'automatisation
+              <p className="text-sm text-gray-600 mb-4">
+                Rejoignez nos formations et gagnez jusqu'à 10 heures par semaine
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-3 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                <button className="px-5 py-2 bg-[#800020] text-white text-sm rounded-lg hover:bg-[#600018] transition-colors">
                   Contacter un conseiller
                 </button>
-                <button className="px-8 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-400 transition-colors">
+                <button className="px-5 py-2 bg-white text-gray-700 text-sm rounded-lg hover:bg-gray-100 transition-colors border border-gray-200">
                   Télécharger le catalogue
                 </button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </div>

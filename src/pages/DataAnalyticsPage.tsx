@@ -22,7 +22,9 @@ import {
   LineChart,
   Brain,
   Activity,
-  GitBranch
+  GitBranch,
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { popularCourses, getCoursesByCategory } from "@/data/courses";
@@ -427,19 +429,28 @@ const DataAnalyticsPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "disponible": return "bg-green-100 text-green-800 border-green-200";
-      case "réservation": return "bg-blue-100 text-blue-800 border-blue-200";
-      case "bientôt_disponible": return "bg-orange-100 text-orange-800 border-orange-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "disponible": return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "réservation": return "bg-amber-50 text-amber-700 border-amber-200";
+      case "bientôt_disponible": return "bg-blue-50 text-blue-700 border-blue-200";
+      default: return "bg-gray-50 text-gray-700 border-gray-200";
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "disponible": return <CheckCircle className="w-3 h-3" />;
+      case "réservation": return <Calendar className="w-3 h-3" />;
+      case "bientôt_disponible": return <AlertCircle className="w-3 h-3" />;
+      default: return null;
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "débutant": return "bg-emerald-100 text-emerald-800 border-emerald-200";
-      case "intermédiaire": return "bg-amber-100 text-amber-800 border-amber-200";
-      case "avancé": return "bg-rose-100 text-rose-800 border-rose-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "débutant": return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
+      case "avancé": return "bg-rose-50 text-rose-700 border-rose-200";
+      default: return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
 
@@ -451,10 +462,10 @@ const DataAnalyticsPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-700 text-white">
-          <div className="absolute inset-0 bg-black/20"></div>
+      <div className="min-h-screen bg-white">
+        {/* Hero Section - Bordeaux */}
+        <section className="relative bg-[#800020] text-white border-b-4 border-[#600018]">
+          <div className="absolute inset-0 bg-[#600018] opacity-50"></div>
           <div className="relative container mx-auto px-4 py-16 lg:py-24">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -463,35 +474,31 @@ const DataAnalyticsPage = () => {
               className="text-center max-w-4xl mx-auto"
             >
               <div className="flex justify-center mb-6">
-                <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                  <BarChart3 className="w-8 h-8" />
+                <div className="p-4 bg-white/10 rounded-full border-2 border-white/20">
+                  <BarChart3 className="w-10 h-10" />
                 </div>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold mb-6 font-montserrat">
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6 font-montserrat tracking-tight">
                 Data & Analytics
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-emerald-100 max-w-3xl mx-auto">
+              <p className="text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-light">
                 Transformez les données en insights et devenez expert en analyse de données
               </p>
               
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.total}</div>
-                  <div className="text-emerald-100">Formations</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.available}</div>
-                  <div className="text-emerald-100">Disponibles</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.students.toLocaleString()}</div>
-                  <div className="text-emerald-100">Apprenants</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.avgRating}</div>
-                  <div className="text-emerald-100">Note moyenne</div>
-                </div>
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                {[
+                  { value: stats.total, label: "Formations", icon: BookOpen },
+                  { value: stats.available, label: "Disponibles", icon: CheckCircle },
+                  { value: stats.students.toLocaleString(), label: "Apprenants", icon: Users },
+                  { value: stats.avgRating, label: "Note moyenne", icon: Star }
+                ].map((stat, index) => (
+                  <div key={index} className="bg-white/10 p-4 rounded-lg border border-white/20">
+                    <stat.icon className="w-6 h-6 mx-auto mb-2 text-white/80" />
+                    <div className="text-2xl font-bold">{stat.value}</div>
+                    <div className="text-sm text-white/80">{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -499,7 +506,7 @@ const DataAnalyticsPage = () => {
 
         {/* Search and Filters */}
         <section className="container mx-auto px-4 py-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border-2 border-gray-200 p-6">
             <div className="flex flex-col lg:flex-row gap-4 mb-6">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -508,18 +515,18 @@ const DataAnalyticsPage = () => {
                   placeholder="Rechercher une formation..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 focus:border-[#800020] outline-none transition-colors"
                 />
               </div>
               
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-6 py-3 border-2 border-gray-200 hover:border-[#800020] transition-colors"
               >
                 <Filter className="w-4 h-4" />
                 Filtres
                 {(selectedLevel !== "all" || selectedStatus !== "all") && (
-                  <span className="bg-emerald-500 text-white text-xs px-2 py-1 rounded-full">
+                  <span className="bg-[#800020] text-white text-xs px-2 py-1">
                     {[
                       selectedLevel !== "all" && selectedLevel,
                       selectedStatus !== "all" && selectedStatus
@@ -531,7 +538,7 @@ const DataAnalyticsPage = () => {
               {(searchTerm || selectedLevel !== "all" || selectedStatus !== "all") && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-2 px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 border-2 border-red-200 text-red-700 hover:border-red-300 transition-colors"
                 >
                   <X className="w-4 h-4" />
                   Réinitialiser
@@ -546,7 +553,7 @@ const DataAnalyticsPage = () => {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="border-t pt-6"
+                  className="border-t-2 border-gray-200 pt-6"
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -558,10 +565,10 @@ const DataAnalyticsPage = () => {
                           <button
                             key={level}
                             onClick={() => setSelectedLevel(level)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-4 py-2 border-2 transition-colors ${
                               selectedLevel === level
-                                ? "bg-emerald-500 text-white border-emerald-500"
-                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                                ? "bg-[#800020] text-white border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:border-[#800020]"
                             }`}
                           >
                             {level === "all" ? "Tous les niveaux" : level.charAt(0).toUpperCase() + level.slice(1)}
@@ -579,10 +586,10 @@ const DataAnalyticsPage = () => {
                           <button
                             key={status}
                             onClick={() => setSelectedStatus(status)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-4 py-2 border-2 transition-colors ${
                               selectedStatus === status
-                                ? "bg-emerald-500 text-white border-emerald-500"
-                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                                ? "bg-[#800020] text-white border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:border-[#800020]"
                             }`}
                           >
                             {status === "all" ? "Tous les statuts" : 
@@ -601,7 +608,7 @@ const DataAnalyticsPage = () => {
 
         {/* Courses Grid */}
         <section className="container mx-auto px-4 py-8">
-          <div className="mb-8">
+          <div className="mb-8 border-b-2 border-gray-200 pb-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''} disponible{filteredCourses.length > 1 ? 's' : ''}
             </h2>
@@ -617,36 +624,37 @@ const DataAnalyticsPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white border-2 border-gray-200 hover:border-[#800020] transition-colors"
               >
                 <div className="relative">
                   <img 
                     src={course.image} 
                     alt={course.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover border-b-2 border-gray-200"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(course.status)}`}>
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className={`px-3 py-1 text-xs font-medium border-2 flex items-center gap-1 ${getStatusColor(course.status)}`}>
+                      {getStatusIcon(course.status)}
                       {course.status === "disponible" ? "Disponible" :
-                       course.status === "réservation" ? "Réservation" : "Bientôt disponible"}
+                       course.status === "réservation" ? "Réservation" : "Bientôt dispo"}
                     </span>
                   </div>
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
+                    <span className={`px-3 py-1 text-xs font-medium border-2 ${getLevelColor(course.level)}`}>
                       {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <course.icon className="w-6 h-6 text-emerald-600" />
+                  <div className="flex items-start gap-3 mb-4">
+                    <course.icon className="w-6 h-6 text-[#800020] flex-shrink-0 mt-1" />
                     <h3 className="text-xl font-bold text-gray-900 line-clamp-2">
                       {course.title}
                     </h3>
                   </div>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2">
+                  <p className="text-gray-600 mb-4 line-clamp-2 text-sm">
                     {course.description}
                   </p>
 
@@ -654,61 +662,56 @@ const DataAnalyticsPage = () => {
                     {course.tags.slice(0, 3).map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-lg"
+                        className="px-2 py-1 bg-gray-100 text-gray-700 text-xs border border-gray-200"
                       >
                         {tag}
                       </span>
                     ))}
                     {course.tags.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-lg">
+                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs border border-gray-200">
                         +{course.tags.length - 3}
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                  <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
-                      <Clock className="w-4 h-4" />
+                      <Clock className="w-4 h-4 text-[#800020]" />
                       <span>{course.duration}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
-                      <Users className="w-4 h-4" />
-                      <span>{course.students} apprenants</span>
+                      <Users className="w-4 h-4 text-[#800020]" />
+                      <span>{course.students}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
-                      <Star className="w-4 h-4 text-yellow-500" />
-                      <span>{course.rating} ({course.reviews} avis)</span>
+                      <Star className="w-4 h-4 text-amber-500" />
+                      <span>{course.rating} ({course.reviews})</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
-                      <Award className="w-4 h-4" />
+                      <Award className="w-4 h-4 text-[#800020]" />
                       <span>Certificat</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-4 pt-4 border-t-2 border-gray-100">
                     <div>
-                      <div className="text-2xl font-bold text-gray-900">
+                      <div className="text-2xl font-bold text-[#800020]">
                         {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                       </div>
-                      {course.price > 0 && (
-                        <div className="text-sm text-gray-500">
-                          {(course.price / 655.96 / 1000).toFixed(1)}k XOF
-                        </div>
-                      )}
                     </div>
                   </div>
 
                   <div className="flex gap-2">
                     <button
                       onClick={() => navigate(`/formation/${course.id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#800020] text-white hover:bg-[#600018] transition-colors border-2 border-[#800020]"
                     >
                       Voir détails
                       <ArrowRight className="w-4 h-4" />
                     </button>
                     {course.status === "disponible" && (
                       <button
-                        className="px-4 py-2 border border-emerald-600 text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
+                        className="px-4 py-3 border-2 border-[#800020] text-[#800020] hover:bg-[#800020] hover:text-white transition-colors"
                       >
                         S'inscrire
                       </button>
@@ -720,8 +723,8 @@ const DataAnalyticsPage = () => {
           </div>
 
           {filteredCourses.length === 0 && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center py-12 border-2 border-gray-200">
+              <div className="w-16 h-16 bg-gray-100 border-2 border-gray-200 flex items-center justify-center mx-auto mb-4">
                 <Search className="w-8 h-8 text-gray-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -732,7 +735,7 @@ const DataAnalyticsPage = () => {
               </p>
               <button
                 onClick={resetFilters}
-                className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                className="px-6 py-3 bg-[#800020] text-white hover:bg-[#600018] transition-colors border-2 border-[#800020]"
               >
                 Réinitialiser les filtres
               </button>
@@ -741,7 +744,7 @@ const DataAnalyticsPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-16">
+        <section className="bg-[#800020] text-white py-16 border-t-4 border-[#600018]">
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -751,14 +754,14 @@ const DataAnalyticsPage = () => {
               <h2 className="text-3xl font-bold mb-4">
                 Prêt à devenir expert en data ?
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto text-emerald-100">
-                Rejoignez nos formations et développez les compétences les plus recherchées du marché de la data
+              <p className="text-xl mb-8 max-w-2xl mx-auto text-white/80 font-light">
+                Rejoignez nos formations et développez les compétences les plus recherchées du marché
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <button className="px-8 py-3 bg-white text-[#800020] hover:bg-gray-100 transition-colors border-2 border-white font-semibold">
                   Contacter un conseiller
                 </button>
-                <button className="px-8 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-400 transition-colors">
+                <button className="px-8 py-3 bg-transparent text-white hover:bg-white/10 transition-colors border-2 border-white font-semibold">
                   Télécharger le catalogue
                 </button>
               </div>

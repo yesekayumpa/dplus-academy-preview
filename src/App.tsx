@@ -20,6 +20,7 @@ import DigitalToolsAutomationPage from "./pages/DigitalToolsAutomationPage";
 import DataAnalyticsPage from "./pages/DataAnalyticsPage";
 import EntrepreneurshipPage from "./pages/EntrepreneurshipPage";
 import SoftSkillsLeadershipPage from "./pages/SoftSkillsLeadershipPage";
+import SalesFunnelPage from "./pages/SalesFunnelPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,8 @@ const App = () => (
           <Route path="/data-analytics" element={<DataAnalyticsPage />} />
           <Route path="/entrepreneuriat" element={<EntrepreneurshipPage />} />
           <Route path="/soft-skills-leadership" element={<SoftSkillsLeadershipPage />} />
+          <Route path="/tunnel-vente" element={<SalesFunnelPage />} />
+          <Route path="/sales-funnel" element={<SalesFunnelPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

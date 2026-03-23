@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { 
   Users, 
@@ -36,6 +36,11 @@ const BecomeTrainerPage = () => {
     linkedin: "",
     cv: null as File | null
   });
+
+  // Scroll automatique en haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -154,7 +159,7 @@ const BecomeTrainerPage = () => {
               alt="DM+ Tech" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-[#800020] mix-blend-multiply opacity-90" />
+            <div className="absolute inset-0 bg-[#5f4349] mix-blend-multiply opacity-90" />
           </div>
           
           {/* Contenu hero réduit */}
@@ -212,7 +217,7 @@ const BecomeTrainerPage = () => {
                       <div className="text-white/80">{stat.icon}</div>
                       <div>
                         <div className="text-white font-bold text-xs">{stat.value}</div>
-                        <div className="text-white/60 text-xs leading-tight">{stat.label}</div>
+                        <div className="text-white text-xs leading-tight">{stat.label}</div>
                       </div>
                     </div>
                   ))}

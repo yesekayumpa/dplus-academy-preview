@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BookOpen,
@@ -354,6 +355,7 @@ const TypewriterText = ({ text, delay = 0, className = "" }) => {
 };
 
 const ElearningPage = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showFunnels, setShowFunnels] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(courses[0]);
@@ -562,7 +564,7 @@ const ElearningPage = () => {
             
             <button
               onClick={() => {
-                window.open('https://dmplus-tunnel-de-vente-cgpg.vercel.app/', '_blank');
+                navigate('/tunnel-vente');
               }}
               className="px-3 py-1.5 bg-red-700 text-white text-[12px] font-medium rounded-lg hover:bg-red-800 transition-colors shadow-sm flex items-center gap-1"
             >

@@ -50,11 +50,11 @@ const Header = () => {
   }, [location]);
 
   const navItems = [
-    { label: "Masterclass", href: "/masterclasses" },
-    { label: "E-learning", href: "/e-learning" },
-    { label: "Mentored Courses", href: "/sur-mesure" },
-    { label: "Corporate", href: "/corporate-programs" },
-    { label: "Nos formateurs", href: "/nos-formateurs" },
+    { label: "Masterclass", href: "/masterclasses", hasDropdown: false },
+    { label: "E-learning", href: "/e-learning", hasDropdown: false },
+    { label: "Mentored Courses", href: "/sur-mesure", hasDropdown: false },
+    { label: "Corporate", href: "/corporate-programs", hasDropdown: false },
+    { label: "Nos formateurs", href: "/nos-formateurs", hasDropdown: false },
   ];
 
   return (
@@ -73,125 +73,16 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               <div key={item.label} className="relative">
-                {item.hasDropdown ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => {
-                      if (item.label === "Nos formations") {
-                        setIsSubsidiariesOpen(true);
-                      } else if (item.label === "Nos formats pédagogiques") {
-                        setIsFormatsOpen(true);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (item.label === "Nos formations") {
-                        setIsSubsidiariesOpen(false);
-                      } else if (item.label === "Nos formats pédagogiques") {
-                        setIsFormatsOpen(false);
-                      }
-                    }}
-                  >
-                    <button
-                      className="flex items-center gap-1 px-4 py-2 rounded-lg font-medium 
-                      transition-all duration-300 text-foreground hover:bg-muted"
-                    >
-                      {item.label}
-                      <ChevronDown
-                        className={cn(
-                          "w-4 h-4 transition-transform duration-300",
-                          (item.label === "Nos formations" &&
-                            isSubsidiariesOpen) ||
-                            (item.label === "Nos formats pédagogiques" &&
-                              isFormatsOpen)
-                            ? "rotate-180"
-                            : "",
-                        )}
-                      />
-                    </button>
-
-                    <AnimatePresence>
-                      {((item.label === "Nos formations" &&
-                        isSubsidiariesOpen) ||
-                        (item.label === "Nos formats pédagogiques" &&
-                          isFormatsOpen)) && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className={`absolute top-full left-0 mt-2 w-80 ${isScrolled ? "bg-white" : "bg-white/5"} backdrop-blur-md 
-                          rounded-xl shadow-2xl overflow-hidden transition-all duration-200`}
-                        >
-                          <div className="px-2 py-3">
-                            {item.label === "Nos formations"
-                              ? subsidiaries.map((sub) => {
-                                  const Icon = sub.icon;
-                                  return (
-                                    <Link
-                                      key={sub.id}
-                                      to={`/filiale/${sub.slug}`}
-                                      className={`flex items-center gap-3 p-1 rounded-xl 
-                                    hover:bg-white/5 transition-all duration-200 ${isScrolled ? "text-black" : "text-white"}`}
-                                    >
-                                      <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                                        <Icon className="w-5 h-5 8" />
-                                      </div>
-                                      <div>
-                                        <div className="font-medium transition-colors">
-                                          {sub.shortName}
-                                        </div>
-                                        <div className="text-xs line-clamp-1">
-                                          {sub.services[0]}
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  );
-                                })
-                              : formats.map((format) => (
-                                  <Link
-                                    key={format.id}
-                                    to={format.href}
-                                    className={`group flex items-center gap-3 p-3 rounded-xl 
-                                  transition-all duration-300 transform hover:scale-105 hover:shadow-lg
-                                  ${isScrolled ? "text-black hover:bg-primary/10" : "text-white hover:bg-white/10"}`}
-                                  >
-                                    <div
-                                      className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300
-                                    ${isScrolled ? "bg-primary/10 group-hover:bg-primary/20" : "bg-white/10 group-hover:bg-white/20"}`}
-                                    >
-                                      <div className="w-5 h-5 bg-primary rounded transition-all duration-300 group-hover:scale-110"></div>
-                                    </div>
-                                    <div className="flex-1">
-                                      <div className="font-medium transition-colors group-hover:text-primary">
-                                        {format.label}
-                                      </div>
-                                      <div
-                                        className={`text-xs line-clamp-1 transition-opacity duration-300
-                                      ${isScrolled ? "text-gray-600" : "text-white/70"}`}
-                                      >
-                                        {format.description}
-                                      </div>
-                                    </div>
-                                    <div
-                                      className={`w-2 h-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100
-                                    ${isScrolled ? "bg-primary" : "bg-white"}`}
-                                    ></div>
-                                  </Link>
-                                ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className="px-4 py-2 rounded-lg font-medium transition-all duration-300 
-                    text-foreground hover:bg-muted"
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  to={item.href}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 
+                  ${location.pathname === item.href 
+                    ? 'bg-academy/20 text-academy shadow-sm' 
+                    : 'text-foreground hover:bg-gray-100'
+                  }`}
+                >
+                  {item.label}
+                </Link>
               </div>
             ))}
           </div>
@@ -220,17 +111,11 @@ const Header = () => {
           >
             {isMobileMenuOpen ? (
               <X
-                className={cn(
-                  "w-6 h-6",
-                  isScrolled ? "text-foreground" : "text-white",
-                )}
+                className="w-6 h-6 text-black"
               />
             ) : (
               <Menu
-                className={cn(
-                  "w-6 h-6",
-                  isScrolled ? "text-foreground" : "text-white",
-                )}
+                className="w-6 h-6 text-black"
               />
             )}
           </button>
@@ -249,110 +134,30 @@ const Header = () => {
               <div className="p-4 space-y-2">
                 {navItems.map((item) => (
                   <div key={item.label}>
-                    {item.hasDropdown ? (
-                      <div className="space-y-2">
-                        <button
-                          onClick={() => {
-                            if (item.label === "Nos formations") {
-                              setIsSubsidiariesOpen(!isSubsidiariesOpen);
-                            } else if (
-                              item.label === "Nos formats pédagogiques"
-                            ) {
-                              setIsFormatsOpen(!isFormatsOpen);
-                            }
-                          }}
-                          className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
-                        >
-                          {item.label}
-                          <ChevronDown
-                            className={cn(
-                              "w-4 h-4 transition-transform duration-300",
-                              (item.label === "Nos formations" &&
-                                isSubsidiariesOpen) ||
-                                (item.label === "Nos formats pédagogiques" &&
-                                  isFormatsOpen)
-                                ? "rotate-180"
-                                : "",
-                            )}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {((item.label === "Nos formations" &&
-                            isSubsidiariesOpen) ||
-                            (item.label === "Nos formats pédagogiques" &&
-                              isFormatsOpen)) && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="pl-4 space-y-1"
-                            >
-                              {item.label === "Nos formations"
-                                ? subsidiaries.map((sub) => {
-                                    const Icon = sub.icon;
-                                    return (
-                                      <Link
-                                        key={sub.id}
-                                        to={`/filiale/${sub.slug}`}
-                                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors"
-                                      >
-                                        <div
-                                          className={cn(
-                                            "w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br",
-                                            sub.gradientClass,
-                                          )}
-                                        >
-                                          <Icon className="w-4 h-4 text-white" />
-                                        </div>
-                                        <span className="text-sm font-medium">
-                                          {sub.shortName}
-                                        </span>
-                                      </Link>
-                                    );
-                                  })
-                                : formats.map((format) => (
-                                    <Link
-                                      key={format.id}
-                                      to={format.href}
-                                      className="group flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-all duration-300 transform hover:scale-105 hover:shadow-md"
-                                    >
-                                      <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
-                                        <div className="w-4 h-4 bg-primary rounded transition-all duration-300 group-hover:scale-110"></div>
-                                      </div>
-                                      <div className="flex-1">
-                                        <span className="text-sm font-medium group-hover:text-primary transition-colors">
-                                          {format.label}
-                                        </span>
-                                        <div className="text-xs text-muted-foreground group-hover:text-primary/70 transition-colors">
-                                          {format.description}
-                                        </div>
-                                      </div>
-                                      <div className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                                    </Link>
-                                  ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className="block px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    )}
+                    <Link
+                      to={item.href}
+                      className={`block px-4 py-3 rounded-xl transition-colors
+                        ${location.pathname === item.href 
+                          ? 'bg-academy/10 text-academy' 
+                          : 'text-black hover:bg-gray-100'
+                        }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
                   </div>
                 ))}
                 <Link
                   to="/devenir-formateur"
                   className="block w-full px-4 py-3 rounded-xl bg-gradient-to-tr from-primary to-primary-light text-white text-center font-semibold mt-4"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Devenir formateur
                 </Link>
                 <Link
                   to="/nous-contacter"
                   className="block w-full px-4 py-3 rounded-xl bg-white text-primary border border-primary text-center font-semibold mt-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Nous contacter
                 </Link>

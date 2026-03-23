@@ -32,7 +32,7 @@ const NewsletterBanner = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="relative z-50 bg-gradient-to-r from-academy to-academy-light text-white"
+        className="relative z-40 bg-gradient-to-r from-academy to-academy-light text-white"
       >
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
