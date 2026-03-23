@@ -22,7 +22,9 @@ import {
   Lightbulb,
   Users2,
   Building,
-  PieChart
+  PieChart,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { popularCourses, getCoursesByCategory } from "@/data/courses";
@@ -37,7 +39,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "débutant",
     duration: "30 heures",
-    price: 393576, // 600 FCFA * 655,96
+    price: 393576,
     rating: 4.7,
     reviews: 156,
     students: 480,
@@ -73,7 +75,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "intermédiaire",
     duration: "40 heures",
-    price: 590364, // 900 FCFA * 655,96
+    price: 590364,
     rating: 4.8,
     reviews: 89,
     students: 290,
@@ -109,7 +111,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "débutant",
     duration: "35 heures",
-    price: 459168, // 700 FCFA * 655,96
+    price: 459168,
     rating: 4.6,
     reviews: 134,
     students: 420,
@@ -145,7 +147,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "intermédiaire",
     duration: "30 heures",
-    price: 459168, // 700 FCFA * 655,96
+    price: 459168,
     rating: 4.7,
     reviews: 112,
     students: 310,
@@ -181,7 +183,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "intermédiaire",
     duration: "35 heures",
-    price: 524768, // 800 FCFA * 655,96
+    price: 524768,
     rating: 4.8,
     reviews: 98,
     students: 280,
@@ -217,7 +219,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "débutant",
     duration: "40 heures",
-    price: 524768, // 800 FCFA * 655,96
+    price: 524768,
     rating: 4.7,
     reviews: 127,
     students: 380,
@@ -253,7 +255,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "intermédiaire",
     duration: "25 heures",
-    price: 393576, // 600 FCFA * 655,96
+    price: 393576,
     rating: 4.6,
     reviews: 78,
     students: 220,
@@ -289,7 +291,7 @@ const entrepreneurshipCourses = [
     category: "Entrepreneuriat",
     level: "avancé",
     duration: "45 heures",
-    price: 655960, // 1000 FCFA * 655,96
+    price: 655960,
     rating: 4.8,
     reviews: 67,
     students: 150,
@@ -354,19 +356,19 @@ const EntrepreneurshipPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "disponible": return "bg-green-100 text-green-800 border-green-200";
-      case "réservation": return "bg-blue-100 text-blue-800 border-blue-200";
-      case "bientôt_disponible": return "bg-orange-100 text-orange-800 border-orange-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "disponible": return "bg-green-50 text-green-700 border-green-200";
+      case "réservation": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "bientôt_disponible": return "bg-orange-50 text-orange-700 border-orange-200";
+      default: return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "débutant": return "bg-emerald-100 text-emerald-800 border-emerald-200";
-      case "intermédiaire": return "bg-amber-100 text-amber-800 border-amber-200";
-      case "avancé": return "bg-rose-100 text-rose-800 border-rose-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "débutant": return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
+      case "avancé": return "bg-rose-50 text-rose-700 border-rose-200";
+      default: return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
 
@@ -378,46 +380,46 @@ const EntrepreneurshipPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-orange-600 to-red-700 text-white">
-          <div className="absolute inset-0 bg-black/20"></div>
-          <div className="relative container mx-auto px-4 py-16 lg:py-24">
+      <div className="min-h-screen bg-white">
+        {/* Hero Section avec image de fond */}
+        <section className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1600&h=600&fit=crop")' }}>
+          <div className="absolute inset-0 bg-orange-900/80"></div>
+          <div className="relative container mx-auto px-4 pt-20 pb-12 lg:pt-24 lg:pb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center max-w-4xl mx-auto"
             >
-              <div className="flex justify-center mb-6">
-                <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                  <Rocket className="w-8 h-8" />
+              <div className="flex justify-center mb-4">
+                <div className="p-2 bg-white/20 rounded-full">
+                  <Rocket className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold mb-6 font-montserrat">
+              <h1 className="text-3xl lg:text-5xl font-bold mb-3 text-white">
                 Entrepreneuriat
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-orange-100 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg mb-6 text-orange-100 max-w-3xl mx-auto">
                 Lancez et développez votre entreprise avec les meilleures stratégies entrepreneuriales
               </p>
               
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.total}</div>
-                  <div className="text-orange-100">Formations</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="text-center bg-white/10 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-white mb-1">{stats.total}</div>
+                  <div className="text-xs text-orange-100">Formations</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.available}</div>
-                  <div className="text-orange-100">Disponibles</div>
+                <div className="text-center bg-white/10 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-white mb-1">{stats.available}</div>
+                  <div className="text-xs text-orange-100">Disponibles</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.students.toLocaleString()}</div>
-                  <div className="text-orange-100">Apprenants</div>
+                <div className="text-center bg-white/10 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-white mb-1">{stats.students.toLocaleString()}</div>
+                  <div className="text-xs text-orange-100">Apprenants</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">{stats.avgRating}</div>
-                  <div className="text-orange-100">Note moyenne</div>
+                <div className="text-center bg-white/10 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-white mb-1">{stats.avgRating}</div>
+                  <div className="text-xs text-orange-100">Note moyenne</div>
                 </div>
               </div>
             </motion.div>
@@ -425,28 +427,28 @@ const EntrepreneurshipPage = () => {
         </section>
 
         {/* Search and Filters */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex flex-col lg:flex-row gap-4 mb-6">
+        <section className="container mx-auto px-4 py-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="flex flex-col lg:flex-row gap-3 mb-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Rechercher une formation..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 />
               </div>
               
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
               >
                 <Filter className="w-4 h-4" />
                 Filtres
                 {(selectedLevel !== "all" || selectedStatus !== "all") && (
-                  <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+                  <span className="bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                     {[
                       selectedLevel !== "all" && selectedLevel,
                       selectedStatus !== "all" && selectedStatus
@@ -458,7 +460,7 @@ const EntrepreneurshipPage = () => {
               {(searchTerm || selectedLevel !== "all" || selectedStatus !== "all") && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-2 px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors"
                 >
                   <X className="w-4 h-4" />
                   Réinitialiser
@@ -473,11 +475,11 @@ const EntrepreneurshipPage = () => {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="border-t pt-6"
+                  className="border-t border-gray-200 pt-4"
                 >
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
                         Niveau
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -485,20 +487,20 @@ const EntrepreneurshipPage = () => {
                           <button
                             key={level}
                             onClick={() => setSelectedLevel(level)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-3 py-1 text-xs rounded-lg border transition-colors ${
                               selectedLevel === level
                                 ? "bg-orange-500 text-white border-orange-500"
                                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                             }`}
                           >
-                            {level === "all" ? "Tous les niveaux" : level.charAt(0).toUpperCase() + level.slice(1)}
+                            {level === "all" ? "Tous" : level.charAt(0).toUpperCase() + level.slice(1)}
                           </button>
                         ))}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-xs font-medium text-gray-700 mb-2">
                         Statut
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -506,15 +508,15 @@ const EntrepreneurshipPage = () => {
                           <button
                             key={status}
                             onClick={() => setSelectedStatus(status)}
-                            className={`px-4 py-2 rounded-lg border transition-colors ${
+                            className={`px-3 py-1 text-xs rounded-lg border transition-colors ${
                               selectedStatus === status
                                 ? "bg-orange-500 text-white border-orange-500"
                                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                             }`}
                           >
-                            {status === "all" ? "Tous les statuts" : 
+                            {status === "all" ? "Tous" : 
                              status === "disponible" ? "Disponible" :
-                             status === "réservation" ? "Réservation" : "Bientôt disponible"}
+                             status === "réservation" ? "Réservation" : "Bientôt"}
                           </button>
                         ))}
                       </div>
@@ -526,99 +528,99 @@ const EntrepreneurshipPage = () => {
           </div>
         </section>
 
-        {/* Courses Grid */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''} disponible{filteredCourses.length > 1 ? 's' : ''}
+        {/* Courses Grid - Cartes réduites */}
+        <section className="container mx-auto px-4 py-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-1">
+              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-xs text-gray-600">
               Explorez nos formations spécialisées en entrepreneuriat
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredCourses.map((course, index) => (
               <motion.div
                 key={course.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                transition={{ delay: index * 0.05 }}
+                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-orange-300 transition-colors"
               >
                 <div className="relative">
                   <img 
                     src={course.image} 
                     alt={course.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-32 object-cover"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(course.status)}`}>
+                  <div className="absolute top-2 left-2">
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(course.status)}`}>
                       {course.status === "disponible" ? "Disponible" :
-                       course.status === "réservation" ? "Réservation" : "Bientôt disponible"}
+                       course.status === "réservation" ? "Réservation" : "Bientôt"}
                     </span>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
+                  <div className="absolute top-2 right-2">
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
                       {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <course.icon className="w-6 h-6 text-orange-600" />
-                    <h3 className="text-xl font-bold text-gray-900 line-clamp-2">
+                <div className="p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <course.icon className="w-4 h-4 text-orange-600" />
+                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
                       {course.title}
                     </h3>
                   </div>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2">
+                  <p className="text-xs text-gray-600 mb-2 line-clamp-2">
                     {course.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {course.tags.slice(0, 3).map((tag) => (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {course.tags.slice(0, 2).map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-1 bg-orange-50 text-orange-700 text-xs rounded-lg"
+                        className="px-1.5 py-0.5 bg-orange-50 text-orange-600 text-[10px] rounded"
                       >
                         {tag}
                       </span>
                     ))}
-                    {course.tags.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-lg">
-                        +{course.tags.length - 3}
+                    {course.tags.length > 2 && (
+                      <span className="px-1.5 py-0.5 bg-gray-50 text-gray-500 text-[10px] rounded">
+                        +{course.tags.length - 2}
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Clock className="w-4 h-4" />
+                  <div className="grid grid-cols-2 gap-2 mb-2 text-[10px]">
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <Clock className="w-3 h-3" />
                       <span>{course.duration}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Users className="w-4 h-4" />
-                      <span>{course.students} apprenants</span>
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <Users className="w-3 h-3" />
+                      <span>{course.students}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Star className="w-4 h-4 text-yellow-500" />
-                      <span>{course.rating} ({course.reviews} avis)</span>
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <Star className="w-3 h-3 text-yellow-500" />
+                      <span>{course.rating} ({course.reviews})</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Award className="w-4 h-4" />
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <Award className="w-3 h-3" />
                       <span>Certificat</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-2">
                     <div>
-                      <div className="text-2xl font-bold text-gray-900">
+                      <div className="text-base font-bold text-gray-900">
                         {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                       </div>
                       {course.price > 0 && (
-                        <div className="text-sm text-gray-500">
+                        <div className="text-[10px] text-gray-500">
                           {(course.price / 655.96 / 1000).toFixed(1)}k XOF
                         </div>
                       )}
@@ -628,14 +630,14 @@ const EntrepreneurshipPage = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => navigate(`/formation/${course.id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 bg-orange-600 text-white text-xs rounded hover:bg-orange-700 transition-colors"
                     >
-                      Voir détails
-                      <ArrowRight className="w-4 h-4" />
+                      Voir
+                      <ArrowRight className="w-3 h-3" />
                     </button>
                     {course.status === "disponible" && (
                       <button
-                        className="px-4 py-2 border border-orange-600 text-orange-600 rounded-lg hover:bg-orange-50 transition-colors"
+                        className="px-3 py-1.5 border border-orange-600 text-orange-600 text-xs rounded hover:bg-orange-50 transition-colors"
                       >
                         S'inscrire
                       </button>
@@ -647,45 +649,112 @@ const EntrepreneurshipPage = () => {
           </div>
 
           {filteredCourses.length === 0 && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
+            <div className="text-center py-8">
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Search className="w-6 h-6 text-gray-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-base font-semibold text-gray-900 mb-1">
                 Aucune formation trouvée
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-xs text-gray-600 mb-3">
                 Essayez de modifier vos filtres ou termes de recherche
               </p>
               <button
                 onClick={resetFilters}
-                className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                className="px-4 py-1.5 bg-orange-600 text-white text-sm rounded hover:bg-orange-700 transition-colors"
               >
-                Réinitialiser les filtres
+                Réinitialiser
               </button>
             </div>
           )}
         </section>
 
-        {/* CTA Section */}
-        <section className="bg-gradient-to-r from-orange-600 to-red-700 text-white py-16">
+        {/* Navigation Élégante */}
+        <section className="bg-gradient-to-r from-orange-50 to-amber-50 border-t border-gray-200 py-12">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center gap-8">
+              {/* Indicateur de progression */}
+              <div className="w-full max-w-2xl">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm font-medium text-gray-600">Progression</span>
+                  <span className="text-sm font-medium text-orange-600">80%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                  <div className="bg-gradient-to-r from-orange-500 to-amber-600 h-2 rounded-full transition-all duration-500" style={{ width: '80%' }}></div>
+                </div>
+              </div>
+
+              {/* Pagination moderne */}
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => navigate('/data-analytics')}
+                  className="group relative px-6 py-3 bg-white border border-gray-300 rounded-2xl text-gray-700 hover:border-orange-400 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                >
+                  <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                  <span className="font-medium">Précédent</span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => navigate('/data-analytics')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-orange-400 hover:text-orange-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    3
+                  </button>
+                  <button 
+                    onClick={() => navigate('/soft-skills-leadership')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-orange-400 hover:text-orange-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    5
+                  </button>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
+                    4
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => navigate('/soft-skills-leadership')}
+                  className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-2xl hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                >
+                  <span className="font-medium">Suivant</span>
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+
+              {/* Indicateur de pages */}
+              <div className="flex items-center gap-6 text-sm text-gray-500">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                  <span>Entrepreneuriat</span>
+                </div>
+                <span className="text-gray-300">|</span>
+                <span>Page 4 sur 5</span>
+                <span className="text-gray-300">|</span>
+                <span>Formation certifiante</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Sans dégradé */}
+        <section className="bg-orange-600 text-white py-10">
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-xl font-bold mb-2">
                 Prêt à lancer votre entreprise ?
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto text-orange-100">
+              <p className="text-sm mb-5 max-w-2xl mx-auto text-orange-100">
                 Rejoignez nos formations et transformez votre idée en entreprise réussie
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-3 bg-white text-orange-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button className="px-5 py-2 bg-white text-orange-600 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors">
                   Contacter un conseiller
                 </button>
-                <button className="px-8 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-400 transition-colors">
+                <button className="px-5 py-2 bg-orange-500 text-white rounded-lg text-sm font-semibold hover:bg-orange-400 transition-colors">
                   Télécharger le catalogue
                 </button>
               </div>

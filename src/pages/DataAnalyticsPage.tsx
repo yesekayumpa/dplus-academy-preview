@@ -24,10 +24,11 @@ import {
   Activity,
   GitBranch,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { popularCourses, getCoursesByCategory } from "@/data/courses";
 
 // Formations relatives à Data & Analytics
 const dataAnalyticsCourses = [
@@ -35,362 +36,181 @@ const dataAnalyticsCourses = [
     id: "data-science-fundamentals",
     title: "Data Science Fundamentals",
     description: "Maîtrisez les fondamentaux de la data science",
-    longDescription: "Formation complète sur les concepts fondamentaux de la data science, incluant la collecte, le nettoyage et l'analyse de données.",
+    longDescription: "Formation complète sur les concepts fondamentaux de la data science.",
     category: "Data & Analytics",
     level: "débutant",
-    duration: "50 heures",
-    price: 655960, // 1000 FCFA * 655,96
+    duration: "50h",
+    price: 655960,
     rating: 4.8,
     reviews: 234,
     students: 720,
     instructor: "Dr. Marie Dubois",
     instructorTitle: "Data Scientist Senior",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
-    tags: ["Data Science", "Python", "Statistiques", "Analyse"],
-    objectives: [
-      "Comprendre les concepts data science",
-      "Maîtriser Python pour l'analyse",
-      "Appliquer les statistiques",
-      "Visualiser les données"
-    ],
-    prerequisites: ["Base en programmation", "Mathématiques"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-15",
+    tags: ["Data Science", "Python", "Statistiques"],
     status: "disponible",
     icon: BarChart3,
-    features: [
-      "Projets pratiques",
-      "Jupyter notebooks inclus",
-      "Certification Data Science",
-      "Support communautaire"
-    ],
-    schedule: "Mardi & Jeudi 18h-20h",
-    nextSession: "2024-04-05"
+    features: ["Projets pratiques", "Certification"]
   },
   {
     id: "python-data-analysis",
     title: "Python pour l'Analyse de Données",
     description: "Devenez expert en analyse avec Python",
-    longDescription: "Formation spécialisée sur l'écosystème Python pour l'analyse de données : Pandas, NumPy, Matplotlib et Scikit-learn.",
+    longDescription: "Formation spécialisée sur l'écosystème Python pour l'analyse.",
     category: "Data & Analytics",
     level: "intermédiaire",
-    duration: "60 heures",
-    price: 787152, // 1200 FCFA * 655,96
+    duration: "60h",
+    price: 787152,
     rating: 4.9,
     reviews: 189,
     students: 580,
     instructor: "Jean-Marc Martin",
     instructorTitle: "Python Data Expert",
     image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=300&fit=crop&crop=center",
-    tags: ["Python", "Pandas", "NumPy", "Matplotlib"],
-    objectives: [
-      "Manipuler des données avec Pandas",
-      "Analyser avec NumPy",
-      "Visualiser avec Matplotlib",
-      "Appliquer le machine learning"
-    ],
-    prerequisites: ["Python de base", "Statistiques"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-10",
+    tags: ["Python", "Pandas", "NumPy"],
     status: "disponible",
     icon: Database,
-    features: [
-      "Bibliothèque complète",
-      "Projets réels",
-      "Certification Python Data",
-      "Mentorat inclus"
-    ],
-    schedule: "Lundi & Mercredi 19h-21h",
-    nextSession: "2024-04-08"
+    features: ["Projets réels", "Certification"]
   },
   {
     id: "r-shiny-masterclass",
     title: "R & Shiny Masterclass",
     description: "Créez des applications web interactives",
-    longDescription: "Formation avancée sur R et Shiny pour développer des applications web interactives et des dashboards dynamiques.",
+    longDescription: "Formation avancée sur R et Shiny pour développer des applications.",
     category: "Data & Analytics",
     level: "intermédiaire",
-    duration: "40 heures",
-    price: 590364, // 900 FCFA * 655,96
+    duration: "40h",
+    price: 590364,
     rating: 4.7,
     reviews: 127,
     students: 450,
     instructor: "Dr. Sophie Laurent",
     instructorTitle: "R & Shiny Expert",
     image: "https://images.unsplash.com/photo-1554224155-6af6314bafcd?w=400&h=300&fit=crop&crop=center",
-    tags: ["R", "Shiny", "Data Visualization", "Web Apps"],
-    objectives: [
-      "Maîtriser le langage R",
-      "Développer des apps Shiny",
-      "Créer des dashboards",
-      "Déployer des applications"
-    ],
-    prerequisites: ["Base en R", "Statistiques"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-12",
+    tags: ["R", "Shiny", "Visualization"],
     status: "disponible",
     icon: PieChart,
-    features: [
-      "Apps Shiny incluses",
-      "Projets interactifs",
-      "Certification R Shiny",
-      "Support expert"
-    ],
-    schedule: "Flexible",
-    nextSession: "2024-04-12"
+    features: ["Apps incluses", "Certification"]
   },
   {
     id: "sql-database-analytics",
     title: "SQL & Database Analytics",
     description: "Maîtrisez SQL pour l'analyse de données",
-    longDescription: "Formation complète sur SQL et l'analyse de bases de données relationnelles et NoSQL.",
+    longDescription: "Formation complète sur SQL et l'analyse de bases de données.",
     category: "Data & Analytics",
     level: "débutant",
-    duration: "35 heures",
-    price: 459168, // 700 FCFA * 655,96
+    duration: "35h",
+    price: 459168,
     rating: 4.6,
     reviews: 156,
     students: 520,
     instructor: "Philippe Bernard",
     instructorTitle: "Database Expert",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center",
-    tags: ["SQL", "Database", "Analytics", "PostgreSQL"],
-    objectives: [
-      "Maîtriser les requêtes SQL",
-      "Optimiser les performances",
-      "Analyser les données",
-      "Gérer les bases de données"
-    ],
-    prerequisites: ["Base en informatique"],
-    isUpdated: false,
-    lastUpdateDate: "2024-02-15",
+    tags: ["SQL", "Database", "Analytics"],
     status: "disponible",
     icon: Database,
-    features: [
-      "Lab SQL inclus",
-      "Projets de base de données",
-      "Certification SQL",
-      "Support technique"
-    ],
-    schedule: "Flexible",
-    nextSession: "2024-04-15"
+    features: ["Lab SQL", "Certification"]
   },
   {
     id: "business-intelligence-powerbi",
-    title: "Business Intelligence avec Power BI",
-    description: "Créez des dashboards interactifs avec Power BI",
-    longDescription: "Formation spécialisée sur Power BI pour créer des tableaux de bord interactifs et des rapports analytiques.",
+    title: "Business Intelligence Power BI",
+    description: "Créez des dashboards interactifs",
+    longDescription: "Formation spécialisée sur Power BI pour créer des tableaux de bord.",
     category: "Data & Analytics",
     level: "intermédiaire",
-    duration: "45 heures",
-    price: 655960, // 1000 FCFA * 655,96
+    duration: "45h",
+    price: 655960,
     rating: 4.8,
     reviews: 178,
     students: 480,
     instructor: "Claire Petit",
     instructorTitle: "BI Consultant",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
-    tags: ["Power BI", "Dashboards", "DAX", "Analytics"],
-    objectives: [
-      "Maîtriser Power BI",
-      "Créer des dashboards",
-      "Utiliser le langage DAX",
-      "Analyser les données métier"
-    ],
-    prerequisites: ["Excel avancé", "Notions de données"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-08",
+    tags: ["Power BI", "Dashboards", "DAX"],
     status: "disponible",
     icon: TrendingUp,
-    features: [
-      "Licence Power BI incluse",
-      "Projets BI réels",
-      "Certification Power BI",
-      "Templates inclus"
-    ],
-    schedule: "2x par semaine",
-    nextSession: "2024-04-18"
+    features: ["Projets BI", "Certification"]
   },
   {
     id: "tableau-data-visualization",
-    title: "Tableau Expert - Data Visualization",
-    description: "Devenez expert en visualisation de données",
-    longDescription: "Formation complète sur Tableau pour créer des visualisations percutantes et des dashboards interactifs.",
+    title: "Tableau Expert",
+    description: "Devenez expert en visualisation",
+    longDescription: "Formation complète sur Tableau pour créer des visualisations.",
     category: "Data & Analytics",
     level: "intermédiaire",
-    duration: "40 heures",
-    price: 590364, // 900 FCFA * 655,96
+    duration: "40h",
+    price: 590364,
     rating: 4.7,
     reviews: 134,
     students: 380,
     instructor: "Alexandre Kofi",
     instructorTitle: "Tableau Expert",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbcc31c?w=400&h=300&fit=crop&crop=center",
-    tags: ["Tableau", "Visualization", "Dashboards", "Storytelling"],
-    objectives: [
-      "Maîtriser Tableau Desktop",
-      "Créer des visualisations",
-      "Développer des dashboards",
-      "Raconter des histoires avec les données"
-    ],
-    prerequisites: ["Notions de données"],
-    isUpdated: false,
-    lastUpdateDate: "2024-02-28",
+    tags: ["Tableau", "Visualization", "Dashboards"],
     status: "disponible",
     icon: LineChart,
-    features: [
-      "Licence Tableau incluse",
-      "Projets de visualisation",
-      "Certification Tableau",
-      "Portfolio inclus"
-    ],
-    schedule: "Flexible",
-    nextSession: "2024-04-20"
+    features: ["Projets inclus", "Certification"]
   },
   {
     id: "machine-learning-fundamentals",
     title: "Machine Learning Fundamentals",
     description: "Maîtrisez les bases du machine learning",
-    longDescription: "Formation intensive sur les concepts fondamentaux du machine learning et les algorithmes les plus courants.",
+    longDescription: "Formation sur les concepts fondamentaux du machine learning.",
     category: "Data & Analytics",
     level: "avancé",
-    duration: "55 heures",
-    price: 852748, // 1300 FCFA * 655,96
+    duration: "55h",
+    price: 852748,
     rating: 4.8,
     reviews: 112,
     students: 290,
     instructor: "Dr. Marie Claire",
     instructorTitle: "ML Engineer",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center",
-    tags: ["Machine Learning", "Scikit-learn", "Python", "AI"],
-    objectives: [
-      "Comprendre les algorithmes ML",
-      "Préparer les données",
-      "Entraîner des modèles",
-      "Évaluer les performances"
-    ],
-    prerequisites: ["Python avancé", "Statistiques", "Mathématiques"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-18",
+    tags: ["ML", "Scikit-learn", "Python"],
     status: "disponible",
     icon: Brain,
-    features: [
-      "GPU Cloud access",
-      "Projets ML réels",
-      "Certification ML",
-      "Mentorat expert"
-    ],
-    schedule: "2x par semaine",
-    nextSession: "2024-04-22"
+    features: ["Projets ML", "Certification"]
   },
   {
     id: "deep-learning-neural-networks",
     title: "Deep Learning & Neural Networks",
     description: "Plongez dans le deep learning",
-    longDescription: "Formation avancée sur les réseaux de neurones, le deep learning et TensorFlow/PyTorch.",
+    longDescription: "Formation avancée sur les réseaux de neurones.",
     category: "Data & Analytics",
     level: "avancé",
-    duration: "70 heures",
-    price: 983940, // 1500 FCFA * 655,96
+    duration: "70h",
+    price: 983940,
     rating: 4.9,
     reviews: 89,
     students: 180,
     instructor: "Thomas Bernard",
     instructorTitle: "Deep Learning Expert",
     image: "https://images.unsplash.com/photo-1512941937309-5ba8c2c101c0?w=400&h=300&fit=crop&crop=center",
-    tags: ["Deep Learning", "Neural Networks", "TensorFlow", "PyTorch"],
-    objectives: [
-      "Comprendre les réseaux de neurones",
-      "Maîtriser TensorFlow/PyTorch",
-      "Développer des modèles DL",
-      "Déployer en production"
-    ],
-    prerequisites: ["Machine Learning", "Python avancé", "Mathématiques"],
-    isUpdated: false,
-    lastUpdateDate: "2024-02-20",
+    tags: ["Deep Learning", "TensorFlow", "PyTorch"],
     status: "réservation",
     icon: Activity,
-    features: [
-      "GPU Cloud inclus",
-      "Projets deep learning",
-      "Certification DL",
-      "Support continu"
-    ],
-    schedule: "Flexible",
-    nextSession: "2024-05-05"
+    features: ["GPU inclus", "Certification"]
   },
   {
     id: "data-engineering-pipelines",
     title: "Data Engineering & Pipelines",
-    description: "Construisez des pipelines de données robustes",
-    longDescription: "Formation sur l'ingénierie des données, les ETL, et la construction de pipelines de données à grande échelle.",
+    description: "Construisez des pipelines de données",
+    longDescription: "Formation sur l'ingénierie des données et les ETL.",
     category: "Data & Analytics",
     level: "avancé",
-    duration: "60 heures",
-    price: 852748, // 1300 FCFA * 655,96
+    duration: "60h",
+    price: 852748,
     rating: 4.7,
     reviews: 78,
     students: 150,
     instructor: "Marc Rousseau",
     instructorTitle: "Data Engineer",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop&crop=center",
-    tags: ["Data Engineering", "ETL", "Apache Spark", "Cloud"],
-    objectives: [
-      "Concevoir des pipelines ETL",
-      "Utiliser Apache Spark",
-      "Optimiser les performances",
-      "Déployer dans le cloud"
-    ],
-    prerequisites: ["Python", "SQL", "Cloud"],
-    isUpdated: true,
-    lastUpdateDate: "2024-03-20",
+    tags: ["Data Engineering", "ETL", "Spark"],
     status: "disponible",
     icon: GitBranch,
-    features: [
-      "Cloud credits inclus",
-      "Projets de data engineering",
-      "Certification Data Engineer",
-      "Accès aux outils professionnels"
-    ],
-    schedule: "2x par semaine",
-    nextSession: "2024-04-25"
-  },
-  {
-    id: "nlp-text-analytics",
-    title: "NLP & Text Analytics",
-    description: "Analysez le texte avec l'IA",
-    longDescription: "Formation spécialisée sur le traitement du langage naturel et l'analyse de textes avec les techniques modernes de NLP.",
-    category: "Data & Analytics",
-    level: "avancé",
-    duration: "50 heures",
-    price: 787152, // 1200 FCFA * 655,96
-    rating: 4.6,
-    reviews: 67,
-    students: 120,
-    instructor: "Dr. Jean-Pierre Ndiaye",
-    instructorTitle: "NLP Expert",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop&crop=center",
-    tags: ["NLP", "Text Analytics", "Transformers", "BERT"],
-    objectives: [
-      "Maîtriser les techniques NLP",
-      "Utiliser les transformers",
-      "Analyser les sentiments",
-      "Construire des chatbots"
-    ],
-    prerequisites: ["Machine Learning", "Python avancé"],
-    isUpdated: false,
-    lastUpdateDate: "2024-02-25",
-    status: "bientôt_disponible",
-    icon: BookOpen,
-    features: [
-      "Modèles pré-entraînés inclus",
-      "Projets NLP réels",
-      "Certification NLP",
-      "Support expert"
-    ],
-    schedule: "Flexible",
-    nextSession: "2024-05-10",
-    availableDate: "2024-05-10"
+    features: ["Cloud credits", "Certification"]
   }
 ];
 
@@ -429,28 +249,19 @@ const DataAnalyticsPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "disponible": return "bg-emerald-50 text-emerald-700 border-emerald-200";
-      case "réservation": return "bg-amber-50 text-amber-700 border-amber-200";
-      case "bientôt_disponible": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "disponible": return "bg-green-50 text-green-700 border-green-200";
+      case "réservation": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "bientôt_disponible": return "bg-orange-50 text-orange-700 border-orange-200";
       default: return "bg-gray-50 text-gray-700 border-gray-200";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "disponible": return <CheckCircle className="w-3 h-3" />;
-      case "réservation": return <Calendar className="w-3 h-3" />;
-      case "bientôt_disponible": return <AlertCircle className="w-3 h-3" />;
-      default: return null;
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "débutant": return "bg-emerald-50 text-emerald-700 border-emerald-200";
-      case "intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
-      case "avancé": return "bg-rose-50 text-rose-700 border-rose-200";
-      default: return "bg-gray-50 text-gray-700 border-gray-200";
+      case "débutant": return "bg-emerald-50 text-emerald-700";
+      case "intermédiaire": return "bg-amber-50 text-amber-700";
+      case "avancé": return "bg-rose-50 text-rose-700";
+      default: return "bg-gray-50 text-gray-700";
     }
   };
 
@@ -463,70 +274,74 @@ const DataAnalyticsPage = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-white">
-        {/* Hero Section - Bordeaux */}
-        <section className="relative bg-[#800020] text-white border-b-4 border-[#600018]">
-          <div className="absolute inset-0 bg-[#600018] opacity-50"></div>
-          <div className="relative container mx-auto px-4 py-16 lg:py-24">
+        {/* Hero Section avec image de fond */}
+        <section className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=600&fit=crop")' }}>
+          <div className="absolute inset-0 bg-[#800020]/85"></div>
+          <div className="relative container mx-auto px-4 pt-20 pb-10 lg:pt-24 lg:pb-14">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto"
+              className="text-center max-w-3xl mx-auto"
             >
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-white/10 rounded-full border-2 border-white/20">
-                  <BarChart3 className="w-10 h-10" />
+              <div className="flex justify-center mb-3">
+                <div className="p-1.5 bg-white/10 rounded-full border border-white/20">
+                  <BarChart3 className="w-5 h-5 text-white" />
                 </div>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold mb-6 font-montserrat tracking-tight">
+              <h1 className="text-2xl lg:text-3xl font-bold mb-2 text-white">
                 Data & Analytics
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-light">
+              <p className="text-sm lg:text-base mb-5 text-white/80 max-w-2xl mx-auto">
                 Transformez les données en insights et devenez expert en analyse de données
               </p>
               
-              {/* Stats Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                {[
-                  { value: stats.total, label: "Formations", icon: BookOpen },
-                  { value: stats.available, label: "Disponibles", icon: CheckCircle },
-                  { value: stats.students.toLocaleString(), label: "Apprenants", icon: Users },
-                  { value: stats.avgRating, label: "Note moyenne", icon: Star }
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white/10 p-4 rounded-lg border border-white/20">
-                    <stat.icon className="w-6 h-6 mx-auto mb-2 text-white/80" />
-                    <div className="text-2xl font-bold">{stat.value}</div>
-                    <div className="text-sm text-white/80">{stat.label}</div>
-                  </div>
-                ))}
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="text-center bg-white/10 rounded-lg p-2">
+                  <div className="text-lg font-bold text-white mb-0.5">{stats.total}</div>
+                  <div className="text-[10px] text-white/70">Formations</div>
+                </div>
+                <div className="text-center bg-white/10 rounded-lg p-2">
+                  <div className="text-lg font-bold text-white mb-0.5">{stats.available}</div>
+                  <div className="text-[10px] text-white/70">Disponibles</div>
+                </div>
+                <div className="text-center bg-white/10 rounded-lg p-2">
+                  <div className="text-lg font-bold text-white mb-0.5">{stats.students.toLocaleString()}</div>
+                  <div className="text-[10px] text-white/70">Apprenants</div>
+                </div>
+                <div className="text-center bg-white/10 rounded-lg p-2">
+                  <div className="text-lg font-bold text-white mb-0.5">{stats.avgRating}</div>
+                  <div className="text-[10px] text-white/70">Note</div>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* Search and Filters */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="bg-white border-2 border-gray-200 p-6">
-            <div className="flex flex-col lg:flex-row gap-4 mb-6">
+        <section className="container mx-auto px-4 -mt-4 relative z-10">
+          <div className="bg-white border border-gray-200 rounded-lg p-3">
+            <div className="flex flex-col lg:flex-row gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" />
                 <input
                   type="text"
                   placeholder="Rechercher une formation..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 focus:border-[#800020] outline-none transition-colors"
+                  className="w-full pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:border-[#800020] focus:outline-none transition-colors"
                 />
               </div>
               
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-6 py-3 border-2 border-gray-200 hover:border-[#800020] transition-colors"
+                className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-sm border border-gray-200"
               >
-                <Filter className="w-4 h-4" />
-                Filtres
+                <Filter className="w-3.5 h-3.5" />
+                <span>Filtres</span>
                 {(selectedLevel !== "all" || selectedStatus !== "all") && (
-                  <span className="bg-[#800020] text-white text-xs px-2 py-1">
+                  <span className="bg-[#800020] text-white text-[10px] px-1 py-0.5 rounded-full">
                     {[
                       selectedLevel !== "all" && selectedLevel,
                       selectedStatus !== "all" && selectedStatus
@@ -538,10 +353,10 @@ const DataAnalyticsPage = () => {
               {(searchTerm || selectedLevel !== "all" || selectedStatus !== "all") && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-2 px-6 py-3 border-2 border-red-200 text-red-700 hover:border-red-300 transition-colors"
+                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-lg transition-colors text-sm border border-gray-200"
                 >
-                  <X className="w-4 h-4" />
-                  Réinitialiser
+                  <X className="w-3.5 h-3.5" />
+                  <span>Reset</span>
                 </button>
               )}
             </div>
@@ -552,49 +367,49 @@ const DataAnalyticsPage = () => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="border-t-2 border-gray-200 pt-6"
+                  transition={{ duration: 0.2 }}
+                  className="border-t border-gray-200 mt-3 pt-3"
                 >
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-[11px] font-medium text-gray-700 mb-1.5">
                         Niveau
                       </label>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {levels.map((level) => (
                           <button
                             key={level}
                             onClick={() => setSelectedLevel(level)}
-                            className={`px-4 py-2 border-2 transition-colors ${
+                            className={`px-2.5 py-1 text-[11px] rounded-lg border transition-colors ${
                               selectedLevel === level
                                 ? "bg-[#800020] text-white border-[#800020]"
-                                : "bg-white text-gray-700 border-gray-200 hover:border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                             }`}
                           >
-                            {level === "all" ? "Tous les niveaux" : level.charAt(0).toUpperCase() + level.slice(1)}
+                            {level === "all" ? "Tous" : level}
                           </button>
                         ))}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <label className="block text-[11px] font-medium text-gray-700 mb-1.5">
                         Statut
                       </label>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {statuses.map((status) => (
                           <button
                             key={status}
                             onClick={() => setSelectedStatus(status)}
-                            className={`px-4 py-2 border-2 transition-colors ${
+                            className={`px-2.5 py-1 text-[11px] rounded-lg border transition-colors ${
                               selectedStatus === status
                                 ? "bg-[#800020] text-white border-[#800020]"
-                                : "bg-white text-gray-700 border-gray-200 hover:border-[#800020]"
+                                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                             }`}
                           >
-                            {status === "all" ? "Tous les statuts" : 
-                             status === "disponible" ? "Disponible" :
-                             status === "réservation" ? "Réservation" : "Bientôt disponible"}
+                            {status === "all" ? "Tous" : 
+                             status === "disponible" ? "Dispo" :
+                             status === "réservation" ? "Résa" : "Bientôt"}
                           </button>
                         ))}
                       </div>
@@ -606,116 +421,104 @@ const DataAnalyticsPage = () => {
           </div>
         </section>
 
-        {/* Courses Grid */}
+        {/* Courses Grid - Cartes réduites */}
         <section className="container mx-auto px-4 py-8">
-          <div className="mb-8 border-b-2 border-gray-200 pb-4">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''} disponible{filteredCourses.length > 1 ? 's' : ''}
+          <div className="mb-4">
+            <h2 className="text-base font-medium text-gray-900 mb-0.5">
+              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''}
             </h2>
-            <p className="text-gray-600">
-              Explorez nos formations spécialisées en data et analytics
+            <p className="text-xs text-gray-500">
+              {filteredCourses.length === dataAnalyticsCourses.length 
+                ? "Toutes nos formations en data & analytics" 
+                : "Résultats de votre recherche"}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredCourses.map((course, index) => (
               <motion.div
                 key={course.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white border-2 border-gray-200 hover:border-[#800020] transition-colors"
+                transition={{ delay: index * 0.03 }}
+                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group"
+                onClick={() => navigate(`/formation/${course.id}`)}
               >
-                <div className="relative">
+                <div className="relative h-28 overflow-hidden bg-gray-100">
                   <img 
                     src={course.image} 
                     alt={course.title}
-                    className="w-full h-48 object-cover border-b-2 border-gray-200"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className={`px-3 py-1 text-xs font-medium border-2 flex items-center gap-1 ${getStatusColor(course.status)}`}>
-                      {getStatusIcon(course.status)}
-                      {course.status === "disponible" ? "Disponible" :
-                       course.status === "réservation" ? "Réservation" : "Bientôt dispo"}
+                  <div className="absolute top-1.5 left-1.5">
+                    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${getStatusColor(course.status)}`}>
+                      {course.status === "disponible" ? "Dispo" :
+                       course.status === "réservation" ? "Résa" : "Bientôt"}
                     </span>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 text-xs font-medium border-2 ${getLevelColor(course.level)}`}>
-                      {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
+                  <div className="absolute top-1.5 right-1.5">
+                    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${getLevelColor(course.level)}`}>
+                      {course.level === "débutant" ? "Débutant" :
+                       course.level === "intermédiaire" ? "Intermédiaire" : "Avancé"}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex items-start gap-3 mb-4">
-                    <course.icon className="w-6 h-6 text-[#800020] flex-shrink-0 mt-1" />
-                    <h3 className="text-xl font-bold text-gray-900 line-clamp-2">
+                <div className="p-2.5">
+                  <div className="flex items-start gap-1.5 mb-1.5">
+                    <course.icon className="w-3.5 h-3.5 text-[#800020] flex-shrink-0 mt-0.5" />
+                    <h3 className="text-xs font-medium text-gray-900 line-clamp-2 leading-tight">
                       {course.title}
                     </h3>
                   </div>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2 text-sm">
+                  <p className="text-[10px] text-gray-500 mb-1.5 line-clamp-2">
                     {course.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {course.tags.slice(0, 3).map((tag) => (
+                  <div className="flex flex-wrap gap-1 mb-1.5">
+                    {course.tags.slice(0, 2).map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-1 bg-gray-100 text-gray-700 text-xs border border-gray-200"
+                        className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200"
                       >
                         {tag}
                       </span>
                     ))}
-                    {course.tags.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs border border-gray-200">
-                        +{course.tags.length - 3}
+                    {course.tags.length > 2 && (
+                      <span className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200">
+                        +{course.tags.length - 2}
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Clock className="w-4 h-4 text-[#800020]" />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Users className="w-4 h-4 text-[#800020]" />
-                      <span>{course.students}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Star className="w-4 h-4 text-amber-500" />
-                      <span>{course.rating} ({course.reviews})</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Award className="w-4 h-4 text-[#800020]" />
-                      <span>Certificat</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4 pt-4 border-t-2 border-gray-100">
-                    <div>
-                      <div className="text-2xl font-bold text-[#800020]">
-                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-0.5 text-gray-500">
+                        <Clock className="w-2.5 h-2.5" />
+                        <span className="text-[9px]">{course.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-0.5 text-gray-500">
+                        <Users className="w-2.5 h-2.5" />
+                        <span className="text-[9px]">{course.students}</span>
                       </div>
                     </div>
+                    <div className="flex items-center gap-0.5">
+                      <Star className="w-2.5 h-2.5 text-amber-400" />
+                      <span className="text-[10px] font-medium">{course.rating}</span>
+                    </div>
                   </div>
 
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => navigate(`/formation/${course.id}`)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#800020] text-white hover:bg-[#600018] transition-colors border-2 border-[#800020]"
-                    >
-                      Voir détails
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    {course.status === "disponible" && (
-                      <button
-                        className="px-4 py-3 border-2 border-[#800020] text-[#800020] hover:bg-[#800020] hover:text-white transition-colors"
-                      >
-                        S'inscrire
-                      </button>
-                    )}
+                  <div className="pt-1.5 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                      <span className="text-xs font-bold text-gray-900">
+                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-0.5 text-[#800020] text-[10px] font-medium">
+                      Détails
+                      <ArrowRight className="w-2.5 h-2.5" />
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -723,19 +526,19 @@ const DataAnalyticsPage = () => {
           </div>
 
           {filteredCourses.length === 0 && (
-            <div className="text-center py-12 border-2 border-gray-200">
-              <div className="w-16 h-16 bg-gray-100 border-2 border-gray-200 flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
+            <div className="text-center py-8">
+              <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-2 border border-gray-200">
+                <Search className="w-4 h-4 text-gray-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-sm font-medium text-gray-900 mb-0.5">
                 Aucune formation trouvée
               </h3>
-              <p className="text-gray-600 mb-4">
-                Essayez de modifier vos filtres ou termes de recherche
+              <p className="text-xs text-gray-500 mb-3">
+                Essayez de modifier vos filtres
               </p>
               <button
                 onClick={resetFilters}
-                className="px-6 py-3 bg-[#800020] text-white hover:bg-[#600018] transition-colors border-2 border-[#800020]"
+                className="px-3 py-1.5 bg-[#800020] text-white text-xs rounded-lg hover:bg-[#600018] transition-colors"
               >
                 Réinitialiser les filtres
               </button>
@@ -743,29 +546,93 @@ const DataAnalyticsPage = () => {
           )}
         </section>
 
-        {/* CTA Section */}
-        <section className="bg-[#800020] text-white py-16 border-t-4 border-[#600018]">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold mb-4">
+        {/* Navigation Élégante */}
+        <section className="bg-gradient-to-r from-emerald-50 to-teal-50 border-t border-gray-200 py-12">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center gap-8">
+              {/* Indicateur de progression */}
+              <div className="w-full max-w-2xl">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm font-medium text-gray-600">Progression</span>
+                  <span className="text-sm font-medium text-emerald-600">60%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-600 h-2 rounded-full transition-all duration-500" style={{ width: '60%' }}></div>
+                </div>
+              </div>
+
+              {/* Pagination moderne */}
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => navigate('/digital-tools-automation')}
+                  className="group relative px-6 py-3 bg-white border border-gray-300 rounded-2xl text-gray-700 hover:border-emerald-400 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                >
+                  <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                  <span className="font-medium">Précédent</span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => navigate('/digital-tools-automation')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    2
+                  </button>
+                  <button 
+                    onClick={() => navigate('/entrepreneurship')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    4
+                  </button>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
+                    3
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => navigate('/entrepreneurship')}
+                  className="group relative px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                >
+                  <span className="font-medium">Suivant</span>
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+
+              {/* Indicateur de pages */}
+              <div className="flex items-center gap-6 text-sm text-gray-500">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span>Data & Analytics</span>
+                </div>
+                <span className="text-gray-300">|</span>
+                <span>Page 3 sur 5</span>
+                <span className="text-gray-300">|</span>
+                <span>Formation certifiante</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Sans dégradé */}
+        <section className="bg-gray-50 border-t border-gray-200 py-8">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center">
+              <BarChart3 className="w-5 h-5 text-[#800020] mx-auto mb-2" />
+              <h2 className="text-base font-bold text-gray-900 mb-1">
                 Prêt à devenir expert en data ?
               </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto text-white/80 font-light">
-                Rejoignez nos formations et développez les compétences les plus recherchées du marché
+              <p className="text-xs text-gray-600 mb-3">
+                Rejoignez nos formations et développez les compétences les plus recherchées
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-3 bg-white text-[#800020] hover:bg-gray-100 transition-colors border-2 border-white font-semibold">
+              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                <button className="px-4 py-1.5 bg-[#800020] text-white text-xs rounded-lg hover:bg-[#600018] transition-colors">
                   Contacter un conseiller
                 </button>
-                <button className="px-8 py-3 bg-transparent text-white hover:bg-white/10 transition-colors border-2 border-white font-semibold">
+                <button className="px-4 py-1.5 bg-white text-gray-700 text-xs rounded-lg hover:bg-gray-100 transition-colors border border-gray-200">
                   Télécharger le catalogue
                 </button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </div>

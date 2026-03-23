@@ -39,37 +39,37 @@ const SalesFunnelPage = () => {
           <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les outils essentiels</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Photoshop, Illustrator et InDesign pour concrétiser vos idées créatives</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Photoshop, Illustrator et InDesign pour concrétiser vos idées créatives</p>
             </div>
           </div>
           <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Créer des visuels percutants</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Logos, affiches, flyers et supports de communication qui captent l'attention</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Logos, affiches, flyers et supports de communication qui captent l'attention</p>
             </div>
           </div>
           <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Optimiser votre workflow</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Raccourcis, automatisations et bonnes pratiques des professionnels</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Raccourcis, automatisations et bonnes pratiques des professionnels</p>
             </div>
           </div>
           <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Adapter vos créations</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Designs adaptés à tous supports (print, web, réseaux sociaux)</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Designs adaptés à tous supports (print, web, réseaux sociaux)</p>
             </div>
           </div>
           <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Développer votre identité visuelle</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Fondamentaux du graphisme (couleurs, typographies, composition)</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Fondamentaux du graphisme (couleurs, typographies, composition)</p>
             </div>
           </div>
           <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
             <div>
               <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Templates, modèles et guides professionnels inclus</p>
+              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Templates, modèles et guides professionnels inclus</p>
               <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
             </div>
           </div>
@@ -176,9 +176,9 @@ const SalesFunnelPage = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-xl sm:max-w-3xl md:max-w-4xl mx-auto space-y-3 sm:space-y-4">
+        <div className="max-w-5xl sm:max-w-3xl md:max-w-4xl mx-auto space-y-3 sm:space-y-4 px-3 sm:px-0">
           {/* Module 1 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(1)}
               className="w-full flex items-center justify-between p-3 sm:p-4 md:p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -188,8 +188,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">01</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Introduction</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Présentation de la formation complète</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Introduction</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Présentation de la formation complète</p>
                 </div>
               </div>
               <svg 
@@ -208,8 +208,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 1 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -218,20 +218,20 @@ const SalesFunnelPage = () => {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Présentation de la formation complète</h4>
+                      <h4 className="text-sm sm:font-medium text-gray-900">Présentation de la formation complète</h4>
                       <span className="text-xs text-gray-500">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Logiciels incontournables du design graphique</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Pack bonus montage vidéo et marketing digital</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Cadre sécurisé et accessible</span>
                     </li>
@@ -241,7 +241,7 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 2 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(2)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -251,8 +251,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">02</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Les outils essentiels</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Maîtrise Photoshop, Illustrator, InDesign</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Les outils essentiels</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Maîtrise Photoshop, Illustrator, InDesign</p>
                 </div>
               </div>
               <svg 
@@ -271,8 +271,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 2 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -286,15 +286,15 @@ const SalesFunnelPage = () => {
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Adobe Photoshop, Illustrator, InDesign</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Alternatives gratuites puissantes</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Choisir selon ses objectifs</span>
                     </li>
@@ -304,7 +304,7 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 3 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(3)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -314,8 +314,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">03</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Projets pratiques</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Créez des projets réels</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Projets pratiques</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Créez des projets réels</p>
                 </div>
               </div>
               <svg 
@@ -334,8 +334,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 3 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -349,19 +349,19 @@ const SalesFunnelPage = () => {
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Analyse d'un brief client</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Recherche d'inspiration</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Création pas à pas d'une affiche</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Export aux bons formats</span>
                     </li>
@@ -371,7 +371,7 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 4 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(4)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -381,8 +381,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">04</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Maîtrise du design</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Théorie et pratique avancées</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Maîtrise du design</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Théorie et pratique avancées</p>
                 </div>
               </div>
               <svg 
@@ -401,8 +401,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 4 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -416,19 +416,19 @@ const SalesFunnelPage = () => {
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Les 7 principes fondamentaux du design</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Composition et hiérarchie visuelle</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Grilles et alignement</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Analyse et amélioration de visuels</span>
                     </li>
@@ -438,7 +438,7 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 5 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(5)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -448,8 +448,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">05</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Identité visuelle</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Charte graphique complet</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Identité visuelle</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Charte graphique complet</p>
                 </div>
               </div>
               <svg 
@@ -468,8 +468,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 5 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -483,19 +483,19 @@ const SalesFunnelPage = () => {
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Recherche et création d'un moodboard</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Création du logo et direction artistique</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Déclinaison sur différents supports</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Constitution du dossier client</span>
                     </li>
@@ -505,7 +505,7 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 6 */}
-          <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
             <button 
               onClick={() => toggleModule(6)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
@@ -515,8 +515,8 @@ const SalesFunnelPage = () => {
                   <span className="text-red-600 font-bold text-sm sm:text-lg">06</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Lancement professionnel</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Stratégies de carrière</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Lancement professionnel</h3>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Stratégies de carrière</p>
                 </div>
               </div>
               <svg 
@@ -535,8 +535,8 @@ const SalesFunnelPage = () => {
               </svg>
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 6 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-              <div className="p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+              <div className="p-3 sm:p-6 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -550,19 +550,19 @@ const SalesFunnelPage = () => {
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Créer un portfolio professionnel</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Plateformes d'exposition (Behance, Instagram)</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Fixer ses tarifs et propositions</span>
                     </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                       <span>Stratégies pour trouver ses premiers clients</span>
                     </li>
@@ -786,28 +786,28 @@ const SalesFunnelPage = () => {
                         <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Formation complète</h5>
-                            <p className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Photoshop, Illustrator et outils professionnels</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Photoshop, Illustrator et outils professionnels</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
                         <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Accompagnement personnalisé</h5>
-                            <p className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Suivi par des experts du secteur</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Suivi par des experts du secteur</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
                         <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Certification professionnelle</h5>
-                            <p className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Reconnue par les entreprises</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Reconnue par les entreprises</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
                         <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Évolution de carrière</h5>
-                            <p className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Développez votre potentiel professionnel</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Développez votre potentiel professionnel</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
@@ -825,17 +825,17 @@ const SalesFunnelPage = () => {
                 <img className="w-full h-auto object-cover rounded-xl relative z-10 transition-all duration-700 group-hover:brightness-110" src="/Prof.png" alt="Blaise KAYUMPA Yese - Designer Graphique Senior" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-xl transform -skew-x-12"></div>
               </div>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-16 w-12 h-12 flex items-center justify-center cursor-pointer z-50 animate-fade-in-up" style={{animation: "4s ease-in-out infinite float, 0.8s ease-out 1000ms both fade-in-up"}}>
-                <img className="w-8 h-8 object-contain animate-spin-slow" src="/photoshop.png" alt="Adobe photoshop" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-16 w-12 h-12 flex items-center justify-center cursor-pointer z-50" style={{animation: "8s ease-in-out infinite orbit-top, 0.8s ease-out 1000ms both fade-in-up"}}>
+                <img className="w-8 h-8 object-contain" src="/photoshop.png" alt="Adobe photoshop" style={{animation: "3s ease-in-out infinite pulse-rotate"}} />
               </div>
-              <div className="absolute top-1/4 right-0 translate-x-16 -translate-y-1/2 w-12 h-12 flex items-center justify-center cursor-pointer z-50 animate-fade-in-up" style={{animation: "4s ease-in-out infinite float, 0.8s ease-out 1100ms both fade-in-up"}}>
-                <img className="w-8 h-8 object-contain animate-spin-slow" src="/adobe-illustrator.png" alt="Adobe adobe-illustrator" />
+              <div className="absolute top-1/4 right-0 translate-x-16 -translate-y-1/2 w-12 h-12 flex items-center justify-center cursor-pointer z-50" style={{animation: "10s ease-in-out infinite orbit-right, 0.8s ease-out 1100ms both fade-in-up"}}>
+                <img className="w-8 h-8 object-contain" src="/adobe-illustrator.png" alt="Adobe adobe-illustrator" style={{animation: "4s ease-in-out infinite bounce-glow"}} />
               </div>
-              <div className="absolute bottom-0 right-1/4 translate-x-8 translate-y-16 w-12 h-12 flex items-center justify-center cursor-pointer z-50 animate-fade-in-up" style={{animation: "4s ease-in-out infinite float, 0.8s ease-out 1200ms both fade-in-up"}}>
-                <img className="w-8 h-8 object-contain animate-spin-slow" src="/xd.png" alt="Adobe xd" />
+              <div className="absolute bottom-0 right-1/4 translate-x-8 translate-y-16 w-12 h-12 flex items-center justify-center cursor-pointer z-50" style={{animation: "12s ease-in-out infinite orbit-bottom-right, 0.8s ease-out 1200ms both fade-in-up"}}>
+                <img className="w-8 h-8 object-contain" src="/xd.png" alt="Adobe xd" style={{animation: "5s ease-in-out infinite spin-scale"}} />
               </div>
-              <div className="absolute top-1/4 left-0 -translate-x-16 -translate-y-1/2 w-12 h-12 flex items-center justify-center cursor-pointer z-50 animate-fade-in-up" style={{animation: "4s ease-in-out infinite float, 0.8s ease-out 1300ms both fade-in-up"}}>
-                <img className="w-8 h-8 object-contain animate-spin-slow" src="/indesign.png" alt="Adobe indesign" />
+              <div className="absolute top-1/4 left-0 -translate-x-16 -translate-y-1/2 w-12 h-12 flex items-center justify-center cursor-pointer z-50" style={{animation: "9s ease-in-out infinite orbit-left, 0.8s ease-out 1300ms both fade-in-up"}}>
+                <img className="w-8 h-8 object-contain" src="/indesign.png" alt="Adobe indesign" style={{animation: "6s ease-in-out infinite swing-pulse"}} />
               </div>
             </div>
           </div>
@@ -941,7 +941,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aïcha K." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Aïcha K.</h4>
-                        <p className="text-sm text-gray-600">Designer Graphique</p>
+                        <p className="text-xs sm:text-sm text-gray-600">Designer Graphique</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -970,7 +970,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mohamed D." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Mohamed D.</h4>
-                        <p className="text-sm text-gray-600">Développeur Web</p>
+                        <p className="text-xs sm:text-sm text-gray-600">Développeur Web</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -999,7 +999,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fatou N." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Fatou N.</h4>
-                        <p className="text-sm text-gray-600">Entrepreneuse</p>
+                        <p className="text-xs sm:text-sm text-gray-600">Entrepreneuse</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

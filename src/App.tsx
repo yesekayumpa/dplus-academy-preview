@@ -20,6 +20,7 @@ import DigitalToolsAutomationPage from "./pages/DigitalToolsAutomationPage";
 import DataAnalyticsPage from "./pages/DataAnalyticsPage";
 import EntrepreneurshipPage from "./pages/EntrepreneurshipPage";
 import SoftSkillsLeadershipPage from "./pages/SoftSkillsLeadershipPage";
+import FormationPilliersPage from "./pages/FormationPilliersPage";
 import SalesFunnelPage from "./pages/SalesFunnelPage";
 import NotFound from "./pages/NotFound";
 
@@ -46,10 +47,11 @@ const App = () => (
           <Route path="/sur-mesure/:id" element={<SurmesureDetailPage />} />
           <Route path="/nos-formateurs" element={<TrainersPage />} />
           <Route path="/finance-investment" element={<FinanceInvestmentPage />} />
-          <Route path="/outils-digitaux-automatisation" element={<DigitalToolsAutomationPage />} />
+          <Route path="/digital-tools-automation" element={<DigitalToolsAutomationPage />} />
           <Route path="/data-analytics" element={<DataAnalyticsPage />} />
-          <Route path="/entrepreneuriat" element={<EntrepreneurshipPage />} />
+          <Route path="/entrepreneurship" element={<EntrepreneurshipPage />} />
           <Route path="/soft-skills-leadership" element={<SoftSkillsLeadershipPage />} />
+          <Route path="/formation-pilliers" element={<FormationPilliersPage />} />
           <Route path="/tunnel-vente" element={<SalesFunnelPage />} />
           <Route path="/sales-funnel" element={<SalesFunnelPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
