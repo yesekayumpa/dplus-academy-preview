@@ -1,15 +1,39 @@
 import SalesFunnelHeader from "@/components/SalesFunnelHeader";
 import PremiumCourseSection from "@/components/PremiumCourseSection";
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SalesFunnelPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [openModule, setOpenModule] = useState<number | null>(null);
   const [showDescription, setShowDescription] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
-  // Scroll en haut au chargement de la page
+  // Récupérer les données du cours depuis la navigation
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    // Récupérer les données du cours depuis le state de navigation ou les paramètres URL
+    const courseData = location.state?.course;
+    if (courseData) {
+      setSelectedCourse(courseData);
+    } else {
+      // Fallback: données par défaut si aucun cours n'est passé
+      setSelectedCourse({
+        title: "Formation Graphisme",
+        description: "Maîtrisez les compétences essentielles du design graphique professionnel",
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop&crop=entropy&auto=format",
+        price: 4900,
+        originalPrice: 9900,
+        duration: "30h",
+        modules: 6,
+        instructor: "DIGITALMIND+ ACADEMY",
+        level: "Débutant",
+        category: "Design"
+      });
+    }
+  }, [location.state]);
 
   const toggleModule = (moduleNumber: number) => {
     setOpenModule(openModule === moduleNumber ? null : moduleNumber);
@@ -18,7 +42,180 @@ const SalesFunnelPage = () => {
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
-  
+
+  const getLearningContent = () => {
+    switch (selectedCourse?.category) {
+      case "Design":
+        return (
+          <>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les outils essentiels</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Photoshop, Illustrator et InDesign pour concrétiser vos idées créatives</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Créer des visuels percutants</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Logos, affiches, flyers et supports de communication qui captent l'attention</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Optimiser votre workflow</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Raccourcis, automatisations et bonnes pratiques des professionnels</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Adapter vos créations</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Designs adaptés à tous supports (print, web, réseaux sociaux)</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Développer votre identité visuelle</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Fondamentaux du graphisme (couleurs, typographies, composition)</p>
+              </div>
+            </div>
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Templates, modèles et guides professionnels inclus</p>
+                <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
+              </div>
+            </div>
+          </>
+        );
+      case "Programmation":
+        return (
+          <>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les fondamentaux</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Variables, fonctions, et structures de contrôle essentielles</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Programmation orientée objet</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Classes, héritage et principes SOLID</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets pratiques</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Applications réelles pour construire votre portfolio</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Bibliothèques modernes</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Frameworks et outils du développement web moderne</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Best practices</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Code propre, tests et méthodologies agiles</p>
+              </div>
+            </div>
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Support communautaire</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Accès au forum et aide des mentors</p>
+                <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
+              </div>
+            </div>
+          </>
+        );
+      case "Data Science":
+        return (
+          <>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Analyse de données</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Manipulation et exploration avec pandas et numpy</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Machine Learning</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Algorithmes supervisés et non supervisés</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Deep Learning</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Réseaux de neurones et TensorFlow</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Visualisation</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Graphiques interactifs avec matplotlib et plotly</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets réels</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Cas d'usage industriels et datasets réels</p>
+              </div>
+            </div>
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Certification</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Validation des compétences par projet final</p>
+                <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
+              </div>
+            </div>
+          </>
+        );
+      default:
+        return (
+          <>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Compétences fondamentales</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Bases solides pour démarrer votre parcours</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Pratique avancée</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Techniques professionnelles et expertises</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets concrets</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Applications pratiques du domaine</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Méthodologies</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Approches et meilleures pratiques</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Études de cas</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Exemples réels et analyses</p>
+              </div>
+            </div>
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
+                <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Matériels complémentaires et supports</p>
+                <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <SalesFunnelHeader />
@@ -27,52 +224,18 @@ const SalesFunnelPage = () => {
         </div>
       </div>
       
-      <PremiumCourseSection />
+      <PremiumCourseSection course={selectedCourse} />
       
       <div className="max-w-xl sm:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         <div className="text-center mb-2 sm:mb-3 md:mb-4 lg:mb-6">
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 md:mb-3">Ce que vous allez apprendre</h2>
           <div className="w-12 h-0.5 bg-red-500 mx-auto rounded-full mb-1 sm:mb-2 md:mb-4"></div>
-          <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-2xl mx-auto">Maîtrisez les compétences essentielles du design graphique professionnel</p>
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
+            {selectedCourse?.description || "Maîtrisez les compétences essentielles du design graphique professionnel"}
+          </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 max-w-sm sm:max-w-5xl mx-auto">
-          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les outils essentiels</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Photoshop, Illustrator et InDesign pour concrétiser vos idées créatives</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Créer des visuels percutants</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Logos, affiches, flyers et supports de communication qui captent l'attention</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Optimiser votre workflow</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Raccourcis, automatisations et bonnes pratiques des professionnels</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Adapter vos créations</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Designs adaptés à tous supports (print, web, réseaux sociaux)</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Développer votre identité visuelle</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Fondamentaux du graphisme (couleurs, typographies, composition)</p>
-            </div>
-          </div>
-          <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
-              <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Templates, modèles et guides professionnels inclus</p>
-              <span className="inline-block mt-1 sm:mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs sm:text-sm font-medium">Bonus</span>
-            </div>
-          </div>
+          {getLearningContent()}
         </div>
       </div>
       

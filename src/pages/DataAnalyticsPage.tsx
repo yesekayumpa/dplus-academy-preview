@@ -50,7 +50,8 @@ const dataAnalyticsCourses = [
     tags: ["Data Science", "Python", "Statistiques"],
     status: "disponible",
     icon: BarChart3,
-    features: ["Projets pratiques", "Certification"]
+    features: ["Projets pratiques", "Certification"],
+    type: "e-learning"
   },
   {
     id: "python-data-analysis",
@@ -70,7 +71,8 @@ const dataAnalyticsCourses = [
     tags: ["Python", "Pandas", "NumPy"],
     status: "disponible",
     icon: Database,
-    features: ["Projets réels", "Certification"]
+    features: ["Projets réels", "Certification"],
+    type: "masterclass"
   },
   {
     id: "r-shiny-masterclass",
@@ -90,7 +92,8 @@ const dataAnalyticsCourses = [
     tags: ["R", "Shiny", "Visualization"],
     status: "disponible",
     icon: PieChart,
-    features: ["Apps incluses", "Certification"]
+    features: ["Apps incluses", "Certification"],
+    type: "corporate"
   },
   {
     id: "sql-database-analytics",
@@ -110,7 +113,8 @@ const dataAnalyticsCourses = [
     tags: ["SQL", "Database", "Analytics"],
     status: "disponible",
     icon: Database,
-    features: ["Lab SQL", "Certification"]
+    features: ["Lab SQL", "Certification"],
+    type: "e-learning"
   },
   {
     id: "business-intelligence-powerbi",
@@ -130,7 +134,8 @@ const dataAnalyticsCourses = [
     tags: ["Power BI", "Dashboards", "DAX"],
     status: "disponible",
     icon: TrendingUp,
-    features: ["Projets BI", "Certification"]
+    features: ["Projets BI", "Certification"],
+    type: "corporate"
   },
   {
     id: "tableau-data-visualization",
@@ -150,7 +155,8 @@ const dataAnalyticsCourses = [
     tags: ["Tableau", "Visualization", "Dashboards"],
     status: "disponible",
     icon: LineChart,
-    features: ["Projets inclus", "Certification"]
+    features: ["Projets inclus", "Certification"],
+    type: "masterclass"
   },
   {
     id: "machine-learning-fundamentals",
@@ -170,7 +176,8 @@ const dataAnalyticsCourses = [
     tags: ["ML", "Scikit-learn", "Python"],
     status: "disponible",
     icon: Brain,
-    features: ["Projets ML", "Certification"]
+    features: ["Projets ML", "Certification"],
+    type: "masterclass"
   },
   {
     id: "deep-learning-neural-networks",
@@ -190,7 +197,8 @@ const dataAnalyticsCourses = [
     tags: ["Deep Learning", "TensorFlow", "PyTorch"],
     status: "réservation",
     icon: Activity,
-    features: ["GPU inclus", "Certification"]
+    features: ["GPU inclus", "Certification"],
+    type: "masterclass"
   },
   {
     id: "data-engineering-pipelines",
@@ -210,7 +218,8 @@ const dataAnalyticsCourses = [
     tags: ["Data Engineering", "ETL", "Spark"],
     status: "disponible",
     icon: GitBranch,
-    features: ["Cloud credits", "Certification"]
+    features: ["Cloud credits", "Certification"],
+    type: "corporate"
   }
 ];
 
@@ -262,6 +271,33 @@ const DataAnalyticsPage = () => {
       case "intermédiaire": return "bg-amber-50 text-amber-700";
       case "avancé": return "bg-rose-50 text-rose-700";
       default: return "bg-gray-50 text-gray-700";
+    }
+  };
+
+  const getCourseTypeBadge = (type: string) => {
+    switch (type) {
+      case "e-learning": return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", label: "E-learning" };
+      case "corporate": return { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", label: "Corporate" };
+      case "masterclass": return { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", label: "Masterclass" };
+      default: return { bg: "bg-gray-50", text: "text-gray-700", border: "border-gray-200", label: "Formation" };
+    }
+  };
+
+  const handleCourseClick = (course: any) => {
+    const courseType = course.type || 'e-learning';
+    
+    switch (courseType) {
+      case 'masterclass':
+        navigate(`/masterclass/${course.id}`);
+        break;
+      case 'e-learning':
+        navigate('/e-learning');
+        break;
+      case 'corporate':
+        navigate('/corporate-programs');
+        break;
+      default:
+        navigate('/e-learning');
     }
   };
 
@@ -434,66 +470,78 @@ const DataAnalyticsPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filteredCourses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.03 }}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group"
-                onClick={() => navigate(`/formation/${course.id}`)}
-              >
-                <div className="relative h-28 overflow-hidden bg-gray-100">
-                  <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-1.5 left-1.5">
-                    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${getStatusColor(course.status)}`}>
-                      {course.status === "disponible" ? "Dispo" :
-                       course.status === "réservation" ? "Résa" : "Bientôt"}
-                    </span>
-                  </div>
-                  <div className="absolute top-1.5 right-1.5">
-                    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${getLevelColor(course.level)}`}>
-                      {course.level === "débutant" ? "Débutant" :
-                       course.level === "intermédiaire" ? "Intermédiaire" : "Avancé"}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-2.5">
-                  <div className="flex items-start gap-1.5 mb-1.5">
-                    <course.icon className="w-3.5 h-3.5 text-[#800020] flex-shrink-0 mt-0.5" />
-                    <h3 className="text-xs font-medium text-gray-900 line-clamp-2 leading-tight">
-                      {course.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-[10px] text-gray-500 mb-1.5 line-clamp-2">
-                    {course.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1 mb-1.5">
-                    {course.tags.slice(0, 2).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200"
-                      >
-                        {tag}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredCourses.map((course, index) => {
+              const statusColor = getStatusColor(course.status);
+              const levelColor = getLevelColor(course.level);
+              const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
+              return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.03 }}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group hover:shadow-lg"
+                  onClick={() => handleCourseClick(course)}
+                >
+                  <div className="relative h-32 overflow-hidden bg-gray-100">
+                    <img 
+                      src={course.image || "/assets/Masterclass.jpg"} 
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/Masterclass.jpg";
+                      }}
+                    />
+                    <div className="absolute top-1.5 left-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${statusColor}`}>
+                        {course.status === "disponible" ? "Dispo" :
+                         course.status === "réservation" ? "Résa" : "Bientôt"}
                       </span>
-                    ))}
-                    {course.tags.length > 2 && (
-                      <span className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200">
-                        +{course.tags.length - 2}
+                    </div>
+                    <div className="absolute top-1.5 right-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${levelColor}`}>
+                        {course.level === "débutant" ? "Débutant" :
+                         course.level === "intermédiaire" ? "Intermédiaire" : "Avancé"}
                       </span>
-                    )}
+                    </div>
+                    {/* Badge de type en bas à gauche */}
+                    <div className="absolute bottom-1.5 left-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${typeBadge.bg} ${typeBadge.text} ${typeBadge.border} backdrop-blur-sm`}>
+                        {typeBadge.label}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-1.5">
+                  <div className="p-3">
+                    <div className="flex items-start gap-1.5 mb-1.5">
+                      <course.icon className="w-3.5 h-3.5 text-[#800020] flex-shrink-0 mt-0.5" />
+                      <h3 className="text-xs font-medium text-gray-900 line-clamp-2 leading-tight">
+                        {course.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-[10px] text-gray-500 mb-1.5 line-clamp-2">
+                      {course.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1 mb-1.5">
+                      {course.tags.slice(0, 2).map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200 hover:bg-gray-100 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {course.tags.length > 2 && (
+                        <span className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200">
+                          +{course.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-1.5 mb-2">
                       <div className="flex items-center gap-0.5 text-gray-500">
                         <Clock className="w-2.5 h-2.5" />
                         <span className="text-[9px]">{course.duration}</span>
@@ -502,27 +550,32 @@ const DataAnalyticsPage = () => {
                         <Users className="w-2.5 h-2.5" />
                         <span className="text-[9px]">{course.students}</span>
                       </div>
+                      <div className="flex items-center gap-0.5">
+                        <Star className="w-2.5 h-2.5 text-amber-400" />
+                        <span className="text-[10px] font-medium">{course.rating}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-0.5">
-                      <Star className="w-2.5 h-2.5 text-amber-400" />
-                      <span className="text-[10px] font-medium">{course.rating}</span>
-                    </div>
-                  </div>
 
-                  <div className="pt-1.5 border-t border-gray-100 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-gray-900">
-                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-0.5 text-[#800020] text-[10px] font-medium">
-                      Détails
-                      <ArrowRight className="w-2.5 h-2.5" />
+                    <div className="pt-1.5 border-t border-gray-100 flex items-center justify-between">
+                      <div>
+                        <span className="text-xs font-bold text-gray-900">
+                          {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                        </span>
+                        {course.price > 0 && (
+                          <span className="text-[9px] text-gray-500 ml-1">
+                            ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-0.5 text-[#800020] text-[10px] font-medium">
+                        Détails
+                        <ArrowRight className="w-2.5 h-2.5" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           {filteredCourses.length === 0 && (
@@ -578,15 +631,21 @@ const DataAnalyticsPage = () => {
                   >
                     2
                   </button>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
+                    3
+                  </div>
                   <button 
                     onClick={() => navigate('/entrepreneurship')}
                     className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
                   >
                     4
                   </button>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
-                    3
-                  </div>
+                  <button 
+                    onClick={() => navigate('/soft-skills-leadership')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    5
+                  </button>
                 </div>
 
                 <button 

@@ -49,7 +49,8 @@ const digitalToolsCourses = [
     tags: ["Python", "Automatisation", "Scripting"],
     status: "disponible",
     icon: Code,
-    features: ["Projets pratiques", "Certification Python"]
+    features: ["Projets pratiques", "Certification Python"],
+    type: "e-learning"
   },
   {
     id: "excel-automation-vba",
@@ -69,7 +70,8 @@ const digitalToolsCourses = [
     tags: ["Excel", "VBA", "Power Query"],
     status: "disponible",
     icon: Database,
-    features: ["Templates inclus", "Certification VBA"]
+    features: ["Templates inclus", "Certification VBA"],
+    type: "corporate"
   },
   {
     id: "no-code-low-code",
@@ -89,7 +91,8 @@ const digitalToolsCourses = [
     tags: ["No-Code", "Bubble", "Webflow"],
     status: "disponible",
     icon: Zap,
-    features: ["Projets guidés", "Certification No-Code"]
+    features: ["Projets guidés", "Certification No-Code"],
+    type: "e-learning"
   },
   {
     id: "rpa-automation",
@@ -109,7 +112,8 @@ const digitalToolsCourses = [
     tags: ["RPA", "UiPath", "Automation"],
     status: "disponible",
     icon: Bot,
-    features: ["Projets entreprise", "Certification RPA"]
+    features: ["Projets entreprise", "Certification RPA"],
+    type: "masterclass"
   },
   {
     id: "api-integration",
@@ -129,7 +133,8 @@ const digitalToolsCourses = [
     tags: ["API", "REST", "Postman"],
     status: "réservation",
     icon: Settings,
-    features: ["Projets d'intégration", "Certification API"]
+    features: ["Projets d'intégration", "Certification API"],
+    type: "masterclass"
   },
   {
     id: "workflow-automation",
@@ -149,7 +154,8 @@ const digitalToolsCourses = [
     tags: ["Workflow", "Zapier", "Power Automate"],
     status: "disponible",
     icon: Cpu,
-    features: ["Cas d'usage réels", "Certification Workflow"]
+    features: ["Cas d'usage réels", "Certification Workflow"],
+    type: "corporate"
   },
   {
     id: "mobile-automation",
@@ -169,7 +175,8 @@ const digitalToolsCourses = [
     tags: ["Mobile", "Appium", "Testing"],
     status: "bientôt_disponible",
     icon: Smartphone,
-    features: ["Projets de test", "Certification Mobile"]
+    features: ["Projets de test", "Certification Mobile"],
+    type: "masterclass"
   },
   {
     id: "cloud-automation",
@@ -189,7 +196,8 @@ const digitalToolsCourses = [
     tags: ["Cloud", "DevOps", "Terraform"],
     status: "disponible",
     icon: Laptop,
-    features: ["Projets DevOps", "Certification Cloud"]
+    features: ["Projets DevOps", "Certification Cloud"],
+    type: "masterclass"
   }
 ];
 
@@ -241,6 +249,33 @@ const DigitalToolsAutomationPage = () => {
       case "intermédiaire": return "bg-amber-50 text-amber-700";
       case "avancé": return "bg-rose-50 text-rose-700";
       default: return "bg-gray-50 text-gray-700";
+    }
+  };
+
+  const getCourseTypeBadge = (type: string) => {
+    switch (type) {
+      case "e-learning": return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", label: "E-learning" };
+      case "corporate": return { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", label: "Corporate" };
+      case "masterclass": return { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", label: "Masterclass" };
+      default: return { bg: "bg-gray-50", text: "text-gray-700", border: "border-gray-200", label: "Formation" };
+    }
+  };
+
+  const handleCourseClick = (course: any) => {
+    const courseType = course.type || 'e-learning';
+    
+    switch (courseType) {
+      case 'masterclass':
+        navigate(`/masterclass/${course.id}`);
+        break;
+      case 'e-learning':
+        navigate('/e-learning');
+        break;
+      case 'corporate':
+        navigate('/corporate-programs');
+        break;
+      default:
+        navigate('/e-learning');
     }
   };
 
@@ -414,87 +449,111 @@ const DigitalToolsAutomationPage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
-            {filteredCourses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.03 }}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group"
-                onClick={() => navigate(`/formation/${course.id}`)}
-              >
-                <div className="relative h-28 overflow-hidden bg-gray-100">
-                  <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-1.5 left-1.5">
-                    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${getStatusColor(course.status)}`}>
-                      {course.status === "disponible" ? "Dispo" :
-                       course.status === "réservation" ? "Résa" : "Bientôt"}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-2.5">
-                  <div className="flex items-start gap-1.5 mb-1.5">
-                    <course.icon className="w-3.5 h-3.5 text-[#800020] flex-shrink-0 mt-0.5" />
-                    <h3 className="text-xs font-medium text-gray-900 line-clamp-2 leading-tight">
-                      {course.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-[10px] text-gray-500 mb-1.5 line-clamp-2">
-                    {course.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1 mb-1.5">
-                    {course.tags.slice(0, 2).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200"
-                      >
-                        {tag}
+            {filteredCourses.map((course, index) => {
+              const statusColor = getStatusColor(course.status);
+              const levelColor = getLevelColor(course.level);
+              const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
+              return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.03 }}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#800020] transition-colors cursor-pointer group hover:shadow-lg"
+                  onClick={() => handleCourseClick(course)}
+                >
+                  <div className="relative h-32 overflow-hidden bg-gray-100">
+                    <img 
+                      src={course.image || "/assets/Masterclass.jpg"} 
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/Masterclass.jpg";
+                      }}
+                    />
+                    <div className="absolute top-1.5 left-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${statusColor}`}>
+                        {course.status === "disponible" ? "Dispo" :
+                         course.status === "réservation" ? "Résa" : "Bientôt"}
                       </span>
-                    ))}
-                    {course.tags.length > 2 && (
-                      <span className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200">
-                        +{course.tags.length - 2}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className={`text-[9px] px-1 py-0.5 rounded ${getLevelColor(course.level)}`}>
+                    </div>
+                    <div className="absolute top-1.5 right-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${levelColor}`}>
                         {course.level}
                       </span>
-                      <div className="flex items-center gap-0.5 text-gray-500">
-                        <Clock className="w-2.5 h-2.5" />
-                        <span className="text-[9px]">{course.duration}</span>
-                      </div>
                     </div>
-                    <div className="flex items-center gap-0.5">
-                      <Star className="w-2.5 h-2.5 text-amber-400" />
-                      <span className="text-[10px] font-medium">{course.rating}</span>
+                    {/* Badge de type en bas à gauche */}
+                    <div className="absolute bottom-1.5 left-1.5">
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full border ${typeBadge.bg} ${typeBadge.text} ${typeBadge.border} backdrop-blur-sm`}>
+                        {typeBadge.label}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="pt-1.5 border-t border-gray-100 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-gray-900">
-                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
-                      </span>
+                  <div className="p-3">
+                    <div className="flex items-start gap-1.5 mb-2">
+                      <course.icon className="w-4 h-4 text-[#800020] flex-shrink-0 mt-0.5" />
+                      <h3 className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight">
+                        {course.title}
+                      </h3>
                     </div>
-                    <div className="flex items-center gap-0.5 text-[#800020] text-[10px] font-medium">
-                      Détails
-                      <ChevronRight className="w-2.5 h-2.5" />
+
+                    <p className="text-[10px] text-gray-500 mb-2 line-clamp-2">
+                      {course.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {course.tags.slice(0, 2).map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200 hover:bg-gray-100 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {course.tags.length > 2 && (
+                        <span className="px-1 py-0.5 bg-gray-50 text-gray-600 text-[9px] rounded border border-gray-200">
+                          +{course.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[9px] px-1 py-0.5 rounded ${levelColor}`}>
+                          {course.level}
+                        </span>
+                        <div className="flex items-center gap-0.5 text-gray-500">
+                          <Clock className="w-2.5 h-2.5" />
+                          <span className="text-[9px]">{course.duration}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        <Star className="w-2.5 h-2.5 text-amber-400" />
+                        <span className="text-[10px] font-medium">{course.rating}</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                      <div>
+                        <span className="text-sm font-bold text-gray-900">
+                          {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                        </span>
+                        {course.price > 0 && (
+                          <span className="text-[9px] text-gray-500 ml-1">
+                            ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-0.5 text-[#800020] text-[10px] font-medium">
+                        Détails
+                        <ChevronRight className="w-2.5 h-2.5" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           {filteredCourses.length === 0 && (
@@ -544,21 +603,27 @@ const DigitalToolsAutomationPage = () => {
                 </button>
 
                 <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => navigate('/finance-investment')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-red-400 hover:text-red-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    1
-                  </button>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
+                    2
+                  </div>
                   <button 
                     onClick={() => navigate('/data-analytics')}
                     className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-red-400 hover:text-red-600 hover:shadow-md transition-all duration-300 font-semibold"
                   >
                     3
                   </button>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
-                    2
-                  </div>
+                  <button 
+                    onClick={() => navigate('/entrepreneurship')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-red-400 hover:text-red-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    4
+                  </button>
+                  <button 
+                    onClick={() => navigate('/soft-skills-leadership')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-red-400 hover:text-red-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    5
+                  </button>
                 </div>
 
                 <button 

@@ -64,7 +64,8 @@ const softSkillsCourses = [
       "Coaching individuel"
     ],
     schedule: "Mardi & Jeudi 18h-20h",
-    nextSession: "2024-04-05"
+    nextSession: "2024-04-05",
+    type: "masterclass"
   },
   {
     id: "emotional-intelligence",
@@ -100,7 +101,8 @@ const softSkillsCourses = [
       "Support psychologique"
     ],
     schedule: "Lundi & Mercredi 19h-21h",
-    nextSession: "2024-04-08"
+    nextSession: "2024-04-08",
+    type: "e-learning"
   },
   {
     id: "effective-communication",
@@ -136,7 +138,8 @@ const softSkillsCourses = [
       "Feedback personnalisé"
     ],
     schedule: "Flexible",
-    nextSession: "2024-04-12"
+    nextSession: "2024-04-12",
+    type: "e-learning"
   },
   {
     id: "conflict-resolution",
@@ -172,7 +175,8 @@ const softSkillsCourses = [
       "Support continu"
     ],
     schedule: "2x par semaine",
-    nextSession: "2024-04-15"
+    nextSession: "2024-04-15",
+    type: "corporate"
   },
   {
     id: "team-building",
@@ -208,7 +212,8 @@ const softSkillsCourses = [
       "Mentorat inclus"
     ],
     schedule: "Flexible",
-    nextSession: "2024-04-18"
+    nextSession: "2024-04-18",
+    type: "corporate"
   },
   {
     id: "critical-thinking",
@@ -244,7 +249,8 @@ const softSkillsCourses = [
       "Support personnalisé"
     ],
     schedule: "2x par semaine",
-    nextSession: "2024-04-20"
+    nextSession: "2024-04-20",
+    type: "e-learning"
   },
   {
     id: "time-management",
@@ -280,7 +286,8 @@ const softSkillsCourses = [
       "Suivi personnalisé"
     ],
     schedule: "Flexible",
-    nextSession: "2024-04-22"
+    nextSession: "2024-04-22",
+    type: "e-learning"
   },
   {
     id: "networking-professional",
@@ -316,7 +323,8 @@ const softSkillsCourses = [
       "Mentorat carrière"
     ],
     schedule: "2x par semaine",
-    nextSession: "2024-04-25"
+    nextSession: "2024-04-25",
+    type: "masterclass"
   },
   {
     id: "stress-management",
@@ -352,7 +360,8 @@ const softSkillsCourses = [
       "Support bien-être"
     ],
     schedule: "Flexible",
-    nextSession: "2024-05-05"
+    nextSession: "2024-05-05",
+    type: "e-learning"
   },
   {
     id: "coaching-mentoring",
@@ -388,7 +397,8 @@ const softSkillsCourses = [
       "Mentorat avancé"
     ],
     schedule: "2x par semaine",
-    nextSession: "2024-04-28"
+    nextSession: "2024-04-28",
+    type: "masterclass"
   }
 ];
 
@@ -440,6 +450,33 @@ const SoftSkillsLeadershipPage = () => {
       case "intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
       case "avancé": return "bg-rose-50 text-rose-700 border-rose-200";
       default: return "bg-gray-50 text-gray-700 border-gray-200";
+    }
+  };
+
+  const getCourseTypeBadge = (type: string) => {
+    switch (type) {
+      case "e-learning": return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", label: "E-learning" };
+      case "corporate": return { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", label: "Corporate" };
+      case "masterclass": return { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", label: "Masterclass" };
+      default: return { bg: "bg-gray-50", text: "text-gray-700", border: "border-gray-200", label: "Formation" };
+    }
+  };
+
+  const handleCourseClick = (course: any) => {
+    const courseType = course.type || 'e-learning';
+    
+    switch (courseType) {
+      case 'masterclass':
+        navigate(`/masterclass/${course.id}`);
+        break;
+      case 'e-learning':
+        navigate('/e-learning');
+        break;
+      case 'corporate':
+        navigate('/corporate-programs');
+        break;
+      default:
+        navigate('/e-learning');
     }
   };
 
@@ -611,112 +648,127 @@ const SoftSkillsLeadershipPage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredCourses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-pink-300 transition-colors"
-              >
-                <div className="relative">
-                  <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="w-full h-32 object-cover"
-                  />
-                  <div className="absolute top-2 left-2">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(course.status)}`}>
-                      {course.status === "disponible" ? "Disponible" :
-                       course.status === "réservation" ? "Réservation" : "Bientôt"}
-                    </span>
-                  </div>
-                  <div className="absolute top-2 right-2">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
-                      {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <course.icon className="w-4 h-4 text-pink-600" />
-                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
-                      {course.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                    {course.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1 mb-2">
-                    {course.tags.slice(0, 2).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="px-1.5 py-0.5 bg-pink-50 text-pink-600 text-[10px] rounded"
-                      >
-                        {tag}
+            {filteredCourses.map((course, index) => {
+              const statusColor = getStatusColor(course.status);
+              const levelColor = getLevelColor(course.level);
+              const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
+              return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-pink-300 transition-colors cursor-pointer group hover:shadow-lg"
+                  onClick={() => handleCourseClick(course)}
+                >
+                  <div className="relative">
+                    <img 
+                      src={course.image || "/assets/Masterclass.jpg"} 
+                      alt={course.title}
+                      className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/Masterclass.jpg";
+                      }}
+                    />
+                    <div className="absolute top-2 left-2">
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${statusColor}`}>
+                        {course.status === "disponible" ? "Disponible" :
+                         course.status === "réservation" ? "Réservation" : "Bientôt"}
                       </span>
-                    ))}
-                    {course.tags.length > 2 && (
-                      <span className="px-1.5 py-0.5 bg-gray-50 text-gray-500 text-[10px] rounded">
-                        +{course.tags.length - 2}
+                    </div>
+                    <div className="absolute top-2 right-2">
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${levelColor}`}>
+                        {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                       </span>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2 mb-2 text-[10px]">
-                    <div className="flex items-center gap-1 text-gray-600">
-                      <Clock className="w-3 h-3" />
-                      <span>{course.duration}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-gray-600">
-                      <Users className="w-3 h-3" />
-                      <span>{course.students}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-600">
-                      <Star className="w-3 h-3 text-yellow-500" />
-                      <span>{course.rating} ({course.reviews})</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-600">
-                      <Award className="w-3 h-3" />
-                      <span>Certificat</span>
+                    {/* Badge de type en bas à gauche */}
+                    <div className="absolute bottom-2 left-2">
+                      <span className={`px-2 py-0.5 text-xs font-medium rounded-full border ${typeBadge.bg} ${typeBadge.text} ${typeBadge.border} backdrop-blur-sm`}>
+                        {typeBadge.label}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <div className="text-base font-bold text-gray-900">
-                        {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <course.icon className="w-5 h-5 text-pink-600" />
+                      <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
+                        {course.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+                      {course.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {course.tags.slice(0, 3).map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-2 py-0.5 bg-pink-50 text-pink-600 text-[10px] rounded hover:bg-pink-100 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {course.tags.length > 3 && (
+                        <span className="px-2 py-0.5 bg-gray-50 text-gray-500 text-[10px] rounded">
+                          +{course.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 mb-3 text-[10px]">
+                      <div className="flex items-center gap-1 text-gray-600">
+                        <Clock className="w-3 h-3" />
+                        <span>{course.duration}</span>
                       </div>
-                      {course.price > 0 && (
-                        <div className="text-[10px] text-gray-500">
-                          {(course.price / 655.96 / 1000).toFixed(1)}k XOF
+                      <div className="flex items-center gap-1 text-gray-600">
+                        <Users className="w-3 h-3" />
+                        <span>{course.students}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-600">
+                        <Star className="w-3 h-3 text-yellow-500" />
+                        <span>{course.rating} ({course.reviews})</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-600">
+                        <Award className="w-3 h-3" />
+                        <span>Certificat</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <div className="text-base font-bold text-gray-900">
+                          {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                         </div>
+                        {course.price > 0 && (
+                          <div className="text-[10px] text-gray-500">
+                            ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleCourseClick(course)}
+                        className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-pink-600 text-white text-xs rounded hover:bg-pink-700 transition-colors hover:shadow-md"
+                      >
+                        Voir
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                      {course.status === "disponible" && (
+                        <button
+                          className="px-3 py-2 border border-pink-600 text-pink-600 text-xs rounded hover:bg-pink-50 transition-colors"
+                        >
+                          S'inscrire
+                        </button>
                       )}
                     </div>
                   </div>
-
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => navigate(`/formation/${course.id}`)}
-                      className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 bg-pink-600 text-white text-xs rounded hover:bg-pink-700 transition-colors"
-                    >
-                      Voir
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                    {course.status === "disponible" && (
-                      <button
-                        className="px-3 py-1.5 border border-pink-600 text-pink-600 text-xs rounded hover:bg-pink-50 transition-colors"
-                      >
-                        S'inscrire
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           {filteredCourses.length === 0 && (
@@ -767,16 +819,22 @@ const SoftSkillsLeadershipPage = () => {
 
                 <div className="flex items-center gap-2">
                   <button 
+                    onClick={() => navigate('/digital-tools-automation')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-pink-400 hover:text-pink-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    2
+                  </button>
+                  <button 
+                    onClick={() => navigate('/data-analytics')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-pink-400 hover:text-pink-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    3
+                  </button>
+                  <button 
                     onClick={() => navigate('/entrepreneurship')}
                     className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-pink-400 hover:text-pink-600 hover:shadow-md transition-all duration-300 font-semibold"
                   >
                     4
-                  </button>
-                  <button 
-                    onClick={() => navigate('/finance-investment')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-pink-400 hover:text-pink-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    1
                   </button>
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
                     5

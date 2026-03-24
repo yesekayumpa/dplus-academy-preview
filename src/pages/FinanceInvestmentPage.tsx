@@ -41,7 +41,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
     tags: ["Finance", "Analyse", "Marchés"],
     status: "disponible",
-    icon: TrendingUp
+    icon: TrendingUp,
+    type: "e-learning"
   },
   {
     id: "investment-strategies",
@@ -58,7 +59,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop&crop=center",
     tags: ["Investissement", "Trading", "Analyse"],
     status: "disponible",
-    icon: DollarSign
+    icon: DollarSign,
+    type: "masterclass"
   },
   {
     id: "financial-modeling",
@@ -75,7 +77,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center",
     tags: ["Modeling", "Valuation", "Excel"],
     status: "disponible",
-    icon: LineChart
+    icon: LineChart,
+    type: "corporate"
   },
   {
     id: "cryptocurrency-trading",
@@ -92,7 +95,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop&crop=center",
     tags: ["Crypto", "Blockchain", "Trading"],
     status: "réservation",
-    icon: Shield
+    icon: Shield,
+    type: "corporate"
   },
   {
     id: "corporate-finance",
@@ -109,7 +113,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop&crop=center",
     tags: ["Corporate", "Trésorerie", "Stratégie"],
     status: "disponible",
-    icon: Briefcase
+    icon: Briefcase,
+    type: "corporate"
   },
   {
     id: "risk-management",
@@ -126,7 +131,8 @@ const financeCourses = [
     image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&crop=center",
     tags: ["Risk", "Compliance", "Audit"],
     status: "bientôt_disponible",
-    icon: Shield
+    icon: Shield,
+    type: "e-learning"
   }
 ];
 
@@ -178,6 +184,33 @@ const FinanceInvestmentPage = () => {
       case "intermédiaire": return { bg: "bg-amber-50", text: "text-amber-700", label: "Intermédiaire" };
       case "avancé": return { bg: "bg-rose-50", text: "text-rose-700", label: "Avancé" };
       default: return { bg: "bg-gray-50", text: "text-gray-700", label: "Inconnu" };
+    }
+  };
+
+  const getCourseTypeBadge = (type: string) => {
+    switch (type) {
+      case "e-learning": return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", label: "E-learning" };
+      case "corporate": return { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200", label: "Corporate" };
+      case "masterclass": return { bg: "bg-orange-50", text: "text-orange-700", border: "border-orange-200", label: "Masterclass" };
+      default: return { bg: "bg-gray-50", text: "text-gray-700", border: "border-gray-200", label: "Inconnu" };
+    }
+  };
+
+  const handleCourseClick = (course: any) => {
+    const courseType = course.type || 'e-learning';
+    
+    switch (courseType) {
+      case 'masterclass':
+        navigate(`/masterclass/${course.id}`);
+        break;
+      case 'e-learning':
+        navigate('/e-learning');
+        break;
+      case 'corporate':
+        navigate('/corporate-programs');
+        break;
+      default:
+        navigate('/e-learning');
     }
   };
 
@@ -356,29 +389,39 @@ const FinanceInvestmentPage = () => {
             {filteredCourses.map((course, index) => {
               const statusBadge = getStatusBadge(course.status);
               const levelBadge = getLevelBadge(course.level);
+              const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
               return (
                 <motion.div
                   key={course.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-blue-300 transition-all cursor-pointer"
-                  onClick={() => navigate(`/formation/${course.id}`)}
+                  className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-blue-300 transition-all cursor-pointer hover:shadow-lg"
+                  onClick={() => handleCourseClick(course)}
                 >
-                  <div className="relative h-44 overflow-hidden bg-gray-100">
+                  <div className="relative h-48 overflow-hidden bg-gray-100">
                     <img 
-                      src={course.image} 
+                      src={course.image || "/assets/Masterclass.jpg"} 
                       alt={course.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/Masterclass.jpg";
+                      }}
                     />
                     <div className="absolute top-3 left-3 flex gap-2">
                       <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${statusBadge.bg} ${statusBadge.text}`}>
                         {statusBadge.label}
                       </span>
                     </div>
-                    <div className="absolute top-3 right-3">
+                    <div className="absolute top-3 right-3 flex flex-col gap-2">
                       <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${levelBadge.bg} ${levelBadge.text}`}>
                         {levelBadge.label}
+                      </span>
+                    </div>
+                    {/* Badge de type en bas à gauche */}
+                    <div className="absolute bottom-3 left-3">
+                      <span className={`px-2.5 py-1 text-xs font-medium rounded-full border ${typeBadge.bg} ${typeBadge.text} ${typeBadge.border} backdrop-blur-sm`}>
+                        {typeBadge.label}
                       </span>
                     </div>
                   </div>
@@ -401,37 +444,40 @@ const FinanceInvestmentPage = () => {
                       {course.tags.map((tag) => (
                         <span 
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg"
+                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg hover:bg-gray-200 transition-colors"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between mb-4 pt-3 border-t border-gray-100">
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-gray-500">
-                          <Clock className="w-3.5 h-3.5" />
-                          <span className="text-xs">{course.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-gray-500">
-                          <Users className="w-3.5 h-3.5" />
-                          <span className="text-xs">{course.students}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Star className="w-3.5 h-3.5 text-amber-400" />
-                          <span className="text-xs font-medium">{course.rating}</span>
-                        </div>
+                    <div className="grid grid-cols-3 gap-3 mb-4">
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-xs">{course.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <Users className="w-4 h-4" />
+                        <span className="text-xs">{course.students}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 text-amber-400" />
+                        <span className="text-xs font-medium">{course.rating}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                       <div>
                         <span className="text-lg font-bold text-gray-900">
                           {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                         </span>
+                        {course.price > 0 && (
+                          <span className="text-xs text-gray-500 ml-1">
+                            ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
+                          </span>
+                        )}
                       </div>
-                      <button className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors">
+                      <button className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors hover:shadow-md">
                         Détails
                         <ArrowRight className="w-4 h-4" />
                       </button>
@@ -515,21 +561,33 @@ const FinanceInvestmentPage = () => {
                 </button>
 
                 <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => navigate('/soft-skills-leadership')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    5
-                  </button>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
+                    1
+                  </div>
                   <button 
                     onClick={() => navigate('/digital-tools-automation')}
                     className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
                   >
                     2
                   </button>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
-                    1
-                  </div>
+                  <button 
+                    onClick={() => navigate('/data-analytics')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    3
+                  </button>
+                  <button 
+                    onClick={() => navigate('/entrepreneurship')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    4
+                  </button>
+                  <button 
+                    onClick={() => navigate('/soft-skills-leadership')}
+                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
+                  >
+                    5
+                  </button>
                 </div>
 
                 <button 

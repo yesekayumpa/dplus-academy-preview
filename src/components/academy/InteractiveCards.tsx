@@ -116,13 +116,13 @@ const InteractiveCards = () => {
         navigate("/finance-investment");
         break;
       case "informatique":
-        navigate("/outils-digitaux-automatisation");
+        navigate("/digital-tools-automation");
         break;
       case "data":
         navigate("/data-analytics");
         break;
       case "entrepreneurship":
-        navigate("/entrepreneuriat");
+        navigate("/entrepreneurship");
         break;
       case "soft-skills":
         navigate("/soft-skills-leadership");

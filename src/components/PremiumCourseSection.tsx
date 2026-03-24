@@ -1,7 +1,22 @@
 import React from 'react';
 import { Sparkles, Star, MessageCircle, Lightbulb } from 'lucide-react';
 
-const PremiumCourseSection = () => {
+interface PremiumCourseSectionProps {
+  course?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    originalPrice?: number;
+    duration?: string;
+    modules?: number;
+    instructor?: string;
+    level?: string;
+    category?: string;
+  };
+}
+
+const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
   return (
     <section className="py-3 bg-white" id="formations" data-courses-section="true">
       <div className="relative bg-white text-gray-900 py-4 px-3 sm:px-4 lg:px-6 pt-8 sm:pt-12 lg:pt-16">
@@ -12,14 +27,14 @@ const PremiumCourseSection = () => {
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
             <span className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent">
-              Deviens un Designer
+              {course?.title || "Deviens un Designer"}
             </span>
             <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
-              Graphique Professionnel
+              {course?.category === "Design" ? "Graphique Professionnel" : "Expert dans votre domaine"}
             </span>
           </h1>
           <p className="text-base sm:text-lg text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
-            Apprends à utiliser Photoshop, Illustrator et InDesign comme un pro, avec en BONUS des formations en Montage Vidéo (Premiere Pro) et Marketing Digital.
+            {course?.description || "Apprends à utiliser Photoshop, Illustrator et InDesign comme un pro, avec en BONUS des formations en Montage Vidéo (Premiere Pro) et Marketing Digital."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a 
@@ -120,10 +135,14 @@ const PremiumCourseSection = () => {
                 <div className="relative h-48 lg:h-full min-h-[250px] flex items-center justify-center p-2 md:p-4">
                   <div className="relative">
                     <img 
-                      src="/pack-design-graphique-removebg-preview.png" 
-                      alt="Pack Design Graphique" 
+                      src={course?.image || "/pack-design-graphique-removebg-preview.png"} 
+                      alt={course?.title || "Pack Design Graphique"} 
                       className="relative w-full h-full object-contain rounded-2xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300" 
                       loading="eager"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/pack-design-graphique-removebg-preview.png";
+                      }}
                     />
                   </div>
                 </div>

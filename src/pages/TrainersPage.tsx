@@ -47,7 +47,7 @@ const trainers = [
     name: "Dr. Marie Dubois",
     title: "PhD Computer Science, ex-Google",
     bio: "Expert en intelligence artificielle et machine learning avec plus de 15 ans d'expérience dans la tech. J'ai formé plus de 15 000 étudiants et développé des programmes innovants pour les plus grandes écoles.",
-    image: "/assets/Formateur Afrique.jpg",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: [
       "Machine Learning",
       "Deep Learning",
@@ -95,7 +95,7 @@ const trainers = [
     name: "Prof. Jean Martin",
     title: "Data Scientist, ex-IBM",
     bio: "Spécialiste en analyse de données et visualisation, passionné par la transformation digitale des entreprises. J'accompagne les organisations dans leur transition data-driven.",
-    image: "/assets/E-learning2.jpg",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: ["Data Analysis", "Tableau", "Power BI", "SQL", "Python", "R"],
     courses: [
       "Data Visualization avec Tableau",
@@ -139,7 +139,7 @@ const trainers = [
     name: "Sarah Laurent",
     title: "Lead Designer, Freelance",
     bio: "Designer UI/UX créative, spécialisée dans la création d'expériences digitales mémorables et intuitives. J'ai travaillé avec plus de 50 startups et grandes entreprises.",
-    image: "/assets/Masterclass.jpg",
+    image: "https://images.unsplash.com/photo-1494790108777-466d853b884d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: [
       "UI Design",
       "UX Design",
@@ -178,7 +178,7 @@ const trainers = [
     name: "Marc Dubois",
     title: "Strategy Consultant, McKinsey",
     bio: "Consultant en stratégie d'entreprise, expert en transformation organisationnelle et innovation business. J'ai accompagné plus de 30 entreprises du CAC 40.",
-    image: "/assets/Formateur Afrique.jpg",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: [
       "Business Strategy",
       "Management",
@@ -225,7 +225,7 @@ const trainers = [
     name: "Julie Bernard",
     title: "Growth Marketing Lead",
     bio: "Experte en marketing digital et croissance, spécialisée dans les stratégies d'acquisition et de rétention. J'ai généré +200% de croissance pour 3 startups.",
-    image: "/assets/E-learning2.jpg",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: [
       "Marketing Digital",
       "SEO/SEA",
@@ -268,7 +268,7 @@ const trainers = [
     name: "Antoine Bernard",
     title: "Data Engineer, Datadog",
     bio: "Architecte de données spécialisé dans les systèmes distribués et le traitement en temps réel. Je forme les équipes aux technologies big data modernes.",
-    image: "/assets/Masterclass.jpg",
+    image: "https://images.unsplash.com/photo-1494790108777-466d853b884d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
     specialties: [
       "Big Data",
       "Apache Spark",

@@ -292,7 +292,7 @@ const SurmesureDetailPage = () => {
                         onClick={() => setShowInstructorModal(true)}
                       >
                         <img 
-                          src="/assets/Formateur Afrique.jpg" 
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
                           alt={course.instructor || "Formateur"}
                           className="w-full h-full object-cover"
                         />
@@ -529,7 +529,7 @@ const SurmesureDetailPage = () => {
                   <div className="flex items-center gap-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
                       <img 
-                        src="/assets/Formateur Afrique.jpg" 
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
                         alt={course.instructor || "Formateur"}
                         className="w-full h-full object-cover"
                       />
