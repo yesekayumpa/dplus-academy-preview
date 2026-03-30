@@ -47,7 +47,7 @@ const trainers = [
     name: "Dr. Marie Dubois",
     title: "PhD Computer Science, ex-Google",
     bio: "Expert en intelligence artificielle et machine learning avec plus de 15 ans d'expérience dans la tech. J'ai formé plus de 15 000 étudiants et développé des programmes innovants pour les plus grandes écoles.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: [
       "Machine Learning",
       "Deep Learning",
@@ -95,7 +95,7 @@ const trainers = [
     name: "Prof. Jean Martin",
     title: "Data Scientist, ex-IBM",
     bio: "Spécialiste en analyse de données et visualisation, passionné par la transformation digitale des entreprises. J'accompagne les organisations dans leur transition data-driven.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: ["Data Analysis", "Tableau", "Power BI", "SQL", "Python", "R"],
     courses: [
       "Data Visualization avec Tableau",
@@ -139,7 +139,7 @@ const trainers = [
     name: "Sarah Laurent",
     title: "Lead Designer, Freelance",
     bio: "Designer UI/UX créative, spécialisée dans la création d'expériences digitales mémorables et intuitives. J'ai travaillé avec plus de 50 startups et grandes entreprises.",
-    image: "https://images.unsplash.com/photo-1494790108777-466d853b884d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: [
       "UI Design",
       "UX Design",
@@ -178,7 +178,7 @@ const trainers = [
     name: "Marc Dubois",
     title: "Strategy Consultant, McKinsey",
     bio: "Consultant en stratégie d'entreprise, expert en transformation organisationnelle et innovation business. J'ai accompagné plus de 30 entreprises du CAC 40.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: [
       "Business Strategy",
       "Management",
@@ -225,7 +225,7 @@ const trainers = [
     name: "Julie Bernard",
     title: "Growth Marketing Lead",
     bio: "Experte en marketing digital et croissance, spécialisée dans les stratégies d'acquisition et de rétention. J'ai généré +200% de croissance pour 3 startups.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: [
       "Marketing Digital",
       "SEO/SEA",
@@ -268,7 +268,7 @@ const trainers = [
     name: "Antoine Bernard",
     title: "Data Engineer, Datadog",
     bio: "Architecte de données spécialisé dans les systèmes distribués et le traitement en temps réel. Je forme les équipes aux technologies big data modernes.",
-    image: "https://images.unsplash.com/photo-1494790108777-466d853b884d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    image: "/assets/Formateur Afrique.jpg",
     specialties: [
       "Big Data",
       "Apache Spark",
@@ -321,6 +321,7 @@ const TrainersPage = () => {
     (typeof trainers)[0] | null
   >(null);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [modalImageError, setModalImageError] = useState(false);
 
   // Forcer le scroll vers le haut au chargement de la page
   useEffect(() => {
@@ -328,6 +329,11 @@ const TrainersPage = () => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }, []);
+
+  // Réinitialiser l'erreur d'image du modal quand le formateur change
+  useEffect(() => {
+    setModalImageError(false);
+  }, [selectedTrainer]);
 
   const specialties = [
     ...new Set(trainers.flatMap((trainer) => trainer.specialties)),
@@ -349,31 +355,48 @@ const TrainersPage = () => {
     trainer: (typeof trainers)[0];
     onClick: () => void;
     featured?: boolean;
-  }) => (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="group cursor-pointer"
-      onClick={onClick}
-    >
-      <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full flex flex-col">
-        {/* Image avec overlay bordeaux */}
-        <div className="relative h-36 overflow-hidden flex-shrink-0">
-          <img
-            src={trainer.image}
-            alt={trainer.name}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#46181e] to-transparent opacity-60" />
-          
-          {featured && (
-            <Badge className="absolute top-2 left-2 bg-yellow-400 text-gray-900 border-0 text-xs px-2 py-0.5">
-              <Sparkles className="w-3 h-3 mr-1" />
-              Vedette
-            </Badge>
-          )}
-        </div>
+  }) => {
+    const [imageError, setImageError] = useState(false);
+
+    return (
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="group cursor-pointer"
+        onClick={onClick}
+      >
+        <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full flex flex-col">
+          {/* Image avec overlay bordeaux */}
+          <div className="relative h-36 overflow-hidden flex-shrink-0">
+            {!imageError ? (
+              <img
+                src={trainer.image}
+                alt={trainer.name}
+                className="w-full h-full object-cover"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-[#fbe7ea] to-[#f5cbd1] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span className="text-white font-bold text-lg">
+                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-600">Image non disponible</p>
+                </div>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#46181e] to-transparent opacity-60" />
+            
+            {featured && (
+              <Badge className="absolute top-2 left-2 bg-yellow-400 text-gray-900 border-0 text-xs px-2 py-0.5">
+                <Sparkles className="w-3 h-3 mr-1" />
+                Vedette
+              </Badge>
+            )}
+          </div>
 
         <CardContent className="p-3 flex-1 flex flex-col">
           {/* Nom et titre */}
@@ -426,7 +449,8 @@ const TrainersPage = () => {
         </CardContent>
       </Card>
     </motion.article>
-  );
+    );
+  };
 
   return (
     <Layout>
@@ -534,11 +558,24 @@ const TrainersPage = () => {
                   {/* Header fixe avec bordeaux */}
                   <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#f5cbd1] bg-gradient-to-r from-[#fbe7ea] to-white flex-shrink-0">
                     <div className="relative flex-shrink-0">
-                      <img
-                        src={selectedTrainer.image}
-                        alt={selectedTrainer.name}
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border-4 border-white shadow-xl"
-                      />
+                      {!modalImageError ? (
+                        <img
+                          src={selectedTrainer.image}
+                          alt={selectedTrainer.name}
+                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border-4 border-white shadow-xl"
+                          onError={() => setModalImageError(true)}
+                        />
+                      ) : (
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-[#fbe7ea] to-[#f5cbd1] flex items-center justify-center border-4 border-white shadow-xl">
+                          <div className="text-center">
+                            <div className="w-8 h-8 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto">
+                              <span className="text-white font-bold text-sm">
+                                {selectedTrainer.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       {selectedTrainer.featured && (
                         <div className="absolute -top-2 -right-2">
                           <Badge className="bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white border-0 px-2 py-1 text-xs shadow-lg">

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Sparkles, Star, MessageCircle, Lightbulb } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Star, MessageCircle, Lightbulb, X } from 'lucide-react';
 
 interface PremiumCourseSectionProps {
   course?: {
@@ -17,6 +17,36 @@ interface PremiumCourseSectionProps {
 }
 
 const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
+  const [showChariowModal, setShowChariowModal] = useState(false);
+
+  const openChariowModal = () => {
+    setShowChariowModal(true);
+    // Bloquer le scroll de la page
+    document.body.style.overflow = 'hidden';
+    // Load Chariow widget script and CSS when modal opens
+    const script = document.createElement('script');
+    script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+    document.head.appendChild(link);
+  };
+
+  const closeChariowModal = () => {
+    setShowChariowModal(false);
+    // Réactiver le scroll de la page
+    document.body.style.overflow = 'unset';
+  };
+
+  // Nettoyer le style overflow quand le composant est démonté
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
   return (
     <section className="py-3 bg-white" id="formations" data-courses-section="true">
       <div className="relative bg-white text-gray-900 py-4 px-3 sm:px-4 lg:px-6 pt-8 sm:pt-12 lg:pt-16">
@@ -37,14 +67,12 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
             {course?.description || "Apprends à utiliser Photoshop, Illustrator et InDesign comme un pro, avec en BONUS des formations en Montage Vidéo (Premiere Pro) et Marketing Digital."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-            <a 
-              href="https://academydmplus-group.mychariow.shop/" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <button 
+              onClick={openChariowModal}
               className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl max-w-xs sm:max-w-none inline-flex items-center justify-center"
             >
               <span className="flex items-center gap-2">Acheter la formation</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -151,6 +179,38 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
           </div>
         </section>
       </div>
+
+      {/* Chariow Modal */}
+      {showChariowModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-auto relative">
+            <button
+              onClick={closeChariowModal}
+              className="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors"
+            >
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+            
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Rejoindre la formation</h2>
+              
+              {/* Chariow Widget */}
+              <div id="chariow-widget" 
+                   data-product-id="prd_6lpbgj"
+                   data-store-domain="academydmplus-group.mychariow.shop"
+                   data-style="frame"
+                   data-border-style="rounded"
+                   data-cta-width="xs"
+                   data-cta-animation="none"
+                   data-locale="en"
+                   data-primary-color="#ff0000"
+                   data-background-color="#FFFFFF"
+                   data-custom-cta-text="Rejoindre la formation">
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
