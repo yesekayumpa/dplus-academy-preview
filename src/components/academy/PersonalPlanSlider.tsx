@@ -252,8 +252,21 @@ const PersonalPlanSlider = () => {
                     }}
                   >
                     <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 p-6 md:p-8">
-                      {/* Content Section */}
-                      <div className="flex-1 space-y-6 text-center lg:text-left">
+                      {/* Image Section - en premier sur mobile */}
+                      <div className="flex-1 lg:max-w-md lg:order-2">
+                        <div className="relative">
+                          <img
+                            src={slide.image}
+                            srcSet={`${slide.image} 1x, ${slide.image.replace('@1x', '@2x')} 2x`}
+                            alt="Interface de jeu de rôle illustrant un exercice de conversation avec l'IA"
+                            className="w-full h-auto rounded-lg border border-gray-200"
+                            loading="eager"
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Content Section - en deuxième sur mobile */}
+                      <div className="flex-1 space-y-6 text-center lg:text-left lg:order-1">
                         <div className="space-y-4">
                           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
                             {slide.title}
@@ -299,19 +312,6 @@ const PersonalPlanSlider = () => {
                           >
                             Explorer ce domaine
                           </button>
-                        </div>
-                      </div>
-                      
-                      {/* Image Section */}
-                      <div className="flex-1 lg:max-w-md">
-                        <div className="relative">
-                          <img
-                            src={slide.image}
-                            srcSet={`${slide.image} 1x, ${slide.image.replace('@1x', '@2x')} 2x`}
-                            alt="Interface de jeu de rôle illustrant un exercice de conversation avec l'IA"
-                            className="w-full h-auto rounded-lg border border-gray-200"
-                            loading="eager"
-                          />
                         </div>
                       </div>
                     </div>
