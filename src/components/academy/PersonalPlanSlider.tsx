@@ -47,7 +47,8 @@ const PersonalPlanSlider = () => {
           text: "Évaluation d'investissements"
         }
       ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
+      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp",
+      route: "/finance-investment"
     },
     {
       id: 2,
@@ -70,7 +71,8 @@ const PersonalPlanSlider = () => {
           text: "Outils collaboratifs"
         }
       ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
+      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp",
+      route: "/digital-tools-automation"
     },
     {
       id: 3,
@@ -93,7 +95,8 @@ const PersonalPlanSlider = () => {
           text: "Business Intelligence"
         }
       ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
+      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp",
+      route: "/data-analytics"
     },
     {
       id: 4,
@@ -116,7 +119,8 @@ const PersonalPlanSlider = () => {
           text: "Marketing stratégique"
         }
       ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
+      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp",
+      route: "/entrepreneurship"
     },
     {
       id: 5,
@@ -139,7 +143,8 @@ const PersonalPlanSlider = () => {
           text: "Intelligence émotionnelle"
         }
       ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
+      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp",
+      route: "/soft-skills-leadership"
     }
   ];
 
@@ -217,10 +222,10 @@ const PersonalPlanSlider = () => {
           {/* Header du slider */}
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Transformez votre carrière
+              Nos Piliers de Formation
             </h2>
             <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Découvrez nos solutions adaptées à vos objectifs professionnels
+              Une approche structurée pour un apprentissage durable et impactant
             </p>
           </div>
 
@@ -289,7 +294,7 @@ const PersonalPlanSlider = () => {
                         {/* CTA Section */}
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4">
                           <button
-                            onClick={() => handleNavigateWithScroll('/personal-plan/')}
+                            onClick={() => handleNavigateWithScroll(slide.route)}
                             className="px-6 py-2 bg-gray-900 text-white rounded-lg font-semibold text-sm hover:bg-gray-800 transition-colors duration-300"
                           >
                             Explorer ce domaine

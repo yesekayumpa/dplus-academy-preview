@@ -23,6 +23,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import FormationPagination from "@/components/academy/FormationPagination";
 
 // Formations relatives à la Finance & Investment
 const financeCourses = [
@@ -142,6 +143,8 @@ const FinanceInvestmentPage = () => {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 4;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -161,6 +164,17 @@ const FinanceInvestmentPage = () => {
     
     return matchesSearch && matchesLevel && matchesStatus;
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedLevel, selectedStatus]);
 
   const stats = {
     total: financeCourses.length,
@@ -375,10 +389,10 @@ const FinanceInvestmentPage = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-gray-900">
-                {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''}
+                {currentCourses.length} formation{currentCourses.length > 1 ? 's' : ''} sur {filteredCourses.length}
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                {filteredCourses.length === financeCourses.length 
+                Page {currentPage} sur {totalPages} • {filteredCourses.length === financeCourses.length 
                   ? "Toutes nos formations en finance & investment" 
                   : "Résultats de votre recherche"}
               </p>
@@ -386,7 +400,7 @@ const FinanceInvestmentPage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCourses.map((course, index) => {
+            {currentCourses.map((course, index) => {
               const statusBadge = getStatusBadge(course.status);
               const levelBadge = getLevelBadge(course.level);
               const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
@@ -488,6 +502,51 @@ const FinanceInvestmentPage = () => {
             })}
           </div>
 
+          {/* Pagination interne */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-4 mt-8">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentPage === 1 
+                    ? 'text-gray-300 cursor-not-allowed' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                      currentPage === page
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentPage === totalPages 
+                    ? 'text-gray-300 cursor-not-allowed' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+
           {filteredCourses.length === 0 && (
             <div className="text-center py-16">
               <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -535,84 +594,8 @@ const FinanceInvestmentPage = () => {
           </div>
         </section>
 
-        {/* Navigation Élégante */}
-        <section className="bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center gap-8">
-              {/* Indicateur de progression */}
-              <div className="w-full max-w-2xl">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-gray-600">Progression</span>
-                  <span className="text-sm font-medium text-blue-600">33%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500" style={{ width: '33%' }}></div>
-                </div>
-              </div>
-
-              {/* Pagination moderne */}
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => navigate('/soft-skills-leadership')}
-                  className="group relative px-6 py-3 bg-white border border-gray-300 rounded-2xl text-gray-700 hover:border-blue-400 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
-                >
-                  <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
-                  <span className="font-medium">Précédent</span>
-                </button>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
-                    1
-                  </div>
-                  <button 
-                    onClick={() => navigate('/digital-tools-automation')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    2
-                  </button>
-                  <button 
-                    onClick={() => navigate('/data-analytics')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    3
-                  </button>
-                  <button 
-                    onClick={() => navigate('/entrepreneurship')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    4
-                  </button>
-                  <button 
-                    onClick={() => navigate('/soft-skills-leadership')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    5
-                  </button>
-                </div>
-
-                <button 
-                  onClick={() => navigate('/digital-tools-automation')}
-                  className="group relative px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                >
-                  <span className="font-medium">Suivant</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
-              </div>
-
-              {/* Indicateur de pages */}
-              <div className="flex items-center gap-6 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                  <span>Finance & Investment</span>
-                </div>
-                <span className="text-gray-300">|</span>
-                <span>Page 1 sur 5</span>
-                <span className="text-gray-300">|</span>
-                <span>Formation certifiante</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Pagination des formations */}
+        <FormationPagination />
       </div>
     </Layout>
   );

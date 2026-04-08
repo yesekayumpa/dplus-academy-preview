@@ -29,6 +29,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import FormationPagination from "@/components/academy/FormationPagination";
 
 // Formations relatives à Data & Analytics
 const dataAnalyticsCourses = [
@@ -229,6 +230,8 @@ const DataAnalyticsPage = () => {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 4;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -248,6 +251,17 @@ const DataAnalyticsPage = () => {
     
     return matchesSearch && matchesLevel && matchesStatus;
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedLevel, selectedStatus]);
 
   const stats = {
     total: dataAnalyticsCourses.length,
@@ -459,19 +473,21 @@ const DataAnalyticsPage = () => {
 
         {/* Courses Grid - Cartes réduites */}
         <section className="container mx-auto px-4 py-8">
-          <div className="mb-4">
-            <h2 className="text-base font-medium text-gray-900 mb-0.5">
-              {filteredCourses.length} formation{filteredCourses.length > 1 ? 's' : ''}
-            </h2>
-            <p className="text-xs text-gray-500">
-              {filteredCourses.length === dataAnalyticsCourses.length 
-                ? "Toutes nos formations en data & analytics" 
-                : "Résultats de votre recherche"}
-            </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">
+                {currentCourses.length} formation{currentCourses.length > 1 ? 's' : ''} sur {filteredCourses.length}
+              </h2>
+              <p className="text-xs text-gray-500">
+                Page {currentPage} sur {totalPages} • {filteredCourses.length === dataAnalyticsCourses.length 
+                  ? "Toutes nos formations en data & analytics" 
+                  : "Résultats de votre recherche"}
+              </p>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredCourses.map((course, index) => {
+            {currentCourses.map((course, index) => {
               const statusColor = getStatusColor(course.status);
               const levelColor = getLevelColor(course.level);
               const typeBadge = getCourseTypeBadge(course.type || 'e-learning');
@@ -578,6 +594,51 @@ const DataAnalyticsPage = () => {
             })}
           </div>
 
+          {/* Pagination interne */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentPage === 1 
+                    ? 'text-gray-300 cursor-not-allowed' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                      currentPage === page
+                        ? 'bg-[#800020] text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentPage === totalPages 
+                    ? 'text-gray-300 cursor-not-allowed' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+
           {filteredCourses.length === 0 && (
             <div className="text-center py-8">
               <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-2 border border-gray-200">
@@ -597,79 +658,6 @@ const DataAnalyticsPage = () => {
               </button>
             </div>
           )}
-        </section>
-
-        {/* Navigation Élégante */}
-        <section className="bg-gradient-to-r from-emerald-50 to-teal-50 border-t border-gray-200 py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center gap-8">
-              {/* Indicateur de progression */}
-              <div className="w-full max-w-2xl">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-gray-600">Progression</span>
-                  <span className="text-sm font-medium text-emerald-600">60%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-600 h-2 rounded-full transition-all duration-500" style={{ width: '60%' }}></div>
-                </div>
-              </div>
-
-              {/* Pagination moderne */}
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => navigate('/digital-tools-automation')}
-                  className="group relative px-6 py-3 bg-white border border-gray-300 rounded-2xl text-gray-700 hover:border-emerald-400 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
-                >
-                  <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
-                  <span className="font-medium">Précédent</span>
-                </button>
-
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => navigate('/digital-tools-automation')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    2
-                  </button>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg flex items-center justify-center font-bold text-lg">
-                    3
-                  </div>
-                  <button 
-                    onClick={() => navigate('/entrepreneurship')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    4
-                  </button>
-                  <button 
-                    onClick={() => navigate('/soft-skills-leadership')}
-                    className="w-12 h-12 rounded-xl bg-white border-2 border-gray-300 text-gray-600 hover:border-emerald-400 hover:text-emerald-600 hover:shadow-md transition-all duration-300 font-semibold"
-                  >
-                    5
-                  </button>
-                </div>
-
-                <button 
-                  onClick={() => navigate('/entrepreneurship')}
-                  className="group relative px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                >
-                  <span className="font-medium">Suivant</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
-              </div>
-
-              {/* Indicateur de pages */}
-              <div className="flex items-center gap-6 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                  <span>Data & Analytics</span>
-                </div>
-                <span className="text-gray-300">|</span>
-                <span>Page 3 sur 5</span>
-                <span className="text-gray-300">|</span>
-                <span>Formation certifiante</span>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* CTA Section - Sans dégradé */}
@@ -695,6 +683,9 @@ const DataAnalyticsPage = () => {
           </div>
         </section>
       </div>
+      
+      {/* Pagination des formations */}
+      <FormationPagination />
     </Layout>
   );
 };

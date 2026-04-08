@@ -147,6 +147,32 @@ const MasterclassDetailPage = () => {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showInstructorPopup, setShowInstructorPopup] = useState(false);
   
+  // Bloquer le scroll de la page principale quand un popup est ouvert
+  useEffect(() => {
+    if (showRegistrationForm || showInstructorPopup) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+    };
+  }, [showRegistrationForm, showInstructorPopup]);
+  
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -179,7 +205,7 @@ const MasterclassDetailPage = () => {
     
     // Titre
     doc.setFontSize(20);
-    doc.setTextColor(70, 24, 30); // Couleur bordeaux
+    doc.setTextColor(70, 24, 30);
     doc.text('PLAQUETTE DE FORMATION', 105, 20, { align: 'center' });
     
     // Ligne de séparation
@@ -573,11 +599,10 @@ const MasterclassDetailPage = () => {
                 </div>
                 
                 <div className="p-4 sm:p-6 lg:p-8">
-                  {/* TEXTE CORRIGÉ AVEC ANIMATION */}
                   <motion.p 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.1 + ("Transformez votre avenir".length + " avenir numérique".length) * 0.05 + 0.3 }}
+                    transition={{ delay: 0.1 }}
                     className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 max-w-lg"
                   >
                     Transformez votre <span className="whitespace-nowrap">avenir numérique</span>
@@ -846,7 +871,7 @@ const MasterclassDetailPage = () => {
           </div>
         </div>
 
-        {/* Modal d'inscription - CORRIGÉ AVEC SCROLL ET SANS LA PARTIE BLEUE */}
+        {/* Modal d'inscription */}
         <AnimatePresence>
           {showRegistrationForm && (
             <RegistrationModal
@@ -856,7 +881,7 @@ const MasterclassDetailPage = () => {
           )}
         </AnimatePresence>
 
-        {/* Popup formateur - TAILLE RÉDUITE ET POLICE PLUS PETITE */}
+        {/* Popup formateur */}
         <AnimatePresence>
           {showInstructorPopup && (
             <InstructorPopup
@@ -891,25 +916,23 @@ const NotFoundState = ({ onBack }: { onBack: () => void }) => (
   </Layout>
 );
 
-// Popup formateur - TAILLE RÉDUITE ET POLICE PLUS PETITE
+// Popup formateur
 const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-2 sm:p-4 overscroll-none"
-    style={{ touchAction: 'none' }}
+    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4"
     onClick={onClose}
   >
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
-      className="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto overscroll-contain mx-auto shadow-xl"
-      style={{ touchAction: 'pan-y' }}
+      className="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto mx-auto shadow-xl"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* En-tête avec bouton de fermeture - Plus compact */}
+      {/* En-tête */}
       <div className="relative bg-gradient-to-r from-gray-50 to-white px-3 sm:px-4 py-3 border-b border-gray-100">
         <button
           onClick={onClose}
@@ -928,10 +951,10 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
         </div>
       </div>
       
-      {/* Contenu principal - Plus compact */}
+      {/* Contenu principal */}
       <div className="p-4">
         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-          {/* Image plus petite */}
+          {/* Image */}
           <div className="relative group flex-shrink-0 mx-auto sm:mx-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--academy-primary))] to-[hsl(var(--academy-primary))/60%] rounded-full blur-md opacity-20" />
@@ -940,7 +963,6 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
                 alt={instructor.name}
                 className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white shadow-md"
               />
-              {/* Badge de vérification - Plus petit */}
               <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full flex items-center justify-center">
                 <svg className="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -949,7 +971,7 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
             </div>
           </div>
 
-          {/* Infos formateur - Police réduite */}
+          {/* Infos formateur */}
           <div className="flex-1 min-w-0 text-center sm:text-left">
             <div className="mb-3">
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
@@ -963,10 +985,8 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
               </div>
               <p className="text-sm text-[hsl(var(--academy-primary))] font-medium mb-2">{instructor.title}</p>
               
-              {/* Bio courte */}
               <p className="text-xs text-gray-600 leading-relaxed mb-3">{instructor.bio}</p>
               
-              {/* Statistiques - Plus compactes */}
               <div className="grid grid-cols-3 gap-2 mb-3">
                 <div className="text-center p-1.5 bg-gray-50 rounded-lg">
                   <div className="text-sm font-bold text-gray-900">8+</div>
@@ -983,7 +1003,6 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
               </div>
             </div>
             
-            {/* Expertise tags - Plus petits */}
             <div>
               <h4 className="text-xs font-medium text-gray-700 mb-2">Expertise</h4>
               <div className="flex flex-wrap gap-1">
@@ -1001,42 +1020,65 @@ const InstructorPopup = ({ instructor, onClose }: { instructor: any; onClose: ()
   </motion.div>
 );
 
-// RegistrationModal - RESPONSIVE ET CORRIGÉ AVEC SCROLL
+// RegistrationModal - CORRIGÉ : sans couche absolute problématique
 const RegistrationModal = ({ masterclass, onClose }: any) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-2 sm:p-4 overscroll-none"
-    style={{ touchAction: 'none' }}
+    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
     onClick={onClose}
   >
     <motion.div
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.95, opacity: 0 }}
-      className="bg-white rounded-xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] flex flex-col overflow-hidden overscroll-contain mx-auto"
-      style={{ touchAction: 'pan-y' }}
+      initial={{ scale: 0.95, opacity: 0, y: 20 }}
+      animate={{ scale: 1, opacity: 1, y: 0 }}
+      exit={{ scale: 0.95, opacity: 0, y: 20 }}
+      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl mx-auto relative"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Header responsive - fixe */}
-      <div className="p-4 sm:p-6 border-b border-gray-200 flex-shrink-0">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 min-w-0">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 truncate">Inscription à la formation</h2>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1 truncate">{masterclass.title}</p>
+      {/* Header - Dégradé directement sur le conteneur, sans couche absolute */}
+      <div className="bg-gradient-to-r from-[hsl(345,70%,35%)] to-[hsl(345,75%,50%)] px-6 py-5 flex-shrink-0">
+        <button 
+          onClick={onClose}
+          className="absolute top-5 right-5 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors backdrop-blur-sm z-10"
+        >
+          <X className="w-5 h-5 text-white" />
+        </button>
+        
+        <div className="flex items-center gap-4 pr-10">
+          <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+            <GraduationCap className="w-6 h-6 text-white" />
           </div>
-          <button 
-            onClick={onClose}
-            className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0 ml-2"
-          >
-            <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
-          </button>
+          <div>
+            <h2 className="text-xl font-bold text-white">Inscription à la formation</h2>
+            <p className="text-sm text-white/80 mt-1 line-clamp-1">{masterclass.title}</p>
+          </div>
         </div>
       </div>
 
-      {/* Formulaire - scrollable responsive */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+      {/* Information rapide sur la formation */}
+      <div className="px-6 py-4 bg-amber-50 border-b border-amber-100 flex-shrink-0">
+        <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-amber-700">
+              <Calendar className="w-4 h-4" />
+              <span className="font-medium">{new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+            <div className="flex items-center gap-2 text-amber-700">
+              <Clock className="w-4 h-4" />
+              <span className="font-medium">{masterclass.duration}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 font-bold text-amber-800">
+            <Tag className="w-4 h-4" />
+            <span className="text-base">{masterclass.price * 655} FCFA</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Formulaire - zone scrollable */}
+      <div className="flex-1 overflow-y-auto p-6">
         <MasterclassRegistrationForm />
       </div>
     </motion.div>

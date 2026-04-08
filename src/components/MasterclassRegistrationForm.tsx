@@ -941,7 +941,7 @@ const MasterclassRegistrationForm = () => {
 
       {/* Header premium */}
       <div
-        className={`sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b ${theme.border}`}
+        className={`sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b ${theme.border}`}
       >
         <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center justify-between">
