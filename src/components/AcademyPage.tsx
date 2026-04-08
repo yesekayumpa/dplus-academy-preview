@@ -13,6 +13,7 @@ import AcademySection from "@/components/academy/AcademySection";
 import { HeroSection } from "@/components/academy/HeroSection";
 import NotreMissionSection from "@/components/academy/NotreMissionSection";
 import MasterclassSection from "@/components/academy/MasterclassSection";
+import PersonalPlanSlider from "@/components/academy/PersonalPlanSlider";
 
 const AcademyPage = () => {
   const navigate = useNavigate();
@@ -117,6 +118,10 @@ const AcademyPage = () => {
       <HeroSection />
 
       <NotreMissionSection />
+      
+      {/* Personal Plan Slider */}
+      <PersonalPlanSlider />
+      
       {/* Section spécifique pour DM+ Academy */}
       <AcademySection />
 

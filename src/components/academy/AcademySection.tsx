@@ -122,69 +122,119 @@ const AcademySection = () => {
     }
   ];
 
-  // Données pour le slider Personal Plan Banner
+  // Données pour le slider Personal Plan Banner - Piliers de Formation
   const personalPlanSlides = [
     {
       id: 1,
-      title: "Réinventez votre carrière à l'ère de l'IA",
-      description: "Pérennisez vos compétences avec l'Abonnement individuel. Accédez à une variété de nouveaux contenus créés par des formateurs confirmés.",
+      title: "Finance & Investissement",
+      description: "Maîtrisez les concepts financiers et les stratégies d'investissement pour prendre des décisions éclairées et optimiser votre portefeuille.",
       features: [
         {
-          icon: "sparkles",
-          color: "purple",
-          text: "<strong>Apprenez</strong> à maîtriser l'IA et bien plus"
+          icon: "chart-line",
+          color: "red",
+          text: "Analyse financière"
+        },
+        {
+          icon: "chart-line",
+          color: "red",
+          text: "Gestion de portefeuille"
+        },
+        {
+          icon: "chart-line",
+          color: "red",
+          text: "Évaluation d'investissements"
         }
       ],
       image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
     },
     {
       id: 2,
-      title: "Maîtrisez les compétences essentielles",
-      description: "Développez votre expertise avec des formations pratiques et interactives adaptées au marché actuel.",
+      title: "Outils digitaux & Automatisation",
+      description: "Maîtrisez les outils numériques et techniques d'automatisation pour optimiser vos processus et gagner en productivité.",
       features: [
         {
-          icon: "trophy",
-          color: "green",
-          text: "<strong>Préparez</strong> une certification"
+          icon: "globe",
+          color: "red",
+          text: "Productivité numérique"
+        },
+        {
+          icon: "globe",
+          color: "red",
+          text: "Automatisation des tâches"
+        },
+        {
+          icon: "globe",
+          color: "red",
+          text: "Outils collaboratifs"
         }
       ],
       image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
     },
     {
       id: 3,
-      title: "Coaching personnalisé avec l'IA",
-      description: "Bénéficiez d'un accompagnement sur mesure grâce à notre technologie de coaching par intelligence artificielle.",
+      title: "Data & Analytics",
+      description: "Apprenez à analyser et interpréter les données pour la prise de décision stratégique et piloter la performance de votre organisation.",
       features: [
         {
-          icon: "question-answer-outline",
-          color: "orange",
-          text: "<strong>Entraînez-vous</strong> grâce au coaching IA"
+          icon: "bar-chart",
+          color: "red",
+          text: "Statistiques descriptives"
+        },
+        {
+          icon: "bar-chart",
+          color: "red",
+          text: "Visualisation de données"
+        },
+        {
+          icon: "bar-chart",
+          color: "red",
+          text: "Business Intelligence"
         }
       ],
       image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
     },
     {
       id: 4,
-      title: "Évoluez professionnellement",
-      description: "Accélérez votre carrière avec des formations reconnues et un réseau de professionnels engagés.",
+      title: "Entrepreneuriat",
+      description: "Développez vos compétences entrepreneuriales pour lancer et gérer votre projet avec succès dans un environnement concurrentiel.",
       features: [
         {
-          icon: "lightbulb",
-          color: "teal",
-          text: "<strong>Évoluez</strong> dans votre carrière"
+          icon: "rocket",
+          color: "red",
+          text: "Business plan"
+        },
+        {
+          icon: "rocket",
+          color: "red",
+          text: "Levée de fonds"
+        },
+        {
+          icon: "rocket",
+          color: "red",
+          text: "Marketing stratégique"
         }
       ],
       image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
     },
     {
       id: 5,
-      title: "Commencez votre transformation aujourd'hui",
-      description: "Rejoignez des milliers de professionnels qui ont déjà transformé leur carrière avec nos formations.",
+      title: "Soft skills & Leadership",
+      description: "Développez vos compétences relationnelles et managériales pour devenir un leader inspirant et efficace dans votre organisation.",
       features: [
         {
-          icon: "rocket",
-          color: "blue",
-          text: "<strong>Lancez-vous</strong> dans l'aventure"
+          icon: "users",
+          color: "red",
+          text: "Communication efficace"
+        },
+        {
+          icon: "users",
+          color: "red",
+          text: "Leadership transformationnel"
+        },
+        {
+          icon: "users",
+          color: "red",
+          text: "Intelligence émotionnelle"
         }
       ],
       image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
@@ -200,7 +250,7 @@ const AcademySection = () => {
     }
   };
 
-  // Fonctions pour le slider Personal Plan
+  // Fonctions pour le slider Personal Plan - navigation fluide
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % personalPlanSlides.length);
   };
@@ -213,14 +263,58 @@ const AcademySection = () => {
     setCurrentSlide(index);
   };
 
-  // Auto-play pour le slider Personal Plan
+  // Auto-play pour le slider Personal Plan - animation continue
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide();
-    }, 5000); // Change de slide toutes les 5 secondes
+      setCurrentSlide((prev) => (prev + 1) % personalPlanSlides.length);
+    }, 4000); // Change de slide toutes les 4 secondes
 
     return () => clearInterval(interval);
   }, []);
+
+  // Navigation au clavier
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Navigation tactile/swipe
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+  };
 
   const CarouselCard = ({ item, isDesktop = false }: { item: any; isDesktop?: boolean }) => {
     return (
@@ -607,144 +701,8 @@ const AcademySection = () => {
         </div>
       </section>
 
-      {/* Personal Plan Banner Slider */}
-      <section className="relative py-20 bg-gradient-to-r from-red-50 to-rose-50 overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl">
-          {/* Header du slider */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Transformez votre carrière
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Découvrez nos solutions adaptées à vos objectifs professionnels
-            </p>
-          </div>
-
-          {/* Slider Container */}
-          <div className="relative max-w-6xl mx-auto">
-            {/* Slides */}
-            <div className="overflow-hidden rounded-2xl bg-white shadow-2xl">
-              <div 
-                className="flex transition-transform duration-700 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {personalPlanSlides.map((slide) => (
-                  <div key={slide.id} className="w-full flex-shrink-0">
-                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 p-8 md:p-12">
-                      {/* Content Section */}
-                      <div className="flex-1 space-y-8 text-center lg:text-left">
-                        <div className="space-y-6">
-                          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                            {slide.title}
-                          </h3>
-                          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                            {slide.description}
-                          </p>
-                        </div>
-                        
-                        {/* Features */}
-                        <div className="space-y-4 max-w-md mx-auto lg:mx-0">
-                          {slide.features.map((feature, index) => (
-                            <div key={index} className="flex items-center gap-4 p-4 bg-red-50 rounded-xl border border-red-100">
-                              <div className={`flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center`}>
-                                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  {feature.icon === 'sparkles' && (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                  )}
-                                  {feature.icon === 'trophy' && (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                  )}
-                                  {feature.icon === 'question-answer-outline' && (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                                  )}
-                                  {feature.icon === 'lightbulb' && (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                                  )}
-                                  {feature.icon === 'rocket' && (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                  )}
-                                </svg>
-                              </div>
-                              <span className="text-base md:text-lg text-gray-700 font-medium" dangerouslySetInnerHTML={{ __html: feature.text }} />
-                            </div>
-                          ))}
-                        </div>
-                        
-                        {/* CTA Section */}
-                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-6">
-                          <button
-                            onClick={() => handleNavigateWithScroll('/personal-plan/')}
-                            className="px-8 py-4 bg-gradient-to-r from-red-600 to-rose-700 text-white rounded-xl font-semibold text-base hover:from-red-700 hover:to-rose-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                          >
-                            En savoir plus
-                          </button>
-                          <div className="text-center sm:text-left">
-                            <div className="text-lg font-semibold text-gray-900">À partir de $10.00/mois</div>
-                            <div className="text-sm text-gray-500">Annulez à tout moment</div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Image Section */}
-                      <div className="flex-1 lg:max-w-lg">
-                        <div className="relative">
-                          <img
-                            src={slide.image}
-                            srcSet={`${slide.image} 1x, ${slide.image.replace('@1x', '@2x')} 2x`}
-                            alt="Interface de jeu de rôle illustrant un exercice de conversation avec l'IA"
-                            className="w-full h-auto rounded-2xl shadow-2xl"
-                            loading="eager"
-                          />
-                          {/* Overlay subtil sur l'image */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent rounded-2xl pointer-events-none"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 z-20 border border-red-200 hover:border-red-300"
-              aria-label="Slide précédent"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 z-20 border border-red-200 hover:border-red-300"
-              aria-label="Slide suivant"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-3 mt-10">
-            {personalPlanSlides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  currentSlide === index 
-                    ? 'bg-gradient-to-r from-red-600 to-rose-700 w-10' 
-                    : 'bg-gray-300 hover:bg-gray-400 w-3'
-                }`}
-                aria-label={`Aller au slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
+      
       {/* Formats pédagogiques */}
       
       <MasterclassSection />
