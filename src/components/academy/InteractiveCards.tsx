@@ -236,10 +236,10 @@ const InteractiveCards = () => {
                         {/* Color overlay */}
                         <div 
                           className={cn(
-                            "absolute inset-0 bg-gradient-to-t transition-all duration-400",
+                            "absolute inset-0 transition-all duration-400",
                             shouldShowHoveredState 
-                              ? "from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" 
-                              : "from-black/60 via-black/40 to-black/20"
+                              ? "bg-[#800020]/60" 
+                              : "bg-black/40"
                           )} 
                         />
                         
@@ -441,10 +441,10 @@ const InteractiveCards = () => {
                     {/* Color overlay with reduced opacity */}
                     <div 
                       className={cn(
-                        "absolute inset-0 bg-gradient-to-t transition-all duration-400",
+                        "absolute inset-0 transition-all duration-400",
                         shouldShowHoveredState 
-                          ? "from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" 
-                          : "from-black/60 via-black/40 to-black/20"
+                          ? "bg-[#800020]/60" 
+                          : "bg-black/40"
                       )} 
                     />
                     

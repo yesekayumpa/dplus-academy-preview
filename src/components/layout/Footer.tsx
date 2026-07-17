@@ -23,20 +23,20 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative p-10 text-white overflow-hidden">
+    <footer className="relative pt-3 px-6 pb-1 text-white overflow-hidden">
       {/* Background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${patternWavyDark})` }}
       />
             {/* Color overlay */}
-      <div className="absolute inset-0 bg-slate-900 opacity-80" />
+      <div className="absolute inset-0 bg-red-900 opacity-80" />
 
       {/* Main Footer */}
-      <div className="relative z-10 container mx-auto px-4 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="relative z-10 container mx-auto px-4 lg:px-8 pt-4 pb-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Brand Column */}
-          <div className="space-y-6 text-sm">
+          <div className="space-y-2 text-sm">
             <div className="flex items-center gap-3">
                <a href="/">
                     <img src={logo} alt="DM+ Group" className="h-10 w-auto" />
@@ -64,10 +64,10 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-montserrat font-semibold text-white text-lg mb-6">
+            <h4 className="font-montserrat font-semibold text-white text-lg mb-3">
               DM+ Academy
             </h4>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-1.5 text-sm">
               {academyItems.map((sub) => (
                 <li key={sub.id}>
                   <Link
@@ -84,10 +84,10 @@ const Footer = () => {
 
           {/* Nos Filiales */}
           <div>
-            <h4 className="font-montserrat font-semibold text-white text-lg mb-6">
+            <h4 className="font-montserrat font-semibold text-white text-lg mb-3">
               Nos Entités
             </h4>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-1.5 text-sm">
               {subsidiaries.map((sub) => (
                 <li key={sub.id}>
                   <Link
@@ -103,10 +103,10 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-montserrat font-semibold text-white text-lg mb-6">
+            <h4 className="font-montserrat font-semibold text-white text-lg mb-3">
               Contact
             </h4>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-1.5 text-sm">
               <li>
                 <a
                   href="mailto:academy@dmplus-group.com"
@@ -148,8 +148,8 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="container mx-auto px-4 lg:px-8 py-0.5">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2">
             <p className="text-white/60 text-sm">
               © {currentYear} DM+ Group. Tous droits réservés.
             </p>

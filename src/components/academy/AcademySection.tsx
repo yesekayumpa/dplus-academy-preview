@@ -393,7 +393,7 @@ const AcademySection = () => {
                 <div style={{ textAlign: "center" }}>
                   <button
                     style={{
-                      background: "linear-gradient(135deg, hsl(346, 100%, 25%) 0%, hsl(346, 100%, 35%) 100%)",
+                      background: "hsl(346, 100%, 25%)",
                       color: "#ffffff",
                       border: "none",
                       padding: "10px 24px",
@@ -469,7 +469,7 @@ const AcademySection = () => {
                 <div style={{ textAlign: "left" }}>
                   <button
                     style={{
-                      background: "linear-gradient(135deg, hsl(346, 100%, 25%) 0%, hsl(346, 100%, 35%) 100%)",
+                      background: "hsl(346, 100%, 25%)",
                       color: "#ffffff",
                       border: "none",
                       padding: "10px 24px",
@@ -566,7 +566,7 @@ const AcademySection = () => {
         <p className="text-sm md:text-base text-muted-foreground mb-4">
           Des approches variées pour répondre à vos besoins spécifiques
         </p>
-        <div className="w-20 h-1 rounded-full bg-gradient-to-r from-academy to-academy-light mx-auto" />
+        <div className="w-20 h-1 rounded-full bg-academy mx-auto" />
       </div>
 
      {/* Carrousel de 4 cartes - 4 visibles sur web, 1 sur mobile avec auto-scroll */}
@@ -617,73 +617,6 @@ const AcademySection = () => {
         </div>
       </div>
 
-      {/* Vidéo d'introduction */}
-      <section className="py-4">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Découvrez notre formation en vidéo
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground text-center max-w-3xl mx-auto mb-8">
-            Plongez dans l'univers de notre formation à travers cette vidéo de
-            présentation qui vous donnera un aperçu de notre approche
-            pédagogique et de nos valeurs.
-          </p>
-          <div className="relative max-w-3xl mx-auto">
-            {/* Ordinateur portable avec vidéo intégrée */}
-            <div className="relative scale-75">
-              {/* Écran de l'ordinateur */}
-              <div className="relative bg-gray-900 rounded-t-2xl p-1.5 shadow-2xl">
-                {/* Barre supérieure de l'écran */}
-                <div className="flex items-center justify-between mb-1.5 px-1.5">
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  </div>
-                  <div className="text-xs text-gray-400 font-medium">DM+ Academy</div>
-                  <div className="w-10"></div>
-                </div>
-                
-                {/* Conteneur de la vidéo */}
-                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
-                  <video
-                    className="w-full h-full"
-                    controls
-                    poster="/placeholder.svg"
-                    title="Présentation de la formation DM+ Academy"
-                  >
-                    <source src="/videos/your-video.mp4" type="video/mp4" />
-                    Votre navigateur ne supporte pas la lecture de vidéos.
-                  </video>
-                </div>
-              </div>
-              
-              {/* Clavier du laptop */}
-              <div className="relative bg-gray-800 h-12 rounded-b-2xl shadow-2xl">
-                {/* Trackpad */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-700 rounded-lg shadow-inner"></div>
-                
-                {/* Indicateurs lumineux */}
-                <div className="absolute bottom-1 left-2 flex gap-0.5">
-                  <div className="w-0.5 h-0.5 bg-green-400 rounded-full animate-pulse"></div>
-                  <div className="w-0.5 h-0.5 bg-gray-600 rounded-full"></div>
-                </div>
-              </div>
-              
-              {/* Base du laptop */}
-              <div className="relative h-2 bg-gray-900 rounded-b-3xl shadow-2xl transform scale-105"></div>
-            </div>
-            
-            {/* Effet de reflet sur l'écran */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-3xl"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      
       {/* Formats pédagogiques */}
       
       <MasterclassSection />
@@ -694,7 +627,7 @@ const AcademySection = () => {
           <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
             Nos publics cibles
           </h2>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-academy to-academy-light mx-auto mb-4"></div>
+          <div className="w-12 h-0.5 bg-academy mx-auto mb-4"></div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
             {targetAudiences.map((audience, index) => (
               <motion.div
@@ -705,7 +638,7 @@ const AcademySection = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="bg-card p-3 md:p-4 rounded-lg border border-border text-center hover:transition-all min-h-[140px] md:min-h-[160px]"
               >
-                <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-1 md:mb-2">
+                <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-academy flex items-center justify-center text-white mb-1 md:mb-2">
                   <div className="flex items-center justify-center w-4 h-4 md:w-6 md:h-6">
                     {audience.icon}
                   </div>

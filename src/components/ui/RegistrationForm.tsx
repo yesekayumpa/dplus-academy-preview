@@ -60,7 +60,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
   ];
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl overflow-hidden shadow-2xl">
+    <div className="w-full max-w-xl mx-auto bg-white rounded-2xl overflow-hidden shadow-2xl">
       {/* En-tête */}
       <div className="bg-gradient-to-r from-academy to-academy/90 text-white p-6 relative">
         <div className="absolute top-4 right-4">

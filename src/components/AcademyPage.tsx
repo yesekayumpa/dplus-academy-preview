@@ -2,18 +2,14 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
-  Play,
-  Briefcase,
-  GraduationCap,
-  Users,
 } from "lucide-react";
 import { subsidiaries } from "@/data/subsidiaries";
 import { cn } from "@/lib/utils";
 import AcademySection from "@/components/academy/AcademySection";
 import { HeroSection } from "@/components/academy/HeroSection";
 import NotreMissionSection from "@/components/academy/NotreMissionSection";
-import MasterclassSection from "@/components/academy/MasterclassSection";
 import PersonalPlanSlider from "@/components/academy/PersonalPlanSlider";
+import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
 
 const AcademyPage = () => {
   const navigate = useNavigate();
@@ -65,25 +61,28 @@ const AcademyPage = () => {
     }
   };
 
-  // Équipe DM+ Academy
-  const teamMembers = [
+  // Équipe DM+ Academy - Testimonials for ScrollReel
+  const teamTestimonials = [
     {
-      name: "Sarah Diallo",
+      quote: "Notre mission est de transformer chaque apprenant en expert capable de relever les défis du marché professionnel.",
+      author: "Sarah Diallo",
       role: "Directrice Pédagogique",
-      bio: "",
-      image: null,
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop",
+      alt: "Portrait de Sarah Diallo",
     },
     {
-      name: "Amadou Bâ",
+      quote: "Les partenariats stratégiques sont la clé de notre succès pour offrir des formations de qualité exceptionnelle.",
+      author: "Amadou Bâ",
       role: "Responsable des Partenariats",
-      bio: "",
-      image: null,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop",
+      alt: "Portrait de Amadou Bâ",
     },
     {
-      name: "Aïssatou Diop",
+      quote: "Chaque formation est conçue pour maximiser l'impact pratique et l'employabilité de nos apprenants.",
+      author: "Aïssatou Diop",
       role: "Formatrice Senior",
-      bio: "",
-      image: null,
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80&auto=format&fit=crop",
+      alt: "Portrait de Aïssatou Diop",
     },
   ];
 
@@ -118,61 +117,142 @@ const AcademyPage = () => {
       <HeroSection />
 
       <NotreMissionSection />
-      
+
+      {/* Section vidéo de présentation */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="py-4"
+      >
+        <div className="container mx-auto px-4 max-w-6xl">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-4xl font-bold text-center mb-4"
+          >
+            Découvrir nos formations
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-sm md:text-base text-muted-foreground text-center max-w-3xl mx-auto mb-8"
+          >
+            Plongez dans l'univers de notre formation à travers cette vidéo de présentation qui vous donnera un aperçu de notre approche pédagogique et de nos valeurs.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            whileHover={{ scale: 1.02 }}
+            className="relative max-w-3xl mx-auto"
+          >
+            <div className="relative scale-75">
+              <div className="relative bg-gray-900 rounded-t-2xl p-1.5 shadow-2xl">
+                <div className="flex items-center justify-between mb-1.5 px-1.5">
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="text-xs text-gray-400 font-medium">DM+ Academy</div>
+                  <div className="w-10"></div>
+                </div>
+                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
+                  <video className="w-full h-full" controls loop poster="/placeholder.svg" title="Présentation de la formation DM+ Academy">
+                    <source src="https://tre9zd4etmxyc.pika.art/results/pika2p5_final/b299609631894ab2acdf9467a2d9b636.mp4?download" type="video/mp4" />
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                  </video>
+                </div>
+              </div>
+              <div className="relative bg-gray-800 h-12 rounded-b-2xl shadow-2xl">
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-700 rounded-lg shadow-inner"></div>
+                <div className="absolute bottom-1 left-2 flex gap-0.5">
+                  <div className="w-0.5 h-0.5 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-0.5 h-0.5 bg-gray-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="relative h-2 bg-gray-900 rounded-b-3xl shadow-2xl transform scale-105"></div>
+            </div>
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-3xl"></div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* Personal Plan Slider */}
       <PersonalPlanSlider />
       
       {/* Section spécifique pour DM+ Academy */}
       <AcademySection />
 
-      {/* Notre Équipe Pédagogique - Ancienne version */}
-      <section className="py-8 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div className="text-center max-w-3xl mx-auto mb-6">
-            <h2 className="font-montserrat font-bold text-xl md:text-2xl text-foreground mb-3">
+      {/* Notre Équipe Pédagogique */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className={cn('py-12', 'bg-background')}
+      >
+        <div className={cn('container', 'mx-auto', 'px-4', 'lg:px-8')}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={cn('text-center', 'max-w-5xl', 'mx-auto', 'mb-10')}
+          >
+            <h2 className={cn('font-montserrat', 'font-bold', 'text-2xl', 'md:text-3xl', 'text-foreground', 'mb-3')}>
               Nos experts en formation
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className={cn('text-sm', 'md:text-base', 'text-muted-foreground')}>
               Des formateurs experts dans leur domaine, à l'écoute de vos besoins
             </p>
           </motion.div>
-          <div className="grid grid-cols-3 gap-3">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 }}
-                className="bg-card p-3 rounded-xl border border-border text-center hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 mx-auto rounded-full bg-gradient-to-r from-academy to-academy-light flex items-center justify-center text-white mb-2">
-                  <GraduationCap className="w-4 h-4" />
-                </div>
-                <h3 className="font-semibold text-xs mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-primary font-medium text-xs mb-1">
-                  {member.role}
-                </p>
-                <p className="text-muted-foreground text-xs line-clamp-2">
-                  {member.bio}
-                </p>
-              </motion.div>
-            ))}
-          </div>
           
-          {/* Bouton Voir plus */}
-          <div className="text-center mt-8 mb-8">
-            <button
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-col items-center gap-6"
+          >
+            <ScrollReelTestimonials testimonials={teamTestimonials} />
+            
+            {/* Bouton Voir plus */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleNavigateToTrainers}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-academy to-academy-light text-white font-semibold hover:from-academy/90 hover:to-academy-light/90 transition-all duration-300 hover:scale-105 shadow-lg"
+              className={cn(
+                'inline-flex', 'items-center', 'gap-2', 'px-8', 'py-4', 'rounded-xl',
+                'bg-academy',
+                'text-white', 'font-semibold', 'hover:bg-academy/90',
+                'transition-all', 'duration-300', 'shadow-lg'
+              )}
             >
               Voir plus de formateurs
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+              >
+                <ArrowRight className={cn('w-5', 'h-5')} />
+              </motion.div>
+            </motion.button>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
      
 

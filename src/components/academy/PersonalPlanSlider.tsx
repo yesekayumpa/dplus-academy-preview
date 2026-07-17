@@ -239,13 +239,13 @@ const PersonalPlanSlider = () => {
               onTouchEnd={onTouchEnd}
             >
               <div 
-                className="flex transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                className="flex transition-all duration-700 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {personalPlanSlides.map((slide, index) => (
                   <div 
                     key={slide.id} 
-                    className="w-full flex-shrink-0 transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    className="w-full flex-shrink-0 transition-opacity duration-700 ease-in-out"
                     style={{ 
                       opacity: index === currentSlide ? 1 : 0.7,
                       transform: index === currentSlide ? 'scale(1)' : 'scale(0.98)'
@@ -327,7 +327,7 @@ const PersonalPlanSlider = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                className={`h-2 rounded-full transition-all duration-500 ease-in-out ${
                   currentSlide === index 
                     ? 'bg-gray-900 w-8' 
                     : 'bg-gray-300 hover:bg-gray-400 w-2 hover:scale-110'

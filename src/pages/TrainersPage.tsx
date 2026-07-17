@@ -377,7 +377,7 @@ const TrainersPage = () => {
                 onError={() => setImageError(true)}
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-[#fbe7ea] to-[#f5cbd1] flex items-center justify-center">
+              <div className="w-full h-full bg-[#fbe7ea] flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-12 h-12 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto mb-2">
                     <span className="text-white font-bold text-lg">
@@ -388,7 +388,6 @@ const TrainersPage = () => {
                 </div>
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#46181e] to-transparent opacity-60" />
             
             {featured && (
               <Badge className="absolute top-2 left-2 bg-yellow-400 text-gray-900 border-0 text-xs px-2 py-0.5">
@@ -454,9 +453,9 @@ const TrainersPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-[#fbe7ea]/30">
+      <div className="min-h-screen bg-slate-50">
         {/* Hero Section avec fond bordeaux et image de fond */}
-        <section className="relative overflow-hidden py-24 px-4 bg-gradient-to-br from-[#46181e] to-[#8e2e3b]">
+        <section className="relative overflow-hidden py-24 px-4 bg-[#46181e]">
           {/* Image de fond avec overlay */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -556,7 +555,7 @@ const TrainersPage = () => {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header fixe avec bordeaux */}
-                  <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#f5cbd1] bg-gradient-to-r from-[#fbe7ea] to-white flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#f5cbd1] bg-[#fbe7ea] flex-shrink-0">
                     <div className="relative flex-shrink-0">
                       {!modalImageError ? (
                         <img
@@ -566,7 +565,7 @@ const TrainersPage = () => {
                           onError={() => setModalImageError(true)}
                         />
                       ) : (
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-[#fbe7ea] to-[#f5cbd1] flex items-center justify-center border-4 border-white shadow-xl">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#fbe7ea] flex items-center justify-center border-4 border-white shadow-xl">
                           <div className="text-center">
                             <div className="w-8 h-8 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto">
                               <span className="text-white font-bold text-sm">
@@ -578,7 +577,7 @@ const TrainersPage = () => {
                       )}
                       {selectedTrainer.featured && (
                         <div className="absolute -top-2 -right-2">
-                          <Badge className="bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white border-0 px-2 py-1 text-xs shadow-lg">
+                          <Badge className="bg-[#b23a4a] text-white border-0 px-2 py-1 text-xs shadow-lg">
                             <Sparkles className="w-3 h-3 mr-1" />
                             Vedette
                           </Badge>
@@ -648,7 +647,7 @@ const TrainersPage = () => {
                     `}</style>
 
                     {/* Bio avec bordeaux */}
-                    <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-br from-[#fbe7ea] via-white to-[#fdf2f4] rounded-xl border-l-4 border-[#b23a4a]">
+                    <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-[#fbe7ea] rounded-xl border-l-4 border-[#b23a4a]">
                       <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-[#b23a4a] mb-2" />
                       <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                         {selectedTrainer.bio}
@@ -751,7 +750,7 @@ const TrainersPage = () => {
                         )}
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-                        <Button className="h-8 sm:h-10 px-3 sm:px-6 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] hover:from-[#8e2e3b] hover:to-[#6a232d] text-white text-xs sm:text-sm">
+                        <Button className="h-8 sm:h-10 px-3 sm:px-6 bg-[#b23a4a] hover:bg-[#8e2e3b] text-white text-xs sm:text-sm">
                           Voir les cours
                           <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2" />
                         </Button>
@@ -775,8 +774,8 @@ const TrainersPage = () => {
             }}
           />
 
-          {/* Red Bordeaux Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#800020]/80 via-[#800020]/60 to-[#800020]/40" />
+          {/* Red Bordeaux Overlay */}
+          <div className="absolute inset-0 bg-[#800020]/60" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto">

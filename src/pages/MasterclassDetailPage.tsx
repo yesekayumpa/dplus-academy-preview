@@ -1034,7 +1034,7 @@ const RegistrationModal = ({ masterclass, onClose }: any) => (
       animate={{ scale: 1, opacity: 1, y: 0 }}
       exit={{ scale: 0.95, opacity: 0, y: 20 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl mx-auto relative"
+      className="bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl mx-auto relative"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Header - Dégradé directement sur le conteneur, sans couche absolute */}

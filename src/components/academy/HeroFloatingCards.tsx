@@ -1,5 +1,39 @@
-import { Award, Trophy, Star, Heart } from "lucide-react";
+import { IconCloud } from "@/components/ui/interactive-icon-cloud";
 import student from "@/assets/serious-african-american-student-working-research.jpg";
+
+const iconSlugs = [
+  "typescript",
+  "javascript",
+  "dart",
+  "java",
+  "react",
+  "flutter",
+  "android",
+  "html5",
+  "css3",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "prisma",
+  "amazonaws",
+  "postgresql",
+  "firebase",
+  "nginx",
+  "vercel",
+  "testinglibrary",
+  "jest",
+  "cypress",
+  "docker",
+  "git",
+  "jira",
+  "github",
+  "gitlab",
+  "visualstudiocode",
+  "androidstudio",
+  "sonarqube",
+  "figma",
+];
+
 export function HeroFloatingCards() {
   return (
     <div className="relative flex h-full w-full items-center justify-center">
@@ -8,63 +42,16 @@ export function HeroFloatingCards() {
         <img
           src={student}
           alt="Student holding a tablet, excited about learning"
-          className="h-auto w-full max-w-md rounded-2xl object-cover"
+          className="h-auto w-full max-w-md rounded-2xl object-cover shadow-2xl"
         />
       </div>
 
-      {/* Certificates Earned Card */}
-      <div className="absolute left-0 top-4 z-20 rounded-xl bg-background p-3 shadow-lg lg:left-2 lg:top-8 lg:p-4 hidden lg:block">
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-red-100">
-            <Award className="h-4 w-4 text-red-500" />
-          </div>
-          <span className="text-xs font-medium text-muted-foreground">
-            Certificates Earned
-          </span>
-        </div>
-        <p className="mt-1 text-2xl font-bold text-foreground">2</p>
-      </div>
-
-      {/* Quiz Master Badge */}
-      <div className="absolute right-0 top-16 z-20 flex items-center gap-2 rounded-full bg-background px-4 py-2 shadow-lg lg:-right-4 lg:top-20">
-        <Heart className="h-4 w-4 text-red-500" />
-        <span className="text-xs font-semibold text-foreground">
-          Quiz Master
-        </span>
-      </div>
-
-      {/* Monthly Champion Badge */}
-      <div className="absolute left-8 top-1/2 z-20 flex -translate-y-1/2 items-center gap-2 rounded-full bg-background px-3 py-2 shadow-lg lg:left-4">
-        <Trophy className="h-4 w-4 text-yellow-500" />
-        <span className="text-xs font-medium text-foreground">
-          Monthly Champ
-        </span>
-      </div>
-
-      {/* Course Card */}
-      <div className="absolute -right-2 bottom-20 z-20 w-44 rounded-xl bg-background p-3 shadow-lg lg:bottom-24 lg:right-0 hidden lg:block">
-        <div className="mb-2 h-16 w-full rounded-lg bg-gradient-to-br from-primary/20 to-primary/5" />
-        <p className="text-xs font-semibold text-foreground">
-          UI/UX Design Fundamentals
-        </p>
-        <p className="mt-0.5 text-[10px] text-muted-foreground">25 lessons</p>
-      </div>
-
-      {/* Instructor Card */}
-      <div className="absolute bottom-8 right-12 z-20 flex items-center gap-2 rounded-full bg-background px-3 py-2 shadow-lg lg:bottom-10 lg:right-16">
-        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10">
-          <Star className="h-3.5 w-3.5 text-primary" />
-        </div>
-        <div>
-          <p className="text-[11px] font-semibold text-foreground leading-tight">
-            Michael R.
-          </p>
-          <p className="text-[10px] text-muted-foreground leading-tight">
-            Instructor
-          </p>
+      {/* Icon Cloud - Perfectly circular around the image */}
+      <div className="absolute inset-0 z-20 flex items-start justify-center pointer-events-none -mt-16">
+        <div className="w-[120%] h-[120%]">
+          <IconCloud iconSlugs={iconSlugs} />
         </div>
       </div>
-
-          </div>
+    </div>
   );
 }

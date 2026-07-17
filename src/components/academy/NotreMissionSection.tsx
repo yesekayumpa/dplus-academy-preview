@@ -1,7 +1,7 @@
 const NotreMissionSection = () => {
   return (
    <section className="py-2 md:py-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/5" />
+        <div className="absolute inset-0 bg-primary/5" />
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4">
             Notre mission

@@ -182,6 +182,25 @@ const CorporateProgramsPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Empêcher le scroll de la page quand un modal est ouvert
+  useEffect(() => {
+    if (selectedProgram || showContactModal) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [selectedProgram, showContactModal]);
+
   // Scroll automatique vers le haut au chargement de la page
   useEffect(() => {
     // Forcer le scroll vers le haut immédiatement
@@ -498,14 +517,14 @@ const CorporateProgramsPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 overflow-y-auto"
               onClick={() => setSelectedProgram(null)}
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto my-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative h-64 overflow-hidden">
@@ -610,14 +629,14 @@ const CorporateProgramsPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 overflow-y-auto"
               onClick={() => setShowContactModal(false)}
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto my-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="p-8">
