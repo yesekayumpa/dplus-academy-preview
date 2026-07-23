@@ -22,6 +22,7 @@ import EntrepreneurshipPage from "./pages/EntrepreneurshipPage";
 import SoftSkillsLeadershipPage from "./pages/SoftSkillsLeadershipPage";
 import FormationPilliersPage from "./pages/FormationPilliersPage";
 import SalesFunnelPage from "./pages/SalesFunnelPage";
+import FormationDetailPage from "./pages/FormationDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/entrepreneurship" element={<EntrepreneurshipPage />} />
           <Route path="/soft-skills-leadership" element={<SoftSkillsLeadershipPage />} />
           <Route path="/formation-pilliers" element={<FormationPilliersPage />} />
+          <Route path="/formations/:id" element={<FormationDetailPage />} />
           <Route path="/tunnel-vente" element={<SalesFunnelPage />} />
           <Route path="/sales-funnel" element={<SalesFunnelPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

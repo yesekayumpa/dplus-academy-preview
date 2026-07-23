@@ -39,9 +39,10 @@ import {
   Layers,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { useFormateurs } from "@/hooks/useFormateurs";
 
 // Données des formateurs (inchangées)
-const trainers = [
+const mockTrainers = [
   {
     id: 1,
     name: "Dr. Marie Dubois",
@@ -317,8 +318,20 @@ const trainers = [
 ];
 
 const TrainersPage = () => {
+  const { data: apiFormateurs, isLoading } = useFormateurs();
+
+  const trainers = apiFormateurs ? apiFormateurs.map((f, index) => ({
+    ...mockTrainers[index % mockTrainers.length], // Fallback pour les champs purement UI (bio, stats)
+    id: f.id,
+    name: f.nomComplet,
+    title: f.titre,
+    image: f.imageUrl,
+    specialties: f.competences.map((c) => c.titre),
+    email: `${f.nomComplet.split(' ')[0].toLowerCase()}@dmplus.com`,
+  })) : mockTrainers;
+
   const [selectedTrainer, setSelectedTrainer] = useState<
-    (typeof trainers)[0] | null
+    (typeof mockTrainers)[0] | null
   >(null);
   const [activeFilter, setActiveFilter] = useState("all");
   const [modalImageError, setModalImageError] = useState(false);
@@ -352,7 +365,7 @@ const TrainersPage = () => {
     onClick,
     featured = false,
   }: {
-    trainer: (typeof trainers)[0];
+    trainer: (typeof mockTrainers)[0];
     onClick: () => void;
     featured?: boolean;
   }) => {
@@ -369,25 +382,15 @@ const TrainersPage = () => {
         <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full flex flex-col">
           {/* Image avec overlay bordeaux */}
           <div className="relative h-36 overflow-hidden flex-shrink-0">
-            {!imageError ? (
-              <img
-                src={trainer.image}
-                alt={trainer.name}
-                className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <div className="w-full h-full bg-[#fbe7ea] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto mb-2">
-                    <span className="text-white font-bold text-lg">
-                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-600">Image non disponible</p>
-                </div>
-              </div>
-            )}
+            <img
+              src={trainer.image || "/assets/Formateur Afrique.jpg"}
+              alt={trainer.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.src = "/assets/Formateur Afrique.jpg";
+                e.currentTarget.onerror = null;
+              }}
+            />
             
             {featured && (
               <Badge className="absolute top-2 left-2 bg-yellow-400 text-gray-900 border-0 text-xs px-2 py-0.5">
@@ -557,24 +560,15 @@ const TrainersPage = () => {
                   {/* Header fixe avec bordeaux */}
                   <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#f5cbd1] bg-[#fbe7ea] flex-shrink-0">
                     <div className="relative flex-shrink-0">
-                      {!modalImageError ? (
-                        <img
-                          src={selectedTrainer.image}
-                          alt={selectedTrainer.name}
-                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border-4 border-white shadow-xl"
-                          onError={() => setModalImageError(true)}
-                        />
-                      ) : (
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#fbe7ea] flex items-center justify-center border-4 border-white shadow-xl">
-                          <div className="text-center">
-                            <div className="w-8 h-8 bg-[#b23a4a] rounded-full flex items-center justify-center mx-auto">
-                              <span className="text-white font-bold text-sm">
-                                {selectedTrainer.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                      <img
+                        src={selectedTrainer.image || "/assets/Formateur Afrique.jpg"}
+                        alt={selectedTrainer.name}
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border-4 border-white shadow-xl"
+                        onError={(e) => {
+                          e.currentTarget.src = "/assets/Formateur Afrique.jpg";
+                          e.currentTarget.onerror = null;
+                        }}
+                      />
                       {selectedTrainer.featured && (
                         <div className="absolute -top-2 -right-2">
                           <Badge className="bg-[#b23a4a] text-white border-0 px-2 py-1 text-xs shadow-lg">

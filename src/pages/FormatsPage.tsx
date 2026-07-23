@@ -1,6 +1,9 @@
 import Layout from "@/components/layout/Layout";
+import { useFormatsPedagogiques } from "@/hooks/useFormatsPedagogiques";
 
 const FormatsPage = () => {
+  const { data: formats, isLoading, isError } = useFormatsPedagogiques();
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
@@ -9,46 +12,40 @@ const FormatsPage = () => {
           Nous proposons différents formats d'apprentissage adaptés à vos besoins et votre emploi du temps.
         </p>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-card p-4 rounded-xl">
-            <h2 className="text-xl font-semibold mb-3">Masterclass</h2>
-            <p className="text-sm text-muted-foreground mb-3">
-              Des sessions intensives avec des experts pour maîtriser rapidement des compétences spécifiques.
-            </p>
-            <ul className="space-y-1 text-xs text-muted-foreground">
-              <li>• Sessions de 3-4 heures</li>
-              <li>• Experts de l'industrie</li>
-              <li>• Pratique intensive</li>
-              <li>• Certification incluse</li>
-            </ul>
+        {isLoading ? (
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-academy"></div>
           </div>
-          
-          <div className="bg-card p-4 rounded-xl">
-            <h2 className="text-xl font-semibold mb-3">E-learning</h2>
-            <p className="text-sm text-muted-foreground mb-3">
-              Apprenez à votre rythme avec nos cours en ligne interactifs et flexibles.
-            </p>
-            <ul className="space-y-1 text-xs text-muted-foreground">
-              <li>• Accès 24/7</li>
-              <li>• Progression autonome</li>
-              <li>• Vidéos et exercices</li>
-              <li>• Support en ligne</li>
-            </ul>
+        ) : isError ? (
+          <div className="text-center py-8 text-red-500">
+            Une erreur est survenue lors du chargement des formats pédagogiques.
           </div>
-          
-          <div className="bg-card p-4 rounded-xl">
-            <h2 className="text-xl font-semibold mb-3">Sur mesure</h2>
-            <p className="text-sm text-muted-foreground mb-3">
-              Des formations personnalisées conçues spécifiquement pour vos besoins professionnels.
-            </p>
-            <ul className="space-y-1 text-xs text-muted-foreground">
-              <li>• Contenu adapté</li>
-              <li>• En entreprise ou distanciel</li>
-              <li>• Planning flexible</li>
-              <li>• Suivi personnalisé</li>
-            </ul>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-8">
+            {formats?.map((format) => (
+              <div key={format.id} className="bg-card p-4 rounded-xl flex flex-col">
+                {/* Fallback temporaire en cas d'absence d'image valide, ou utilisation de l'image de l'API */}
+                {format.imageUrl && (
+                  <div className="mb-4 h-48 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100">
+                    <img 
+                      src={format.imageUrl} 
+                      alt={format.titre} 
+                      className="max-h-full object-cover"
+                      onError={(e) => {
+                        // Image de secours si l'URL ne fonctionne pas
+                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
+                      }}
+                    />
+                  </div>
+                )}
+                <h2 className="text-xl font-semibold mb-3">{format.titre}</h2>
+                <p className="text-sm text-muted-foreground mb-3 flex-grow">
+                  {format.description}
+                </p>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );

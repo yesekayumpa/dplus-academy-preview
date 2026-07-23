@@ -2,6 +2,9 @@
 
 import { useNavigate } from "react-router-dom"
 
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
+
 export interface MasterclassCardData {
   id: string
   title: string
@@ -25,7 +28,8 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate("/sur-mesure")
+    window.scrollTo(0, 0);
+    navigate(`/formations/${data.id}`)
   }
 
   return (
@@ -35,9 +39,15 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
     >
       <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
         <img
-          src={data.image || "/placeholder.svg"}
+          src={data.image || FALLBACK_IMAGE}
           alt={data.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (target.src !== FALLBACK_IMAGE) {
+              target.src = FALLBACK_IMAGE;
+            }
+          }}
         />
       </div>
 
@@ -59,14 +69,16 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
                 {"Certifi\u00E9"}
               </span>
             )}
-            {data.isPrensential ? 
+            {data.isPrensential === true && (
               <span className="rounded-sm bg-gray-100 px-1.5 py-0.5 text-xs font-semibold text-gray-800">
-                {"Pr\u00E9sential"}
-              </span> :
-              <span className="rounded-sm bg-blue-100 px-1.5 py-0.5 text-xs font-semibold text-blue-800">
-                {"En ligne"}
+                Présential
               </span>
-            }
+            )}
+            {data.isPrensential === false && (
+              <span className="rounded-sm bg-blue-100 px-1.5 py-0.5 text-xs font-semibold text-blue-800">
+                En ligne
+              </span>
+            )}
             {data.isFollowed && (
               <span className="rounded-sm bg-orange-100 px-1.5 py-0.5 text-xs font-semibold text-orange-800">
                 {"Suivi"}

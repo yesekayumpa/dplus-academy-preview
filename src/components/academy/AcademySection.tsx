@@ -18,6 +18,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import MasterclassSection from "./MasterclassSection";
 import InteractiveCards from "./InteractiveCards";
+import { useFormatsPedagogiques } from "@/hooks/useFormatsPedagogiques";
 
 const AcademySection = () => {
   const navigate = useNavigate();
@@ -90,37 +91,26 @@ const AcademySection = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Données des 4 cartes du carrousel
-  const carouselItems = [
-    {
-      id: 1,
-      title: "Masterclass",
-      description: "Sessions intensives de 2h à 2 jours <br />sur des thématiques précises <br />avec des experts du domaine",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center",
-      link: "/masterclasses"
-    },
-    {
-      id: 2,
-      title: "E-learning",
-      description: "Formations en ligne accessibles <br />à tout moment <br />pour apprendre à votre rythme",
-      image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop&crop=center",
-      link: "/e-learning"
-    },
-    {
-      id: 3,
-      title: "Corporate Programs",
-      description: "Programmes de formation conçus <br />spécifiquement pour les entreprises, <br />adaptés à leurs objectifs et secteur",
-      image: "/assets/E-learning2.jpg",
-      link: "/corporate-programs"
-    },
-    {
-      id: 4,
-      title: "Mentored Courses",
-      description: "Formations sur mesure conçues <br />pour répondre aux objectifs stratégiques <br />et aux défis spécifiques de votre organisation",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop&crop=center",
-      link: "/sur-mesure"
-    }
-  ];
+  // Fetch dynamic data from API
+  const { data: formats, isLoading, isError } = useFormatsPedagogiques();
+
+  // Mappage des données de l'API vers le format attendu par le carrousel
+  const carouselItems = formats?.map((format) => {
+    // Correspondance des slugs avec vos routes existantes
+    let link = `/${format.slug}`;
+    if (format.slug === 'formation-live') link = '/masterclasses';
+    else if (format.slug === 'formation-replay') link = '/e-learning';
+    else if (format.slug === 'formation-hybride') link = '/corporate-programs';
+    else if (format.slug === 'bootcamp-intensif') link = '/sur-mesure';
+
+    return {
+      id: format.id,
+      title: format.titre,
+      description: format.description,
+      image: format.imageUrl,
+      link: link
+    };
+  }) || [];
 
   // Données pour le slider Personal Plan Banner - Piliers de Formation
   const personalPlanSlides = [
@@ -362,6 +352,9 @@ const AcademySection = () => {
                     borderRadius: "8px",
                     transition: "transform 0.3s ease"
                   }}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
+                  }}
                 />
               </div>
               
@@ -437,6 +430,9 @@ const AcademySection = () => {
                     objectFit: "cover",
                     borderRadius: "8px",
                     transition: "transform 0.3s ease"
+                  }}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
                   }}
                 />
               </div>
@@ -576,45 +572,57 @@ const AcademySection = () => {
         margin: '0 auto',
         padding: '30px 20px'
       }}>
-        {/* Desktop: 4 cartes sur une ligne */}
-        <div className="hidden md:block">
-          <div className="flex gap-0 justify-center">
-            {carouselItems.map((item) => (
-              <div key={item.id} className="flex-1 max-w-xs">
-                <CarouselCard item={item} isDesktop={true} />
+        {isLoading ? (
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-academy"></div>
+          </div>
+        ) : isError ? (
+          <div className="text-center py-8 text-red-500">
+            Une erreur est survenue lors du chargement des formats pédagogiques.
+          </div>
+        ) : (
+          <>
+            {/* Desktop: 4 cartes sur une ligne */}
+            <div className="hidden md:block">
+              <div className="flex gap-0 justify-center">
+                {carouselItems.map((item) => (
+                  <div key={item.id} className="flex-1 max-w-xs">
+                    <CarouselCard item={item} isDesktop={true} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Mobile: carrousel avec auto-scroll */}
-        <div className="block md:hidden">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div style={{ 
-              display: 'flex',
-              gap: '0'
-            }}>
-              {carouselItems.map((item) => (
-                <CarouselCard key={item.id} item={item} isDesktop={false} />
-              ))}
             </div>
-          </div>
-          {/* Scroll dots indicator for mobile */}
-          <div className="flex justify-center gap-2 mt-4">
-            {carouselItems.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  selectedIndex === index 
-                    ? 'bg-[#800020] w-6' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                onClick={() => scrollTo(index)}
-                aria-label={`Aller à la carte ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+            
+            {/* Mobile: carrousel avec auto-scroll */}
+            <div className="block md:hidden">
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div style={{ 
+                  display: 'flex',
+                  gap: '0'
+                }}>
+                  {carouselItems.map((item) => (
+                    <CarouselCard key={item.id} item={item} isDesktop={false} />
+                  ))}
+                </div>
+              </div>
+              {/* Scroll dots indicator for mobile */}
+              <div className="flex justify-center gap-2 mt-4">
+                {carouselItems.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      selectedIndex === index 
+                        ? 'bg-[#800020] w-6' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    onClick={() => scrollTo(index)}
+                    aria-label={`Aller à la carte ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Formats pédagogiques */}
