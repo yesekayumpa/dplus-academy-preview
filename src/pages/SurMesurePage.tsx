@@ -105,7 +105,8 @@ const SurMesurePage = () => {
         program: f.competences.map(c => c.titre),
         objectives: f.competences.map(c => c.description),
         target: f.competences.map(c => c.titre),
-        features: f.tags.map(t => t.titre)
+        features: f.tags.map(t => t.titre),
+        tags: f.tags.map(t => t.titre)
       };
     });
   }, [apiFormations]);
