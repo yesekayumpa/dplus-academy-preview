@@ -110,8 +110,6 @@ const SurMesurePage = () => {
     });
   }, [apiFormations]);
 
-  const [selectedCourse, setSelectedCourse] = useState<any>(null);
-
   // Catégories depuis l'API backend
   const { data: apiCategories } = useCategories();
   const categories = useMemo(() => {
