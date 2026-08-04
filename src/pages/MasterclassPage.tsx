@@ -280,6 +280,10 @@ const MasterclassPage = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white text-white hover:bg-white/10 px-8"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  window.location.href = '/masterclasses';
+                }}
               >
                 En savoir plus
               </Button>

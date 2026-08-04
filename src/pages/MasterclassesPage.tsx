@@ -12,6 +12,7 @@ import Layout from "@/components/layout/Layout";
 import MasterclassRegistrationForm from "@/components/MasterclassRegistrationForm";
 import { RegistrationForm } from "@/components/ui/RegistrationForm";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useCategories } from "@/hooks/useCategories";
 
 // Données enrichies des masterclass avec structure détaillée
 const masterclassData = [
@@ -693,10 +694,16 @@ const MasterclassesPageContent = () => {
   // Vérifier si l'URL demande les formations sur mesure
   const isSurMesureMode = searchParams.get('type') === 'sur-mesure';
 
+  // Catégories depuis l'API backend
+  const { data: apiCategories, isLoading: categoriesLoading } = useCategories();
   const categories = useMemo(() => {
+    if (apiCategories && apiCategories.length > 0) {
+      return ["all", ...apiCategories.map(cat => cat.libelle)];
+    }
+    // Fallback sur les catégories locales si l'API n'est pas disponible
     const cats = [...new Set(masterclassData.map(mc => mc.category))];
     return ["all", ...cats];
-  }, []);
+  }, [apiCategories]);
 
   const levels = useMemo(() => {
     const levs = [...new Set(masterclassData.map(mc => mc.level))];
@@ -717,7 +724,23 @@ const MasterclassesPageContent = () => {
         mc.description.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesStatus = filterStatus === "all" || mc.status === filterStatus;
-      const matchesCategory = selectedCategory === "all" || mc.category === selectedCategory;
+      
+      // Mapping catégorie backend -> locale
+      let matchesCategory = selectedCategory === "all";
+      if (!matchesCategory) {
+        const categoryMap: { [key: string]: string[] } = {
+          "Développement Web": ["Programmation", "Développement"],
+          "Data & Intelligence Artificielle": ["Data", "Data Science"],
+          "Design UX/UI": ["Design"],
+          "Marketing Digital": ["Marketing"],
+          "Gestion de Projet": ["Business", "Management", "Entrepreneuriat"]
+        };
+        const mappedLocalCategories = categoryMap[selectedCategory] || [selectedCategory];
+        matchesCategory = mappedLocalCategories.some(
+          localCat => mc.category.toLowerCase() === localCat.toLowerCase()
+        );
+      }
+      
       const matchesLevel = selectedLevel === "all" || mc.level === selectedLevel;
       
       return matchesSearch && matchesStatus && matchesCategory && matchesLevel;

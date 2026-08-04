@@ -38,7 +38,7 @@ const App = () => (
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/nous-contacter" element={<ContactPage />} />
           <Route path="/devenir-formateur" element={<BecomeTrainerPage />} />
-          <Route path="/masterclass" element={<MasterclassPage />} />
+          <Route path="/masterclass" element={<MasterclassesPage />} />
           <Route path="/masterclasses" element={<MasterclassesPage />} />
           <Route path="/masterclass/:id" element={<MasterclassDetailPage />} />
           <Route path="/formats" element={<FormatsPage />} />

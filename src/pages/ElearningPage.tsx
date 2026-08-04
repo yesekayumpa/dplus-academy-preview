@@ -7,6 +7,7 @@ import {
   Sparkles, Zap, ArrowRight, Code, BarChart3, Palette, Briefcase, Target 
 } from 'lucide-react';
 import Layout from '../components/layout/Layout';
+import { useCategories } from '@/hooks/useCategories';
 
 // SalesFunnelExamples component - make sure this is imported or defined
 // If you have this component elsewhere, import it. If not, you'll need to create it.
@@ -518,20 +519,34 @@ const ElearningPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 4;
 
-  const categories = [
-    "all",
-    "Programmation",
-    "Data Science",
-    "Design",
-    "Business",
-    "Marketing",
-    "Vidéo",
-  ];
+  // Catégories depuis l'API backend
+  const { data: apiCategories } = useCategories();
+  const categories = React.useMemo(() => {
+    if (apiCategories && apiCategories.length > 0) {
+      return ["all", ...apiCategories.map(cat => cat.libelle)];
+    }
+    // Fallback statique si l'API n'est pas disponible
+    return ["all", "Programmation", "Data Science", "Design", "Business", "Marketing", "Vidéo"];
+  }, [apiCategories]);
   const levels = ["all", "Débutant", "Intermédiaire", "Avancé"];
 
   const filteredCourses = courses.filter((course) => {
-    const matchesCategory =
-      selectedCategory === "all" || course.category === selectedCategory;
+    // Mapping catégorie backend -> locale
+    let matchesCategory = selectedCategory === "all";
+    if (!matchesCategory) {
+      const categoryMap: { [key: string]: string[] } = {
+        "Développement Web": ["Programmation", "Développement"],
+        "Data & Intelligence Artificielle": ["Data", "Data Science"],
+        "Design UX/UI": ["Design"],
+        "Marketing Digital": ["Marketing"],
+        "Gestion de Projet": ["Business", "Management", "Entrepreneuriat"]
+      };
+      const mappedLocalCategories = categoryMap[selectedCategory] || [selectedCategory];
+      matchesCategory = mappedLocalCategories.some(
+        localCat => course.category.toLowerCase() === localCat.toLowerCase()
+      );
+    }
+
     const matchesLevel =
       selectedLevel === "all" || course.level === selectedLevel;
     const matchesPrice =

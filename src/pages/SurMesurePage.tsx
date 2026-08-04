@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   BookOpen, 
@@ -33,6 +33,7 @@ import Layout from "@/components/layout/Layout";
 import surMesureBg from "@/assets/woman-sitting-library-with-her-laptop.jpg";
 import { RegistrationForm } from '@/components/ui/RegistrationForm';
 import { useNavigate } from "react-router-dom";
+import { useCategories } from "@/hooks/useCategories";
 
 // Couleurs de la charte graphique
 const colors = {
@@ -58,6 +59,15 @@ const SurMesurePage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const navigate = useNavigate();
 
+  // Catégories depuis l'API backend
+  const { data: apiCategories } = useCategories();
+  const categories = useMemo(() => {
+    if (apiCategories && apiCategories.length > 0) {
+      return ["all", ...apiCategories.map(cat => cat.libelle)];
+    }
+    return ["all", "Développement", "Design", "Marketing"];
+  }, [apiCategories]);
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 4;
@@ -65,7 +75,23 @@ const SurMesurePage = () => {
   const filteredCourses = popularCourses.filter((course) => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           course.longDescription?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || course.category === selectedCategory;
+    
+    // Mapping catégorie backend -> locale
+    let matchesCategory = selectedCategory === "all";
+    if (!matchesCategory) {
+      const categoryMap: { [key: string]: string[] } = {
+        "Développement Web": ["Développement"],
+        "Data & Intelligence Artificielle": ["Data", "Data Science"],
+        "Design UX/UI": ["Design"],
+        "Marketing Digital": ["Marketing"],
+        "Gestion de Projet": ["Business", "Management", "Entrepreneuriat"]
+      };
+      const mappedLocalCategories = categoryMap[selectedCategory] || [selectedCategory];
+      matchesCategory = mappedLocalCategories.some(
+        localCat => course.category.toLowerCase() === localCat.toLowerCase()
+      );
+    }
+    
     return matchesSearch && matchesCategory;
   });
 
@@ -260,10 +286,11 @@ const SurMesurePage = () => {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a]"
               >
-                <option value="all">Toutes</option>
-                <option value="Développement">Développement</option>
-                <option value="Design">Design</option>
-                <option value="Marketing">Marketing</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>
+                    {cat === "all" ? "Toutes" : cat}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

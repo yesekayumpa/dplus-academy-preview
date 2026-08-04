@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
@@ -34,6 +34,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { useCategories } from "@/hooks/useCategories";
 
 // Couleurs de la charte graphique rouge-bordeaux
 const colors = {
@@ -223,7 +224,23 @@ const CorporateProgramsPage = () => {
   const filteredPrograms = corporatePrograms.filter(program => {
     const matchesSearch = program.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          program.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || program.category.toLowerCase() === selectedCategory.toLowerCase();
+    
+    // Mapping catégorie backend -> locale
+    let matchesCategory = selectedCategory === "all";
+    if (!matchesCategory) {
+      const categoryMap: { [key: string]: string[] } = {
+        "Développement Web": ["Digital"],
+        "Data & Intelligence Artificielle": ["Data"],
+        "Design UX/UI": ["Design"],
+        "Marketing Digital": ["Digital"],
+        "Gestion de Projet": ["Management"]
+      };
+      const mappedLocalCategories = categoryMap[selectedCategory] || [selectedCategory];
+      matchesCategory = mappedLocalCategories.some(
+        localCat => program.category.toLowerCase() === localCat.toLowerCase()
+      );
+    }
+    
     return matchesSearch && matchesCategory;
   });
 
@@ -238,7 +255,15 @@ const CorporateProgramsPage = () => {
     currentPage * ITEMS_PER_PAGE
   );
 
-  const categories = ["all", "Digital", "Management", "Data"];
+  // Catégories depuis l'API backend
+  const { data: apiCategories } = useCategories();
+  const categories = useMemo(() => {
+    if (apiCategories && apiCategories.length > 0) {
+      return ["all", ...apiCategories.map(cat => cat.libelle)];
+    }
+    // Fallback statique si l'API n'est pas disponible
+    return ["all", "Digital", "Management", "Data"];
+  }, [apiCategories]);
 
   const handleContactExpert = (programName = "") => {
     setContactForm({...contactForm, program: programName});
