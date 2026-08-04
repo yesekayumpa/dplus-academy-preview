@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import Layout from '../components/layout/Layout';
 import { useCategories } from '@/hooks/useCategories';
+import { useFormations } from '@/hooks/useFormations';
 
 // SalesFunnelExamples component - make sure this is imported or defined
 // If you have this component elsewhere, import it. If not, you'll need to create it.
@@ -499,7 +500,65 @@ const ElearningPage = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showFunnels, setShowFunnels] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(courses[0]);
+
+  // Formations depuis l'API backend
+  const { data: apiFormations } = useFormations();
+
+  // Mapping des données backend vers les cours attendus par la page
+  const courses = React.useMemo(() => {
+    if (!apiFormations) return [];
+    
+    // Filtrer uniquement pour le format e-learning
+    const rawFiltered = apiFormations.filter(f => f.format.slug === "e-learning");
+
+    return rawFiltered.map(f => {
+      const levelMap: Record<string, string> = {
+        DEBUTANT: "Débutant",
+        INTERMEDIAIRE: "Intermédiaire",
+        AVANCE: "Avancé"
+      };
+
+      return {
+        id: f.id,
+        title: f.titre,
+        instructor: f.formateur.nomComplet,
+        instructorTitle: f.formateur.titre,
+        instructorAvatar: f.formateur.imageUrl || "https://images.unsplash.com/photo-1494790108777-466d853b884d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+        price: f.cout,
+        originalPrice: f.cout * 1.5, // Simulation prix d'origine
+        image: f.imageUrl || "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=600&fit=crop&crop=entropy&auto=format",
+        category: f.categorie?.libelle || "Programmation",
+        level: levelMap[f.niveau] || "Débutant",
+        duration: `${f.dureeJours * 6}h`,
+        students: f.capacite || 100,
+        rating: 4.8,
+        reviews: 120,
+        isUpdated: f.statut === "EN_COURS",
+        updateVersion: "v1.0",
+        updateDate: "2024-03-01",
+        longDescription: f.sousTitre || "Formation intensive proposée par DM+ Academy.",
+        features: f.competences.map(c => c.titre),
+        icon: Code,
+        color: "red",
+        studentsCount: f.capacite || 100,
+        lastUpdated: "Mars 2024",
+        tags: f.tags.map(t => t.titre),
+        modules: f.competences.length || 6,
+        language: "Français",
+        certificate: true,
+        projects: f.competences.length || 3
+      };
+    });
+  }, [apiFormations]);
+
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
+
+  // Mettre à jour la sélection par défaut une fois les cours chargés
+  React.useEffect(() => {
+    if (courses.length > 0 && !selectedCourse) {
+      setSelectedCourse(courses[0]);
+    }
+  }, [courses, selectedCourse]);
 
   // Scroller en haut au chargement de la page
   useEffect(() => {
@@ -574,9 +633,9 @@ const ElearningPage = () => {
   const stats = {
     students: courses.reduce((acc, c) => acc + c.students, 0),
     courses: courses.length,
-    avgRating: (
+    avgRating: courses.length > 0 ? (
       courses.reduce((acc, c) => acc + c.rating, 0) / courses.length
-    ).toFixed(1),
+    ).toFixed(1) : "0",
     reviews: courses.reduce((acc, c) => acc + c.reviews, 0),
     projects: courses.reduce((acc, c) => acc + (c.projects || 0), 0),
     certificates: courses.filter((c) => c.certificate).length,

@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useCategories } from "@/hooks/useCategories";
+import { useFormations } from "@/hooks/useFormations";
 
 // Couleurs de la charte graphique rouge-bordeaux
 const colors = {
@@ -170,7 +171,46 @@ const corporatePrograms = [
 const CorporateProgramsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedProgram, setSelectedProgram] = useState<typeof corporatePrograms[0] | null>(null);
+
+  // Formations depuis l'API backend
+  const { data: apiFormations } = useFormations();
+
+  // Mapping des données backend vers corporatePrograms attendus par la page
+  const corporatePrograms = useMemo(() => {
+    if (!apiFormations) return [];
+
+    // Filtrer uniquement pour le format corporate-programs
+    const rawFiltered = apiFormations.filter(f => f.format.slug === "corporate-programs");
+
+    return rawFiltered.map(f => {
+      const levelMap: Record<string, string> = {
+        DEBUTANT: "Débutant",
+        INTERMEDIAIRE: "Intermédiaire",
+        AVANCE: "Avancé"
+      };
+
+      return {
+        id: f.id,
+        title: f.titre,
+        subtitle: f.sousTitre,
+        description: f.sousTitre || "Programme de formation sur mesure conçu pour répondre aux besoins des entreprises.",
+        duration: `${f.dureeJours} jours`,
+        format: f.format.titre,
+        participants: `${f.capacite} personnes`,
+        level: levelMap[f.niveau] || "Sur mesure",
+        category: f.categorie?.libelle || "Digital",
+        thumbnail: f.imageUrl || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.8,
+        price: `${f.cout.toLocaleString("fr-FR")} FCFA`,
+        highlights: f.tags.map(t => t.titre),
+        modules: f.competences.map(c => c.titre),
+        targetAudience: f.competences.map(c => c.titre),
+        benefits: f.competences.map(c => c.description)
+      };
+    });
+  }, [apiFormations]);
+
+  const [selectedProgram, setSelectedProgram] = useState<any>(null);
   const [showContactModal, setShowContactModal] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",

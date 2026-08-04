@@ -34,6 +34,7 @@ import surMesureBg from "@/assets/woman-sitting-library-with-her-laptop.jpg";
 import { RegistrationForm } from '@/components/ui/RegistrationForm';
 import { useNavigate } from "react-router-dom";
 import { useCategories } from "@/hooks/useCategories";
+import { useFormations } from "@/hooks/useFormations";
 
 // Couleurs de la charte graphique
 const colors = {
@@ -58,6 +59,58 @@ const SurMesurePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const navigate = useNavigate();
+
+  // Formations depuis l'API backend
+  const { data: apiFormations } = useFormations();
+
+  // Mapping des données backend vers popularCourses attendus par la page
+  const popularCourses = useMemo(() => {
+    if (!apiFormations) return [];
+    
+    // Filtrer uniquement pour le format mentored-courses / sur-mesure
+    const rawFiltered = apiFormations.filter(f => f.format.slug === "mentored-courses" || f.format.slug === "sur-mesure");
+
+    return rawFiltered.map(f => {
+      const levelMap: Record<string, string> = {
+        DEBUTANT: "Débutant",
+        INTERMEDIAIRE: "Intermédiaire",
+        AVANCE: "Avancé"
+      };
+
+      const statusMap: Record<string, "disponible" | "réservation"> = {
+        A_VENIR: "réservation",
+        EN_COURS: "disponible",
+        REPLAY: "disponible",
+        TERMINE: "disponible"
+      };
+
+      return {
+        id: f.id,
+        title: f.titre,
+        category: f.categorie?.libelle || "Développement",
+        image: f.imageUrl || "https://images.unsplash.com/photo-15222071820081-009f0129c71c?w=800",
+        duration: `${f.dureeJours * 6}h`,
+        rating: 4.8,
+        reviewsCount: 12,
+        studentsCount: f.capacite || 20,
+        price: f.cout,
+        originalPrice: f.cout * 1.5,
+        instructor: {
+          name: f.formateur.nomComplet,
+          role: f.formateur.titre,
+          avatar: f.formateur.imageUrl || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+        },
+        status: statusMap[f.statut] || "disponible",
+        longDescription: f.sousTitre || "Formation personnalisée avec mentor individuel.",
+        program: f.competences.map(c => c.titre),
+        objectives: f.competences.map(c => c.description),
+        target: f.competences.map(c => c.titre),
+        features: f.tags.map(t => t.titre)
+      };
+    });
+  }, [apiFormations]);
+
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
   // Catégories depuis l'API backend
   const { data: apiCategories } = useCategories();

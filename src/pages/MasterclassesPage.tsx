@@ -13,6 +13,7 @@ import MasterclassRegistrationForm from "@/components/MasterclassRegistrationFor
 import { RegistrationForm } from "@/components/ui/RegistrationForm";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCategories } from "@/hooks/useCategories";
+import { useFormations } from "@/hooks/useFormations";
 
 // Données enrichies des masterclass avec structure détaillée
 const masterclassData = [
@@ -678,6 +679,114 @@ const MasterclassesPageContent = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+  
+  // Formations depuis l'API backend
+  const { data: apiFormations, isLoading: formationsLoading } = useFormations();
+
+  // Mapping des données backend vers le format enrichi local
+  const masterclassData = useMemo(() => {
+    if (!apiFormations) return [];
+    
+    // On filtre pour cette page : format Masterclass (ou format Sur Mesure si type=sur-mesure)
+    const rawFiltered = apiFormations.filter(f => {
+      const isSurMesureFormat = f.format.slug === "mentored-courses" || f.format.slug === "sur-mesure";
+      const isMasterclassFormat = f.format.slug === "masterclass" || f.format.slug === "formation-live";
+      return isSurMesureFormat || isMasterclassFormat;
+    });
+
+    return rawFiltered.map(f => {
+      const isSurMesureFormat = f.format.slug === "mentored-courses" || f.format.slug === "sur-mesure";
+      
+      const levelMap: Record<string, string> = {
+        DEBUTANT: "Débutant",
+        INTERMEDIAIRE: "Intermédiaire",
+        AVANCE: "Avancé"
+      };
+
+      const statusMap: Record<string, "upcoming" | "past"> = {
+        A_VENIR: "upcoming",
+        EN_COURS: "upcoming",
+        REPLAY: "past",
+        TERMINE: "past"
+      };
+
+      return {
+        id: f.id,
+        title: f.titre,
+        subtitle: f.sousTitre,
+        tagline: isSurMesureFormat ? "Accompagnement individuel premium" : "Une formation stratégique orientée carrière",
+        description: f.format.description || "Formation intensive DM+ Academy.",
+        instructor: f.formateur.nomComplet,
+        instructorTitle: f.formateur.titre,
+        instructorImage: f.formateur.imageUrl || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+        date: "Sur demande",
+        time: "10:00",
+        duration: `${f.dureeJours} jours`,
+        location: f.format.slug === "e-learning" ? "En ligne" : "Présentiel (DM+ Academy) ou En ligne",
+        mode: f.format.slug === "e-learning" ? "online" : "online",
+        status: statusMap[f.statut] || "upcoming",
+        thumbnail: f.imageUrl || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=entropy&auto=format",
+        participants: f.capacite || 100,
+        category: isSurMesureFormat ? "Sur Mesure" : (f.categorie?.libelle || "Data"),
+        level: levelMap[f.niveau] || "Intermédiaire",
+        rating: 4.8,
+        highlights: f.tags.map(t => t.titre),
+        color: "blue",
+        price: f.cout,
+        
+        positioning: {
+          title: " Positionnement Premium",
+          points: [
+            "Former des profils immédiatement opérationnels",
+            "Répondre aux besoins du marché africain et international",
+            "Développer des compétences à forte valeur"
+          ]
+        },
+        
+        program: {
+          title: " Programme de formation",
+          modules: f.competences.map((c, i) => ({
+            number: String(i + 1),
+            name: c.titre
+          }))
+        },
+        
+        finalProject: {
+          title: " Projet Final Academy",
+          description: "Les participants réalisent :",
+          deliverables: [
+            "Un cas pratique d'entreprise",
+            "Mise en application des compétences acquises",
+            "Présentation devant un mentor/expert"
+          ]
+        },
+        
+        certification: {
+          title: " Certification DM+ Academy",
+          description: "À la fin du programme :",
+          benefits: [
+            { icon: "🎓", text: "Certificat Professionnel" },
+            { icon: "💼", text: "Portfolio projet" }
+          ]
+        },
+        
+        differentiation: {
+          title: " Différenciation Academy",
+          points: [
+            "Formation orientée résultats",
+            "Support technique continu",
+            "Coaching personnalisé"
+          ]
+        },
+        
+        objective: {
+          title: " Objectif final",
+          description: "Devenir opérationnel et autonome sur ces technologies.",
+          skills: f.competences.map(c => c.titre)
+        }
+      };
+    });
+  }, [apiFormations]);
 
   // Scroller en haut au chargement de la page
   useEffect(() => {
