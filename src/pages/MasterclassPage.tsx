@@ -46,7 +46,7 @@ const StatCard = ({ icon, value, label, suffix, color, isDecimal = false }: any)
         {icon}
       </div>
       <motion.div 
-        className={`text-3xl md:text-4xl font-bold ${color} mb-2`}
+        className={`text-3xl tracking-tight md:text-4xl tracking-tight font-bold ${color} mb-2`}
         initial={{ scale: 0.5 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
@@ -54,7 +54,7 @@ const StatCard = ({ icon, value, label, suffix, color, isDecimal = false }: any)
         {isDecimal ? displayValue.toFixed(1) : Math.floor(displayValue)}
         {suffix}
       </motion.div>
-      <p className="text-gray-600 font-medium">{label}</p>
+      <p className="text-gray-600 font-medium leading-relaxed">{label}</p>
     </motion.div>
   );
 };
@@ -189,7 +189,7 @@ const MasterclassPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Animated Header */}
-      <div className="relative bg-gradient-to-br from-academy via-academy-light to-purple-600 text-white py-20 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-academy via-academy-light to-purple-600 text-white py-20 lg:py-28 overflow-hidden">
         {/* Animated background elements */}
         <motion.div 
           animate={{ 
@@ -234,7 +234,7 @@ const MasterclassPage = () => {
               <span className="text-sm font-medium">2ème Édition</span>
             </motion.div>
             
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl tracking-tight md:text-6xl tracking-tight font-bold mb-6 leading-tight">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -293,7 +293,7 @@ const MasterclassPage = () => {
       </div>
 
       {/* Animated Statistics Section */}
-      <div className="bg-white py-12 border-b">
+      <div className="bg-white py-16 lg:py-20 lg:py-28 border-b">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <StatCard 
@@ -362,7 +362,7 @@ const MasterclassPage = () => {
                   placeholder="Rechercher une masterclass..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-academy focus:border-transparent transition-all duration-300"
+                  className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-academy focus:border-transparent transition-all duration-300"
                 />
               </motion.div>
 
@@ -372,7 +372,7 @@ const MasterclassPage = () => {
                   <motion.button
                     key={status}
                     onClick={() => setFilterStatus(status as any)}
-                    className={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                    className={`px-4 py-3 rounded-2xl font-medium transition-colors ${
                       filterStatus === status 
                         ? "bg-academy text-white" 
                         : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -389,7 +389,7 @@ const MasterclassPage = () => {
               <motion.select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-academy focus:border-transparent bg-background transition-all duration-300"
+                className="px-4 py-3 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-academy focus:border-transparent bg-background transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
                 whileFocus={{ scale: 1.02 }}
               >
@@ -403,7 +403,7 @@ const MasterclassPage = () => {
 
             {/* Résultats */}
             <div className="mb-4">
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 {filteredMasterclass.length} masterclass{filteredMasterclass.length > 1 ? 's' : ''} trouvé{filteredMasterclass.length > 1 ? 's' : ''}
               </p>
             </div>
@@ -490,7 +490,7 @@ const MasterclassPage = () => {
                           {masterclass.title}
                         </motion.h3>
                         
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed">
                           {masterclass.description}
                         </p>
 
@@ -536,11 +536,11 @@ const MasterclassPage = () => {
                             whileHover={{ x: 5 }}
                             transition={{ type: "spring", stiffness: 300 }}
                           >
-                            <p className="text-sm font-medium text-gray-900">{masterclass.instructor}</p>
-                            <p className="text-xs text-muted-foreground">{masterclass.category}</p>
+                            <p className="text-sm font-medium text-gray-900 leading-relaxed">{masterclass.instructor}</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{masterclass.category}</p>
                           </motion.div>
                           <motion.button 
-                            className="px-4 py-2 bg-academy text-white rounded-lg text-sm font-medium hover:bg-academy/90 transition-colors"
+                            className="px-4 py-2 bg-academy text-white rounded-2xl text-sm font-medium hover:bg-academy/90 transition-colors"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
@@ -557,11 +557,11 @@ const MasterclassPage = () => {
             {/* Message si aucun résultat */}
             {filteredMasterclass.length === 0 && (
               <motion.div 
-                className="text-center py-12"
+                className="text-center py-16 lg:py-20 lg:py-28"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-muted-foreground text-lg">
+                <p className="text-muted-foreground text-lg leading-relaxed">
                   Aucune masterclass trouvée pour votre recherche.
                 </p>
               </motion.div>
@@ -575,7 +575,7 @@ const MasterclassPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-center mb-8">
+              <h2 className="text-3xl tracking-tight font-bold text-center mb-8">
                 Ce que disent nos participants
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -620,14 +620,14 @@ const MasterclassPage = () => {
                         </motion.span>
                       ))}
                     </div>
-                    <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
+                    <p className="text-gray-700 mb-4 italic leading-relaxed">"{testimonial.content}"</p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-academy to-academy-light rounded-full flex items-center justify-center text-white font-bold">
                         {testimonial.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                        <p className="text-sm text-gray-600">{testimonial.role}</p>
+                        <p className="font-semibold text-gray-900 leading-relaxed">{testimonial.name}</p>
+                        <p className="text-sm text-gray-600 leading-relaxed">{testimonial.role}</p>
                       </div>
                     </div>
                   </motion.div>

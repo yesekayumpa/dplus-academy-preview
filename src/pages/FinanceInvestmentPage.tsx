@@ -238,7 +238,7 @@ const FinanceInvestmentPage = () => {
     <Layout>
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section avec image de fond */}
-        <section className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1600&h=600&fit=crop")' }}>
+        <section className="relative bg-cover bg-center bg-no-repeat pt-32 pb-20" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1600&h=600&fit=crop")' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-indigo-900/90"></div>
           <div className="relative container mx-auto px-4 py-16 lg:py-24">
             <motion.div
@@ -254,7 +254,7 @@ const FinanceInvestmentPage = () => {
               <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
                 Finance & Investment
               </h1>
-              <p className="text-lg lg:text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+              <p className="text-lg lg:text-xl mb-8 text-blue-100 max-w-2xl mx-auto leading-relaxed">
                 Devenez expert en finance et développez des stratégies d'investissement performantes
               </p>
               
@@ -385,13 +385,13 @@ const FinanceInvestmentPage = () => {
         </section>
 
         {/* Courses Grid */}
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-4 py-16 lg:py-20 lg:py-28">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-gray-900">
                 {currentCourses.length} formation{currentCourses.length > 1 ? 's' : ''} sur {filteredCourses.length}
               </h2>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-600 mt-1 leading-relaxed">
                 Page {currentPage} sur {totalPages} • {filteredCourses.length === financeCourses.length 
                   ? "Toutes nos formations en finance & investment" 
                   : "Résultats de votre recherche"}
@@ -423,12 +423,12 @@ const FinanceInvestmentPage = () => {
                       }}
                     />
                     <div className="absolute top-3 left-3 flex gap-2">
-                      <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${statusBadge.bg} ${statusBadge.text}`}>
+                      <span className={`px-2.5 py-1 text-xs font-medium rounded-2xl ${statusBadge.bg} ${statusBadge.text}`}>
                         {statusBadge.label}
                       </span>
                     </div>
                     <div className="absolute top-3 right-3 flex flex-col gap-2">
-                      <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${levelBadge.bg} ${levelBadge.text}`}>
+                      <span className={`px-2.5 py-1 text-xs font-medium rounded-2xl ${levelBadge.bg} ${levelBadge.text}`}>
                         {levelBadge.label}
                       </span>
                     </div>
@@ -450,7 +450,7 @@ const FinanceInvestmentPage = () => {
                       </h3>
                     </div>
 
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2 leading-relaxed">
                       {course.description}
                     </p>
 
@@ -458,7 +458,7 @@ const FinanceInvestmentPage = () => {
                       {course.tags.map((tag) => (
                         <span 
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg hover:bg-gray-200 transition-colors"
+                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-2xl hover:bg-gray-200 transition-colors"
                         >
                           {tag}
                         </span>
@@ -466,11 +466,11 @@ const FinanceInvestmentPage = () => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-3 mb-4">
-                      <div className="flex items-center gap-1 text-gray-500">
+                      <div className="flex items-center gap-1 text-gray-600">
                         <Clock className="w-4 h-4" />
                         <span className="text-xs">{course.duration}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-gray-500">
+                      <div className="flex items-center gap-1 text-gray-600">
                         <Users className="w-4 h-4" />
                         <span className="text-xs">{course.students}</span>
                       </div>
@@ -486,12 +486,12 @@ const FinanceInvestmentPage = () => {
                           {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                         </span>
                         {course.price > 0 && (
-                          <span className="text-xs text-gray-500 ml-1">
+                          <span className="text-xs text-gray-600 ml-1">
                             ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
                           </span>
                         )}
                       </div>
-                      <button className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors hover:shadow-md">
+                      <button className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors hover:shadow-xl transition-all duration-300">
                         Détails
                         <ArrowRight className="w-4 h-4" />
                       </button>
@@ -508,7 +508,7 @@ const FinanceInvestmentPage = () => {
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-2 rounded-2xl transition-colors ${
                   currentPage === 1 
                     ? 'text-gray-300 cursor-not-allowed' 
                     : 'text-gray-600 hover:bg-gray-100'
@@ -522,7 +522,7 @@ const FinanceInvestmentPage = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                    className={`w-10 h-10 rounded-2xl font-medium transition-colors ${
                       currentPage === page
                         ? 'bg-blue-600 text-white'
                         : 'text-gray-600 hover:bg-gray-100'
@@ -536,7 +536,7 @@ const FinanceInvestmentPage = () => {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-2 rounded-2xl transition-colors ${
                   currentPage === totalPages 
                     ? 'text-gray-300 cursor-not-allowed' 
                     : 'text-gray-600 hover:bg-gray-100'
@@ -548,14 +548,14 @@ const FinanceInvestmentPage = () => {
           )}
 
           {filteredCourses.length === 0 && (
-            <div className="text-center py-16">
+            <div className="text-center py-16 lg:py-24">
               <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Search className="w-8 h-8 text-gray-400" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Aucune formation trouvée
               </h3>
-              <p className="text-gray-500 mb-4">
+              <p className="text-gray-600 mb-4 leading-relaxed">
                 Essayez de modifier vos filtres ou termes de recherche
               </p>
               <button
@@ -569,7 +569,7 @@ const FinanceInvestmentPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-600 py-12">
+        <section className="bg-blue-600 py-16 lg:py-20 lg:py-28">
           <div className="container mx-auto px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -579,7 +579,7 @@ const FinanceInvestmentPage = () => {
               <h2 className="text-2xl font-bold text-white mb-3">
                 Prêt à devenir expert en finance ?
               </h2>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              <p className="text-blue-100 mb-6 max-w-2xl mx-auto leading-relaxed">
                 Rejoignez nos formations et développez les compétences les plus recherchées du marché
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">

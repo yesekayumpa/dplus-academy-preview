@@ -49,17 +49,17 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
   }, []);
   return (
     <section className="py-3 bg-white" id="formations" data-courses-section="true">
-      <div className="relative bg-white text-gray-900 py-4 px-3 sm:px-4 lg:px-6 pt-8 sm:pt-12 lg:pt-16">
+      <div className="relative bg-white text-gray-900 py-4 px-3 sm:px-4 lg:px-6 pt-8 sm:pt-12 lg:pt-16 lg:pt-24">
         <div className="relative z-10 max-w-4xl mx-auto text-center pt-6 sm:pt-8 lg:pt-12 pb-3">
           <div className="inline-flex items-center px-3 py-1.5 mb-4 rounded-full bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-200 text-red-600 text-sm font-medium backdrop-blur-sm">
             <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
             Formation Premium
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+          <h1 className="text-3xl tracking-tight sm:text-4xl tracking-tight lg:text-5xl tracking-tight font-extrabold leading-tight mb-4">
             <span className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent">
               {course?.title || "Deviens un Designer"}
             </span>
-            <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
+            <span className="block text-2xl sm:text-3xl tracking-tight lg:text-4xl tracking-tight mt-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
               {course?.category === "Design" ? "Graphique Professionnel" : "Expert dans votre domaine"}
             </span>
           </h1>
@@ -69,7 +69,7 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <button 
               onClick={openChariowModal}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl max-w-xs sm:max-w-none inline-flex items-center justify-center"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300 max-w-xs sm:max-w-none inline-flex items-center justify-center"
             >
               <span className="flex items-center gap-2">Acheter la formation</span>
             </button>
@@ -96,7 +96,7 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                     <div className="group relative p-3 rounded-2xl cursor-pointer transition-all duration-300">
                       <div className="relative flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                           <Sparkles className="w-5 h-5 text-red-600" />
                         </div>
                         <div className="flex-1">
@@ -112,7 +112,7 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
                     
                     <div className="group relative p-3 rounded-2xl cursor-pointer transition-all duration-300">
                       <div className="relative flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                           <Star className="w-5 h-5 text-amber-600" />
                         </div>
                         <div className="flex-1">
@@ -128,7 +128,7 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
                     
                     <div className="group relative p-3 rounded-2xl cursor-pointer transition-all duration-300">
                       <div className="relative flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                           <MessageCircle className="w-5 h-5 text-red-600" />
                         </div>
                         <div className="flex-1">
@@ -144,7 +144,7 @@ const PremiumCourseSection = ({ course }: PremiumCourseSectionProps) => {
                     
                     <div className="group relative p-3 rounded-2xl cursor-pointer transition-all duration-300">
                       <div className="relative flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                           <Lightbulb className="w-5 h-5 text-emerald-600" />
                         </div>
                         <div className="flex-1">

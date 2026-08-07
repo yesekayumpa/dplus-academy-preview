@@ -29,7 +29,7 @@ export const Notification = ({ type, message, onClose }: NotificationProps) => {
           exit={{ opacity: 0, y: -50, scale: 0.9 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className={`
-            fixed top-4 right-4 z-50 max-w-md p-4 rounded-lg shadow-lg
+            fixed top-4 right-4 z-50 max-w-md p-4 rounded-2xl shadow-lg
             flex items-start gap-3 backdrop-blur-sm
             ${type === 'success' 
               ? 'bg-green-50/90 border border-green-200' 

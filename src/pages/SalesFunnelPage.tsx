@@ -48,37 +48,37 @@ const SalesFunnelPage = () => {
       case "Design":
         return (
           <>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les outils essentiels</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Photoshop, Illustrator et InDesign pour concrétiser vos idées créatives</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Créer des visuels percutants</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Logos, affiches, flyers et supports de communication qui captent l'attention</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Optimiser votre workflow</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Raccourcis, automatisations et bonnes pratiques des professionnels</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Adapter vos créations</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Designs adaptés à tous supports (print, web, réseaux sociaux)</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Développer votre identité visuelle</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Fondamentaux du graphisme (couleurs, typographies, composition)</p>
               </div>
             </div>
-            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-100 transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Templates, modèles et guides professionnels inclus</p>
@@ -90,37 +90,37 @@ const SalesFunnelPage = () => {
       case "Programmation":
         return (
           <>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Maîtriser les fondamentaux</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Variables, fonctions, et structures de contrôle essentielles</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Programmation orientée objet</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Classes, héritage et principes SOLID</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets pratiques</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Applications réelles pour construire votre portfolio</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Bibliothèques modernes</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Frameworks et outils du développement web moderne</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Best practices</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Code propre, tests et méthodologies agiles</p>
               </div>
             </div>
-            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-100 transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Support communautaire</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Accès au forum et aide des mentors</p>
@@ -132,37 +132,37 @@ const SalesFunnelPage = () => {
       case "Data Science":
         return (
           <>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Analyse de données</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Manipulation et exploration avec pandas et numpy</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Machine Learning</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Algorithmes supervisés et non supervisés</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Deep Learning</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Réseaux de neurones et TensorFlow</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Visualisation</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Graphiques interactifs avec matplotlib et plotly</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets réels</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Cas d'usage industriels et datasets réels</p>
               </div>
             </div>
-            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-100 transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Certification</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Validation des compétences par projet final</p>
@@ -174,37 +174,37 @@ const SalesFunnelPage = () => {
       default:
         return (
           <>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Compétences fondamentales</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Bases solides pour démarrer votre parcours</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Pratique avancée</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Techniques professionnelles et expertises</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Projets concrets</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Applications pratiques du domaine</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Méthodologies</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Approches et meilleures pratiques</p>
               </div>
             </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm transition-all duration-200">
+            <div className="bg-white rounded-2xl sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-md transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Études de cas</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Exemples réels et analyses</p>
               </div>
             </div>
-            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-sm hover:bg-red-100 transition-all duration-200">
+            <div className="bg-red-50 rounded-xl p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-100 transition-all duration-200">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-0.5 sm:mb-1 text-xs sm:text-sm md:text-base">Ressources exclusives</h3>
                 <p className="text-xs sm:text-xs sm:text-sm text-gray-600 leading-tight sm:leading-relaxed md:leading-relaxed">Matériels complémentaires et supports</p>
@@ -228,9 +228,9 @@ const SalesFunnelPage = () => {
       
       <div className="max-w-xl sm:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         <div className="text-center mb-2 sm:mb-3 md:mb-4 lg:mb-6">
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 md:mb-3">Ce que vous allez apprendre</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tight font-bold text-gray-900 mb-1 sm:mb-2 md:mb-3">Ce que vous allez apprendre</h2>
           <div className="w-12 h-0.5 bg-red-500 mx-auto rounded-full mb-1 sm:mb-2 md:mb-4"></div>
-          <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             {selectedCourse?.description || "Maîtrisez les compétences essentielles du design graphique professionnel"}
           </p>
         </div>
@@ -241,22 +241,22 @@ const SalesFunnelPage = () => {
       
       <div className="space-y-6">
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Programme de la Formation</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl tracking-tight lg:text-4xl tracking-tight font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Programme de la Formation</h2>
           <div className="w-16 h-0.5 sm:w-20 bg-red-500 mx-auto rounded-full mb-4 sm:mb-6"></div>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl sm:max-w-3xl mx-auto">6 modules complets pour devenir un designer graphique professionnel</p>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed">6 modules complets pour devenir un designer graphique professionnel</p>
         </div>
         <div className="mt-8 sm:mt-12 md:mt-16">
           <div className="text-center mb-4 sm:mb-6 md:mb-8">
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 md:mb-3">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tight font-bold text-gray-900 mb-1 sm:mb-2 md:mb-3">
               <span className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent">Découvrir la formation</span>
             </h2>
-            <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-lg sm:max-w-xl mx-auto">Une présentation immersive de mes créations</p>
+            <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-lg sm:max-w-xl mx-auto leading-relaxed">Une présentation immersive de mes créations</p>
           </div>
           <div className="relative max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto">
-            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded sm:rounded-lg md:rounded-xl lg:rounded-2xl p-0.5 sm:p-1 shadow-xl group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-red-500/20 via-transparent to-red-500/20 rounded sm:rounded-lg md:rounded-xl lg:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/10 to-transparent rounded sm:rounded-lg md:rounded-xl lg:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-              <div className="relative bg-black rounded sm:rounded-lg md:rounded-xl overflow-hidden aspect-video">
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded sm:rounded-2xl md:rounded-xl lg:rounded-2xl p-0.5 sm:p-1 shadow-xl group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-red-500/20 via-transparent to-red-500/20 rounded sm:rounded-2xl md:rounded-xl lg:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/10 to-transparent rounded sm:rounded-2xl md:rounded-xl lg:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+              <div className="relative bg-black rounded sm:rounded-2xl md:rounded-xl overflow-hidden aspect-video">
                 <div className="absolute inset-0 flex items-center justify-center z-20">
                   <div className="w-8 h-8 sm:w-10 sm:h-12 md:w-16 md:h-16 bg-red-600/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:bg-red-500 transition-all duration-500 cursor-pointer group">
                     <svg className="w-3 h-3 sm:w-4 sm:h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
@@ -272,14 +272,14 @@ const SalesFunnelPage = () => {
                         <path d="M8 5v14l11-7z"></path>
                       </svg>
                     </div>
-                    <p className="text-gray-400 text-xs sm:text-sm">Cliquez pour lire la vidéo</p>
+                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">Cliquez pour lire la vidéo</p>
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             </div>
             <div className="mt-3 sm:mt-4 md:mt-6 text-center">
-              <p className="text-gray-500 text-xs">
+              <p className="text-gray-600 text-xs leading-relaxed">
                 <span className="inline-flex items-center gap-1">
                   <svg className="w-2 h-2 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path>
@@ -298,26 +298,26 @@ const SalesFunnelPage = () => {
         <div className="p-2 sm:p-3 mt-4 sm:mt-6 max-w-xs sm:max-w-sm lg:max-w-lg relative overflow-hidden mx-auto">
           <div className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-red-400/5 to-red-500/5 rounded-full filter blur-lg animate-pulse"></div>
           <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-tr from-blue-400/5 to-blue-500/5 rounded-full filter blur-lg animate-pulse" style={{animationDelay: "1s"}}></div>
-          <div className="relative z-10 rounded-lg bg-gradient-to-r from-gray-50/80 to-white/80 backdrop-blur-sm border border-gray-100/50 shadow-sm">
+          <div className="relative z-10 rounded-2xl bg-gradient-to-r from-gray-50/80 to-white/80 backdrop-blur-sm border border-gray-100/50 shadow-md">
             <div className="flex flex-nowrap justify-between items-center text-left px-1 sm:px-2">
-              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-lg p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-sm">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-2xl p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-red-500 relative z-10">
                   <path d="M12 7v14"></path>
                   <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
                 </svg>
                 <div className="text-[8px] sm:text-xs md:text-sm font-bold text-gray-900 leading-tight relative z-10">6 Modules</div>
               </div>
-              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-lg p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-sm">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-2xl p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-500 relative z-10">
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
                 <div className="text-[8px] sm:text-xs md:text-sm font-bold text-gray-900 leading-tight relative z-10">157 min</div>
               </div>
-              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-lg p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-sm">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative flex items-center space-x-0.5 sm:space-x-1 bg-gradient-to-br from-white to-gray-50/50 rounded-2xl p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-green-500 relative z-10">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
@@ -328,8 +328,8 @@ const SalesFunnelPage = () => {
                 </svg>
                 <div className="text-[9px] sm:text-sm font-bold text-gray-900 leading-tight relative z-10">Illimité Accès</div>
               </div>
-              <div className="group relative flex items-center space-x-0.5 bg-gradient-to-br from-white to-gray-50/50 rounded-lg p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-sm">
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="group relative flex items-center space-x-0.5 bg-gradient-to-br from-white to-gray-50/50 rounded-2xl p-1 sm:p-2 transition-all duration-300 flex-shrink-0 border border-gray-100/30 shadow-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2.5 h-2.5 sm:w-5 sm:h-5 text-amber-500 relative z-10">
                   <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                   <path d="m9 11 3 3L22 4"></path>
@@ -341,18 +341,18 @@ const SalesFunnelPage = () => {
         </div>
         <div className="max-w-5xl sm:max-w-3xl md:max-w-4xl mx-auto space-y-3 sm:space-y-4 px-3 sm:px-0">
           {/* Module 1 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(1)}
               className="w-full flex items-center justify-between p-3 sm:p-4 md:p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">01</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Introduction</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Présentation de la formation complète</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Présentation de la formation complète</p>
                 </div>
               </div>
               <svg 
@@ -372,7 +372,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 1 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -382,7 +382,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="text-sm sm:font-medium text-gray-900">Présentation de la formation complète</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -404,18 +404,18 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 2 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(2)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">02</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Les outils essentiels</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Maîtrise Photoshop, Illustrator, InDesign</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Maîtrise Photoshop, Illustrator, InDesign</p>
                 </div>
               </div>
               <svg 
@@ -435,7 +435,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 2 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -445,7 +445,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Maîtrise Photoshop, Illustrator, InDesign</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -467,18 +467,18 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 3 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(3)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">03</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Projets pratiques</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Créez des projets réels</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Créez des projets réels</p>
                 </div>
               </div>
               <svg 
@@ -498,7 +498,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 3 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -508,7 +508,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Créez des projets réels</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -534,18 +534,18 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 4 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(4)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">04</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Maîtrise du design</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Théorie et pratique avancées</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Théorie et pratique avancées</p>
                 </div>
               </div>
               <svg 
@@ -565,7 +565,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 4 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -575,7 +575,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Théorie et pratique avancées</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -601,18 +601,18 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 5 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(5)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">05</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Identité visuelle</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Charte graphique complet</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Charte graphique complet</p>
                 </div>
               </div>
               <svg 
@@ -632,7 +632,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 5 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -642,7 +642,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Charte graphique complet</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -668,18 +668,18 @@ const SalesFunnelPage = () => {
             </div>
           </div>
           {/* Module 6 */}
-          <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm shadow-gray-100">
+          <div className="bg-white rounded-2xl sm:rounded-xl overflow-hidden shadow-md shadow-gray-100">
             <button 
               onClick={() => toggleModule(6)}
               className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
             >
               <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <span className="text-red-600 font-bold text-sm sm:text-lg">06</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Lancement professionnel</h3>
-                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">Stratégies de carrière</p>
+                  <p className="text-xs sm:text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1 leading-relaxed">Stratégies de carrière</p>
                 </div>
               </div>
               <svg 
@@ -699,7 +699,7 @@ const SalesFunnelPage = () => {
             </button>
             <div className={`border-t border-gray-200 transition-all duration-300 ${openModule === 6 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="p-3 sm:p-6 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                <div className="bg-gray-50 rounded-2xl p-3 sm:p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-red-600">
@@ -709,7 +709,7 @@ const SalesFunnelPage = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Portfolio et premiers clients</h4>
-                      <span className="text-xs text-gray-500">Leçon 1</span>
+                      <span className="text-xs text-gray-600">Leçon 1</span>
                     </div>
                   </div>
                   <ul className="space-y-2 ml-11">
@@ -739,9 +739,9 @@ const SalesFunnelPage = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-4">
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3">Choisissez Votre Parcours</h2>
+          <h2 className="text-xl md:text-2xl lg:text-3xl tracking-tight font-bold text-gray-900 mb-2 md:mb-3">Choisissez Votre Parcours</h2>
           <div className="w-16 h-0.5 bg-red-600 mx-auto rounded-full mb-2 md:mb-4"></div>
-          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">Des formations adaptées à tous les niveaux, conçues par des experts pour vous aider à maîtriser la finance personnelle et l'investissement.</p>
+          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">Des formations adaptées à tous les niveaux, conçues par des experts pour vous aider à maîtriser la finance personnelle et l'investissement.</p>
         </div>
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -757,7 +757,7 @@ const SalesFunnelPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 text-xs md:text-sm">Standard</h3>
-                    <p className="text-xs text-gray-600 font-medium">Formation complète</p>
+                    <p className="text-xs text-gray-600 font-medium leading-relaxed">Formation complète</p>
                   </div>
                 </div>
                 <div className="mb-5">
@@ -765,12 +765,12 @@ const SalesFunnelPage = () => {
                     <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">297</span>
                     <span className="text-sm font-semibold text-red-600 ml-1">FCFA</span>
                   </div>
-                  <p className="text-center text-xs text-gray-500 mt-1 md:mt-2 font-medium">Prix unique • Accès immédiat</p>
+                  <p className="text-center text-xs text-gray-600 mt-1 md:mt-2 font-medium leading-relaxed">Prix unique • Accès immédiat</p>
                 </div>
                 <p className="text-gray-600 mb-3 md:mb-4 text-xs leading-tight md:leading-relaxed">Formations complètes pour apprendre à votre rythme avec nos ressources en ligne.</p>
                 <ul className="space-y-1.5 md:space-y-2 mb-3 md:mb-5">
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -778,8 +778,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Accès illimité aux cours</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -787,8 +787,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Ressources téléchargeables</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -796,8 +796,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Communauté active</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M18 6 6 18"></path>
                         <path d="m6 6 12 12"></path>
@@ -823,7 +823,7 @@ const SalesFunnelPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 text-xs md:text-sm">Premium</h3>
-                    <p className="text-xs text-red-600 font-medium">Accompagnement personnalisé</p>
+                    <p className="text-xs text-red-600 font-medium leading-relaxed">Accompagnement personnalisé</p>
                   </div>
                 </div>
                 <div className="mb-5">
@@ -831,12 +831,12 @@ const SalesFunnelPage = () => {
                     <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">597</span>
                     <span className="text-sm font-semibold text-red-600 ml-1">FCFA</span>
                   </div>
-                  <p className="text-center text-xs text-gray-500 mt-1 md:mt-2 font-medium">Prix unique • Accès immédiat</p>
+                  <p className="text-center text-xs text-gray-600 mt-1 md:mt-2 font-medium leading-relaxed">Prix unique • Accès immédiat</p>
                 </div>
                 <p className="text-gray-600 mb-3 md:mb-4 text-xs leading-tight md:leading-relaxed">Coaching individuel avec suivi personnalisé pour atteindre vos objectifs rapidement.</p>
                 <ul className="space-y-1.5 md:space-y-2 mb-3 md:mb-5">
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -844,8 +844,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Accès illimité aux cours</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -853,8 +853,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Ressources téléchargeables</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -862,8 +862,8 @@ const SalesFunnelPage = () => {
                     </div>
                     <span className="text-xs font-medium text-gray-700">Communauté active</span>
                   </li>
-                  <li className="flex items-center bg-gray-50 rounded-lg p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-1.5 md:mr-2">
+                  <li className="flex items-center bg-gray-50 rounded-2xl p-1.5 md:p-2 transition-all duration-300 hover:bg-red-50">
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-1.5 md:mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-2 h-2 md:w-2.5 md:h-2.5 text-white">
                         <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                         <path d="m9 11 3 3L22 4"></path>
@@ -886,9 +886,9 @@ const SalesFunnelPage = () => {
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full filter blur-2xl animate-pulse"></div>
           </div>
           <div className="relative z-10 inline-block">
-            <h1 className="relative text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black mb-1 sm:mb-2 md:mb-3 leading-tight">
+            <h1 className="relative text-lg sm:text-2xl md:text-3xl tracking-tight lg:text-4xl tracking-tight font-black mb-1 sm:mb-2 md:mb-3 leading-tight">
               <span className="relative inline-block">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-transparent to-red-200 opacity-0 hover:opacity-100 transition-opacity duration-700 rounded-lg transform skew-x-12"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-transparent to-red-200 opacity-0 hover:opacity-100 transition-opacity duration-700 rounded-2xl transform skew-x-12"></div>
                 <span className="relative bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 cursor-default inline-block transform hover:scale-105">Formateur</span>
               </span>
             </h1>
@@ -898,9 +898,9 @@ const SalesFunnelPage = () => {
         </div>
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 relative z-10 items-stretch text-center lg:text-left">
           <div className="flex-1 flex flex-col justify-between">
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight animate-fade-in-up">
+            <h1 className="text-xl sm:text-2xl md:text-4xl tracking-tight font-bold text-gray-900 mb-2 sm:mb-3 leading-tight animate-fade-in-up">
               <span className="inline-block hover:scale-105 transition-transform duration-300 cursor-default">Blaise KAYUMPA Yese</span>
-              <span className="block text-lg sm:text-xl md:text-3xl mt-1 sm:mt-2 bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent font-semibold animate-gradient-shift">Designer Graphique Senior</span>
+              <span className="block text-lg sm:text-xl md:text-3xl tracking-tight mt-1 sm:mt-2 bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent font-semibold animate-gradient-shift">Designer Graphique Senior</span>
             </h1>
             <button 
               onClick={toggleDescription}
@@ -932,7 +932,7 @@ const SalesFunnelPage = () => {
                     <div className="flex items-center gap-1 sm:gap-2 mb-3 sm:mb-4 animate-fade-in-up" style={{animationDelay: "400ms"}}>
                       <div className="group">
                         <h3 className="text-base sm:text-xl font-bold bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">Profil Professionnel</h3>
-                        <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Designer Graphique Senior</p>
+                        <p className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-600 transition-colors duration-300 leading-relaxed">Designer Graphique Senior</p>
                       </div>
                     </div>
                     <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-3 sm:mb-4 border border-gray-100/50 shadow-inner hover:shadow-lg transition-all duration-500 group animate-fade-in-up" style={{animationDelay: "500ms"}}>
@@ -946,31 +946,31 @@ const SalesFunnelPage = () => {
                         <div className="flex-1 h-px bg-gradient-to-r from-red-200 to-transparent"></div>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-left">
-                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
+                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Formation complète</h5>
-                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Photoshop, Illustrator et outils professionnels</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">Photoshop, Illustrator et outils professionnels</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
-                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
+                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Accompagnement personnalisé</h5>
-                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Suivi par des experts du secteur</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">Suivi par des experts du secteur</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
-                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
+                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Certification professionnelle</h5>
-                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Reconnue par les entreprises</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">Reconnue par les entreprises</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
-                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-lg border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
+                        <div className="group flex items-start gap-1 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100/50 hover:shadow-xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white">
                           <div className="flex-1">
                             <h5 className="font-bold text-gray-800 text-xs sm:text-base mb-1 group-hover:text-gray-900 transition-colors duration-300">Évolution de carrière</h5>
-                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Développez votre potentiel professionnel</p>
+                            <p className="text-xs sm:text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">Développez votre potentiel professionnel</p>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                         </div>
@@ -1008,17 +1008,17 @@ const SalesFunnelPage = () => {
       <div className="max-w-xl sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block text-red-500 text-sm font-semibold tracking-wider uppercase mb-3">Témoignages</span>
-          <h2 className="text-4xl md:text-4xl font-bold text-gray-900 mb-4">Ce que disent nos étudiants</h2>
+          <h2 className="text-4xl tracking-tight md:text-4xl tracking-tight font-bold text-gray-900 mb-4">Ce que disent nos étudiants</h2>
           <div className="w-24 h-1 bg-red-500 mx-auto mt-4"></div>
         </div>
         <div className="relative">
           <div className="grid grid-cols-1 lg:hidden gap-4">
-            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
               <div className="flex items-center mb-3">
                 <img className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aïcha K." />
                 <div className="ml-2 sm:ml-3">
                   <h4 className="text-xs sm:text-sm font-bold text-gray-900">Aïcha K.</h4>
-                  <p className="text-xs text-gray-600">Designer Graphique</p>
+                  <p className="text-xs text-gray-600 leading-relaxed">Designer Graphique</p>
                 </div>
                 <div className="ml-auto flex items-center space-x-1">
                   <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1038,14 +1038,14 @@ const SalesFunnelPage = () => {
                   </svg>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-xs sm:text-sm">"Grâce à cette formation, j'ai pu lancer mon activité de freelance en design graphique. Les cours sont clairs et les projets concrets m'ont permis de me constituer un portfolio solide."</p>
+              <p className="text-gray-700 italic text-xs sm:text-sm leading-relaxed">"Grâce à cette formation, j'ai pu lancer mon activité de freelance en design graphique. Les cours sont clairs et les projets concrets m'ont permis de me constituer un portfolio solide."</p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
               <div className="flex items-center mb-3">
                 <img className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mohamed D." />
                 <div className="ml-2 sm:ml-3">
                   <h4 className="text-xs sm:text-sm font-bold text-gray-900">Mohamed D.</h4>
-                  <p className="text-xs text-gray-600">Développeur Web</p>
+                  <p className="text-xs text-gray-600 leading-relaxed">Développeur Web</p>
                 </div>
                 <div className="ml-auto flex items-center space-x-1">
                   <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1065,14 +1065,14 @@ const SalesFunnelPage = () => {
                   </svg>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-xs sm:text-sm">"La qualité des formations est exceptionnelle. J'ai particulièrement apprécié les études de cas réels qui m'ont permis de comprendre les enjeux concrets du métier."</p>
+              <p className="text-gray-700 italic text-xs sm:text-sm leading-relaxed">"La qualité des formations est exceptionnelle. J'ai particulièrement apprécié les études de cas réels qui m'ont permis de comprendre les enjeux concrets du métier."</p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-500 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
               <div className="flex items-center mb-3">
                 <img className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fatou N." />
                 <div className="ml-2 sm:ml-3">
                   <h4 className="text-xs sm:text-sm font-bold text-gray-900">Fatou N.</h4>
-                  <p className="text-xs text-gray-600">Entrepreneuse</p>
+                  <p className="text-xs text-gray-600 leading-relaxed">Entrepreneuse</p>
                 </div>
                 <div className="ml-auto flex items-center space-x-1">
                   <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1092,7 +1092,7 @@ const SalesFunnelPage = () => {
                   </svg>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-xs sm:text-sm">"En tant que débutante, j'ai trouvé les explications très accessibles. Le suivi personnalisé m'a permis de progresser rapidement et d'acquérir des compétences solides."</p>
+              <p className="text-gray-700 italic text-xs sm:text-sm leading-relaxed">"En tant que débutante, j'ai trouvé les explications très accessibles. Le suivi personnalisé m'a permis de progresser rapidement et d'acquérir des compétences solides."</p>
             </div>
           </div>
           <div className="relative w-full py-4 hidden lg:block" role="region" aria-roledescription="carousel">
@@ -1104,7 +1104,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aïcha K." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Aïcha K.</h4>
-                        <p className="text-xs sm:text-sm text-gray-600">Designer Graphique</p>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Designer Graphique</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1124,7 +1124,7 @@ const SalesFunnelPage = () => {
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-700 italic">"Grâce à cette formation, j'ai pu lancer mon activité de freelance en design graphique. Les cours sont clairs et les projets concrets m'ont permis de me constituer un portfolio solide."</p>
+                    <p className="text-gray-700 italic leading-relaxed">"Grâce à cette formation, j'ai pu lancer mon activité de freelance en design graphique. Les cours sont clairs et les projets concrets m'ont permis de me constituer un portfolio solide."</p>
                   </div>
                 </div>
                 <div role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-full pl-4 lg:basis-1/3">
@@ -1133,7 +1133,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mohamed D." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Mohamed D.</h4>
-                        <p className="text-xs sm:text-sm text-gray-600">Développeur Web</p>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Développeur Web</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1153,7 +1153,7 @@ const SalesFunnelPage = () => {
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-700 italic">"La qualité des formations est exceptionnelle. J'ai particulièrement apprécié les études de cas réels qui m'ont permis de comprendre les enjeux concrets du métier."</p>
+                    <p className="text-gray-700 italic leading-relaxed">"La qualité des formations est exceptionnelle. J'ai particulièrement apprécié les études de cas réels qui m'ont permis de comprendre les enjeux concrets du métier."</p>
                   </div>
                 </div>
                 <div role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-full pl-4 lg:basis-1/3">
@@ -1162,7 +1162,7 @@ const SalesFunnelPage = () => {
                       <img className="w-14 h-14 rounded-full object-cover border-2 border-red-500/50" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fatou N." />
                       <div className="ml-4">
                         <h4 className="text-lg font-bold text-gray-900">Fatou N.</h4>
-                        <p className="text-xs sm:text-sm text-gray-600">Entrepreneuse</p>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Entrepreneuse</p>
                       </div>
                       <div className="ml-auto flex items-center space-x-1">
                         <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1182,7 +1182,7 @@ const SalesFunnelPage = () => {
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-700 italic">"En tant que débutante, j'ai trouvé les explications très accessibles. Le suivi personnalisé m'a permis de progresser rapidement et d'acquérir des compétences solides."</p>
+                    <p className="text-gray-700 italic leading-relaxed">"En tant que débutante, j'ai trouvé les explications très accessibles. Le suivi personnalisé m'a permis de progresser rapidement et d'acquérir des compétences solides."</p>
                   </div>
                 </div>
               </div>
@@ -1199,7 +1199,7 @@ const SalesFunnelPage = () => {
             {/* Brand */}
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-4">
-                <img className="h-10 w-auto mr-3" src="/Copie de LOGOTYPE [Récupéré]-18.png" alt="DMPLUS ACADEMY" />
+                <img className="h-10 w-auto mr-3 object-cover" src="/Copie de LOGOTYPE [Récupéré]-18.png" alt="DMPLUS ACADEMY" />
                 <h3 className="text-xl font-bold text-gray-900">DM + Academy</h3>
               </div>
               <p className="text-gray-600 mb-6 leading-relaxed max-w-xs mx-auto md:mx-0">
@@ -1235,7 +1235,7 @@ const SalesFunnelPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-sm">Email</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">Email</p>
                     <a href="mailto:academy@dmplus-group.com" className="text-gray-900 hover:text-red-600 transition-colors font-medium">academy@dmplus-group.com</a>
                   </div>
                 </div>
@@ -1246,7 +1246,7 @@ const SalesFunnelPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-sm">Téléphone</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">Téléphone</p>
                     <a href="tel:+221338295879" className="text-gray-900 hover:text-red-600 transition-colors font-medium">+221 33 829 58 79</a>
                   </div>
                 </div>
@@ -1257,7 +1257,7 @@ const SalesFunnelPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-sm">WhatsApp</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">WhatsApp</p>
                     <a href="https://wa.me/221766638219" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-green-600 transition-colors font-medium">+221 76 663 82 19</a>
                   </div>
                 </div>
@@ -1278,7 +1278,7 @@ const SalesFunnelPage = () => {
                   <span className="font-semibold">95%</span> de satisfaction
                 </p>
                 <div className="pt-3">
-                  <p className="text-gray-500 text-xs mb-2">Suivez-nous</p>
+                  <p className="text-gray-600 text-xs mb-2 leading-relaxed">Suivez-nous</p>
                   <div className="flex justify-center md:justify-start space-x-2">
                     <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Certifié</span>
                     <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Qualité</span>
@@ -1292,8 +1292,8 @@ const SalesFunnelPage = () => {
           <div className="border-t border-gray-200 mt-8 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center text-center">
               <div className="mb-4 md:mb-0">
-                <p className="text-gray-500 text-sm"> 2025 DIGITAL MIND PLUS ACADEMY. Tous droits réservés.</p>
-                <p className="text-gray-400 text-xs mt-1">Ce site ne fait pas partie du site web Facebook ou de Facebook, Inc. ni de Google Inc.</p>
+                <p className="text-gray-600 text-sm leading-relaxed"> 2025 DIGITAL MIND PLUS ACADEMY. Tous droits réservés.</p>
+                <p className="text-gray-400 text-xs mt-1 leading-relaxed">Ce site ne fait pas partie du site web Facebook ou de Facebook, Inc. ni de Google Inc.</p>
               </div>
             </div>
           </div>

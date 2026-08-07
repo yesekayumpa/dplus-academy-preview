@@ -73,7 +73,7 @@ const FormationDetailPage = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#46181e] via-[#6a232d] to-[#8e2e3b]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-3 border-white border-t-transparent mx-auto mb-4" />
-            <p className="text-white text-sm font-medium">Chargement...</p>
+            <p className="text-white text-sm font-medium leading-relaxed">Chargement...</p>
           </div>
         </div>
       </Layout>
@@ -86,12 +86,12 @@ const FormationDetailPage = () => {
       <Layout>
         <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4">
           <h1 className="text-2xl font-bold text-gray-800">Formation introuvable</h1>
-          <p className="text-gray-500 text-center">
+          <p className="text-gray-600 text-center leading-relaxed">
             La formation demandée n'existe pas ou une erreur est survenue.
           </p>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 px-5 py-2.5 bg-[#800020] text-white rounded-lg text-sm font-semibold hover:bg-[#6a001a] transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[#800020] text-white rounded-2xl text-sm font-semibold hover:bg-[#6a001a] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour
@@ -109,7 +109,7 @@ const FormationDetailPage = () => {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-gradient-to-br from-[#46181e] via-[#6a232d] to-[#8e2e3b] text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#46181e] via-[#6a232d] to-[#8e2e3b] text-white overflow-hidden pt-32 pb-20">
         {/* Overlay pattern */}
         <div
           className="absolute inset-0 opacity-10"
@@ -120,7 +120,7 @@ const FormationDetailPage = () => {
           }}
         />
 
-        <div className="relative container mx-auto max-w-6xl px-4 py-10 md:py-16">
+        <div className="relative container mx-auto max-w-6xl px-4 py-10 md:py-16 lg:py-24">
           {/* Retour */}
           <button
             onClick={() => navigate(-1)}
@@ -161,7 +161,7 @@ const FormationDetailPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 leading-tight">
+              <h1 className="text-2xl md:text-3xl tracking-tight lg:text-4xl tracking-tight font-bold mb-3 leading-tight">
                 {formation.titre}
               </h1>
               <p className="text-white/80 text-sm md:text-base mb-6 leading-relaxed">
@@ -172,24 +172,24 @@ const FormationDetailPage = () => {
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
                   <Clock className="w-5 h-5 mx-auto mb-1 text-amber-300" />
-                  <p className="text-lg font-bold">{formation.dureeJours}j</p>
-                  <p className="text-xs text-white/60">Durée</p>
+                  <p className="text-lg font-bold leading-relaxed">{formation.dureeJours}j</p>
+                  <p className="text-xs text-white/60 leading-relaxed">Durée</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
                   <Users className="w-5 h-5 mx-auto mb-1 text-amber-300" />
-                  <p className="text-lg font-bold">{formation.capacite}</p>
-                  <p className="text-xs text-white/60">Places</p>
+                  <p className="text-lg font-bold leading-relaxed">{formation.capacite}</p>
+                  <p className="text-xs text-white/60 leading-relaxed">Places</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
                   <BookOpen className="w-5 h-5 mx-auto mb-1 text-amber-300" />
-                  <p className="text-lg font-bold">{formation.format.titre.split(" ")[1] || "Live"}</p>
-                  <p className="text-xs text-white/60">Format</p>
+                  <p className="text-lg font-bold leading-relaxed">{formation.format.titre.split(" ")[1] || "Live"}</p>
+                  <p className="text-xs text-white/60 leading-relaxed">Format</p>
                 </div>
               </div>
 
               {/* Prix + CTA */}
               <div className="flex flex-wrap items-center gap-4">
-                <span className="text-3xl font-bold text-amber-300">
+                <span className="text-3xl tracking-tight font-bold text-amber-300">
                   {formation.cout.toLocaleString("fr-FR")} FCFA
                 </span>
                 <button className="px-6 py-3 bg-white text-[#800020] font-bold rounded-xl text-sm hover:bg-amber-50 transition-colors shadow-lg">
@@ -214,7 +214,7 @@ const FormationDetailPage = () => {
                 }}
               />
               {/* Format badge overlay */}
-              <div className="absolute top-3 left-3 px-3 py-1.5 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold rounded-lg">
+              <div className="absolute top-3 left-3 px-3 py-1.5 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold rounded-2xl">
                 {formation.format.titre}
               </div>
             </motion.div>
@@ -260,8 +260,8 @@ const FormationDetailPage = () => {
                     <div key={comp.id} className="flex items-start gap-3">
                       <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-semibold">{comp.titre}</p>
-                        <p className="text-xs text-muted-foreground">{comp.description}</p>
+                        <p className="text-sm font-semibold leading-relaxed">{comp.titre}</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{comp.description}</p>
                       </div>
                     </div>
                   ))}
@@ -314,8 +314,8 @@ const FormationDetailPage = () => {
                   {formation.formateur.nomComplet.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{formation.formateur.nomComplet}</p>
-                  <p className="text-xs text-muted-foreground">{formation.formateur.titre}</p>
+                  <p className="font-semibold text-sm leading-relaxed">{formation.formateur.nomComplet}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{formation.formateur.titre}</p>
                 </div>
               </div>
               {/* Compétences du formateur */}

@@ -51,14 +51,14 @@ const NewsletterBanner = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={handleSubscribe}
-                className="px-4 py-2 bg-white text-academy font-semibold rounded-lg text-sm hover:bg-white/90 transition-colors shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                className="px-4 py-2 bg-white text-academy font-semibold rounded-2xl text-sm hover:bg-white/90 transition-colors shadow-xl hover:shadow-lg transform hover:scale-105 duration-200"
               >
                 S'abonner
               </button>
               
               <button
                 onClick={handleClose}
-                className="p-1.5 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10"
+                className="p-1.5 text-white/80 hover:text-white transition-colors rounded-2xl hover:bg-white/10"
                 aria-label="Fermer le bandeau"
               >
                 <X className="w-4 h-4" />

@@ -268,88 +268,128 @@ const SurMesurePage = () => {
   return (
     <Layout>
       <div className="min-h-screen">
-        {/* Hero Section avec couleurs de la charte */}
+        {/* Hero Section */}
         <div className="relative overflow-hidden bg-gradient-to-br from-[#46181e] via-[#6a232d] to-[#8e2e3b]">
-          {/* Image de fond avec overlay */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          {/* Image de fond */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
             style={{ backgroundImage: `url(${surMesureBg})` }}
           />
-          
-          <div className="relative container mx-auto px-4 py-20">
+          {/* Dégradé bas */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#46181e] to-transparent" />
+
+          <div className="relative container mx-auto px-4 max-w-6xl py-24 lg:py-32 flex flex-col items-center text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-center max-w-5xl mx-auto"
+              transition={{ duration: 0.7 }}
+              className="max-w-3xl"
             >
               {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8"
-              >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
                 <Sparkles className="w-4 h-4 text-yellow-300" />
-                <span className="text-sm font-medium text-white">Formations Sur Mesure</span>
-              </motion.div>
-              
+                <span className="text-xs font-semibold text-white tracking-wider uppercase">Formations Sur Mesure</span>
+              </div>
+
               {/* Titre */}
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-5xl md:text-7xl font-bold mb-6 text-white"
-              >
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white mb-5">
                 Formation
                 <span className="block text-yellow-300">Sur Mesure</span>
-              </motion.h1>
-              
+              </h1>
+
               {/* Description */}
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="text-xl text-white/90 mb-10 max-w-3xl mx-auto"
-              >
-                Des formations personnalisées pour transformer votre carrière
-              </motion.p>
+              <p className="text-base sm:text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
+                Des formations personnalisées pour transformer votre carrière, adaptées à vos besoins et votre rythme.
+              </p>
             </motion.div>
           </div>
         </div>
 
-        {/* Section de recherche */}
-        <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex gap-3">
+
+        {/* Section Filtres et Recherche */}
+        <div className="container mx-auto px-4 py-8">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-md">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
+                <p className="text-sm text-gray-600 leading-relaxed">Explorez notre catalogue de formations sur mesure</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  <span className="text-base sm:text-lg font-bold text-[#b23a4a]">{filteredCourses.length}</span> formation{filteredCourses.length > 1 ? 's' : ''} trouvée{filteredCourses.length > 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Rechercher une formation..."
+                  placeholder="Rechercher une formation par mot-clé..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl text-sm sm:text-base focus:outline-none focus:border-[#b23a4a] focus:ring-2 focus:ring-[#b23a4a]/20"
                 />
               </div>
               
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a]"
-              >
-                {categories.map(cat => (
-                  <option key={cat} value={cat}>
-                    {cat === "all" ? "Toutes" : cat}
-                  </option>
-                ))}
-              </select>
+              <div className="flex gap-4">
+                <div className="flex items-center gap-2">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#b23a4a]"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>
+                        {cat === "all" ? "Toutes catégories" : cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                {(searchTerm || selectedCategory !== "all") && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedCategory("all");
+                    }}
+                    className="px-4 py-3 sm:py-4 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-xl border border-transparent transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Réinitialiser
+                  </button>
+                )}
+              </div>
+            </div>
+            
+            {/* Tags rapides */}
+            <div className="flex flex-wrap items-center gap-2 mt-6 pt-6 border-t border-gray-100">
+              {["Data", "Finance", "Soft Skills", "Python", "Excel"].map((tag, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    if (tag === "Python" || tag === "Excel") {
+                      setSelectedCategory("Outils Digitaux");
+                    } else {
+                      setSelectedCategory(tag);
+                    }
+                  }}
+                  className={`px-4 py-1.5 rounded-full text-xs transition-colors border ${
+                    selectedCategory === tag || (selectedCategory === "Outils Digitaux" && (tag === "Python" || tag === "Excel"))
+                      ? "bg-[#b23a4a]/10 border-[#b23a4a] text-[#b23a4a]"
+                      : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Liste des cours simplifiée */}
-        <div className="container mx-auto px-6 py-20">
+        <div className="container mx-auto px-6 py-20 lg:py-28">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {paginatedCourses.map((course, index) => (
               <motion.div
@@ -403,7 +443,7 @@ const SurMesurePage = () => {
                         </div>
                         <span className="font-medium text-[10px]">{course.rating}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-gray-500">
+                      <div className="flex items-center gap-1 text-gray-600">
                         <Users className="w-2 h-2" />
                         <span className="text-[10px]">{course.students}</span>
                       </div>
@@ -425,7 +465,7 @@ const SurMesurePage = () => {
 
                     {/* Statut et durée */}
                     <div className="flex items-center justify-between text-[10px] mb-2">
-                      <div className="flex items-center gap-1 text-gray-500">
+                      <div className="flex items-center gap-1 text-gray-600">
                         <Clock className="w-2 h-2" />
                         <span>{course.duration}</span>
                       </div>
@@ -457,7 +497,7 @@ const SurMesurePage = () => {
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -467,7 +507,7 @@ const SurMesurePage = () => {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                    className={`w-8 h-8 rounded-2xl text-sm font-medium transition-colors ${
                       currentPage === i + 1
                         ? "bg-[#b23a4a] text-white"
                         : "text-gray-600 hover:bg-gray-100"
@@ -481,7 +521,7 @@ const SurMesurePage = () => {
               <button
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -503,7 +543,7 @@ const SurMesurePage = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-lg max-w-xl w-full max-h-[85vh] overflow-y-auto"
+                className="bg-white rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Image du cours */}
@@ -530,7 +570,7 @@ const SurMesurePage = () => {
                   <h2 className="text-2xl font-bold text-white mb-2">
                     {selectedCourse.title}
                   </h2>
-                  <p className="text-white/90 text-sm">
+                  <p className="text-white/90 text-sm leading-relaxed">
                     {selectedCourse.description}
                   </p>
                 </div>
@@ -566,7 +606,7 @@ const SurMesurePage = () => {
                   {/* Description */}
                   <div className="mb-4">
                     <h3 className="font-semibold mb-2">Description</h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {selectedCourse.longDescription || "Formation complète pour maîtriser tous les aspects."}
                     </p>
                   </div>
@@ -584,10 +624,10 @@ const SurMesurePage = () => {
                   </div>
 
                   {/* Prix et inscription */}
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-gray-50 p-4 rounded-2xl">
                     <div className="flex items-center justify-between mb-3">
                       <div>
-                        <span className="text-sm text-gray-500">Prix</span>
+                        <span className="text-sm text-gray-600">Prix</span>
                         <div className="text-2xl font-bold text-[#46181e]">
                           {selectedCourse.price.toLocaleString()} FCFA
                         </div>

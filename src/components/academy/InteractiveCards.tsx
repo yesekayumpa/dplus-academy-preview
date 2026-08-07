@@ -193,7 +193,7 @@ const InteractiveCards = () => {
   }, [isMobile]);
 
   return (
-    <div className="w-full py-12 px-4">
+    <div className="w-full py-16 lg:py-20 lg:py-28 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Mobile: Horizontal scroll with scroll-triggered animation */}
         {isMobile ? (

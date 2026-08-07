@@ -100,7 +100,7 @@ export function TrainingCarousel({
                 className={`bg-white rounded-2xl shadow-lg transition-all h-full flex flex-col overflow-hidden border ${
                   selectedItemId === item.id 
                     ? 'border-academy/50 shadow-xl' 
-                    : 'border-gray-100 group-hover:border-academy/20 hover:shadow-xl'
+                    : 'border-gray-100 group-hover:border-academy/20 hover:shadow-xl transition-all duration-300'
                 }`}
                 whileHover={selectedItemId === item.id ? {} : { y: -8 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -123,7 +123,7 @@ export function TrainingCarousel({
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
                     {item.duration && (
                       <span className="flex items-center">
                         <Clock className="h-4 w-4 mr-1 text-academy" />
@@ -137,12 +137,12 @@ export function TrainingCarousel({
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-600 mb-6 flex-grow">{item.description}</p>
+                  <p className="text-gray-600 mb-6 flex-grow leading-relaxed">{item.description}</p>
                   <div className="mt-auto">
                     {(item.title?.trim()?.toLowerCase() === "masterclass") ? (
                       <button 
                         onClick={() => handleNavigateWithScroll("/masterclasses")}
-                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-xl transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
                             : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'
@@ -153,7 +153,7 @@ export function TrainingCarousel({
                     ) : (item.title?.trim()?.toLowerCase() === "e-learning") ? (
                       <button 
                         onClick={() => handleNavigateWithScroll("/e-learning")}
-                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-xl transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
                             : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'
@@ -164,7 +164,7 @@ export function TrainingCarousel({
                     ) : (item.title?.trim()?.toLowerCase() === "sur mesure") ? (
                       <button 
                         onClick={() => handleNavigateWithScroll("/sur-mesure")}
-                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform flex items-center justify-center group/button ${
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-xl transition-all duration-300 transform flex items-center justify-center group/button ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
                             : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'
@@ -178,7 +178,7 @@ export function TrainingCarousel({
                           e.stopPropagation();
                           handleItemClick(item);
                         }}
-                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 transform ${
+                        className={`w-full font-semibold py-3 px-6 rounded-xl shadow-xl transition-all duration-300 transform ${
                           selectedItemId === item.id 
                             ? 'bg-gradient-to-r from-academy/90 to-academy-light/90 text-white scale-[1.02] shadow-lg'
                             : 'bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white group-hover:scale-[1.02] hover:shadow-lg'

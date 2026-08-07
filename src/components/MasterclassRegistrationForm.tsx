@@ -271,7 +271,7 @@ const ElegantField = ({
             <FormLabel
               className={`
               absolute -top-2 left-3 px-2 text-xs font-medium transition-all z-10
-              ${isFocused || field.value ? theme.text : "text-gray-500"}
+              ${isFocused || field.value ? theme.text : "text-gray-600"}
               bg-white
             `}
             >
@@ -349,14 +349,14 @@ const SimpleRadioOption = ({
         {Icon && (
           <div
             className={`
-            p-1 sm:p-1.5 rounded-lg
+            p-1 sm:p-1.5 rounded-2xl
             ${selected === id ? theme.bgLight : "bg-gray-100"}
           `}
           >
             <Icon
               className={`
               w-3 h-3 sm:w-4 sm:h-4
-              ${selected === id ? theme.text : "text-gray-500"}
+              ${selected === id ? theme.text : "text-gray-600"}
             `}
             />
           </div>
@@ -364,7 +364,7 @@ const SimpleRadioOption = ({
         {label}
       </Label>
       {description && (
-        <p className="text-xs text-gray-500 mt-1">{description}</p>
+        <p className="text-xs text-gray-600 mt-1 leading-relaxed">{description}</p>
       )}
     </div>
     {selected === id && (
@@ -383,7 +383,7 @@ const SimpleSkillBadge = ({ label, selected, onClick, icon: Icon }) => (
     type="button"
     onClick={onClick}
     className={`
-      px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200
+      px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm font-medium transition-all duration-200
       flex items-center gap-1.5 sm:gap-2 min-w-[80px] sm:min-w-[100px] justify-center
       border-2
       ${
@@ -395,7 +395,7 @@ const SimpleSkillBadge = ({ label, selected, onClick, icon: Icon }) => (
   >
     {Icon && (
       <Icon
-        className={`w-4 h-4 ${selected ? "text-white" : "text-gray-500"}`}
+        className={`w-4 h-4 ${selected ? "text-white" : "text-gray-600"}`}
       />
     )}
     <span>{label}</span>
@@ -414,7 +414,7 @@ const SimpleSectionHeader = ({ icon: Icon, title, subtitle, theme }) => {
         </div>
         <div>
           <h3 className="text-xl font-bold text-gray-800">{title}</h3>
-          <p className="text-sm text-gray-500">{subtitle}</p>
+          <p className="text-sm text-gray-600 leading-relaxed">{subtitle}</p>
         </div>
       </div>
       <Separator className="mt-4 bg-gray-200" />
@@ -437,13 +437,13 @@ const LevelCard = ({
       <div className={`p-3 sm:p-4 border-b-2 border-gray-100 bg-gray-50/50`}>
         <div className="flex items-center gap-2 sm:gap-3">
           <div
-            className={`w-8 h-8 sm:w-10 sm:h-10 ${theme.bgLight} rounded-lg flex items-center justify-center`}
+            className={`w-8 h-8 sm:w-10 sm:h-10 ${theme.bgLight} rounded-2xl flex items-center justify-center`}
           >
             <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${theme.text}`} />
           </div>
           <div>
             <h4 className="font-semibold text-gray-800 text-sm sm:text-base">{title}</h4>
-            <p className="text-xs text-gray-500">{description}</p>
+            <p className="text-xs text-gray-600 leading-relaxed">{description}</p>
           </div>
         </div>
       </div>
@@ -457,7 +457,7 @@ const LevelCard = ({
             <div
               key={option.value}
               className={`
-                relative flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border-2 transition-all cursor-pointer min-w-0
+                relative flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-2xl border-2 transition-all cursor-pointer min-w-0
                 ${
                   value === option.value
                     ? `${theme.border} ${theme.bgLight}`
@@ -778,11 +778,11 @@ const MasterclassRegistrationForm = () => {
               transition={{ delay: 0.3 }}
             >
               <h2
-                className={`text-3xl font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}
+                className={`text-3xl tracking-tight font-bold bg-gradient-to-r ${theme.from} ${theme.to} bg-clip-text text-transparent`}
               >
                 Félicitations !
               </h2>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-600 mt-2 leading-relaxed">
                 Votre candidature a été reçue avec succès
               </p>
             </motion.div>
@@ -842,14 +842,14 @@ const MasterclassRegistrationForm = () => {
                   `}
                   >
                     <step.icon
-                      className={`w-4 h-4 ${step.done ? "text-green-600" : "text-gray-500"}`}
+                      className={`w-4 h-4 ${step.done ? "text-green-600" : "text-gray-600"}`}
                     />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="text-xs font-medium text-gray-900">
+                    <p className="text-xs font-medium text-gray-900 leading-relaxed">
                       {step.text}
                     </p>
-                    <p className="text-[10px] text-gray-500">{step.time}</p>
+                    <p className="text-[10px] text-gray-600 leading-relaxed">{step.time}</p>
                   </div>
                   {step.done && (
                     <BadgeCheck className="w-4 h-4 text-green-500" />
@@ -967,7 +967,7 @@ const MasterclassRegistrationForm = () => {
                 >
                   Master Class R & Shiny
                 </h1>
-                <p className="text-xs text-gray-500 flex items-center gap-1">
+                <p className="text-xs text-gray-600 flex items-center gap-1 leading-relaxed">
                   <Gem className={`w-3 h-3 ${theme.text}`} />
                   2ème édition • Formation d'excellence
                 </p>
@@ -1015,11 +1015,11 @@ const MasterclassRegistrationForm = () => {
                     onHoverStart={() => setHoveredTab(i)}
                     onHoverEnd={() => setHoveredTab(null)}
                     className={`
-                      w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all cursor-pointer
+                      w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex items-center justify-center transition-all cursor-pointer
                       ${
                         activeTab === tab.value
                           ? `bg-gradient-to-br ${theme.from} ${theme.to} text-white`
-                          : "bg-gray-100 text-gray-500"
+                          : "bg-gray-100 text-gray-600"
                       }
                     `}
                     onClick={() => setActiveTab(tab.value)}
@@ -1035,7 +1035,7 @@ const MasterclassRegistrationForm = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setShowThemePicker(!showThemePicker)}
-                  className={`p-2 rounded-lg ${theme.bgLight} ${theme.text} transition-all`}
+                  className={`p-2 rounded-2xl ${theme.bgLight} ${theme.text} transition-all`}
                 >
                   <Brush className="w-4 h-4" />
                 </motion.button>
@@ -1057,7 +1057,7 @@ const MasterclassRegistrationForm = () => {
                             setCurrentTheme(key);
                             setShowThemePicker(false);
                           }}
-                          className={`w-8 h-8 rounded-lg ${themes[key].bg} ${
+                          className={`w-8 h-8 rounded-2xl ${themes[key].bg} ${
                             currentTheme === key
                               ? "ring-2 ring-offset-2 ring-gray-400"
                               : ""
@@ -1307,7 +1307,7 @@ const MasterclassRegistrationForm = () => {
                                   />
                                 </div>
                               </div>
-                              <p className="text-xs text-gray-500 italic flex items-center gap-1">
+                              <p className="text-xs text-gray-600 italic flex items-center gap-1 leading-relaxed">
                                 <Sparkles className="w-3 h-3 text-[hsl(345,70%,35%)]" />
                                 Dites-nous ce que vous voulez apprendre pour
                                 personnaliser votre parcours
@@ -1548,7 +1548,7 @@ const MasterclassRegistrationForm = () => {
                                 ${
                                   progress >= 80 && !isSubmitting
                                     ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
-                                    : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                                    : "bg-gray-200 text-gray-600 cursor-not-allowed"
                                 }
                               `}
                             >
@@ -1575,7 +1575,7 @@ const MasterclassRegistrationForm = () => {
                         </div>
 
                         {/* Message de confidentialité élégant */}
-                        <div className="mt-4 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-4 text-[10px] text-gray-500">
+                        <div className="mt-4 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-4 text-[10px] text-gray-600">
                           <div className="flex flex-col xs:flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                             <span className="flex items-center gap-1">
                               <Shield className={`w-3 h-3 ${theme.text}`} />

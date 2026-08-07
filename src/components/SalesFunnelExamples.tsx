@@ -318,7 +318,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow"
+      className="bg-white rounded-xl border border-gray-200 p-6 shadow-md hover:shadow-xl transition-shadow"
     >
       {/* Badge de mise à jour */}
       {product.isUpdated && (
@@ -329,7 +329,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
             <Sparkles className="w-3 h-3" />
             Produit à jour - {product.updateVersion}
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-gray-600">
             Mis à jour le{" "}
             {new Date(product.updateDate!).toLocaleDateString("fr-FR")}
           </div>
@@ -337,11 +337,11 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
       )}
 
       <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-      <p className="text-gray-600 mb-4">{product.description}</p>
+      <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
 
       {/* Prix */}
       <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl font-bold text-gray-900">
+        <span className="text-3xl tracking-tight font-bold text-gray-900">
           {product.price * 655} FCFA
         </span>
         {product.originalPrice && (
@@ -392,7 +392,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
         </span>
         <button
           onClick={() => setSelectedProduct(product)}
-          className={`px-4 py-2 ${theme.primary} text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity`}
+          className={`px-4 py-2 ${theme.primary} text-white rounded-2xl text-sm font-medium hover:opacity-90 transition-opacity`}
         >
           Voir le tunnel
         </button>
@@ -415,13 +415,13 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
       {/* Header compact */}
       <div className="text-center mb-4">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">{step.title}</h2>
-        <p className="text-gray-600">{step.description}</p>
+        <p className="text-gray-600 leading-relaxed">{step.description}</p>
       </div>
 
       {/* Contenu principal en grille compacte */}
       <div className="grid md:grid-cols-2 gap-4 mb-4">
         {/* Produit sélectionné - carte compacte */}
-        <div className={`p-4 ${theme.primaryLight} rounded-lg`}>
+        <div className={`p-4 ${theme.primaryLight} rounded-2xl`}>
           <div className="flex items-start justify-between mb-2">
             <h3 className="font-semibold text-gray-900 text-sm">
               {selectedProduct.name}
@@ -465,7 +465,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
         <div className="space-y-3">
           {/* Bonus compact */}
           {step.bonus && (
-            <div className="p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 bg-gray-50 rounded-2xl">
               <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2 text-sm">
                 <Gift className="w-4 h-4 text-yellow-500" />
                 Bonus inclus
@@ -487,7 +487,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
           {/* Urgence compacte */}
           {step.urgency && (
             <div
-              className={`p-3 ${theme.primaryLight} rounded-lg flex items-center gap-2`}
+              className={`p-3 ${theme.primaryLight} rounded-2xl flex items-center gap-2`}
             >
               <AlertCircle className={`w-4 h-4 ${theme.text} flex-shrink-0`} />
               <span className={`text-sm font-medium ${theme.text}`}>
@@ -500,7 +500,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
 
       {/* CTA compact */}
       <button
-        className={`w-full py-3 bg-gradient-to-r ${theme.gradient} text-white rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2`}
+        className={`w-full py-3 bg-gradient-to-r ${theme.gradient} text-white rounded-2xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2`}
         onClick={() => !isLast && setCurrentStep(currentStep + 1)}
       >
         {step.cta}
@@ -523,7 +523,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
               <span className="font-medium">Retour aux cours</span>
             </button>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">Tunnel actuel:</span>
+              <span className="text-sm text-gray-600">Tunnel actuel:</span>
               <span
                 className={`px-3 py-1 ${theme.primary} text-white rounded-full text-sm font-medium`}
               >
@@ -545,7 +545,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
                     setSelectedFunnel(funnel);
                     setCurrentStep(0);
                   }}
-                  className={`flex-shrink-0 px-4 py-2 rounded-lg border-2 transition-all ${
+                  className={`flex-shrink-0 px-4 py-2 rounded-2xl border-2 transition-all ${
                     selectedFunnel.id === funnel.id
                       ? `${theme.primary} text-white border-${theme.primary.split("-")[1]}-600`
                       : "bg-white text-gray-700 border-gray-200 hover:border-gray-300"
@@ -643,7 +643,7 @@ const SalesFunnelExamples = ({ onBack }: SalesFunnelExamplesProps) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-lg p-4 border border-gray-200"
+                    className="bg-white rounded-2xl p-4 border border-gray-200"
                   >
                     <div className="text-2xl font-bold text-gray-900 mb-1">
                       {metric.value}

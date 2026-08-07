@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 const TimeUnit = ({ value, label, isLast = false }: { value: string; label: string; isLast?: boolean }) => (
   <div className="flex flex-col items-center mx-0.5 md:mx-1 group">
     <div className="relative">
-      <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-red-600 rounded-lg opacity-0 group-hover:opacity-10 transition-all duration-300 -z-10"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl opacity-0 group-hover:opacity-10 transition-all duration-300 -z-10"></div>
       <div className="p-0.5 md:p-1">
         <span className="text-sm md:text-xl font-bold text-red-600">
           {value}
         </span>
       </div>
     </div>
-    <span className="mt-1 text-[8px] md:text-[10px] font-medium text-gray-500 group-hover:text-red-600 transition-colors">
+    <span className="mt-1 text-[8px] md:text-[10px] font-medium text-gray-600 group-hover:text-red-600 transition-colors">
       {label}
     </span>
   </div>
@@ -122,7 +122,7 @@ const Timer = ({
     return (
         <div className={`inline-flex items-center justify-center ${className} ${isTimeUp ? 'text-red-500' : ''}`}>
             {isTimeUp ? (
-                <div className="flex items-center space-x-1.5 bg-gradient-to-r from-red-50 to-red-100 px-2 py-1 rounded-md border border-red-100 text-sm">
+                <div className="flex items-center space-x-1.5 bg-gradient-to-r from-red-50 to-red-100 px-2 py-1 rounded-xl border border-red-100 text-sm">
                   <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>

@@ -6,14 +6,14 @@ const FormatsPage = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold mb-8">Nos Formats Pédagogiques</h1>
-        <p className="text-lg text-muted-foreground mb-12">
+      <div className="container mx-auto px-4 py-16 lg:py-24">
+        <h1 className="text-4xl tracking-tight font-bold mb-8">Nos Formats Pédagogiques</h1>
+        <p className="text-lg text-muted-foreground mb-12 leading-relaxed">
           Nous proposons différents formats d'apprentissage adaptés à vos besoins et votre emploi du temps.
         </p>
         
         {isLoading ? (
-          <div className="flex justify-center items-center py-12">
+          <div className="flex justify-center items-center py-16 lg:py-20 lg:py-28">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-academy"></div>
           </div>
         ) : isError ? (
@@ -26,7 +26,7 @@ const FormatsPage = () => {
               <div key={format.id} className="bg-card p-4 rounded-xl flex flex-col">
                 {/* Fallback temporaire en cas d'absence d'image valide, ou utilisation de l'image de l'API */}
                 {format.imageUrl && (
-                  <div className="mb-4 h-48 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100">
+                  <div className="mb-4 h-48 rounded-2xl overflow-hidden flex items-center justify-center bg-gray-100">
                     <img 
                       src={format.imageUrl} 
                       alt={format.titre} 
@@ -39,7 +39,7 @@ const FormatsPage = () => {
                   </div>
                 )}
                 <h2 className="text-xl font-semibold mb-3">{format.titre}</h2>
-                <p className="text-sm text-muted-foreground mb-3 flex-grow">
+                <p className="text-sm text-muted-foreground mb-3 flex-grow leading-relaxed">
                   {format.description}
                 </p>
               </div>

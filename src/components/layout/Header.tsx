@@ -1,122 +1,101 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { subsidiaries } from "@/data/subsidiaries";
+import { Menu, X, UserPlus, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/academy-white.png";
 import logo2 from "@/assets/LOGOTYPE [Récupéré]-18.png";
 
-const formats = [
-  {
-    id: 1,
-    label: "Masterclass",
-    href: "/masterclasses",
-    description: "Sessions intensives avec des experts",
-  },
-  {
-    id: 2,
-    label: "E-learning",
-    href: "/e-learning",
-    description: "Apprentissage flexible en ligne",
-  },
-  {
-    id: 3,
-    label: "Mentored Courses",
-    href: "/sur-mesure",
-    description: "Formations personnalisées",
-  },
+const navItems = [
+  { label: "Masterclass", href: "/masterclasses" },
+  { label: "E-learning", href: "/e-learning" },
+  { label: "Mentored Courses", href: "/sur-mesure" },
+  { label: "Corporate", href: "/corporate-programs" },
+  { label: "Nos formateurs", href: "/nos-formateurs" },
 ];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSubsidiariesOpen, setIsSubsidiariesOpen] = useState(false);
-  const [isFormatsOpen, setIsFormatsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setIsSubsidiariesOpen(false);
-    setIsFormatsOpen(false);
   }, [location]);
 
-  const navItems = [
-    { label: "Masterclass", href: "/masterclasses", hasDropdown: false },
-    { label: "E-learning", href: "/e-learning", hasDropdown: false },
-    { label: "Mentored Courses", href: "/sur-mesure", hasDropdown: false },
-    { label: "Corporate", href: "/corporate-programs", hasDropdown: false },
-    { label: "Nos formateurs", href: "/nos-formateurs", hasDropdown: false },
-  ];
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 
-      bg-white/90 backdrop-blur-xl shadow-sm py-3"
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        isScrolled
+          ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100 py-2"
+          : "bg-white/90 backdrop-blur-xl shadow-md py-3"
+      )}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <a href="/">
-            <img src={logo2} alt="DM+ Group" className="h-10 w-auto" />
+          <a href="/" className="flex-shrink-0">
+            <img
+              src={logo2}
+              alt="DM+ Academy"
+              className={cn("w-auto transition-all duration-300", isScrolled ? "h-14" : "h-16")}
+            />
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation — tous les liens à plat */}
           <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              <div key={item.label} className="relative">
-                <Link
-                  to={item.href}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 
-                  ${location.pathname === item.href 
-                    ? 'bg-academy/20 text-academy shadow-sm' 
-                    : 'text-foreground hover:bg-gray-100'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </div>
+              <Link
+                key={item.href}
+                to={item.href}
+                className={cn(
+                  "px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 whitespace-nowrap",
+                  isActive(item.href)
+                    ? "bg-[#b23a4a]/10 text-[#b23a4a]"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                )}
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Link
-              to="/devenir-formateur"
-              className="px-6 py-3 rounded-3xl transition-all duration-300 bg-gradient-to-tr from-primary to-primary-light text-white"
-            >
-              Devenir formateur
-            </Link>
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/nous-contacter"
-              className="mx-2 px-6 py-3 rounded-3xl transition-all duration-300 
-                bg-white text-primary border border-primary"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-gray-700 border border-gray-200 hover:border-[#b23a4a] hover:text-[#b23a4a] transition-all duration-200 whitespace-nowrap"
             >
+              <Phone className="w-4 h-4" />
               Nous contacter
+            </Link>
+            <Link
+              to="/devenir-formateur"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white shadow-xl hover:shadow-lg hover:from-[#8e2e3b] hover:to-[#b23a4a] transition-all duration-200 whitespace-nowrap"
+            >
+              <UserPlus className="w-4 h-4" />
+              Devenir formateur
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
           >
             {isMobileMenuOpen ? (
-              <X
-                className="w-6 h-6 text-black"
-              />
+              <X className="w-5 h-5 text-gray-800" />
             ) : (
-              <Menu
-                className="w-6 h-6 text-black"
-              />
+              <Menu className="w-5 h-5 text-gray-800" />
             )}
           </button>
         </nav>
@@ -128,39 +107,45 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden mt-4 bg-white rounded-2xl shadow-2xl overflow-hidden"
+              transition={{ duration: 0.25 }}
+              className="lg:hidden mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
             >
-              <div className="p-4 space-y-2">
+              <div className="p-3 space-y-1">
                 {navItems.map((item) => (
-                  <div key={item.label}>
-                    <Link
-                      to={item.href}
-                      className={`block px-4 py-3 rounded-xl transition-colors
-                        ${location.pathname === item.href 
-                          ? 'bg-academy/10 text-academy' 
-                          : 'text-black hover:bg-gray-100'
-                        }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  </div>
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={cn(
+                      "block px-4 py-3 rounded-xl text-sm font-semibold transition-colors",
+                      isActive(item.href)
+                        ? "bg-[#b23a4a]/10 text-[#b23a4a]"
+                        : "text-gray-700 hover:bg-gray-50"
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
                 ))}
-                <Link
-                  to="/devenir-formateur"
-                  className="block w-full px-4 py-3 rounded-xl bg-gradient-to-tr from-primary to-primary-light text-white text-center font-semibold mt-4"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Devenir formateur
-                </Link>
-                <Link
-                  to="/nous-contacter"
-                  className="block w-full px-4 py-3 rounded-xl bg-white text-primary border border-primary text-center font-semibold mt-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Nous contacter
-                </Link>
+
+                {/* Mobile CTAs */}
+                <div className="pt-3 border-t border-gray-100 space-y-2">
+                  <Link
+                    to="/nous-contacter"
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-sm hover:border-[#b23a4a] hover:text-[#b23a4a] transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Phone className="w-4 h-4" />
+                    Nous contacter
+                  </Link>
+                  <Link
+                    to="/devenir-formateur"
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white font-semibold text-sm shadow-xl"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    Devenir formateur
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

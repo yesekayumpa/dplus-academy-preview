@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Search, Clock, Users, Star, Award, ChevronLeft, ChevronRight, 
+  Search, Clock, Users, Star, Award, ChevronLeft, ChevronRight, X,
   Monitor, BookOpen, Heart, Globe, Sun, Moon, GraduationCap, 
   Sparkles, Zap, ArrowRight, Code, BarChart3, Palette, Briefcase, Target 
 } from 'lucide-react';
@@ -676,7 +676,7 @@ const ElearningPage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1, duration: 0.4 }}
-        className="bg-white rounded-lg border border-red-200 hover:border-red-500 hover:shadow-md transition-all duration-200 relative overflow-hidden h-full flex flex-col"
+        className="bg-white rounded-2xl border border-red-200 hover:border-red-500 hover:shadow-xl transition-all duration-200 relative overflow-hidden h-full flex flex-col"
       >
         {/* Image Container - ratio plus compact */}
         <div className="relative aspect-[16/9] overflow-hidden bg-gray-100 rounded-t-lg">
@@ -693,7 +693,7 @@ const ElearningPage = () => {
           {/* Badge - uniquement si nouveau */}
           {course.isUpdated && (
             <div className="absolute top-1.5 left-1.5">
-              <span className="px-1.5 py-0.5 bg-red-700 text-white text-[9px] font-medium rounded-full flex items-center gap-0.5 shadow-sm">
+              <span className="px-1.5 py-0.5 bg-red-700 text-white text-[9px] font-medium rounded-full flex items-center gap-0.5 shadow-md">
                 <Sparkles className="w-2.5 h-2.5" />
                 Nouveau
               </span>
@@ -703,7 +703,7 @@ const ElearningPage = () => {
           {/* Bouton sauvegarder */}
           <button
             onClick={() => toggleSaveCourse(course.id)}
-            className={`absolute top-1.5 right-1.5 p-1 bg-white/90 backdrop-blur-sm rounded-full shadow-sm transition-colors ${
+            className={`absolute top-1.5 right-1.5 p-1 bg-white/90 backdrop-blur-sm rounded-full shadow-md transition-colors ${
               isSaved ? "text-red-700" : "text-red-600 hover:text-red-700"
             }`}
           >
@@ -732,7 +732,7 @@ const ElearningPage = () => {
             <span className="text-[9px] font-medium text-red-700 bg-red-50 px-1.5 py-0.5 rounded-full">
               {course.category}
             </span>
-            <span className="text-[9px] text-gray-500 flex items-center gap-0.5">
+            <span className="text-[9px] text-gray-600 flex items-center gap-0.5">
               <Clock className="w-2.5 h-2.5" />
               {course.duration}
             </span>
@@ -767,7 +767,7 @@ const ElearningPage = () => {
               ({course.reviews})
             </span>
             <span className="text-[8px] text-gray-300">•</span>
-            <div className="flex items-center text-[8px] text-gray-500">
+            <div className="flex items-center text-[8px] text-gray-600">
               <Users className="w-2.5 h-2.5 mr-0.5" />
               {course.students > 1000 
                 ? `${(course.students / 1000).toFixed(1)}k` 
@@ -807,7 +807,7 @@ const ElearningPage = () => {
                   } 
                 });
               }}
-              className="px-3 py-1.5 bg-red-700 text-white text-[12px] font-medium rounded-lg hover:bg-red-800 transition-colors shadow-sm flex items-center gap-1"
+              className="px-3 py-1.5 bg-red-700 text-white text-[12px] font-medium rounded-2xl hover:bg-red-800 transition-colors shadow-md flex items-center gap-1"
             >
               Voir plus
               <ChevronRight className="w-3 h-3" />
@@ -841,7 +841,7 @@ const ElearningPage = () => {
                     <h2 className="text-sm text-gray-900">
                       {selectedCourse.title}
                     </h2>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-400 leading-relaxed">
                       {selectedCourse.isUpdated
                         ? "Version mise à jour"
                         : "Version standard"}
@@ -875,7 +875,7 @@ const ElearningPage = () => {
             <div className="flex items-center justify-between">
               {/* Logo */}
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-red-700 to-red-800 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-red-700 to-red-800 rounded-2xl flex items-center justify-center">
                   <GraduationCap className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-lg font-semibold text-gray-900">
@@ -892,14 +892,14 @@ const ElearningPage = () => {
                     placeholder="Rechercher un cours..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-red-200 rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    className="w-full pl-10 pr-4 py-2 border border-red-200 rounded-2xl focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
                   />
                 </div>
               </div>
 
               {/* Actions */}
               <div className="flex items-center gap-3">
-                <button className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors relative">
+                <button className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-2xl transition-colors relative">
                   <Heart className="w-5 h-5" />
                   {savedCourses.length > 0 && (
                     <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
@@ -907,12 +907,12 @@ const ElearningPage = () => {
                     </span>
                   )}
                 </button>
-                <button className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors">
+                <button className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-2xl transition-colors">
                   <Globe className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setIsDarkMode(!isDarkMode)}
-                  className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-2xl transition-colors"
                 >
                   {isDarkMode ? (
                     <Sun className="w-5 h-5" />
@@ -926,7 +926,7 @@ const ElearningPage = () => {
         </nav>
 
         {/* Hero Section avec animation lettre par lettre */}
-        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[400px] sm:min-h-[450px] md:min-h-[450px] lg:min-h-[400px] flex items-center overflow-hidden">
+        <section className="relative bg-gradient-to-br from-red-950 via-red-900 to-red-800 min-h-[300px] sm:min-h-[350px] md:min-h-[350px] lg:min-h-[300px] flex items-center overflow-hidden pt-16 lg:pt-24 pb-8">
           <div className="absolute inset-0">
             <img
               src="/assets/E-learning2.jpg"
@@ -995,7 +995,7 @@ const ElearningPage = () => {
                 </motion.div>
 
                 <div className="mb-4 sm:mb-4 md:mb-2">
-                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight">
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tight xl:text-4xl tracking-tight font-bold text-white leading-tight">
                     <TypewriterText text="Transformez votre" delay={0.1} />
                     <div className="mt-1">
                       <TypewriterText 
@@ -1020,7 +1020,7 @@ const ElearningPage = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + ("Transformez votre".length + " avenir numérique".length) * 0.05 + 0.4 }}
-                  className="flex flex-row items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 max-w-full sm:max-w-md border border-white/10 overflow-x-auto"
+                  className="flex flex-row items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm rounded-2xl px-3 py-2 max-w-full sm:max-w-md border border-white/10 overflow-x-auto"
                 >
                   <div className="flex items-center gap-2">
                     <div className="text-sm sm:text-sm font-bold text-white">50+</div>
@@ -1055,7 +1055,7 @@ const ElearningPage = () => {
                     
                     {/* Barre de progression sur l'image hero */}
                     <div className="absolute bottom-3 left-3 right-3">
-                      <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-3 py-2">
                         <div className="flex items-center justify-between text-white text-xs mb-1">
                           <span>Formation en cours</span>
                           <span className="font-medium">78%</span>
@@ -1089,7 +1089,7 @@ const ElearningPage = () => {
                       className="w-full h-auto object-cover"
                     />
                     <div className="absolute bottom-2 left-2 right-2">
-                      <div className="bg-black/40 backdrop-blur-sm rounded-lg px-2 py-1.5">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-2 py-1.5">
                         <div className="flex items-center justify-between text-white text-xs mb-1">
                           <span>Formation en cours</span>
                           <span className="font-medium">78%</span>
@@ -1112,48 +1112,152 @@ const ElearningPage = () => {
         </section>
 
         {/* Filtres */}
-        <section className="py-6">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900">
-                    Nos formations
-                  </h2>
-                  <p className="text-xs text-gray-500">
-                    {filteredCourses.length} cours disponibles
-                  </p>
+        {/* Section Filtres et Recherche */}
+        <section className="container mx-auto px-4 max-w-7xl py-8">
+          <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 border border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
+                <p className="text-sm text-gray-600 leading-relaxed">Explorez notre catalogue de formations e-learning</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  <span className="text-base sm:text-lg font-bold text-[#b23a4a]">{filteredCourses.length}</span> formation{filteredCourses.length > 1 ? 's' : ''} trouvée{filteredCourses.length > 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-4 sm:mb-6">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Rechercher une formation par mot-clé..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 sm:py-4 bg-white border border-gray-300 rounded-xl text-sm sm:text-base focus:outline-none focus:border-[#b23a4a] focus:ring-2 focus:ring-[#b23a4a]/20"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {/* Filtres desktop */}
+              <div className="hidden lg:flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Catégorie:</span>
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#b23a4a]"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>
+                        {cat === "all" ? "Toutes catégories" : cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Niveau:</span>
+                  <select
+                    value={selectedLevel}
+                    onChange={(e) => setSelectedLevel(e.target.value)}
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#b23a4a]"
+                  >
+                    {levels.map(level => (
+                      <option key={level} value={level}>
+                        {level === "all" ? "Tous niveaux" : level}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {(searchQuery || selectedCategory !== "all" || selectedLevel !== "all") && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedCategory("all");
+                      setSelectedLevel("all");
+                    }}
+                    className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Réinitialiser
+                  </button>
+                )}
+              </div>
+
+              {/* Filtres mobile */}
+              <div className="lg:hidden space-y-3">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">Catégorie:</span>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#b23a4a]"
+                    >
+                      {categories.map(cat => (
+                        <option key={cat} value={cat}>
+                          {cat === "all" ? "Toutes catégories" : cat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">Niveau:</span>
+                    <select
+                      value={selectedLevel}
+                      onChange={(e) => setSelectedLevel(e.target.value)}
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#b23a4a]"
+                    >
+                      {levels.map(level => (
+                        <option key={level} value={level}>
+                          {level === "all" ? "Tous niveaux" : level}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {(searchQuery || selectedCategory !== "all" || selectedLevel !== "all") && (
+                    <button
+                      onClick={() => {
+                        setSearchQuery("");
+                        setSelectedCategory("all");
+                        setSelectedLevel("all");
+                      }}
+                      className="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors flex items-center justify-center gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      Réinitialiser
+                    </button>
+                  )}
                 </div>
               </div>
 
+              {/* Tags rapides */}
               <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-lg">
-                  {categories.slice(0, 4).map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap ${
-                        selectedCategory === category
-                          ? "bg-white text-red-700 shadow-sm"
-                          : "text-red-600 hover:text-red-700"
-                      }`}
-                    >
-                      {category === "all" ? "Tous" : category}
-                    </button>
-                  ))}
-                </div>
-
-                <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
-                  className="px-3 py-1.5 border border-red-200 rounded-lg text-xs focus:outline-none focus:border-red-500"
-                >
-                  {levels.map((level) => (
-                    <option key={level} value={level}>
-                      {level === "all" ? "Tous niveaux" : level}
-                    </option>
-                  ))}
-                </select>
+                {["Data", "Finance", "Soft Skills", "Python", "Excel"].map((tag, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (tag === "Python" || tag === "Excel") {
+                        setSelectedCategory("Outils Digitaux");
+                      } else {
+                        setSelectedCategory(tag);
+                      }
+                    }}
+                    className={`px-4 py-1.5 rounded-full text-xs transition-colors border ${
+                      selectedCategory === tag || (selectedCategory === "Outils Digitaux" && (tag === "Python" || tag === "Excel"))
+                        ? "bg-[#b23a4a]/10 border-[#b23a4a] text-[#b23a4a]"
+                        : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -1183,7 +1287,7 @@ const ElearningPage = () => {
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -1193,7 +1297,7 @@ const ElearningPage = () => {
                     <button
                       key={i}
                       onClick={() => setCurrentPage(i + 1)}
-                      className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                      className={`w-8 h-8 rounded-2xl text-sm font-medium transition-colors ${
                         currentPage === i + 1
                           ? "bg-red-700 text-white"
                           : "text-gray-600 hover:bg-gray-100"
@@ -1207,7 +1311,7 @@ const ElearningPage = () => {
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -1217,7 +1321,7 @@ const ElearningPage = () => {
         </section>
 
         {/* Section Avantages */}
-        <section className="py-12 bg-gray-50">
+        <section className="py-16 lg:py-20 lg:py-28 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1254,7 +1358,7 @@ const ElearningPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center"
+                  className="bg-white rounded-xl p-6 shadow-md border border-gray-200 text-center"
                 >
                   <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <item.icon className="w-6 h-6 text-red-700" />
@@ -1262,7 +1366,7 @@ const ElearningPage = () => {
                   <h3 className="text-base font-semibold text-gray-900 mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-500">{item.description}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -1280,28 +1384,28 @@ const ElearningPage = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-red-900/95 to-red-800/95" />
           </div>
 
-          <div className="relative container mx-auto px-4 py-12 max-w-7xl">
+          <div className="relative container mx-auto px-4 py-16 lg:py-20 lg:py-28 max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="max-w-3xl mx-auto text-center"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+              <h2 className="text-2xl md:text-3xl tracking-tight font-bold text-white mb-3">
                 Prêt à commencer ?
               </h2>
 
-              <p className="text-base text-white/80 mb-6">
+              <p className="text-base text-white/80 mb-6 leading-relaxed">
                 Rejoignez plus de {stats.students.toLocaleString()} apprenants
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button className="px-6 py-3 bg-gradient-to-r from-red-700 to-red-800 text-white font-semibold rounded-lg hover:from-red-800 hover:to-red-900 transition-all shadow-lg flex items-center justify-center gap-2">
+                <button className="px-6 py-3 bg-gradient-to-r from-red-700 to-red-800 text-white font-semibold rounded-2xl hover:from-red-800 hover:to-red-900 transition-all shadow-lg flex items-center justify-center gap-2">
                   Commencer maintenant
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-lg hover:bg-white/20 transition-all">
+                <button className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-2xl hover:bg-white/20 transition-all">
                   Parler à un conseiller
                 </button>
               </div>

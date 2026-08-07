@@ -110,11 +110,11 @@ export default function FormationPilliersPage() {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative bg-cover bg-center bg-no-repeat" style={{ 
+        <section className="relative bg-cover bg-center bg-no-repeat pt-32 pb-20" style={{ 
           backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=600&fit=crop")' 
         }}>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-purple-900/90"></div>
-          <div className="relative container mx-auto px-4 pt-20 pb-12 lg:pt-24 lg:pb-16">
+          <div className="relative container mx-auto px-4 pt-20 pb-12 lg:pt-24 lg:pb-16 lg:pb-24">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -126,29 +126,29 @@ export default function FormationPilliersPage() {
                   <BookOpen className="w-8 h-8 text-white" />
                 </div>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white font-montserrat">
+              <h1 className="text-4xl tracking-tight lg:text-6xl tracking-tight font-bold mb-6 text-white font-montserrat">
                 Nos Piliers de Formation
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-light">
+              <p className="text-xl lg:text-2xl mb-8 text-white/90 max-w-3xl mx-auto font-light leading-relaxed">
                 Découvrez nos 5 piliers d'excellence pour développer vos compétences et booster votre carrière
               </p>
               
               {/* Stats Globales */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                <div className="text-center bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-white mb-2">40</div>
+                <div className="text-center bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                  <div className="text-3xl tracking-tight font-bold text-white mb-2">40</div>
                   <div className="text-sm text-white/80">Formations</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-white mb-2">34</div>
+                <div className="text-center bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                  <div className="text-3xl tracking-tight font-bold text-white mb-2">34</div>
                   <div className="text-sm text-white/80">Disponibles</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-white mb-2">14.5k</div>
+                <div className="text-center bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                  <div className="text-3xl tracking-tight font-bold text-white mb-2">14.5k</div>
                   <div className="text-sm text-white/80">Apprenants</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-white mb-2">4.7</div>
+                <div className="text-center bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                  <div className="text-3xl tracking-tight font-bold text-white mb-2">4.7</div>
                   <div className="text-sm text-white/80">Note moyenne</div>
                 </div>
               </div>
@@ -157,12 +157,12 @@ export default function FormationPilliersPage() {
         </section>
 
         {/* Piliers Grid */}
-        <section className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-16 lg:py-24">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
+            <h2 className="text-3xl tracking-tight font-bold text-gray-900 mb-4 text-center">
               Explorez Nos Piliers de Formation
             </h2>
-            <p className="text-lg text-gray-600 mb-8 text-center max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 mb-8 text-center max-w-3xl mx-auto leading-relaxed">
               Choisissez le domaine qui correspond à vos objectifs professionnels et commencez votre apprentissage
             </p>
           </div>
@@ -181,9 +181,9 @@ export default function FormationPilliersPage() {
                   <div className={`${pilier.bgColor} p-6 text-white relative overflow-hidden`}>
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 backdrop-blur-sm"></div>
                     <div className="relative z-10">
-                      <pilier.icon className="w-12 h-12 mb-4" />
+                      <pilier.icon className="w-12 h-12 mb-4 leading-relaxed" />
                       <h3 className="text-2xl font-bold mb-3">{pilier.title}</h3>
-                      <p className="text-white/90 mb-6 line-clamp-3">{pilier.description}</p>
+                      <p className="text-white/90 mb-6 line-clamp-3 leading-relaxed">{pilier.description}</p>
                     </div>
                   </div>
 
@@ -215,7 +215,7 @@ export default function FormationPilliersPage() {
                   <div className="p-6 bg-white border-t border-gray-100">
                     <button
                       onClick={() => navigate(pilier.link)}
-                      className={`w-full flex items-center justify-center gap-2 px-6 py-3 ${pilier.bgColor} text-white rounded-lg font-semibold transition-colors ${pilier.hoverColor}`}
+                      className={`w-full flex items-center justify-center gap-2 px-6 py-3 ${pilier.bgColor} text-white rounded-2xl font-semibold transition-colors ${pilier.hoverColor}`}
                     >
                       Explorer les formations
                       <ArrowRight className="w-5 h-5" />

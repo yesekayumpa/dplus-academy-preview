@@ -1138,7 +1138,7 @@ const MasterclassesPageContent = () => {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative h-[400px] sm:h-[500px] overflow-hidden pt-6 sm:pt-8 md:pt-12">
+        <section className="relative min-h-[400px] sm:min-h-[500px] overflow-hidden pt-32 pb-20 sm:pt-32 sm:pb-20 md:pt-32 md:pb-20">
           <div className="absolute inset-0">
             <img
               src="/assets/Masterclass.jpg"
@@ -1164,14 +1164,14 @@ const MasterclassesPageContent = () => {
                 {isSurMesureMode ? (
                   <>
                     Masterclass
-                    <span className="block font-black text-3xl sm:text-5xl md:text-6xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-1 sm:mt-2">
+                    <span className="block font-black text-3xl tracking-tight sm:text-5xl tracking-tight md:text-6xl tracking-tight bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mt-1 sm:mt-2">
                       Sur Mesure
                     </span>
                   </>
                 ) : (
                   <>
                     Masterclass
-                    <span className="block font-black text-3xl sm:text-5xl md:text-6xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-1 sm:mt-2">
+                    <span className="block font-black text-3xl tracking-tight sm:text-5xl tracking-tight md:text-6xl tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mt-1 sm:mt-2">
                       Business Revente
                     </span>
                   </>
@@ -1209,10 +1209,10 @@ const MasterclassesPageContent = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
               <div>
                 <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Trouver votre formation</h2>
-                <p className="text-sm text-gray-600">Explorez notre catalogue de masterclasses</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Explorez notre catalogue de masterclasses</p>
               </div>
               <div className="text-right">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-600 leading-relaxed">
                   <span className="text-base sm:text-lg font-bold text-[hsl(var(--academy-primary))]">{filteredMasterclass.length}</span> formation{filteredMasterclass.length > 1 ? 's' : ''} trouvée{filteredMasterclass.length > 1 ? 's' : ''}
                 </p>
               </div>
@@ -1238,7 +1238,7 @@ const MasterclassesPageContent = () => {
               <div className="hidden lg:flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-700">Statut:</span>
-                  <div className="flex border border-gray-200 rounded-lg overflow-hidden">
+                  <div className="flex border border-gray-200 rounded-2xl overflow-hidden">
                     {[
                       { value: "all", label: "Toutes" },
                       { value: "upcoming", label: "À venir" },
@@ -1264,7 +1264,7 @@ const MasterclassesPageContent = () => {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                   >
                     {categories.map(cat => (
                       <option key={cat} value={cat}>
@@ -1279,7 +1279,7 @@ const MasterclassesPageContent = () => {
                   <select
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                   >
                     {levels.map(level => (
                       <option key={level} value={level}>
@@ -1292,7 +1292,7 @@ const MasterclassesPageContent = () => {
                 {(searchTerm || filterStatus !== "all" || selectedCategory !== "all" || selectedLevel !== "all") && (
                   <button
                     onClick={resetFilters}
-                    className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
+                    className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors flex items-center gap-2"
                   >
                     <X className="w-4 h-4" />
                     Réinitialiser
@@ -1305,7 +1305,7 @@ const MasterclassesPageContent = () => {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-gray-700">Statut:</span>
-                    <div className="flex border border-gray-200 rounded-lg overflow-hidden flex-1">
+                    <div className="flex border border-gray-200 rounded-2xl overflow-hidden flex-1">
                       {[
                         { value: "all", label: "Toutes" },
                         { value: "upcoming", label: "À venir" },
@@ -1331,7 +1331,7 @@ const MasterclassesPageContent = () => {
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                     >
                       {categories.map(cat => (
                         <option key={cat} value={cat}>
@@ -1346,7 +1346,7 @@ const MasterclassesPageContent = () => {
                     <select
                       value={selectedLevel}
                       onChange={(e) => setSelectedLevel(e.target.value)}
-                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
+                      className="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[hsl(var(--academy-primary))]"
                     >
                       {levels.map(level => (
                         <option key={level} value={level}>
@@ -1359,7 +1359,7 @@ const MasterclassesPageContent = () => {
                   {(searchTerm || filterStatus !== "all" || selectedCategory !== "all" || selectedLevel !== "all") && (
                     <button
                       onClick={resetFilters}
-                      className="w-full px-4 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors flex items-center justify-center gap-2"
                     >
                       <X className="w-4 h-4" />
                       Réinitialiser
@@ -1501,12 +1501,12 @@ const MasterclassesPageContent = () => {
 
               {/* Aucune formation trouvée */}
               {filteredMasterclass.length === 0 && (
-                <div className="text-center py-12">
+                <div className="text-center py-16 lg:py-20 lg:py-28">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Aucune formation trouvée</h3>
-                  <p className="text-gray-600 mb-6">Essayez de modifier vos filtres ou votre recherche</p>
+                  <p className="text-gray-600 mb-6 leading-relaxed">Essayez de modifier vos filtres ou votre recherche</p>
                   <button
                     onClick={resetFilters}
-                    className="px-6 py-3 bg-[hsl(var(--academy-primary))] text-white font-medium rounded-lg hover:bg-[hsl(var(--academy-primary))]/90 transition-colors"
+                    className="px-6 py-3 bg-[hsl(var(--academy-primary))] text-white font-medium rounded-2xl hover:bg-[hsl(var(--academy-primary))]/90 transition-colors"
                   >
                     Réinitialiser les filtres
                   </button>
@@ -1571,10 +1571,10 @@ const MasterclassCard = ({
           />
           
           <div className="absolute top-3 left-3 flex gap-2">
-            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border} backdrop-blur-sm shadow-sm`}>
+            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${categoryStyle.bg} ${categoryStyle.text} border ${categoryStyle.border} backdrop-blur-sm shadow-md`}>
               {masterclass.category}
             </span>
-            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border} backdrop-blur-sm shadow-sm`}>
+            <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${levelStyle.bg} ${levelStyle.text} border ${levelStyle.border} backdrop-blur-sm shadow-md`}>
               {masterclass.level}
             </span>
           </div>
@@ -1600,8 +1600,8 @@ const MasterclassCard = ({
           {/* Header */}
           <div className="mb-2">
             <h3 className="text-sm md:text-lg font-bold text-[hsl(var(--academy-primary))] mb-2 group-hover:text-[hsl(var(--academy-primary))]/80 transition-colors">{masterclass.title}</h3>
-            <p className="text-xs md:text-xs text-gray-700 mb-1 font-medium">{masterclass.subtitle}</p>
-            <p className="text-xs md:text-xs text-gray-500 italic">{masterclass.tagline}</p>
+            <p className="text-xs md:text-xs text-gray-700 mb-1 font-medium leading-relaxed">{masterclass.subtitle}</p>
+            <p className="text-xs md:text-xs text-gray-600 italic leading-relaxed">{masterclass.tagline}</p>
           </div>
 
           {/* Description courte */}
@@ -1612,26 +1612,26 @@ const MasterclassCard = ({
             <img
               src={masterclass.instructorImage}
               alt={masterclass.instructor}
-              className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-md"
             />
             <div className="flex-1">
-              <p className="text-xs md:text-xs font-semibold text-[hsl(var(--academy-primary))]">{masterclass.instructor}</p>
-              <p className="text-xs md:text-xs text-gray-600">{masterclass.instructorTitle}</p>
+              <p className="text-xs md:text-xs font-semibold text-[hsl(var(--academy-primary))] leading-relaxed">{masterclass.instructor}</p>
+              <p className="text-xs md:text-xs text-gray-600 leading-relaxed">{masterclass.instructorTitle}</p>
             </div>
           </div>
 
           {/* Footer with meta and actions */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-2 border-t border-gray-200/50 gap-4">
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-2xl">
                 <Calendar className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.date === "Sur demande" ? "Sur demande" : new Date(masterclass.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-2xl">
                 <MapPin className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.location}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 text-xs md:text-xs text-gray-600 font-medium bg-gray-50/50 px-3 py-2 rounded-2xl">
                 <Clock className="w-4 h-4 text-[hsl(var(--academy-primary))]" />
                 <span>{masterclass.duration}</span>
               </div>
@@ -1640,7 +1640,7 @@ const MasterclassCard = ({
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onShowDetails(masterclass)}
-                className="px-3 md:px-5 py-1.5 md:py-2 bg-red-900 text-white text-xs md:text-xs font-bold rounded-xl flex items-center gap-2 hover:scale-105 transition-all duration-200 shadow-md"
+                className="px-3 md:px-5 py-1.5 md:py-2 bg-red-900 text-white text-xs md:text-xs font-bold rounded-xl flex items-center gap-2 hover:scale-105 transition-all duration-200 shadow-xl"
               >
                 <Eye className="w-4 h-4" />
                 Voir les détails
@@ -1681,7 +1681,7 @@ const RegistrationModal = ({
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-2xl font-bold mb-1">Inscription - {masterclass.title}</h2>
-              <p className="text-white/90">{masterclass.subtitle}</p>
+              <p className="text-white/90 leading-relaxed">{masterclass.subtitle}</p>
             </div>
             <button 
               onClick={onClose} 
@@ -1691,7 +1691,7 @@ const RegistrationModal = ({
             </button>
           </div>
           
-          <div className="grid grid-cols-3 gap-4 bg-white/10 rounded-lg p-4">
+          <div className="grid grid-cols-3 gap-4 bg-white/10 rounded-2xl p-4">
             <div className="text-center">
               <div className="text-2xl font-bold">Formation certifiante</div>
               <div className="text-sm text-white/80">Tarif de la formation</div>

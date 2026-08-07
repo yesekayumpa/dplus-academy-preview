@@ -91,7 +91,7 @@ const FormationPagination = () => {
               className={`group relative p-2.5 rounded-xl transition-all duration-300 transform-gpu ${
                 currentIndex === 0 
                   ? 'opacity-40 cursor-not-allowed scale-95' 
-                  : 'opacity-100 hover:scale-110 hover:shadow-xl hover:shadow-red-600/25'
+                  : 'opacity-100 hover:scale-110 hover:shadow-xl transition-all duration-300 hover:shadow-red-600/25'
               }`}
               title="Formation précédente"
             >
@@ -130,7 +130,7 @@ const FormationPagination = () => {
                         ? 'bg-gradient-to-br from-amber-600 to-orange-500 shadow-lg opacity-80'
                         : isFuture
                         ? 'bg-gradient-to-br from-red-300 to-rose-400 shadow-lg opacity-60'
-                        : 'bg-gradient-to-br from-red-100 to-rose-200 shadow-md hover:from-red-700 hover:to-red-600 hover:shadow-lg'
+                        : 'bg-gradient-to-br from-red-100 to-rose-200 shadow-xl hover:from-red-700 hover:to-red-600 hover:shadow-lg'
                     }`}>
                       
                       {/* Icône */}
@@ -155,7 +155,7 @@ const FormationPagination = () => {
                     
                     {/* Tooltip compact */}
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50">
-                      <div className="bg-red-900/95 backdrop-blur-xl text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-xl border border-white/10">
+                      <div className="bg-red-900/95 backdrop-blur-xl text-white text-xs rounded-2xl px-3 py-2 whitespace-nowrap shadow-xl border border-white/10">
                         <div className="flex items-center gap-1.5 mb-1">
                           <div className={`w-1.5 h-1.5 rounded-full ${
                             isActive ? 'bg-orange-400' : isPast ? 'bg-amber-400' : 'bg-gray-400'
@@ -178,7 +178,7 @@ const FormationPagination = () => {
               className={`group relative p-2.5 rounded-xl transition-all duration-300 transform-gpu ${
                 currentIndex === formations.length - 1 
                   ? 'opacity-40 cursor-not-allowed scale-95' 
-                  : 'opacity-100 hover:scale-110 hover:shadow-xl hover:shadow-red-600/25'
+                  : 'opacity-100 hover:scale-110 hover:shadow-xl transition-all duration-300 hover:shadow-red-600/25'
               }`}
               title="Formation suivante"
             >

@@ -431,9 +431,9 @@ const EntrepreneurshipPage = () => {
     <Layout>
       <div className="min-h-screen bg-white">
         {/* Hero Section avec image de fond */}
-        <section className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1600&h=600&fit=crop")' }}>
+        <section className="relative bg-cover bg-center bg-no-repeat pt-32 pb-20" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1600&h=600&fit=crop")' }}>
           <div className="absolute inset-0 bg-orange-900/80"></div>
-          <div className="relative container mx-auto px-4 pt-20 pb-12 lg:pt-24 lg:pb-16">
+          <div className="relative container mx-auto px-4 pt-20 pb-12 lg:pt-24 lg:pb-16 lg:pb-24">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -445,28 +445,28 @@ const EntrepreneurshipPage = () => {
                   <Rocket className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <h1 className="text-3xl lg:text-5xl font-bold mb-3 text-white">
+              <h1 className="text-3xl tracking-tight lg:text-5xl tracking-tight font-bold mb-3 text-white">
                 Entrepreneuriat
               </h1>
-              <p className="text-base lg:text-lg mb-6 text-orange-100 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg mb-6 text-orange-100 max-w-3xl mx-auto leading-relaxed">
                 Lancez et développez votre entreprise avec les meilleures stratégies entrepreneuriales
               </p>
               
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="text-center bg-white/10 rounded-lg p-3">
+                <div className="text-center bg-white/10 rounded-2xl p-3">
                   <div className="text-2xl font-bold text-white mb-1">{stats.total}</div>
                   <div className="text-xs text-orange-100">Formations</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-3">
+                <div className="text-center bg-white/10 rounded-2xl p-3">
                   <div className="text-2xl font-bold text-white mb-1">{stats.available}</div>
                   <div className="text-xs text-orange-100">Disponibles</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-3">
+                <div className="text-center bg-white/10 rounded-2xl p-3">
                   <div className="text-2xl font-bold text-white mb-1">{stats.students.toLocaleString()}</div>
                   <div className="text-xs text-orange-100">Apprenants</div>
                 </div>
-                <div className="text-center bg-white/10 rounded-lg p-3">
+                <div className="text-center bg-white/10 rounded-2xl p-3">
                   <div className="text-2xl font-bold text-white mb-1">{stats.avgRating}</div>
                   <div className="text-xs text-orange-100">Note moyenne</div>
                 </div>
@@ -477,7 +477,7 @@ const EntrepreneurshipPage = () => {
 
         {/* Search and Filters */}
         <section className="container mx-auto px-4 py-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <div className="bg-white border border-gray-200 rounded-2xl p-4">
             <div className="flex flex-col lg:flex-row gap-3 mb-4">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -486,13 +486,13 @@ const EntrepreneurshipPage = () => {
                   placeholder="Rechercher une formation..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-2xl focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 />
               </div>
               
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-2xl transition-colors"
               >
                 <Filter className="w-4 h-4" />
                 Filtres
@@ -509,7 +509,7 @@ const EntrepreneurshipPage = () => {
               {(searchTerm || selectedLevel !== "all" || selectedStatus !== "all") && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-2 px-4 py-2 text-sm bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm bg-red-50 hover:bg-red-100 text-red-600 rounded-2xl transition-colors"
                 >
                   <X className="w-4 h-4" />
                   Réinitialiser
@@ -536,7 +536,7 @@ const EntrepreneurshipPage = () => {
                           <button
                             key={level}
                             onClick={() => setSelectedLevel(level)}
-                            className={`px-3 py-1 text-xs rounded-lg border transition-colors ${
+                            className={`px-3 py-1 text-xs rounded-2xl border transition-colors ${
                               selectedLevel === level
                                 ? "bg-orange-500 text-white border-orange-500"
                                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
@@ -557,7 +557,7 @@ const EntrepreneurshipPage = () => {
                           <button
                             key={status}
                             onClick={() => setSelectedStatus(status)}
-                            className={`px-3 py-1 text-xs rounded-lg border transition-colors ${
+                            className={`px-3 py-1 text-xs rounded-2xl border transition-colors ${
                               selectedStatus === status
                                 ? "bg-orange-500 text-white border-orange-500"
                                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
@@ -584,7 +584,7 @@ const EntrepreneurshipPage = () => {
               <h2 className="text-lg font-bold text-gray-900">
                 {currentCourses.length} formation{currentCourses.length > 1 ? 's' : ''} sur {filteredCourses.length}
               </h2>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-600 leading-relaxed">
                 Page {currentPage} sur {totalPages} • Explorez nos formations spécialisées en entrepreneuriat
               </p>
             </div>
@@ -601,7 +601,7 @@ const EntrepreneurshipPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-orange-300 transition-colors cursor-pointer group hover:shadow-lg"
+                  className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange-300 transition-colors cursor-pointer group hover:shadow-lg"
                   onClick={() => handleCourseClick(course)}
                 >
                   <div className="relative">
@@ -640,7 +640,7 @@ const EntrepreneurshipPage = () => {
                       </h3>
                     </div>
 
-                    <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+                    <p className="text-xs text-gray-600 mb-3 line-clamp-2 leading-relaxed">
                       {course.description}
                     </p>
 
@@ -654,7 +654,7 @@ const EntrepreneurshipPage = () => {
                         </span>
                       ))}
                       {course.tags.length > 3 && (
-                        <span className="px-2 py-0.5 bg-gray-50 text-gray-500 text-[10px] rounded">
+                        <span className="px-2 py-0.5 bg-gray-50 text-gray-600 text-[10px] rounded">
                           +{course.tags.length - 3}
                         </span>
                       )}
@@ -685,7 +685,7 @@ const EntrepreneurshipPage = () => {
                           {course.price === 0 ? "Gratuit" : `${(course.price / 655.96).toFixed(0)} FCFA`}
                         </div>
                         {course.price > 0 && (
-                          <div className="text-[10px] text-gray-500">
+                          <div className="text-[10px] text-gray-600">
                             ~{((course.price / 655.96) / 12).toFixed(0)}€/mois
                           </div>
                         )}
@@ -695,7 +695,7 @@ const EntrepreneurshipPage = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleCourseClick(course)}
-                        className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-orange-600 text-white text-xs rounded hover:bg-orange-700 transition-colors hover:shadow-md"
+                        className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-orange-600 text-white text-xs rounded hover:bg-orange-700 transition-colors hover:shadow-xl transition-all duration-300"
                       >
                         Voir
                         <ArrowRight className="w-3 h-3" />
@@ -720,7 +720,7 @@ const EntrepreneurshipPage = () => {
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-2 rounded-2xl transition-colors ${
                   currentPage === 1 
                     ? 'text-gray-300 cursor-not-allowed' 
                     : 'text-gray-600 hover:bg-gray-100'
@@ -734,7 +734,7 @@ const EntrepreneurshipPage = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                    className={`w-10 h-10 rounded-2xl font-medium transition-colors ${
                       currentPage === page
                         ? 'bg-orange-600 text-white'
                         : 'text-gray-600 hover:bg-gray-100'
@@ -748,7 +748,7 @@ const EntrepreneurshipPage = () => {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-2 rounded-2xl transition-colors ${
                   currentPage === totalPages 
                     ? 'text-gray-300 cursor-not-allowed' 
                     : 'text-gray-600 hover:bg-gray-100'
@@ -767,7 +767,7 @@ const EntrepreneurshipPage = () => {
               <h3 className="text-base font-semibold text-gray-900 mb-1">
                 Aucune formation trouvée
               </h3>
-              <p className="text-xs text-gray-600 mb-3">
+              <p className="text-xs text-gray-600 mb-3 leading-relaxed">
                 Essayez de modifier vos filtres ou termes de recherche
               </p>
               <button
@@ -791,14 +791,14 @@ const EntrepreneurshipPage = () => {
               <h2 className="text-xl font-bold mb-2">
                 Prêt à lancer votre entreprise ?
               </h2>
-              <p className="text-sm mb-5 max-w-2xl mx-auto text-orange-100">
+              <p className="text-sm mb-5 max-w-2xl mx-auto text-orange-100 leading-relaxed">
                 Rejoignez nos formations et transformez votre idée en entreprise réussie
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button className="px-5 py-2 bg-white text-orange-600 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors">
+                <button className="px-5 py-2 bg-white text-orange-600 rounded-2xl text-sm font-semibold hover:bg-gray-100 transition-colors">
                   Contacter un conseiller
                 </button>
-                <button className="px-5 py-2 bg-orange-500 text-white rounded-lg text-sm font-semibold hover:bg-orange-400 transition-colors">
+                <button className="px-5 py-2 bg-orange-500 text-white rounded-2xl text-sm font-semibold hover:bg-orange-400 transition-colors">
                   Télécharger le catalogue
                 </button>
               </div>

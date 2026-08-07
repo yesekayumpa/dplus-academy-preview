@@ -217,14 +217,14 @@ const PersonalPlanSlider = () => {
   return (
     <>
       {/* Personal Plan Banner Slider */}
-      <section className="relative py-12 bg-white overflow-hidden">
+      <section className="relative py-16 lg:py-20 lg:py-28 bg-white overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           {/* Header du slider */}
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            <h2 className="text-2xl md:text-3xl tracking-tight font-bold text-gray-900 mb-3">
               Nos Piliers de Formation
             </h2>
-            <p className="text-base text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Une approche structurée pour un apprentissage durable et impactant
             </p>
           </div>
@@ -259,7 +259,7 @@ const PersonalPlanSlider = () => {
                             src={slide.image}
                             srcSet={`${slide.image} 1x, ${slide.image.replace('@1x', '@2x')} 2x`}
                             alt="Interface de jeu de rôle illustrant un exercice de conversation avec l'IA"
-                            className="w-full h-auto rounded-lg border border-gray-200"
+                            className="w-full h-auto rounded-2xl border border-gray-200 object-cover"
                             loading="eager"
                           />
                         </div>
@@ -268,7 +268,7 @@ const PersonalPlanSlider = () => {
                       {/* Content Section - en deuxième sur mobile */}
                       <div className="flex-1 space-y-6 text-center lg:text-left lg:order-1">
                         <div className="space-y-4">
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl tracking-tight font-bold text-gray-900 leading-tight">
                             {slide.title}
                           </h3>
                           <p className="text-base text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
@@ -308,7 +308,7 @@ const PersonalPlanSlider = () => {
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4">
                           <button
                             onClick={() => handleNavigateWithScroll(slide.route)}
-                            className="px-6 py-2 bg-gray-900 text-white rounded-lg font-semibold text-sm hover:bg-gray-800 transition-colors duration-300"
+                            className="px-6 py-2 bg-gray-900 text-white rounded-2xl font-semibold text-sm hover:bg-gray-800 transition-colors duration-300"
                           >
                             Explorer ce domaine
                           </button>

@@ -32,6 +32,7 @@ import {
   Mail,
   Send,
   MessageCircle,
+  CheckCircle
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useCategories } from "@/hooks/useCategories";
@@ -53,120 +54,7 @@ const colors = {
   }
 };
 
-// Données des programmes corporate
-const corporatePrograms = [
-  {
-    id: 1,
-    title: "Transformation Digitale",
-    subtitle: "Programme Complet de Transformation Numérique",
-    description: "Accompagnez votre entreprise dans sa transition digitale avec des formations sur mesure adaptées à votre secteur et vos objectifs stratégiques.",
-    duration: "3-6 mois",
-    format: "Sur site ou en ligne",
-    participants: "10-25 personnes",
-    level: "Sur mesure",
-    category: "Digital",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    rating: 4.8,
-    price: "Sur devis",
-    highlights: ["Cloud", "IA", "Automatisation", "Data"],
-    
-    modules: [
-      "Stratégie digitale et alignement business",
-      "Gestion du changement et adoption",
-      "Outils collaboratifs et plateformes cloud",
-      "Cybersécurité et conformité",
-      "Mesure du ROI et KPIs"
-    ],
-    
-    targetAudience: [
-      "Directions générales",
-      "Équipes de direction",
-      "Responsables transformation",
-      "Équipes techniques et opérationnelles"
-    ],
-    
-    benefits: [
-      "Augmentation de la productivité de 35%",
-      "Réduction des coûts opérationnels",
-      "Amélioration de l'expérience client",
-      "Agilité organisationnelle accrue"
-    ]
-  },
-  {
-    id: 2,
-    title: "Leadership et Management",
-    subtitle: "Développez les Compétences Managériales de Vos Équipes",
-    description: "Formation intensive pour renforcer les capacités de leadership et développer une culture d'excellence au sein de votre organisation.",
-    duration: "2-4 mois",
-    format: "Présentiel et blended learning",
-    participants: "8-20 personnes",
-    level: "Intermédiaire à Avancé",
-    category: "Management",
-    thumbnail: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    rating: 4.9,
-    price: "Sur devis",
-    highlights: ["Leadership", "Communication", "Coaching", "Intelligence émotionnelle"],
-    
-    modules: [
-      "Fondamentaux du leadership moderne",
-      "Communication efficace et influence",
-      "Gestion des conflits et médiation",
-      "Coaching d'équipe et développement des talents",
-      "Prise de décision stratégique"
-    ],
-    
-    targetAudience: [
-      "Managers et responsables d'équipes",
-      "Leaders intermédiaires",
-      "Futurs managers",
-      "Direction des ressources humaines"
-    ],
-    
-    benefits: [
-      "Amélioration de l'engagement des équipes",
-      "Réduction du turnover",
-      "Meilleure performance collective",
-      "Culture d'entreprise renforcée"
-    ]
-  },
-  {
-    id: 3,
-    title: "Data Analytics et Business Intelligence",
-    subtitle: "Maîtrisez la Donnée pour Piloter Votre Business",
-    description: "Programme complet pour transformer vos équipes en experts de la data, capables de prendre des décisions basées sur l'analyse et les insights.",
-    duration: "4-6 mois",
-    format: "Sur site avec projets pratiques",
-    participants: "12-30 personnes",
-    level: "Débutant à Avancé",
-    category: "Data",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    rating: 4.7,
-    price: "Sur devis",
-    highlights: ["Data Science", "BI", "Machine Learning", "Visualisation"],
-    
-    modules: [
-      "Fondamentaux de l'analyse de données",
-      "Outils de Business Intelligence (Power BI, Tableau)",
-      "Statistiques appliquées au business",
-      "Introduction au Machine Learning",
-      "Storytelling avec les données"
-    ],
-    
-    targetAudience: [
-      "Équipes marketing et commercial",
-      "Responsables opérationnels",
-      "Analystes business",
-      "Direction générale"
-    ],
-    
-    benefits: [
-      "Décisions plus éclairées et rapides",
-      "Identification de nouvelles opportunités",
-      "Optimisation des processus",
-      "Avantage concurrentiel accru"
-    ]
-  }
-];
+
 
 const CorporateProgramsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -335,7 +223,7 @@ const CorporateProgramsPage = () => {
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
         {/* Hero Section avec image de fond Corporate.jpg */}
-        <section className="relative overflow-hidden py-20 px-4">
+        <section className="relative overflow-hidden pt-32 pb-20 px-4">
           {/* Image de fond */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -361,9 +249,9 @@ const CorporateProgramsPage = () => {
                   <Building2 className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-lg" />
                 </div>
               </div>
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white leading-tight">
+              <h1 className="text-2xl md:text-4xl tracking-tight lg:text-5xl tracking-tight font-bold mb-3 md:mb-4 text-white leading-tight">
                 Programmes
-                <span className="block text-yellow-300 drop-shadow-md">Corporate</span>
+                <span className="block text-yellow-300 drop-shadow-xl">Corporate</span>
               </h1>
               <p className="text-base md:text-lg lg:text-xl text-white/95 mb-4 md:mb-6 max-w-3xl mx-auto leading-relaxed">
                 Des programmes de formation conçus spécifiquement pour les entreprises, 
@@ -393,7 +281,7 @@ const CorporateProgramsPage = () => {
         </section>
 
         {/* Stats Section avec couleurs bordeaux */}
-        <section className="py-16 px-4">
+        <section className="py-16 lg:py-24 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="bg-white rounded-2xl border border-gray-200 p-6">
             <div className="md:flex items-center justify-between gap-4 hidden md:flex md:overflow-visible">
@@ -412,7 +300,7 @@ const CorporateProgramsPage = () => {
                   className="flex items-center gap-3 group"
                 >
                   <div className="relative">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-2xl flex items-center justify-center shadow-xl">
                       <stat.icon className="w-5 h-5 text-white" />
                     </div>
                     {index < 3 && (
@@ -445,7 +333,7 @@ const CorporateProgramsPage = () => {
                     className="flex items-center gap-2 group flex-shrink-0 px-2"
                   >
                     <div className="relative">
-                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-2xl flex items-center justify-center shadow-xl">
                         <stat.icon className="w-4 h-4 text-white" />
                       </div>
                     </div>
@@ -467,7 +355,7 @@ const CorporateProgramsPage = () => {
                     className="flex items-center gap-2 group flex-shrink-0 px-2"
                   >
                     <div className="relative">
-                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-lg flex items-center justify-center shadow-md">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#b23a4a] to-[#8e2e3b] rounded-2xl flex items-center justify-center shadow-xl">
                         <stat.icon className="w-4 h-4 text-white" />
                       </div>
                     </div>
@@ -483,41 +371,84 @@ const CorporateProgramsPage = () => {
           </div>
         </section>
 
-        {/* Search and Filter */}
-        <section className="py-8 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        {/* Section Filtres et Recherche */}
+        <section className="container mx-auto px-4 max-w-6xl py-8">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-md">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Trouver votre programme</h2>
+                <p className="text-sm text-gray-600 leading-relaxed">Explorez notre catalogue de formations pour entreprises</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  <span className="text-base sm:text-lg font-bold text-[#b23a4a]">{filteredPrograms.length}</span> programme{filteredPrograms.length > 1 ? 's' : ''} trouvé{filteredPrograms.length > 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Rechercher un programme..."
+                  placeholder="Rechercher un programme par mot-clé..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl text-sm sm:text-base focus:outline-none focus:border-[#b23a4a] focus:ring-2 focus:ring-[#b23a4a]/20"
                 />
               </div>
-              <div className="flex gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                      selectedCategory === category
-                        ? "bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
+              
+              <div className="flex gap-4">
+                <div className="flex items-center gap-2">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="px-4 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#b23a4a]"
                   >
-                    {category === "all" ? "Tous" : category}
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>
+                        {cat === "all" ? "Toutes catégories" : cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                {(searchTerm || selectedCategory !== "all") && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedCategory("all");
+                    }}
+                    className="px-4 py-3 sm:py-4 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded-xl border border-transparent transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Réinitialiser
                   </button>
-                ))}
+                )}
               </div>
+            </div>
+            
+            {/* Tags rapides */}
+            <div className="flex flex-wrap items-center gap-2 mt-6 pt-6 border-t border-gray-100">
+              {["Management", "Digital", "Data", "Leadership"].map((tag, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedCategory(tag)}
+                  className={`px-4 py-1.5 rounded-full text-xs transition-colors border ${
+                    selectedCategory === tag
+                      ? "bg-[#b23a4a]/10 border-[#b23a4a] text-[#b23a4a]"
+                      : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Programs Grid */}
-        <section className="py-12 px-4">
+        <section className="py-16 lg:py-20 lg:py-28 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paginatedPrograms.map((program, index) => (
@@ -552,9 +483,9 @@ const CorporateProgramsPage = () => {
                   
                   <div className="p-6 flex flex-col flex-1">
                     <h3 className="text-xl font-bold mb-2 text-[#46181e]">{program.title}</h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">{program.description}</p>
+                    <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">{program.description}</p>
                     
-                    <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
                       <div className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
                         <span>{program.duration}</span>
@@ -567,7 +498,7 @@ const CorporateProgramsPage = () => {
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {program.highlights.slice(0, 3).map((highlight, idx) => (
-                        <span key={idx} className="px-3 py-1.5 bg-gradient-to-r from-[#fbe7ea] to-[#f5cbd1] text-[#b23a4a] rounded-lg text-xs font-medium shadow-sm border border-[#b23a4a]/10">
+                        <span key={idx} className="px-3 py-1.5 bg-gradient-to-r from-[#fbe7ea] to-[#f5cbd1] text-[#b23a4a] rounded-2xl text-xs font-medium shadow-md border border-[#b23a4a]/10">
                           {highlight}
                         </span>
                       ))}
@@ -576,9 +507,9 @@ const CorporateProgramsPage = () => {
                     <div className="flex items-center justify-between mt-auto">
                       <div className="flex flex-col">
                         <span className="text-lg font-bold text-[#46181e]">{program.price}</span>
-                        <span className="text-xs text-gray-500">par employé</span>
+                        <span className="text-xs text-gray-600">par employé</span>
                       </div>
-                      <button className="px-4 py-2 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white rounded-lg font-medium shadow-md hover:shadow-lg hover:from-[#8e2e3b] hover:to-[#b23a4a] transition-all duration-300 text-sm flex items-center gap-1 group">
+                      <button className="px-4 py-2 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white rounded-2xl font-medium shadow-xl hover:shadow-lg hover:from-[#8e2e3b] hover:to-[#b23a4a] transition-all duration-300 text-sm flex items-center gap-1 group">
                         En savoir plus
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
@@ -594,7 +525,7 @@ const CorporateProgramsPage = () => {
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -604,7 +535,7 @@ const CorporateProgramsPage = () => {
                     <button
                       key={i}
                       onClick={() => setCurrentPage(i + 1)}
-                      className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                      className={`w-8 h-8 rounded-2xl text-sm font-medium transition-colors ${
                         currentPage === i + 1
                           ? "bg-[#b23a4a] text-white"
                           : "text-gray-600 hover:bg-gray-100"
@@ -618,7 +549,7 @@ const CorporateProgramsPage = () => {
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 rounded-2xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -665,9 +596,9 @@ const CorporateProgramsPage = () => {
                 </div>
                 
                 <div className="p-8">
-                  <h2 className="text-3xl font-bold mb-2 text-[#46181e]">{selectedProgram.title}</h2>
-                  <p className="text-xl text-[#b23a4a] mb-6">{selectedProgram.subtitle}</p>
-                  <p className="text-gray-700 mb-8">{selectedProgram.description}</p>
+                  <h2 className="text-3xl tracking-tight font-bold mb-2 text-[#46181e]">{selectedProgram.title}</h2>
+                  <p className="text-xl text-[#b23a4a] mb-6 leading-relaxed">{selectedProgram.subtitle}</p>
+                  <p className="text-gray-700 mb-8 leading-relaxed">{selectedProgram.description}</p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
@@ -708,7 +639,7 @@ const CorporateProgramsPage = () => {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {selectedProgram.benefits.map((benefit, index) => (
-                        <div key={index} className="flex items-start gap-2 p-3 bg-[#fbe7ea] rounded-lg">
+                        <div key={index} className="flex items-start gap-2 p-3 bg-[#fbe7ea] rounded-2xl">
                           <Zap className="w-5 h-5 text-[#b23a4a] mt-0.5 flex-shrink-0" />
                           <span className="text-gray-700">{benefit}</span>
                         </div>
@@ -768,12 +699,12 @@ const CorporateProgramsPage = () => {
                   </div>
 
                   {submitSuccess ? (
-                    <div className="text-center py-12">
+                    <div className="text-center py-16 lg:py-20 lg:py-28">
                       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <CheckCircle2 className="w-8 h-8 text-green-500" />
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">Message envoyé !</h3>
-                      <p className="text-gray-600">Un expert vous contactera dans les 24h.</p>
+                      <p className="text-gray-600 leading-relaxed">Un expert vous contactera dans les 24h.</p>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmitContact} className="space-y-4">
@@ -784,7 +715,7 @@ const CorporateProgramsPage = () => {
                           required
                           value={contactForm.name}
                           onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
                           placeholder="Jean Dupont"
                         />
                       </div>
@@ -796,7 +727,7 @@ const CorporateProgramsPage = () => {
                           required
                           value={contactForm.email}
                           onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
                           placeholder="jean.dupont@entreprise.com"
                         />
                       </div>
@@ -807,7 +738,7 @@ const CorporateProgramsPage = () => {
                           type="tel"
                           value={contactForm.phone}
                           onChange={(e) => setContactForm({...contactForm, phone: e.target.value})}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
                           placeholder="+33 6 12 34 56 78"
                         />
                       </div>
@@ -819,7 +750,7 @@ const CorporateProgramsPage = () => {
                           required
                           value={contactForm.company}
                           onChange={(e) => setContactForm({...contactForm, company: e.target.value})}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
                           placeholder="Nom de votre entreprise"
                         />
                       </div>
@@ -831,7 +762,7 @@ const CorporateProgramsPage = () => {
                             type="text"
                             value={contactForm.program}
                             disabled
-                            className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-700"
+                            className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-2xl text-gray-700"
                           />
                         </div>
                       )}
@@ -843,7 +774,7 @@ const CorporateProgramsPage = () => {
                           value={contactForm.message}
                           onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
                           rows={4}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#b23a4a] focus:border-transparent"
                           placeholder="Décrivez vos besoins de formation..."
                         />
                       </div>
@@ -851,7 +782,7 @@ const CorporateProgramsPage = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-3 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full py-3 bg-gradient-to-r from-[#b23a4a] to-[#8e2e3b] text-white rounded-2xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         {isSubmitting ? (
                           <>
@@ -874,17 +805,17 @@ const CorporateProgramsPage = () => {
         </AnimatePresence>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-[#46181e] to-[#8e2e3b]">
+        <section className="py-20 lg:py-28 px-4 bg-gradient-to-r from-[#46181e] to-[#8e2e3b]">
           <div className="container mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold mb-6 text-white">
+              <h2 className="text-4xl tracking-tight font-bold mb-6 text-white">
                 Prêt à transformer votre entreprise ?
               </h2>
-              <p className="text-xl text-white/90 mb-8">
+              <p className="text-xl text-white/90 mb-8 leading-relaxed">
                 Contactez-nous pour un audit gratuit et une proposition sur mesure
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

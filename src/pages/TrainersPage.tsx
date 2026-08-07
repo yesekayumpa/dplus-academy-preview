@@ -379,7 +379,7 @@ const TrainersPage = () => {
         className="group cursor-pointer"
         onClick={onClick}
       >
-        <Card className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 bg-white h-full flex flex-col">
+        <Card className="overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white h-full flex flex-col">
           {/* Image avec overlay bordeaux */}
           <div className="relative h-36 overflow-hidden flex-shrink-0">
             <img
@@ -403,7 +403,7 @@ const TrainersPage = () => {
         <CardContent className="p-3 flex-1 flex flex-col">
           {/* Nom et titre */}
           <h3 className="font-semibold text-gray-900 text-sm mb-1">{trainer.name}</h3>
-          <p className="text-xs text-gray-500 mb-2 line-clamp-1">{trainer.title}</p>
+          <p className="text-xs text-gray-600 mb-2 line-clamp-1 leading-relaxed">{trainer.title}</p>
 
           {/* Note et localisation */}
           <div className="flex items-center justify-between mb-2">
@@ -430,7 +430,7 @@ const TrainersPage = () => {
           </div>
 
           {/* Stats minimales */}
-          <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+          <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
             <div className="flex items-center gap-1">
               <Users className="w-3 h-3" />
               <span>{(trainer.students / 1000).toFixed(1)}k</span>
@@ -458,7 +458,7 @@ const TrainersPage = () => {
     <Layout>
       <div className="min-h-screen bg-slate-50">
         {/* Hero Section avec fond bordeaux et image de fond */}
-        <section className="relative overflow-hidden py-24 px-4 bg-[#46181e]">
+        <section className="relative overflow-hidden pt-32 pb-20 px-4 bg-[#46181e]">
           {/* Image de fond avec overlay */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -476,11 +476,11 @@ const TrainersPage = () => {
                 Experts de renom
               </Badge>
               
-              <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">
+              <h1 className="text-2xl md:text-4xl tracking-tight font-bold text-white mb-4">
                 Nos Formateurs
               </h1>
               
-              <p className="text-sm md:text-lg text-white/90 max-w-2xl mx-auto">
+              <p className="text-sm md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
                 Une sélection des meilleurs experts pour vous accompagner dans votre réussite
               </p>
             </motion.div>
@@ -494,10 +494,10 @@ const TrainersPage = () => {
             className="w-full"
             onValueChange={setActiveFilter}
           >
-            <TabsList className="w-full justify-start h-auto p-1 bg-white border border-gray-200 rounded-lg overflow-x-auto">
+            <TabsList className="w-full justify-start h-auto p-1 bg-white border border-gray-200 rounded-2xl overflow-x-auto">
               <TabsTrigger
                 value="all"
-                className="px-4 py-2 data-[state=active]:bg-[#b23a4a] data-[state=active]:text-white rounded-md text-sm"
+                className="px-4 py-2 data-[state=active]:bg-[#b23a4a] data-[state=active]:text-white rounded-xl text-sm"
               >
                 Tous
               </TabsTrigger>
@@ -505,7 +505,7 @@ const TrainersPage = () => {
                 <TabsTrigger
                   key={specialty}
                   value={specialty}
-                  className="px-4 py-2 data-[state=active]:bg-[#b23a4a] data-[state=active]:text-white rounded-md text-sm whitespace-nowrap"
+                  className="px-4 py-2 data-[state=active]:bg-[#b23a4a] data-[state=active]:text-white rounded-xl text-sm whitespace-nowrap"
                 >
                   {specialty}
                 </TabsTrigger>
@@ -515,7 +515,7 @@ const TrainersPage = () => {
         </section>
 
         {/* Grille de formateurs */}
-        <section className="container mx-auto px-4 py-6 pb-16">
+        <section className="container mx-auto px-4 py-6 pb-16 lg:pb-24">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             {filteredTrainers.map((trainer, index) => (
               <TrainerCard
@@ -585,11 +585,11 @@ const TrainersPage = () => {
                           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
                             {selectedTrainer.name}
                           </h2>
-                          <p className="text-xs sm:text-sm text-gray-600 mb-2">
+                          <p className="text-xs sm:text-sm text-gray-600 mb-2 leading-relaxed">
                             {selectedTrainer.title}
                           </p>
                           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                            <div className="flex items-center gap-1 bg-[#fbe7ea] px-2 py-1 rounded-lg">
+                            <div className="flex items-center gap-1 bg-[#fbe7ea] px-2 py-1 rounded-2xl">
                               <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-[#b23a4a] text-[#b23a4a]" />
                               <span className="font-bold text-[#b23a4a] text-xs sm:text-sm">
                                 {selectedTrainer.rating}
@@ -650,33 +650,33 @@ const TrainersPage = () => {
 
                     {/* Stats principales */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
-                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-[#f5cbd1]">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-md border border-[#f5cbd1]">
                         <Users className="w-4 h-4 sm:w-5 sm:h-5 text-[#b23a4a] mx-auto mb-1" />
                         <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {(selectedTrainer.students / 1000).toFixed(1)}k
                         </div>
-                        <div className="text-xs text-gray-500">Étudiants</div>
+                        <div className="text-xs text-gray-600">Étudiants</div>
                       </div>
-                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-[#f5cbd1]">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-md border border-[#f5cbd1]">
                         <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-[#b23a4a] mx-auto mb-1" />
                         <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.experience}
                         </div>
-                        <div className="text-xs text-gray-500">Expérience</div>
+                        <div className="text-xs text-gray-600">Expérience</div>
                       </div>
-                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-[#f5cbd1]">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-md border border-[#f5cbd1]">
                         <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-[#b23a4a] mx-auto mb-1" />
                         <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.courses.length}
                         </div>
-                        <div className="text-xs text-gray-500">Cours</div>
+                        <div className="text-xs text-gray-600">Cours</div>
                       </div>
-                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-sm border border-[#f5cbd1]">
+                      <div className="text-center p-2 sm:p-3 bg-white rounded-xl shadow-md border border-[#f5cbd1]">
                         <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-[#b23a4a] mx-auto mb-1" />
                         <div className="text-sm sm:text-lg font-bold text-gray-900">
                           {selectedTrainer.languages.length}
                         </div>
-                        <div className="text-xs text-gray-500">Langues</div>
+                        <div className="text-xs text-gray-600">Langues</div>
                       </div>
                     </div>
                     {/* Expertises en badges avec bordeaux */}
@@ -727,7 +727,7 @@ const TrainersPage = () => {
                             href={selectedTrainer.social.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center text-[#b23a4a] hover:bg-[#f5cbd1] hover:text-[#8e2e3b] transition-all border border-[#f5cbd1] hover:scale-110"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-white flex items-center justify-center text-[#b23a4a] hover:bg-[#f5cbd1] hover:text-[#8e2e3b] transition-all border border-[#f5cbd1] hover:scale-110"
                           >
                             <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                           </a>
@@ -737,7 +737,7 @@ const TrainersPage = () => {
                             href={selectedTrainer.social.twitter}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center text-[#b23a4a] hover:bg-[#f5cbd1] hover:text-[#8e2e3b] transition-all border border-[#f5cbd1] hover:scale-110"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-white flex items-center justify-center text-[#b23a4a] hover:bg-[#f5cbd1] hover:text-[#8e2e3b] transition-all border border-[#f5cbd1] hover:scale-110"
                           >
                             <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                           </a>
@@ -774,10 +774,10 @@ const TrainersPage = () => {
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               <Briefcase className="w-16 h-16 text-white/60 mx-auto mb-6" />
-              <h2 className="font-montserrat font-bold text-4xl md:text-5xl text-white mb-6">
+              <h2 className="font-montserrat font-bold text-4xl tracking-tight md:text-5xl tracking-tight text-white mb-6">
                 Rejoignez notre équipe
               </h2>
-              <p className="text-xl text-white/80 mb-8">
+              <p className="text-xl text-white/80 mb-8 leading-relaxed">
                 Nous recherchons des talents passionnés pour renforcer nos
                 équipes.
               </p>

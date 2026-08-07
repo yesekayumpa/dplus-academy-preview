@@ -122,7 +122,7 @@ const SurmesureDetailPage = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#46181e] via-[#6a232d] to-[#8e2e3b]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-3 border-[#f4e4c1] border-t-transparent mx-auto mb-4"></div>
-            <p className="text-white text-sm font-medium">Chargement...</p>
+            <p className="text-white text-sm font-medium leading-relaxed">Chargement...</p>
           </div>
         </div>
       </Layout>
@@ -136,7 +136,7 @@ const SurmesureDetailPage = () => {
           <div className="text-center bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20 max-w-md mx-4">
             <AlertCircle className="w-12 h-12 text-[#f4e4c1] mx-auto mb-4" />
             <h2 className="text-xl font-bold text-white mb-2">Formation non trouvée</h2>
-            <p className="text-white/80 mb-6 text-sm">La formation que vous recherchez n'existe pas.</p>
+            <p className="text-white/80 mb-6 text-sm leading-relaxed">La formation que vous recherchez n'existe pas.</p>
             <Button 
               onClick={() => navigate('/sur-mesure')}
               className="bg-[#d44c5e] hover:bg-[#b23a4a] text-white px-6 py-2 text-sm font-semibold"
@@ -151,9 +151,9 @@ const SurmesureDetailPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-[#fdf2f4] via-white to-[#fbe7ea] pt-16">
+      <div className="min-h-screen bg-gradient-to-br from-[#fdf2f4] via-white to-[#fbe7ea] pt-16 lg:pt-24">
         {/* Hero Section */}
-        <div className="relative h-56 sm:h-64 overflow-hidden">
+        <div className="relative min-h-56 sm:min-h-64 overflow-hidden pt-32 pb-20">
           <img 
             src={course.image} 
             alt={course.title}
@@ -183,10 +183,10 @@ const SurmesureDetailPage = () => {
               <Badge className="bg-white/20 backdrop-blur-md text-white border-0 mb-2 px-3 py-1 text-xs">
                 {course.category}
               </Badge>
-              <h1 className="text-xl sm:text-3xl font-bold text-white mb-1 line-clamp-2">
+              <h1 className="text-xl sm:text-3xl tracking-tight font-bold text-white mb-1 line-clamp-2">
                 {course.title}
               </h1>
-              <p className="text-sm text-white/90 line-clamp-2">
+              <p className="text-sm text-white/90 line-clamp-2 leading-relaxed">
                 {course.description}
               </p>
             </motion.div>
@@ -204,11 +204,11 @@ const SurmesureDetailPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
               >
-                <Card className="border border-gray-200 shadow-md bg-white">
+                <Card className="border border-gray-200 shadow-xl bg-white">
                   <CardContent className="p-4">
                     <div className="grid grid-cols-4 gap-1.5 px-1">
                       <div className="text-center">
-                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-lg p-1.5 mb-1.5 mx-auto w-7">
+                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-2xl p-1.5 mb-1.5 mx-auto w-7">
                           <div className="flex justify-center">
                             {[...Array(5)].map((_, i) => (
                               <Star
@@ -223,28 +223,28 @@ const SurmesureDetailPage = () => {
                           </div>
                         </div>
                         <div className="text-xs font-bold text-[#46181e]">{course.rating}</div>
-                        <div class="text-[9px] text-gray-500">Note</div>
+                        <div class="text-[9px] text-gray-600">Note</div>
                       </div>
                       <div className="text-center">
-                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-lg p-1.5 mb-1.5 mx-auto w-7">
+                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-2xl p-1.5 mb-1.5 mx-auto w-7">
                           <Users className="w-2.5 h-2.5 text-white mx-auto" />
                         </div>
                         <div className="text-xs font-bold text-[#46181e]">{course.students}</div>
-                        <div class="text-[9px] text-gray-500">Étudiants</div>
+                        <div class="text-[9px] text-gray-600">Étudiants</div>
                       </div>
                       <div className="text-center">
-                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-lg p-1.5 mb-1.5 mx-auto w-7">
+                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-2xl p-1.5 mb-1.5 mx-auto w-7">
                           <Clock className="w-2.5 h-2.5 text-white mx-auto" />
                         </div>
                         <div className="text-xs font-bold text-[#46181e]">{course.duration}</div>
-                        <div class="text-[9px] text-gray-500">Durée</div>
+                        <div class="text-[9px] text-gray-600">Durée</div>
                       </div>
                       <div className="text-center">
-                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-lg p-1.5 mb-1.5 mx-auto w-7">
+                        <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-2xl p-1.5 mb-1.5 mx-auto w-7">
                           <BookOpen className="w-2.5 h-2.5 text-white mx-auto" />
                         </div>
                         <div className="text-xs font-bold text-[#46181e]">{course.level}</div>
-                        <div class="text-[9px] text-gray-500">Niveau</div>
+                        <div class="text-[9px] text-gray-600">Niveau</div>
                       </div>
                     </div>
                   </CardContent>
@@ -257,10 +257,10 @@ const SurmesureDetailPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <Card className="border border-gray-200 shadow-md bg-white">
+                <Card className="border border-gray-200 shadow-xl bg-white">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-md p-1.5">
+                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-xl p-1.5">
                         <BookOpen className="w-4 h-4 text-white" />
                       </div>
                       <h2 className="text-base font-bold text-[#46181e]">Description</h2>
@@ -278,17 +278,17 @@ const SurmesureDetailPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.225 }}
               >
-                <Card className="border border-gray-200 shadow-md bg-white">
+                <Card className="border border-gray-200 shadow-xl bg-white">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-md p-1.5">
+                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-xl p-1.5">
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <h2 className="text-base font-bold text-[#46181e]">Formateur</h2>
                     </div>
                     <div className="flex items-center gap-3">
                       <div 
-                        className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 cursor-pointer hover:scale-105 transition-transform border-2 border-white shadow-md"
+                        className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 cursor-pointer hover:scale-105 transition-transform border-2 border-white shadow-xl"
                         onClick={() => setShowInstructorModal(true)}
                       >
                         <img 
@@ -301,7 +301,7 @@ const SurmesureDetailPage = () => {
                         <h3 className="font-semibold text-base text-gray-900">
                           {course.instructor || "Expert certifié"}
                         </h3>
-                        <p className="text-xs text-gray-600 mt-1">
+                        <p className="text-xs text-gray-600 mt-1 leading-relaxed">
                           {course.title}
                         </p>
                       </div>
@@ -316,17 +316,17 @@ const SurmesureDetailPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
               >
-                <Card className="border border-gray-200 shadow-md bg-white">
+                <Card className="border border-gray-200 shadow-xl bg-white">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-md p-1.5">
+                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-xl p-1.5">
                         <Target className="w-4 h-4 text-white" />
                       </div>
                       <h2 className="text-base font-bold text-[#46181e]">Compétences</h2>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {course.tags.map((tag, i) => (
-                        <span key={i} className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] px-3 py-1.5 rounded-md border border-[#e77a8a]/20 text-xs font-medium text-gray-800">
+                        <span key={i} className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] px-3 py-1.5 rounded-xl border border-[#e77a8a]/20 text-xs font-medium text-gray-800">
                           <CircleCheck className="w-3.5 h-3.5 text-[#d44c5e]" />
                           {tag}
                         </span>
@@ -342,49 +342,49 @@ const SurmesureDetailPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <Card className="border border-gray-200 shadow-md bg-white">
+                <Card className="border border-gray-200 shadow-xl bg-white">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-md p-1.5">
+                      <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded-xl p-1.5">
                         <TrendingUp className="w-4 h-4 text-white" />
                       </div>
                       <h2 className="text-base font-bold text-[#46181e]">Points forts</h2>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md border border-[#e77a8a]/20">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl border border-[#e77a8a]/20">
                         <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded p-1.5">
                           <Zap className="w-3.5 h-3.5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-[#46181e] text-xs">Intensive</h3>
-                          <p className="text-[10px] text-gray-600">Apprentissage rapide</p>
+                          <p className="text-[10px] text-gray-600 leading-relaxed">Apprentissage rapide</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md border border-[#e77a8a]/20">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl border border-[#e77a8a]/20">
                         <div className="bg-gradient-to-br from-blue-400 to-blue-500 rounded p-1.5">
                           <Shield className="w-3.5 h-3.5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-[#46181e] text-xs">Certifiante</h3>
-                          <p className="text-[10px] text-gray-600">Reconnue</p>
+                          <p className="text-[10px] text-gray-600 leading-relaxed">Reconnue</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md border border-[#e77a8a]/20">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl border border-[#e77a8a]/20">
                         <div className="bg-gradient-to-br from-green-400 to-green-500 rounded p-1.5">
                           <Users className="w-3.5 h-3.5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-[#46181e] text-xs">Accompagnement</h3>
-                          <p className="text-[10px] text-gray-600">Personnalisé</p>
+                          <p className="text-[10px] text-gray-600 leading-relaxed">Personnalisé</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md border border-[#e77a8a]/20">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl border border-[#e77a8a]/20">
                         <div className="bg-gradient-to-br from-purple-400 to-purple-500 rounded p-1.5">
                           <Award className="w-3.5 h-3.5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-[#46181e] text-xs">Pratique</h3>
-                          <p className="text-[10px] text-gray-600">Projets concrets</p>
+                          <p className="text-[10px] text-gray-600 leading-relaxed">Projets concrets</p>
                         </div>
                       </div>
                     </div>
@@ -397,7 +397,7 @@ const SurmesureDetailPage = () => {
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-4">
                 {/* Carte d'inscription */}
-                <div className="rounded-lg border border-gray-200 shadow-lg bg-white overflow-hidden">
+                <div className="rounded-2xl border border-gray-200 shadow-lg bg-white overflow-hidden">
                   {/* Header avec prix */}
                   <div className="bg-gradient-to-r from-[#46181e] via-[#6a232d] to-[#8e2e3b] p-4 text-center">
                     <div className="text-2xl font-bold text-white mb-1">
@@ -420,28 +420,28 @@ const SurmesureDetailPage = () => {
                     
                     {/* Liste des avantages */}
                     <div className="space-y-2.5 mb-5">
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl">
                         <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded p-1">
                           <CheckCircle className="w-3.5 h-3.5 text-white" />
                         </div>
                         <span className="text-gray-800 text-xs font-medium">Accès illimité</span>
                       </div>
                       
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl">
                         <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded p-1">
                           <CheckCircle className="w-3.5 h-3.5 text-white" />
                         </div>
                         <span className="text-gray-800 text-xs font-medium">Certification finale</span>
                       </div>
                       
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl">
                         <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded p-1">
                           <CheckCircle className="w-3.5 h-3.5 text-white" />
                         </div>
                         <span className="text-gray-800 text-xs font-medium">Support 7j/7</span>
                       </div>
                       
-                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-md">
+                      <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-[#fdf2f4] to-[#fbe7ea] rounded-xl">
                         <div className="bg-gradient-to-br from-[#d44c5e] to-[#b23a4a] rounded p-1">
                           <CheckCircle className="w-3.5 h-3.5 text-white" />
                         </div>
@@ -452,14 +452,14 @@ const SurmesureDetailPage = () => {
                     {/* Bouton d'inscription */}
                     <button 
                       onClick={() => setShowRegistrationForm(true)}
-                      className="w-full bg-gradient-to-r from-[#d44c5e] to-[#b23a4a] hover:from-[#b23a4a] hover:to-[#8e2e3b] text-white font-semibold py-3 px-4 rounded-md text-sm shadow-md transition-all duration-200 hover:shadow-lg"
+                      className="w-full bg-gradient-to-r from-[#d44c5e] to-[#b23a4a] hover:from-[#b23a4a] hover:to-[#8e2e3b] text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-xl transition-all duration-200 hover:shadow-lg"
                     >
                       S'inscrire maintenant
                     </button>
                     
                     {/* Garantie */}
                     <div className="mt-3 text-center">
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-gray-600 leading-relaxed">
                         <span className="text-[#d44c5e] font-semibold">100% satisfait</span> ou remboursé
                       </p>
                     </div>
@@ -467,12 +467,12 @@ const SurmesureDetailPage = () => {
                 </div>
 
                 {/* Carte de confiance */}
-                <div className="rounded-lg border border-gray-200 shadow-md bg-gradient-to-br from-[#f4e4c1] to-[#faf8f3] p-4 text-center">
+                <div className="rounded-2xl border border-gray-200 shadow-xl bg-gradient-to-br from-[#f4e4c1] to-[#faf8f3] p-4 text-center">
                   <div className="flex justify-center mb-2">
                     <Shield className="w-6 h-6 text-[#46181e]" />
                   </div>
                   <h3 className="text-sm font-bold text-[#46181e] mb-1">Garantie de qualité</h3>
-                  <p className="text-gray-700 text-xs">
+                  <p className="text-gray-700 text-xs leading-relaxed">
                     Formation certifiée par des experts métier
                   </p>
                 </div>
@@ -517,7 +517,7 @@ const SurmesureDetailPage = () => {
                     onClick={() => setShowInstructorModal(false)}
                     className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   >
-                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
@@ -527,7 +527,7 @@ const SurmesureDetailPage = () => {
                 <div className="space-y-4">
                   {/* Photo et nom */}
                   <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-xl">
                       <img 
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
                         alt={course.instructor || "Formateur"}
@@ -538,7 +538,7 @@ const SurmesureDetailPage = () => {
                       <h4 className="text-lg font-semibold text-gray-900">
                         {course.instructor || "Expert certifié"}
                       </h4>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 leading-relaxed">
                         {course.instructorTitle || "Formateur professionnel spécialisé"}
                       </p>
                     </div>

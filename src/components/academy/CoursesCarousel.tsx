@@ -80,7 +80,7 @@ export function MasterclassCarousel({ data }: MasterclassCarouselProps) {
       {!isMobile && canScrollLeft && (
         <button
           onClick={() => scroll("left")}
-          className="absolute -left-2 sm:-left-4 top-1/3 z-10 flex h-8 w-8 sm:h-10 sm:w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-colors hover:bg-muted"
+          className="absolute -left-2 sm:-left-4 top-1/3 z-10 flex h-8 w-8 sm:h-10 sm:w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xl transition-colors hover:bg-muted"
           aria-label="Scroll left"
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -103,7 +103,7 @@ export function MasterclassCarousel({ data }: MasterclassCarouselProps) {
       {!isMobile && canScrollRight && (
         <button
           onClick={() => scroll("right")}
-          className="absolute -right-2 sm:-right-4 top-1/3 z-10 flex h-8 w-8 sm:h-10 sm:w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition-colors hover:bg-muted"
+          className="absolute -right-2 sm:-right-4 top-1/3 z-10 flex h-8 w-8 sm:h-10 sm:w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xl transition-colors hover:bg-muted"
           aria-label="Scroll right"
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />

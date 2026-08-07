@@ -73,7 +73,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
           </button>
         </div>
         <h2 className="text-2xl font-bold">Inscription à la formation</h2>
-        <p className="text-white/90 mt-1">{trainingTitle}</p>
+        <p className="text-white/90 mt-1 leading-relaxed">{trainingTitle}</p>
         
         {/* Étapes */}
         <div className="mt-6 flex justify-between relative">
@@ -120,7 +120,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                             name="firstName"
                             value={formData.firstName}
                             onChange={handleChange}
-                            className="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                            className="pl-10 w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                             required
                           />
                         </div>
@@ -135,7 +135,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                           name="lastName"
                           value={formData.lastName}
                           onChange={handleChange}
-                          className="w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                          className="w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                           required
                         />
                       </div>
@@ -155,7 +155,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                          className="pl-10 w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                           required
                         />
                       </div>
@@ -175,7 +175,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                          className="pl-10 w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                           required
                         />
                       </div>
@@ -196,7 +196,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                          className="w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                           required
                         />
                       </div>
@@ -210,7 +210,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                             name="position"
                             value={formData.position}
                             onChange={handleChange}
-                            className="appearance-none w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3 pr-10"
+                            className="appearance-none w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3 pr-10"
                             required
                           >
                             <option value="">Sélectionnez un poste</option>
@@ -237,7 +237,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                         rows={3}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full rounded-lg border-gray-300 shadow-sm focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
+                        className="w-full rounded-2xl border-gray-300 shadow-md focus:border-academy focus:ring-2 focus:ring-academy/20 py-3"
                         placeholder="Décrivez brièvement ce que vous attendez de cette formation..."
                       />
                     </div>
@@ -250,7 +250,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                           </svg>
                         </div>
                         <div className="ml-3">
-                          <p className="text-sm text-blue-700">
+                          <p className="text-sm text-blue-700 leading-relaxed">
                             Un conseiller vous contactera dans les 24h pour finaliser votre inscription et répondre à vos questions.
                           </p>
                         </div>
@@ -266,7 +266,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
                 <button
                   type="button"
                   onClick={() => setStep(step - 1)}
-                  className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="px-6 py-3 border border-gray-300 rounded-2xl text-gray-700 hover:bg-gray-50 transition-colors"
                   disabled={isSubmitting}
                 >
                   Précédent
@@ -277,7 +277,7 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
               
               <button
                 type="submit"
-                className="px-8 py-3 bg-gradient-to-r from-academy to-academy/90 hover:from-academy/90 hover:to-academy/80 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center"
+                className="px-8 py-3 bg-gradient-to-r from-academy to-academy/90 hover:from-academy/90 hover:to-academy/80 text-white font-semibold rounded-2xl shadow-xl hover:shadow-lg transition-all duration-300 flex items-center"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -303,13 +303,13 @@ export function RegistrationForm({ trainingTitle, onClose, onSuccess }: Registra
               <Check className="h-8 w-8 text-green-600" />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Demande envoyée !</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 leading-relaxed">
               Votre demande d'inscription a bien été enregistrée. Notre équipe vous contactera dans les plus brefs délais.
             </p>
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2.5 bg-academy text-white font-medium rounded-lg hover:bg-academy/90 transition-colors"
+              className="px-6 py-2.5 bg-academy text-white font-medium rounded-2xl hover:bg-academy/90 transition-colors"
             >
               Fermer
             </button>

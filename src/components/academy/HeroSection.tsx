@@ -47,7 +47,7 @@ export function HeroSection() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-background pt-12">
+    <section ref={ref} className="relative overflow-hidden bg-background pt-32 pb-20">
       <div className="container mx-auto px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-12">
           {/* Left Content */}
@@ -58,7 +58,7 @@ export function HeroSection() {
             className="flex flex-col gap-8 order-first lg:order-first pt-8 lg:pt-4"
           >
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl tracking-tight lg:text-6xl tracking-tight">
                 <AnimatedTyping 
                   text="Développez vos compétences "
                   coloredText="Dès aujourd'hui"
@@ -115,7 +115,7 @@ export function HeroSection() {
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-2xl md:text-3xl font-bold text-primary">
+                  <div className="text-2xl md:text-3xl tracking-tight font-bold text-primary">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="text-xs md:text-sm text-muted-foreground mt-1">

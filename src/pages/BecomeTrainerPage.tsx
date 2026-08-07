@@ -151,7 +151,7 @@ const BecomeTrainerPage = () => {
       `}</style>
       <div className="min-h-screen bg-white">
         {/* Hero Section avec image de fond */}
-        <section className="relative bg-[#800020] min-h-[500px] flex items-center overflow-hidden">
+        <section className="relative bg-[#800020] min-h-[350px] flex items-center overflow-hidden pt-16 lg:pt-24 pb-8">
           {/* Image de fond avec overlay */}
           <div className="absolute inset-0">
             <img 
@@ -163,7 +163,7 @@ const BecomeTrainerPage = () => {
           </div>
           
           {/* Contenu hero réduit */}
-          <div className="relative container mx-auto px-4 py-8 md:py-16 lg:py-20">
+          <div className="relative container mx-auto px-4 py-8 md:py-16 lg:py-20 lg:py-28">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -175,9 +175,9 @@ const BecomeTrainerPage = () => {
                 <span className="text-xs font-medium text-white">Rejoignez notre équipe d'experts</span>
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white leading-tight">
+              <h1 className="text-3xl tracking-tight md:text-5xl tracking-tight font-bold mb-4 text-white leading-tight">
                 Devenir Formateur
-                <span className="block text-2xl md:text-4xl mt-1 text-white/80">
+                <span className="block text-2xl md:text-4xl tracking-tight mt-1 text-white/80">
                   Partagez votre expertise
                 </span>
               </h1>
@@ -192,7 +192,7 @@ const BecomeTrainerPage = () => {
                   href="#form"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#800020] font-semibold rounded-lg text-sm hover:bg-gray-50 transition-all duration-300 border-2 border-transparent"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#800020] font-semibold rounded-2xl text-sm hover:bg-gray-50 transition-all duration-300 border-2 border-transparent"
                 >
                   Postuler maintenant
                   <ArrowRight className="w-4 h-4" />
@@ -201,7 +201,7 @@ const BecomeTrainerPage = () => {
                   href="#benefits"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white font-semibold rounded-lg text-sm hover:bg-white/10 transition-all duration-300 border-2 border-white/30"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white font-semibold rounded-2xl text-sm hover:bg-white/10 transition-all duration-300 border-2 border-white/30"
                 >
                   Découvrir les avantages
                   <ChevronRight className="w-4 h-4" />
@@ -228,7 +228,7 @@ const BecomeTrainerPage = () => {
         </section>
 
         {/* Benefits Section - Plus compact */}
-        <section id="benefits" className="py-12 lg:py-16 bg-white">
+        <section id="benefits" className="py-12 lg:py-16 lg:py-24 bg-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -238,10 +238,10 @@ const BecomeTrainerPage = () => {
               className="text-center mb-10"
             >
               <span className="text-xs font-semibold text-[#800020] uppercase tracking-wider">Pourquoi nous rejoindre</span>
-              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">
+              <h2 className="text-2xl md:text-4xl tracking-tight font-bold text-gray-900 mt-2 mb-3">
                 Des avantages exceptionnels
               </h2>
-              <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+              <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Découvrez tous les bénéfices à devenir formateur chez DM+ Academy
               </p>
             </motion.div>
@@ -256,7 +256,7 @@ const BecomeTrainerPage = () => {
                   viewport={{ once: true }}
                   className="group bg-gray-50 p-5 rounded-xl border border-gray-200 hover:border-[#800020] transition-all duration-300"
                 >
-                  <div className="w-10 h-10 bg-[#800020] rounded-lg flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-[#800020] rounded-2xl flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform duration-300">
                     {benefit.icon}
                   </div>
                   <h3 className="text-base font-bold text-gray-900 mb-1">{benefit.title}</h3>
@@ -268,7 +268,7 @@ const BecomeTrainerPage = () => {
         </section>
 
         {/* Requirements Section - Plus compact */}
-        <section className="py-8 lg:py-12 bg-white">
+        <section className="py-8 lg:py-16 lg:py-20 lg:py-28 bg-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -279,10 +279,10 @@ const BecomeTrainerPage = () => {
             >
               <div>
                 <span className="text-xs font-semibold text-[#800020] uppercase tracking-wider">Nos exigences</span>
-                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+                <h2 className="text-2xl md:text-4xl tracking-tight font-bold text-gray-900 mt-2 mb-4">
                   Critères de sélection
                 </h2>
-                <p className="text-sm text-gray-600 mb-5">
+                <p className="text-sm text-gray-600 mb-5 leading-relaxed">
                   Nous recherchons des experts passionnés avec une solide expérience.
                 </p>
                 
@@ -322,7 +322,7 @@ const BecomeTrainerPage = () => {
                     href="#form"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#800020] font-semibold rounded-lg text-xs hover:bg-gray-50 transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#800020] font-semibold rounded-2xl text-xs hover:bg-gray-50 transition-all duration-300"
                   >
                     Postuler maintenant
                     <ArrowRight className="w-3 h-3" />
@@ -334,7 +334,7 @@ const BecomeTrainerPage = () => {
         </section>
 
         {/* Application Form Section - Version Moderne & Attractif */}
-        <section id="form" className="py-12 lg:py-16 bg-gradient-to-br from-gray-50 to-white">
+        <section id="form" className="py-12 lg:py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -354,10 +354,10 @@ const BecomeTrainerPage = () => {
                 >
                   <Target className="w-8 h-8 text-white" />
                 </motion.div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                <h2 className="text-2xl md:text-3xl tracking-tight font-bold text-gray-900 mb-2">
                   Rejoignez l'aventure
                 </h2>
-                <p className="text-sm text-gray-600 max-w-lg mx-auto">
+                <p className="text-sm text-gray-600 max-w-lg mx-auto leading-relaxed">
                   Votre expertise mérite d'être partagée. Devenez formateur et inspirez la prochaine génération.
                 </p>
               </div>
@@ -381,7 +381,7 @@ const BecomeTrainerPage = () => {
                     {/* Section infos personnelles avec icônes */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 bg-[#800020]/10 rounded-lg flex items-center justify-center">
+                        <div className="w-5 h-5 bg-[#800020]/10 rounded-2xl flex items-center justify-center">
                           <User className="w-3 h-3 text-[#800020]" />
                         </div>
                         <span className="text-sm font-semibold text-gray-700">Informations personnelles</span>
@@ -422,7 +422,7 @@ const BecomeTrainerPage = () => {
                     {/* Section profession avec icônes */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 bg-[#800020]/10 rounded-lg flex items-center justify-center">
+                        <div className="w-5 h-5 bg-[#800020]/10 rounded-2xl flex items-center justify-center">
                           <Briefcase className="w-3 h-3 text-[#800020]" />
                         </div>
                         <span className="text-sm font-semibold text-gray-700">Parcours professionnel</span>
@@ -522,7 +522,7 @@ const BecomeTrainerPage = () => {
                     {/* Section motivation avec design spécial */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 bg-[#800020]/10 rounded-lg flex items-center justify-center">
+                        <div className="w-5 h-5 bg-[#800020]/10 rounded-2xl flex items-center justify-center">
                           <Heart className="w-3 h-3 text-[#800020]" />
                         </div>
                         <span className="text-sm font-semibold text-gray-700">Votre motivation</span>
@@ -547,7 +547,7 @@ const BecomeTrainerPage = () => {
                     {/* Section CV avec bouton stylé */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 bg-[#800020]/10 rounded-lg flex items-center justify-center">
+                        <div className="w-5 h-5 bg-[#800020]/10 rounded-2xl flex items-center justify-center">
                           <FileText className="w-3 h-3 text-[#800020]" />
                         </div>
                         <span className="text-sm font-semibold text-gray-700">Documents</span>
@@ -559,7 +559,7 @@ const BecomeTrainerPage = () => {
                           name="cv"
                           onChange={handleFileChange}
                           accept=".pdf,.doc,.docx"
-                          className="w-full px-3 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:border-[#800020] focus:bg-white focus:outline-none transition-all duration-300 file:mr-3 file:py-1 file:px-2 file:text-xs file:font-medium file:bg-[#800020] file:text-white file:rounded-lg file:border-0"
+                          className="w-full px-3 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:border-[#800020] focus:bg-white focus:outline-none transition-all duration-300 file:mr-3 file:py-1 file:px-2 file:text-xs file:font-medium file:bg-[#800020] file:text-white file:rounded-2xl file:border-0"
                         />
                       </div>
                     </div>
@@ -579,7 +579,7 @@ const BecomeTrainerPage = () => {
                         </div>
                       </motion.button>
                       
-                      <p className="text-xs text-gray-500 text-center mt-3">
+                      <p className="text-xs text-gray-600 text-center mt-3 leading-relaxed">
                         <Shield className="w-3 h-3 inline mr-1" />
                         Vos informations sont sécurisées et confidentielles
                       </p>

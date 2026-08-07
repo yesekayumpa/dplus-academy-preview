@@ -108,7 +108,7 @@ const ContactPage = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="relative min-h-[400px] flex items-center justify-center overflow-hidden">
+      <div className="relative min-h-[400px] flex items-center justify-center overflow-hidden pt-32 pb-20">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${contactBg})` }}
@@ -121,17 +121,17 @@ const ContactPage = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl tracking-tight md:text-6xl tracking-tight font-bold text-white mb-6">
             Nous contacter
           </h1>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
             Une question ? Un projet ? Notre équipe est à votre écoute pour vous accompagner dans votre transformation digitale.
           </p>
         </motion.div>
       </div>
 
       {/* Contact Section */}
-      <div className="py-20 px-4">
+      <div className="py-20 lg:py-28 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -142,7 +142,7 @@ const ContactPage = () => {
               viewport={{ once: true }}
             >
               <Card className="p-8 shadow-xl">
-                <h2 className="text-3xl font-bold mb-6 text-foreground">
+                <h2 className="text-3xl tracking-tight font-bold mb-6 text-foreground">
                   Envoyez-nous un message
                 </h2>
                 
@@ -161,7 +161,7 @@ const ContactPage = () => {
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent"
+                            className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent"
                             placeholder="Votre nom"
                           />
                         </div>
@@ -179,7 +179,7 @@ const ContactPage = () => {
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent"
+                            className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent"
                             placeholder="votre@email.com"
                           />
                         </div>
@@ -198,7 +198,7 @@ const ContactPage = () => {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent"
+                            className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent"
                             placeholder="+221 XXX XXX XXX"
                           />
                         </div>
@@ -215,7 +215,7 @@ const ContactPage = () => {
                             value={formData.service}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent appearance-none"
+                            className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent appearance-none"
                           >
                             <option value="">Sélectionnez un service</option>
                             {services.map(service => (
@@ -238,7 +238,7 @@ const ContactPage = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent"
+                        className="w-full px-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent"
                         placeholder="Quel est le sujet de votre message ?"
                       />
                     </div>
@@ -255,7 +255,7 @@ const ContactPage = () => {
                           onChange={handleInputChange}
                           required
                           rows={6}
-                          className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-academy focus:border-transparent resize-none"
+                          className="w-full pl-10 pr-4 py-3 border border-border rounded-2xl focus:ring-2 focus:ring-academy focus:border-transparent resize-none"
                           placeholder="Décrivez votre projet ou votre question..."
                         />
                       </div>
@@ -264,7 +264,7 @@ const ContactPage = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center"
+                      className="w-full bg-gradient-to-r from-academy to-academy-light hover:from-academy/90 hover:to-academy-light/90 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center gap-2">
@@ -283,13 +283,13 @@ const ContactPage = () => {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
+                    className="text-center py-16 lg:py-20 lg:py-28"
                   >
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Send className="h-8 w-8 text-green-600" />
                     </div>
                     <h3 className="text-2xl font-bold mb-2">Message envoyé !</h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground leading-relaxed">
                       Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
                     </p>
                   </motion.div>
@@ -317,15 +317,15 @@ const ContactPage = () => {
                   >
                     <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-academy/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 bg-academy/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                           <div className="text-academy">
                             {info.icon}
                           </div>
                         </div>
                         <div>
                           <h3 className="font-semibold text-lg mb-1">{info.title}</h3>
-                          <p className="text-foreground font-medium">{info.info}</p>
-                          <p className="text-muted-foreground text-sm">{info.description}</p>
+                          <p className="text-foreground font-medium leading-relaxed">{info.info}</p>
+                          <p className="text-muted-foreground text-sm leading-relaxed">{info.description}</p>
                         </div>
                       </div>
                     </Card>

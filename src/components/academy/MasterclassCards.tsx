@@ -37,7 +37,7 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
       className="group flex w-[280px] flex-shrink-0 cursor-pointer flex-col gap-2 sm:w-[300px] md:w-[320px] lg:w-[280px] xl:w-[300px] snap-center"
       onClick={handleClick}
     >
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border">
         <img
           src={data.image || FALLBACK_IMAGE}
           alt={data.title}
@@ -55,7 +55,7 @@ export function MasterclassCard({ data }: MasterclassCardProps) {
         <h3 className="line-clamp-2 text-xs sm:text-sm font-bold leading-snug text-foreground">
           {data.title}
         </h3>
-        <p className="text-xs text-muted-foreground">{data.instructor}</p>
+        <p className="text-xs text-muted-foreground leading-relaxed">{data.instructor}</p>
 
         <div className="mt-2 flex items-center justify-between">
           <div className="flex flex-wrap gap-1 sm:gap-2">

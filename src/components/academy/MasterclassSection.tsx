@@ -1,12 +1,11 @@
-import { MasterclassCarousel } from "./CoursesCarousel";
-import { MasterclassCardData } from "./MasterclassCards";
+import { useNavigate } from "react-router-dom";
+import { MasterclassCard, MasterclassCardData } from "./MasterclassCards";
 import { useFormations } from "@/hooks/useFormations";
 
 // Correspondance statut → badge affiché sur la carte
 const STATUT_LABELS: Record<string, string> = {
   A_VENIR: "À venir",
   EN_COURS: "En cours",
-  REPLAY: "Replay",
   TERMINE: "Terminé",
 };
 
@@ -30,8 +29,11 @@ const CATEGORY_FALLBACKS: Record<number, string> = {
 const DEFAULT_FALLBACK =
   "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=225&fit=crop";
 
+const PREVIEW_COUNT = 3;
+
 const MasterclassSection = () => {
   const { data: formations, isLoading, isError } = useFormations();
+  const navigate = useNavigate();
 
   // Mapper les formations de l'API vers le format attendu par MasterclassCarousel
   const masterclassData: MasterclassCardData[] = (formations ?? []).map(
@@ -55,13 +57,16 @@ const MasterclassSection = () => {
     })
   );
 
+  // Seulement 4 formations en aperçu
+  const previewData = masterclassData.slice(0, PREVIEW_COUNT);
+
   if (isLoading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <h2 className="mb-6 text-2xl font-bold text-foreground">
+        <h2 className="mb-6 text-2xl font-bold text-foreground text-center">
           Nos formations
         </h2>
-        <div className="flex justify-center items-center py-12">
+        <div className="flex justify-center items-center py-16 lg:py-20 lg:py-28">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-academy" />
         </div>
       </div>
@@ -71,7 +76,7 @@ const MasterclassSection = () => {
   if (isError) {
     return (
       <div className="max-w-6xl mx-auto">
-        <h2 className="mb-6 text-2xl font-bold text-foreground">
+        <h2 className="mb-6 text-2xl font-bold text-foreground text-center">
           Nos formations
         </h2>
         <div className="text-center py-8 text-red-500">
@@ -83,10 +88,31 @@ const MasterclassSection = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h2 className="mb-6 text-2xl font-bold text-foreground">
+      <h2 className="mb-6 text-2xl font-bold text-foreground text-center">
         Nos formations
       </h2>
-      <MasterclassCarousel data={masterclassData} />
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+        {previewData.map((item) => (
+          <div
+            key={item.id}
+            className="w-full sm:w-[300px] md:w-[320px] flex-shrink-0"
+          >
+            <MasterclassCard data={item} />
+          </div>
+        ))}
+      </div>
+
+      {masterclassData.length > PREVIEW_COUNT && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => navigate("/formations")}
+            className="px-8 py-3 bg-academy text-white font-semibold rounded-xl shadow-xl hover:opacity-90 hover:shadow-lg transition-all duration-200 flex items-center gap-2"
+          >
+            Voir toutes les formations
+            <span className="text-sm opacity-80">({masterclassData.length})</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

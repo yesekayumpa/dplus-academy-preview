@@ -119,7 +119,7 @@ const SurMesurePage = () => {
     <Layout>
       <div className="min-h-screen">
         {/* Hero Section ultra-élégante */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden pt-32 pb-20">
           {/* Image de fond avec effet parallax */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-110"
@@ -158,7 +158,7 @@ const SurMesurePage = () => {
             ))}
           </div>
           
-          <div className="relative container mx-auto px-4 py-20">
+          <div className="relative container mx-auto px-4 py-20 lg:py-28">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -186,7 +186,7 @@ const SurMesurePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight"
+                className="text-5xl tracking-tight md:text-7xl font-bold mb-6 text-white leading-tight"
               >
                 <span className="block mb-2">Formation</span>
                 <span className="block bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent drop-shadow-2xl">
@@ -287,7 +287,7 @@ const SurMesurePage = () => {
                 fill="white" 
                 fillOpacity="0.95" 
                 d="M0,64L1440,32L1440,320L0,320Z"
-                className="animate-pulse"
+                className="animate-pulse leading-relaxed"
               />
             </svg>
           </div>
@@ -326,7 +326,7 @@ const SurMesurePage = () => {
         </div>
 
         {/* Cours Populaires Section avec design amélioré */}
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -337,7 +337,7 @@ const SurMesurePage = () => {
               <Sparkles className="w-4 h-4 text-[hsl(346,100%,35%)]" />
               <span className="text-sm font-semibold text-gray-800">Cours les plus populaires</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <h2 className="text-3xl tracking-tight md:text-4xl tracking-tight font-bold mb-4 text-gray-900">
               Explorez nos <span className="bg-gradient-to-r from-[hsl(346,100%,25%)] to-[hsl(346,100%,35%)] bg-clip-text text-transparent">formations premium</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -389,7 +389,7 @@ const SurMesurePage = () => {
                         <h3 className="text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg">
                           {course.title}
                         </h3>
-                        <p className="text-white/90 text-sm line-clamp-2 drop-shadow-md">
+                        <p className="text-white/90 text-sm line-clamp-2 drop-shadow-xl leading-relaxed">
                           {course.description}
                         </p>
                       </div>
@@ -415,9 +415,9 @@ const SurMesurePage = () => {
                           ))}
                         </div>
                         <span className="font-bold text-gray-800 text-lg">{course.rating}</span>
-                        <span className="text-gray-500 text-sm">({course.reviews})</span>
+                        <span className="text-gray-600 text-sm">({course.reviews})</span>
                       </div>
-                      <div className="flex items-center gap-1 text-gray-500">
+                      <div className="flex items-center gap-1 text-gray-600">
                         <Users className="w-4 h-4" />
                         <span className="text-sm font-medium">{course.students}</span>
                       </div>
@@ -465,7 +465,7 @@ const SurMesurePage = () => {
                       <div>
                         <div className="text-2xl font-bold text-gray-900 mb-1">
                           {course.price.toLocaleString('fr-FR')} 
-                          <span className="text-sm font-normal text-gray-500">FCFA</span>
+                          <span className="text-sm font-normal text-gray-600">FCFA</span>
                         </div>
                         {course.status === 'réservation' && (
                           <div className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full inline-block">
@@ -474,7 +474,7 @@ const SurMesurePage = () => {
                         )}
                       </div>
                       
-                      <div className={`px-3 py-1.5 rounded-full text-xs font-bold border shadow-md ${
+                      <div className={`px-3 py-1.5 rounded-full text-xs font-bold border shadow-xl ${
                         course.status === 'disponible' ? 'bg-green-100 text-green-700 border-green-200' :
                         course.status === 'réservation' ? 'bg-blue-100 text-blue-700 border-blue-200' :
                         course.status === 'achat' ? 'bg-purple-100 text-purple-700 border-purple-200' :
@@ -542,8 +542,8 @@ const SurMesurePage = () => {
                     <Badge className="bg-white/20 text-white border-white/30 mb-4">
                       {selectedCourse.category}
                     </Badge>
-                    <h2 className="text-3xl font-bold mb-3">{selectedCourse.title}</h2>
-                    <p className="text-white/90 text-lg">{selectedCourse.longDescription}</p>
+                    <h2 className="text-3xl tracking-tight font-bold mb-3">{selectedCourse.title}</h2>
+                    <p className="text-white/90 text-lg leading-relaxed">{selectedCourse.longDescription}</p>
                   </div>
                 </div>
 
@@ -578,8 +578,8 @@ const SurMesurePage = () => {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-3xl font-bold text-gray-800">{selectedCourse.price.toLocaleString('fr-FR')} FCFA</div>
-                      <div className="text-gray-500 mt-1">
+                      <div className="text-3xl tracking-tight font-bold text-gray-800">{selectedCourse.price.toLocaleString('fr-FR')} FCFA</div>
+                      <div className="text-gray-600 mt-1">
                         {selectedCourse.duration} • {selectedCourse.level}
                       </div>
                     </div>

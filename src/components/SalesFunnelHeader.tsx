@@ -88,7 +88,7 @@ const SalesFunnelHeader = () => {
                     <img 
                       src="/Copie de LOGOTYPE [Récupéré]-18.png" 
                       alt="DM+ ACADEMY" 
-                      className="h-16 md:h-20 w-auto cursor-pointer"
+                      className="h-16 md:h-20 w-auto cursor-pointer object-cover"
                     />
                   </Link>
                 </div>

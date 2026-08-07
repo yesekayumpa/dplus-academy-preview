@@ -142,7 +142,7 @@ export const CartSidebar = () => {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+                className="p-1 hover:bg-white/20 rounded-2xl transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -153,8 +153,8 @@ export const CartSidebar = () => {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400 p-8">
                   <ShoppingCart className="w-16 h-16 mb-4" />
-                  <p className="text-center">Votre panier est vide</p>
-                  <p className="text-sm text-center mt-2">Ajoutez des masterclasses pour commencer</p>
+                  <p className="text-center leading-relaxed">Votre panier est vide</p>
+                  <p className="text-sm text-center mt-2 leading-relaxed">Ajoutez des masterclasses pour commencer</p>
                 </div>
               ) : (
                 <div className="p-4 space-y-4">
@@ -163,19 +163,19 @@ export const CartSidebar = () => {
                       key={item.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+                      className="bg-gray-50 rounded-2xl p-4 border border-gray-200"
                     >
                       <div className="flex gap-3">
                         <img
                           src={item.thumbnail}
                           alt={item.title}
-                          className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                          className="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
                         />
                         <div className="flex-1 min-w-0">
                           <h3 className="font-medium text-gray-900 text-sm truncate">{item.title}</h3>
-                          <p className="text-xs text-gray-600 truncate">{item.instructor}</p>
+                          <p className="text-xs text-gray-600 truncate leading-relaxed">{item.instructor}</p>
                           
-                          <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                          <div className="flex items-center gap-2 mt-2 text-xs text-gray-600">
                             <Calendar className="w-3 h-3" />
                             <span>{new Date(item.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</span>
                             <Clock className="w-3 h-3 ml-1" />
@@ -233,11 +233,11 @@ export const CartSidebar = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={clearCart}
-                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-100 transition-colors text-sm"
                     >
                       Vider
                     </button>
-                    <button className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(346,100%,35%)] to-[hsl(346,100%,45%)] text-white rounded-lg hover:from-[hsl(346,100%,30%)] hover:to-[hsl(346,100%,40%)] transition-all text-sm font-medium flex items-center justify-center gap-2">
+                    <button className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(346,100%,35%)] to-[hsl(346,100%,45%)] text-white rounded-2xl hover:from-[hsl(346,100%,30%)] hover:to-[hsl(346,100%,40%)] transition-all text-sm font-medium flex items-center justify-center gap-2">
                       Procéder au paiement
                       <ChevronRight className="w-4 h-4" />
                     </button>

@@ -81,7 +81,7 @@ export function TrainingModal({
                         Formation Premium
                       </div>
                       <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
-                      <p className="mt-2 text-white/90 max-w-2xl">{description}</p>
+                      <p className="mt-2 text-white/90 max-w-2xl leading-relaxed">{description}</p>
                     </div>
                     <button
                       onClick={onClose}
@@ -114,7 +114,7 @@ export function TrainingModal({
                           <Check className="h-5 w-5 text-green-400" />
                         </div>
                         <div className="ml-3">
-                          <p className="text-sm text-green-700">
+                          <p className="text-sm text-green-700 leading-relaxed">
                             Votre inscription a bien été enregistrée ! Un conseiller vous contactera bientôt.
                           </p>
                         </div>
@@ -123,44 +123,44 @@ export function TrainingModal({
                   )}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {duration && (
-                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="bg-academy/10 p-3 rounded-lg mr-4">
+                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-md hover:shadow-xl transition-shadow">
+                        <div className="bg-academy/10 p-3 rounded-2xl mr-4">
                           <Clock className="h-6 w-6 text-academy" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-500">Durée</p>
-                          <p className="font-semibold text-gray-800">{duration}</p>
+                          <p className="text-sm font-medium text-gray-600 leading-relaxed">Durée</p>
+                          <p className="font-semibold text-gray-800 leading-relaxed">{duration}</p>
                         </div>
                       </div>
                     )}
                     
                     {level && (
-                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="bg-academy/10 p-3 rounded-lg mr-4">
+                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-md hover:shadow-xl transition-shadow">
+                        <div className="bg-academy/10 p-3 rounded-2xl mr-4">
                           <User className="h-6 w-6 text-academy" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-500">Niveau</p>
-                          <p className="font-semibold text-gray-800">{level}</p>
+                          <p className="text-sm font-medium text-gray-600 leading-relaxed">Niveau</p>
+                          <p className="font-semibold text-gray-800 leading-relaxed">{level}</p>
                         </div>
                       </div>
                     )}
                     
                     {price && (
-                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="bg-academy/10 p-3 rounded-lg mr-4">
+                      <div className="flex items-center p-4 bg-gradient-to-br from-academy/5 to-white rounded-xl border border-gray-100 shadow-md hover:shadow-xl transition-shadow">
+                        <div className="bg-academy/10 p-3 rounded-2xl mr-4">
                           <DollarSign className="h-6 w-6 text-academy" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-500">Prix</p>
-                          <p className="font-semibold text-gray-800">{price}</p>
+                          <p className="text-sm font-medium text-gray-600 leading-relaxed">Prix</p>
+                          <p className="font-semibold text-gray-800 leading-relaxed">{price}</p>
                         </div>
                       </div>
                     )}
                   </div>
                   
                   {children && (
-                    <div className="bg-white/50 border border-gray-100 rounded-2xl p-6 shadow-sm">
+                    <div className="bg-white/50 border border-gray-100 rounded-2xl p-6 shadow-md">
                       <div className="relative mb-6">
                         <div className="absolute inset-0 flex items-center" aria-hidden="true">
                           <div className="w-full border-t border-gray-200"></div>

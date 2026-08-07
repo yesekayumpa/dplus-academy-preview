@@ -1,663 +1,333 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap,
-  BookOpen,
-  Globe,
-  Rocket,
-  Users,
-  Target,
-  BarChart,
   Briefcase,
   UserPlus,
-  Award,
+  ArrowRight,
+  Play,
+  Monitor,
+  Layers,
+  Zap,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useEmblaCarousel from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
 import MasterclassSection from "./MasterclassSection";
-import InteractiveCards from "./InteractiveCards";
 import { useFormatsPedagogiques } from "@/hooks/useFormatsPedagogiques";
 
 const AcademySection = () => {
   const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true, 
-    align: 'start',
-    slidesToScroll: 1,
-    containScroll: false,
-    dragFree: false
-  });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeAudience, setActiveAudience] = useState(0);
 
-  // Fonction pour naviguer avec scroll vers le haut
   const handleNavigateWithScroll = (link: string) => {
     window.scrollTo(0, 0);
     navigate(link);
   };
 
-  // Auto-play pour mobile uniquement
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    // Détecter si on est sur mobile
-    const mobile = window.innerWidth < 768;
-    setIsMobile(mobile);
-    
-    if (!mobile) return; // Pas d'auto-play sur desktop
-
-    let autoplayTimer: NodeJS.Timeout;
-
-    const playNext = () => {
-      if (!emblaApi) return;
-      emblaApi.scrollNext();
-      autoplayTimer = setTimeout(playNext, 4000);
-    };
-
-    autoplayTimer = setTimeout(playNext, 4000);
-
-    return () => {
-      if (autoplayTimer) clearTimeout(autoplayTimer);
-    };
-  }, [emblaApi]);
-
-  // Track selected slide for dots
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-    };
-
-    emblaApi.on('select', onSelect);
-    onSelect(); // Set initial selected index
-
-    return () => {
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi]);
-
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // Fetch dynamic data from API
   const { data: formats, isLoading, isError } = useFormatsPedagogiques();
 
-  // Mappage des données de l'API vers le format attendu par le carrousel
   const carouselItems = formats?.map((format) => {
-    // Correspondance des slugs avec vos routes existantes
     let link = `/${format.slug}`;
-    if (format.slug === 'formation-live') link = '/masterclasses';
-    else if (format.slug === 'formation-replay') link = '/e-learning';
-    else if (format.slug === 'formation-hybride') link = '/corporate-programs';
-    else if (format.slug === 'bootcamp-intensif') link = '/sur-mesure';
+    if (format.slug === "formation-live") link = "/masterclasses";
+    else if (format.slug === "formation-replay") link = "/e-learning";
+    else if (format.slug === "formation-hybride") link = "/corporate-programs";
+    else if (format.slug === "bootcamp-intensif") link = "/sur-mesure";
 
     return {
       id: format.id,
       title: format.titre,
       description: format.description,
       image: format.imageUrl,
-      link: link
+      link,
     };
   }) || [];
 
-  // Données pour le slider Personal Plan Banner - Piliers de Formation
-  const personalPlanSlides = [
-    {
-      id: 1,
-      title: "Finance & Investissement",
-      description: "Maîtrisez les concepts financiers et les stratégies d'investissement pour prendre des décisions éclairées et optimiser votre portefeuille.",
-      features: [
-        {
-          icon: "chart-line",
-          color: "red",
-          text: "Analyse financière"
-        },
-        {
-          icon: "chart-line",
-          color: "red",
-          text: "Gestion de portefeuille"
-        },
-        {
-          icon: "chart-line",
-          color: "red",
-          text: "Évaluation d'investissements"
-        }
-      ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
-    },
-    {
-      id: 2,
-      title: "Outils digitaux & Automatisation",
-      description: "Maîtrisez les outils numériques et techniques d'automatisation pour optimiser vos processus et gagner en productivité.",
-      features: [
-        {
-          icon: "globe",
-          color: "red",
-          text: "Productivité numérique"
-        },
-        {
-          icon: "globe",
-          color: "red",
-          text: "Automatisation des tâches"
-        },
-        {
-          icon: "globe",
-          color: "red",
-          text: "Outils collaboratifs"
-        }
-      ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
-    },
-    {
-      id: 3,
-      title: "Data & Analytics",
-      description: "Apprenez à analyser et interpréter les données pour la prise de décision stratégique et piloter la performance de votre organisation.",
-      features: [
-        {
-          icon: "bar-chart",
-          color: "red",
-          text: "Statistiques descriptives"
-        },
-        {
-          icon: "bar-chart",
-          color: "red",
-          text: "Visualisation de données"
-        },
-        {
-          icon: "bar-chart",
-          color: "red",
-          text: "Business Intelligence"
-        }
-      ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
-    },
-    {
-      id: 4,
-      title: "Entrepreneuriat",
-      description: "Développez vos compétences entrepreneuriales pour lancer et gérer votre projet avec succès dans un environnement concurrentiel.",
-      features: [
-        {
-          icon: "rocket",
-          color: "red",
-          text: "Business plan"
-        },
-        {
-          icon: "rocket",
-          color: "red",
-          text: "Levée de fonds"
-        },
-        {
-          icon: "rocket",
-          color: "red",
-          text: "Marketing stratégique"
-        }
-      ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
-    },
-    {
-      id: 5,
-      title: "Soft skills & Leadership",
-      description: "Développez vos compétences relationnelles et managériales pour devenir un leader inspirant et efficace dans votre organisation.",
-      features: [
-        {
-          icon: "users",
-          color: "red",
-          text: "Communication efficace"
-        },
-        {
-          icon: "users",
-          color: "red",
-          text: "Leadership transformationnel"
-        },
-        {
-          icon: "users",
-          color: "red",
-          text: "Intelligence émotionnelle"
-        }
-      ],
-      image: "https://frontends.udemycdn.com/staticx/udemy/images/ai-career-banner/ai-career@1x.webp"
-    }
-  ];
-
-  const scrollPrev = () => emblaApi && emblaApi.scrollPrev();
-  const scrollNext = () => emblaApi && emblaApi.scrollNext();
-
-  const scrollTo = (index: number) => {
-    if (emblaApi) {
-      emblaApi.scrollTo(index);
-    }
-  };
-
-  // Fonctions pour le slider Personal Plan - navigation fluide
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % personalPlanSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + personalPlanSlides.length) % personalPlanSlides.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  // Auto-play pour le slider Personal Plan - animation continue
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % personalPlanSlides.length);
-    }, 4000); // Change de slide toutes les 4 secondes
+    if (carouselItems.length === 0) return;
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % carouselItems.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [activeTab, carouselItems.length]);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  // Navigation au clavier
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        nextSlide();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // Navigation tactile/swipe
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) {
-      nextSlide();
-    }
-    if (isRightSwipe) {
-      prevSlide();
-    }
-  };
-
-  const CarouselCard = ({ item, isDesktop = false }: { item: any; isDesktop?: boolean }) => {
-    return (
-      <div className={isDesktop ? "px-2" : "flex-[0_0_100%] md:flex-[0_0_33.333%] px-2 min-w-0"}>
-        <section
-          style={{
-            padding: isDesktop ? "4px 4px 12px 4px" : "12px 4px",
-            backgroundColor: "#fff",
-            color: "#1a1a1a",
-            fontFamily: "Inter, sans-serif",
-            minHeight: isDesktop ? "28vh" : "30vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "12px",
-            boxShadow: isDesktop ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
-            border: isDesktop ? "none" : "1px solid #e5e7eb",
-            transition: "all 0.3s ease",
-            position: "relative",
-            overflow: "hidden"
-          }}
-        >
-          {isDesktop ? (
-            // Version Desktop: image en haut, texte au milieu, bouton en bas (taille réduite)
-            <div
-              style={{
-                maxWidth: "320px",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "8px",
-                alignSelf: "flex-start"
-              }}
-            >
-              {/* Image en haut */}
-              <div style={{ width: "100%", marginTop: "0" }}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{ 
-                    width: "100%", 
-                    height: "160px", 
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    transition: "transform 0.3s ease"
-                  }}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
-                  }}
-                />
-              </div>
-              
-              {/* Contenu au milieu */}
-              <div style={{ width: "100%", textAlign: "center" }}>
-                <h2
-                  style={{
-                    fontSize: "1.1rem",
-                    fontWeight: "bold",
-                    marginBottom: "8px",
-                    lineHeight: "1.2",
-                    color: "#1a1a1a",
-                  }}
-                >
-                  {item.title}
-                </h2>
-                <p
-                  style={{
-                    fontSize: isDesktop ? "0.8rem" : "0.8rem",
-                    fontWeight: "400",
-                    marginBottom: isDesktop ? "16px" : "15px",
-                    lineHeight: "1.4",
-                    color: "#1a1a1a",
-                  }}
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                />
-                
-                {/* Bouton en bas */}
-                <div style={{ textAlign: "center" }}>
-                  <button
-                    style={{
-                      background: "hsl(346, 100%, 25%)",
-                      color: "#ffffff",
-                      border: "none",
-                      padding: "10px 24px",
-                      fontSize: "0.8rem",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      borderRadius: "8px",
-                      fontWeight: "600",
-                      letterSpacing: "0.5px",
-                      textTransform: "uppercase"
-                    }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => handleNavigateWithScroll(item.link)}
-                  >
-                    En savoir plus
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            // Version Mobile: image à gauche, texte à droite avec bouton aligné en bas
-            <div
-              style={{
-                maxWidth: "500px",
-                width: "100%",
-                display: "flex",
-                alignItems: "flex-end",
-                gap: "15px",
-                flexWrap: "wrap",
-              }}
-            >
-              {/* Image à gauche */}
-              <div style={{ flex: 1, minWidth: "180px" }}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{ 
-                    maxWidth: "100%", 
-                    height: "180px", 
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    transition: "transform 0.3s ease"
-                  }}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&crop=center";
-                  }}
-                />
-              </div>
-              
-              {/* Contenu à droite */}
-              <div style={{ flex: 1, minWidth: "150px", textAlign: "left" }}>
-                <h2
-                  style={{
-                    fontSize: "0.95rem",
-                    fontWeight: "bold",
-                    marginBottom: "8px",
-                    lineHeight: "1.2",
-                    color: "#1a1a1a",
-                  }}
-                >
-                  {item.title}
-                </h2>
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    fontWeight: "400",
-                    marginBottom: "15px",
-                    lineHeight: "1.3",
-                    color: "#1a1a1a",
-                  }}
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                />
-                
-                {/* Bouton aligné à gauche */}
-                <div style={{ textAlign: "left" }}>
-                  <button
-                    style={{
-                      background: "hsl(346, 100%, 25%)",
-                      color: "#ffffff",
-                      border: "none",
-                      padding: "10px 24px",
-                      fontSize: "0.8rem",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      borderRadius: "8px",
-                      fontWeight: "600",
-                      letterSpacing: "0.5px"
-                    }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => handleNavigateWithScroll(item.link)}
-                  >
-                    En savoir plus
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
-      </div>
-    );
-  };
-  
-  const pillars = [
-    {
-      title: "Finance & Investissement",
-      icon: <BarChart className="w-6 h-6" />,
-      description:
-        "Maîtrise des concepts financiers et des stratégies d'investissement",
-      type: "finance"
-    },
-    {
-      title: "Outils digitaux & Automatisation",
-      icon: <Globe className="w-6 h-6" />,
-      description:
-        "Maîtrise des outils numériques et techniques d'automatisation",
-      type: "informatique",
-    },
-    {
-      title: "Data & Analytics",
-      icon: <BarChart className="w-6 h-6" />,
-      description:
-        "Analyse et interprétation des données pour la prise de décision",
-      type: "data",
-    },
-    {
-      title: "Entrepreneuriat",
-      icon: <Rocket className="w-6 h-6" />,
-      description:
-        "Développement de projets entrepreneuriaux et gestion d'entreprise",
-      type: "entrepreneurship",
-    },
-    {
-      title: "Soft skills & Leadership",
-      icon: <Users className="w-6 h-6" />,
-      description:
-        "Développement des compétences relationnelles et managériales",
-      type: "soft-skills",
-    },
+  // Tab icons mapping
+  const tabIcons = [
+    <Play className="w-4 h-4" />,
+    <Monitor className="w-4 h-4" />,
+    <Layers className="w-4 h-4" />,
+    <Zap className="w-4 h-4" />,
   ];
 
   const targetAudiences = [
     {
       title: "Étudiants & Jeunes diplômés",
-      icon: <GraduationCap className="w-6 h-6" />,
-      description:
-        "Acquérez des compétences pratiques pour votre insertion professionnelle",
+      icon: <GraduationCap className="w-5 h-5" />,
+      description: "Acquérez des compétences pratiques pour votre insertion professionnelle et démarquez-vous sur le marché du travail.",
+      number: "01",
+      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&h=600&fit=crop&crop=center",
+      badgeTitle: "Taux d'insertion",
+      badgeValue: "89%"
     },
     {
       title: "Professionnels",
-      icon: <Briefcase className="w-6 h-6" />,
-      description:
-        "Développez vos compétences pour évoluer dans votre carrière",
+      icon: <Briefcase className="w-5 h-5" />,
+      description: "Développez vos compétences pour évoluer dans votre carrière et accéder à de nouvelles opportunités.",
+      number: "02",
+      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=700&h=600&fit=crop&crop=center",
+      badgeTitle: "Évolution de carrière",
+      badgeValue: "75%"
     },
     {
       title: "Entrepreneurs",
-      icon: <UserPlus className="w-6 h-6" />,
-      description:
-        "Bénéficiez d'un accompagnement sur mesure pour votre projet",
+      icon: <UserPlus className="w-5 h-5" />,
+      description: "Bénéficiez d'un accompagnement sur mesure pour lancer, structurer et faire croître votre projet.",
+      number: "03",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&h=600&fit=crop&crop=center",
+      badgeTitle: "Projets lancés",
+      badgeValue: "+200"
     },
   ];
 
+  const whyUs = [
+    { num: "01", title: "Formations orientées terrain", desc: "Programmes conçus avec des experts actifs pour une application immédiate en entreprise." },
+    { num: "02", title: "Suivi personnalisé", desc: "Un accompagnement individuel tout au long de votre parcours d'apprentissage." },
+    { num: "03", title: "Certification reconnue", desc: "Des certifications valorisées par les entreprises partenaires de DM+ Academy." },
+    { num: "04", title: "Flexibilité totale", desc: "Présentiel, en ligne ou hybride — choisissez le format qui vous convient." },
+  ];
+
   return (
-    <div className="space-y-4">
-       {/* Piliers de formation – Version Premium */}
-      
-      {/* Header pour le carousel */}
-      <div className="text-center mb-8 max-w-2xl mx-auto">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
-          Nos formats pédagogiques
-        </h2>
-        <p className="text-sm md:text-base text-muted-foreground mb-4">
-          Des approches variées pour répondre à vos besoins spécifiques
-        </p>
-        <div className="w-20 h-1 rounded-full bg-academy mx-auto" />
-      </div>
+    <div className="space-y-0">
 
-     {/* Carrousel de 4 cartes - 4 visibles sur web, 1 sur mobile avec auto-scroll */}
-      <div style={{ 
-        position: 'relative',
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '30px 20px'
-      }}>
-        {isLoading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-academy"></div>
+      {/* ── FORMATS PÉDAGOGIQUES : Tabs interactifs ────────────────── */}
+      <section className="py-14 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl tracking-tight lg:text-4xl tracking-tight font-bold text-gray-900 mb-3">
+              Nos formats pédagogiques
+            </h2>
+            <p className="text-sm md:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+              Des approches variées pour répondre à vos besoins spécifiques
+            </p>
+            <div className="w-12 h-1 rounded-full bg-[#800020] mx-auto mt-4" />
           </div>
-        ) : isError ? (
-          <div className="text-center py-8 text-red-500">
-            Une erreur est survenue lors du chargement des formats pédagogiques.
-          </div>
-        ) : (
-          <>
-            {/* Desktop: 4 cartes sur une ligne */}
-            <div className="hidden md:block">
-              <div className="flex gap-0 justify-center">
-                {carouselItems.map((item) => (
-                  <div key={item.id} className="flex-1 max-w-xs">
-                    <CarouselCard item={item} isDesktop={true} />
-                  </div>
-                ))}
-              </div>
+
+          {isLoading ? (
+            <div className="flex justify-center py-16 lg:py-20 lg:py-28">
+              <div className="w-10 h-10 rounded-full border-3 border-[#800020] border-t-transparent animate-spin" />
             </div>
-            
-            {/* Mobile: carrousel avec auto-scroll */}
-            <div className="block md:hidden">
-              <div className="overflow-hidden" ref={emblaRef}>
-                <div style={{ 
-                  display: 'flex',
-                  gap: '0'
-                }}>
-                  {carouselItems.map((item) => (
-                    <CarouselCard key={item.id} item={item} isDesktop={false} />
-                  ))}
-                </div>
-              </div>
-              {/* Scroll dots indicator for mobile */}
-              <div className="flex justify-center gap-2 mt-4">
-                {carouselItems.map((_, index) => (
+          ) : isError ? (
+            <p className="text-center text-red-400 py-8 leading-relaxed">Erreur de chargement des formats.</p>
+          ) : (
+            <>
+              {/* Tabs pills */}
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {carouselItems.map((item, i) => (
                   <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      selectedIndex === index 
-                        ? 'bg-[#800020] w-6' 
-                        : 'bg-gray-300 hover:bg-gray-400'
+                    key={item.id}
+                    onClick={() => setActiveTab(i)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${
+                      activeTab === i
+                        ? "bg-[#1D0000] text-white border-[#1D0000] shadow-xl"
+                        : "bg-white text-gray-600 border-gray-200 hover:border-[#1D0000]/40 hover:text-[#1D0000]"
                     }`}
-                    onClick={() => scrollTo(index)}
-                    aria-label={`Aller à la carte ${index + 1}`}
-                  />
+                  >
+                    {tabIcons[i % tabIcons.length]}
+                    {item.title}
+                  </button>
                 ))}
               </div>
-            </div>
-          </>
-        )}
-      </div>
 
-      {/* Formats pédagogiques */}
-      
+              {/* Tab content — large 2-col preview */}
+              <AnimatePresence mode="wait">
+                {carouselItems[activeTab] && (
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)", y: 20 }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
+                    exit={{ opacity: 0, scale: 1.02, filter: "blur(10px)", transition: { duration: 0.2 } }}
+                    transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-gray-50 rounded-3xl overflow-hidden p-6 lg:p-0 shadow-2xl"
+                  >
+                    {/* Image */}
+                    <div className="h-64 lg:h-80 overflow-hidden rounded-2xl lg:rounded-none lg:rounded-l-3xl">
+                      <motion.img
+                        initial={{ scale: 1.3 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        src={carouselItems[activeTab].image}
+                        alt={carouselItems[activeTab].title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=500&fit=crop";
+                        }}
+                      />
+                    </div>
+
+                    {/* Text */}
+                    <div className="lg:pr-10 lg:py-10 flex flex-col gap-5">
+                      <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#800020]">
+                        {tabIcons[activeTab % tabIcons.length]}
+                        Format {activeTab + 1} / {carouselItems.length}
+                      </span>
+                      <h3 className="text-xl md:text-2xl font-black text-gray-900 leading-tight">
+                        {carouselItems[activeTab].title}
+                      </h3>
+                      <p
+                        className="text-sm md:text-base text-gray-600 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: carouselItems[activeTab].description }}
+                      />
+                      <button
+                        onClick={() => handleNavigateWithScroll(carouselItems[activeTab].link)}
+                        className="inline-flex items-center gap-2 self-start px-6 py-3 bg-[#1D0000] text-white text-sm font-bold rounded-full hover:bg-[#800020] transition-all duration-200 group"
+                      >
+                        Explorer ce format
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* ── MASTERCLASS SECTION ─────────────────────────────────────── */}
       <MasterclassSection />
 
-      {/* Publics cibles */}
-      <section className="pt-8 pb-4">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-            Nos publics cibles
-          </h2>
-          <div className="w-12 h-0.5 bg-academy mx-auto mb-4"></div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-            {targetAudiences.map((audience, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="bg-card p-3 md:p-4 rounded-lg border border-border text-center hover:transition-all min-h-[140px] md:min-h-[160px]"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-academy flex items-center justify-center text-white mb-1 md:mb-2">
-                  <div className="flex items-center justify-center w-4 h-4 md:w-6 md:h-6">
-                    {audience.icon}
-                  </div>
-                </div>
-                <h3 className="font-semibold text-xs md:text-sm mb-1 leading-tight">{audience.title}</h3>
-                <p className="text-muted-foreground text-xs md:text-sm leading-tight">{audience.description}</p>
-              </motion.div>
-            ))}
+      {/* ── NOS PUBLICS CIBLES : Liste stylisée ─────────────────────── */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto max-w-5xl px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            {/* Texte gauche */}
+            <div>
+              <span className="inline-block px-3 py-1 mb-4 text-xs font-bold uppercase tracking-widest text-[#800020] bg-[#800020]/10 rounded-full">
+                Qui sommes-nous pour ?
+              </span>
+              <h2 className="text-2xl md:text-3xl tracking-tight lg:text-4xl tracking-tight font-black text-gray-900 mb-4 leading-tight">
+                Nos publics<br />
+                <span className="text-[#800020]">cibles</span>
+              </h2>
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
+                DM+ Academy accompagne tous les profils dans leur montée en compétences, quelle que soit leur situation.
+              </p>
+
+              {/* Liste avec grands numéros */}
+              <div className="space-y-2">
+                {targetAudiences.map((audience, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                    onMouseEnter={() => setActiveAudience(i)}
+                    onClick={() => setActiveAudience(i)}
+                    className={`flex gap-3 group cursor-pointer p-3 rounded-2xl transition-colors ${activeAudience === i ? 'bg-gray-50 shadow-sm' : 'hover:bg-gray-50/50'}`}
+                  >
+                    <span className={`text-3xl tracking-tight font-black transition-colors leading-none select-none shrink-0 ${activeAudience === i ? 'text-[#800020]' : 'text-gray-100 group-hover:text-[#800020]/20'}`}>
+                      {audience.number}
+                    </span>
+                    <div className="pt-1">
+                      <div className={`flex items-center gap-2 mb-1 ${activeAudience === i ? 'text-[#800020]' : 'text-[#1D0000]'}`}>
+                        {audience.icon}
+                        <h3 className="font-bold text-sm md:text-base text-gray-900">{audience.title}</h3>
+                      </div>
+                      <p className="text-xs md:text-sm text-gray-600 leading-relaxed">{audience.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Visuel droite */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative h-full min-h-[320px] rounded-3xl overflow-hidden shadow-xl"
+            >
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeAudience}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  src={targetAudiences[activeAudience].image}
+                  alt={targetAudiences[activeAudience].title}
+                  className="w-full h-full object-cover absolute inset-0"
+                />
+              </AnimatePresence>
+              {/* Overlay badge */}
+              <div className="absolute bottom-6 left-6 bg-white rounded-2xl shadow-xl px-5 py-3 transform transition-transform hover:scale-105 z-10">
+                <p className="text-xs text-gray-400 mb-0.5 leading-relaxed">{targetAudiences[activeAudience].badgeTitle}</p>
+                <p className="text-2xl font-black text-[#1D0000] leading-relaxed">{targetAudiences[activeAudience].badgeValue}</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
+
+      {/* ── POURQUOI NOUS CHOISIR : Design asymétrique élégant ──────────────────── */}
+      <section className="py-20 lg:py-32 bg-[#1D0000] text-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+            
+            {/* Colonne gauche (Titre fixe) */}
+            <div className="lg:col-span-5 relative">
+              <div className="lg:sticky lg:top-32">
+                <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold uppercase tracking-widest text-[#1D0000] bg-white rounded-full shadow-lg">
+                  Nos engagements
+                </span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight tracking-tight">
+                  Pourquoi choisir <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
+                    DM+ Academy ?
+                  </span>
+                </h2>
+                <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+                  Une approche pédagogique d'excellence, pensée pour votre réussite professionnelle et votre évolution continue.
+                </p>
+              </div>
+            </div>
+
+            {/* Colonne droite (Liste élégante) */}
+            <div className="lg:col-span-7">
+              <div className="flex flex-col">
+                {whyUs.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: i * 0.15 }}
+                    className="group border-b border-gray-800 last:border-0 py-8 lg:py-12 flex gap-6 md:gap-10 items-start"
+                  >
+                    <div className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-800 group-hover:text-red-500 transition-colors duration-500 font-serif">
+                      {item.num}
+                    </div>
+                    <div className="pt-2">
+                      <h3 className="text-xl md:text-2xl font-bold mb-4 text-white group-hover:text-red-100 transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm md:text-base leading-relaxed md:leading-loose">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

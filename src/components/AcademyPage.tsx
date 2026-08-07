@@ -1,24 +1,17 @@
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  ArrowRight,
-} from "lucide-react";
-import { subsidiaries } from "@/data/subsidiaries";
-import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import AcademySection from "@/components/academy/AcademySection";
 import { HeroSection } from "@/components/academy/HeroSection";
 import NotreMissionSection from "@/components/academy/NotreMissionSection";
 import PersonalPlanSlider from "@/components/academy/PersonalPlanSlider";
-import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
+import { StatsSection } from "@/components/academy/StatsSection";
+import { CTABannerSection } from "@/components/academy/CTABannerSection";
+
 
 const AcademyPage = () => {
   const navigate = useNavigate();
   
-  // Récupérer les données de l'academy
-  const academy = subsidiaries.find((s) => s.id === "academy");
-
-  const Icon = academy.icon;
-
   // Fonction pour naviguer avec scroll vers le haut
   const handleNavigateToTrainers = () => {
     // Détecter si on est sur mobile
@@ -86,31 +79,6 @@ const AcademyPage = () => {
     },
   ];
 
-  // Réalisations et programmes phares
-  const achievements = [
-    {
-      title: "Parcours Data Analyst",
-      client: "Programme certifiant",
-      description:
-        "Formation intensive de 3 mois pour maîtriser l'analyse de données.",
-      image: "/assets/trust-in-government.webp",
-    },
-    {
-      title: "Masterclass Leadership",
-      client: "Session intensive",
-      description:
-        "Développez votre leadership et votre gestion d'équipe sur 2 jours.",
-      image: "/assets/vr-headset.webp",
-    },
-    {
-      title: "Académie Entrepreneuriat",
-      client: "Programme d'accompagnement",
-      description:
-        "6 mois pour lancer et développer votre entreprise avec succès.",
-      image: "/assets/dmplus-tech.webp",
-    },
-  ];
-
   return (
     <>
       {/* Hero Section */}
@@ -118,74 +86,8 @@ const AcademyPage = () => {
 
       <NotreMissionSection />
 
-      {/* Section vidéo de présentation */}
-      <motion.section 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="py-4"
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-4"
-          >
-            Découvrir nos formations
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-sm md:text-base text-muted-foreground text-center max-w-3xl mx-auto mb-8"
-          >
-            Plongez dans l'univers de notre formation à travers cette vidéo de présentation qui vous donnera un aperçu de notre approche pédagogique et de nos valeurs.
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            whileHover={{ scale: 1.02 }}
-            className="relative max-w-3xl mx-auto"
-          >
-            <div className="relative scale-75">
-              <div className="relative bg-gray-900 rounded-t-2xl p-1.5 shadow-2xl">
-                <div className="flex items-center justify-between mb-1.5 px-1.5">
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  </div>
-                  <div className="text-xs text-gray-400 font-medium">DM+ Academy</div>
-                  <div className="w-10"></div>
-                </div>
-                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
-                  <video className="w-full h-full" controls loop poster="/placeholder.svg" title="Présentation de la formation DM+ Academy">
-                    <source src="https://tre9zd4etmxyc.pika.art/results/pika2p5_final/b299609631894ab2acdf9467a2d9b636.mp4?download" type="video/mp4" />
-                    Votre navigateur ne supporte pas la lecture de vidéos.
-                  </video>
-                </div>
-              </div>
-              <div className="relative bg-gray-800 h-12 rounded-b-2xl shadow-2xl">
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-700 rounded-lg shadow-inner"></div>
-                <div className="absolute bottom-1 left-2 flex gap-0.5">
-                  <div className="w-0.5 h-0.5 bg-green-400 rounded-full animate-pulse"></div>
-                  <div className="w-0.5 h-0.5 bg-gray-600 rounded-full"></div>
-                </div>
-              </div>
-              <div className="relative h-2 bg-gray-900 rounded-b-3xl shadow-2xl transform scale-105"></div>
-            </div>
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-3xl"></div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
+      {/* Stats Banner — inspiré Cegos */}
+      <StatsSection />
 
       {/* Personal Plan Slider */}
       <PersonalPlanSlider />
@@ -193,68 +95,82 @@ const AcademyPage = () => {
       {/* Section spécifique pour DM+ Academy */}
       <AcademySection />
 
-      {/* Notre Équipe Pédagogique */}
-      <motion.section 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className={cn('py-12', 'bg-background')}
-      >
-        <div className={cn('container', 'mx-auto', 'px-4', 'lg:px-8')}>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={cn('text-center', 'max-w-5xl', 'mx-auto', 'mb-10')}
-          >
-            <h2 className={cn('font-montserrat', 'font-bold', 'text-2xl', 'md:text-3xl', 'text-foreground', 'mb-3')}>
-              Nos experts en formation
-            </h2>
-            <p className={cn('text-sm', 'md:text-base', 'text-muted-foreground')}>
-              Des formateurs experts dans leur domaine, à l'écoute de vos besoins
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col items-center gap-6"
-          >
-            <ScrollReelTestimonials testimonials={teamTestimonials} />
-            
-            {/* Bouton Voir plus */}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-              whileTap={{ scale: 0.98 }}
-              onClick={handleNavigateToTrainers}
-              className={cn(
-                'inline-flex', 'items-center', 'gap-2', 'px-8', 'py-4', 'rounded-xl',
-                'bg-academy',
-                'text-white', 'font-semibold', 'hover:bg-academy/90',
-                'transition-all', 'duration-300', 'shadow-lg'
-              )}
-            >
-              Voir plus de formateurs
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-              >
-                <ArrowRight className={cn('w-5', 'h-5')} />
-              </motion.div>
-            </motion.button>
-          </motion.div>
-        </div>
-      </motion.section>
+      {/* CTA Banner pleine largeur — inspiré Cegos */}
+      <CTABannerSection />
 
-     
+      {/* Nos experts — Strip horizontal épuré */}
+      <section className="py-14 bg-white border-t border-gray-100">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
+            <div>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#800020] mb-2">Nos formateurs</span>
+              <h2 className="text-2xl md:text-3xl tracking-tight font-black text-gray-900">Des experts pour vous guider</h2>
+            </div>
+            <button
+              onClick={handleNavigateToTrainers}
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-[#1D0000] text-[#1D0000] text-sm font-bold rounded-full hover:bg-[#1D0000] hover:text-white transition-all duration-200 shrink-0"
+            >
+              Voir tous les formateurs
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+            {teamTestimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="flex flex-col gap-4 px-0 md:px-8 py-6 md:py-0 first:pl-0 last:pr-0"
+              >
+                <p className="text-sm text-gray-600 leading-relaxed italic flex-1">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={t.image}
+                    alt={t.alt}
+                    className="w-10 h-10 rounded-full object-cover shrink-0"
+                  />
+                  <div>
+                    <p className="text-sm font-bold text-gray-900 leading-none">{t.author}</p>
+                    <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* Bande "Ils nous font confiance" — inspiré Cegos */}
+      <section className="py-8 border-t border-gray-100 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 leading-relaxed">
+            Ils nous font confiance
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            {[
+              { name: "Orange", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/320px-Orange_logo.svg.png" },
+              { name: "Société Générale", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Soci%C3%A9t%C3%A9_G%C3%A9n%C3%A9rale.svg/320px-Soci%C3%A9t%C3%A9_G%C3%A9n%C3%A9rale.svg.png" },
+              { name: "Total Energies", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TotalEnergies_logo.svg/320px-TotalEnergies_logo.svg.png" },
+              { name: "MTN", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/MTN_Logo.svg/240px-MTN_Logo.svg.png" },
+              { name: "BCEAO", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxT2h06ZqaI3hPEcqsChZuQKrJO_iX__Hjmg&s" },
+            ].map((partner) => (
+              <img
+                key={partner.name}
+                src={partner.logo}
+                alt={`Logo ${partner.name}`}
+                className="h-7 md:h-9 w-auto object-contain"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       </>
   );
