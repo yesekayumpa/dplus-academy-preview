@@ -25,12 +25,21 @@ import SalesFunnelPage from "./pages/SalesFunnelPage";
 import FormationDetailPage from "./pages/FormationDetailPage";
 import FormationsPage from "./pages/FormationsPage";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./components/layout/AdminLayout";
+import AdminFormationsPage from "./pages/admin/AdminFormationsPage";
+import AdminFormationCreatePage from "./pages/admin/AdminFormationCreatePage";
+import AdminFormateursPage from "./pages/admin/AdminFormateursPage";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import AdminProtectedRoute from "./components/layout/AdminProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+  <AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -59,11 +68,23 @@ const App = () => (
           <Route path="/tunnel-vente" element={<SalesFunnelPage />} />
           <Route path="/sales-funnel" element={<SalesFunnelPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route index element={<AdminFormationsPage />} />
+              <Route path="formations" element={<AdminFormationsPage />} />
+              <Route path="formations/create" element={<AdminFormationCreatePage />} />
+              <Route path="formateurs" element={<AdminFormateursPage />} />
+              <Route path="settings" element={<AdminSettingsPage />} />
+            </Route>
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </AuthProvider>
 );
 
 export default App;
