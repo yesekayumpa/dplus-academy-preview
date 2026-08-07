@@ -101,6 +101,21 @@ const AdminFormationCreatePage = () => {
     mutation.mutate(values as unknown as Parameters<typeof formationsService.createFormation>[0]);
   }
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("L'image ne doit pas dépasser 2Mo");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        form.setValue("imageUrl", reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Composant utilitaire pour les cartes du formulaire
   const FormSection = ({ title, icon: Icon, children }: { title: string, icon: React.ElementType, children: React.ReactNode }) => (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-fade-in-up">
@@ -457,9 +472,24 @@ const AdminFormationCreatePage = () => {
                 name="imageUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-slate-700 text-sm">URL de l'image de couverture</FormLabel>
+                    <FormLabel className="text-slate-700 text-sm">Image de couverture (Fichier ou URL)</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://..." className="h-10 rounded-lg text-sm bg-slate-50/50" {...field} />
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-4">
+                          <Input 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={handleImageUpload}
+                            className="file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 text-sm cursor-pointer h-10 w-full"
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-slate-500">
+                          <span className="flex-1 h-px bg-slate-200"></span>
+                          <span>OU</span>
+                          <span className="flex-1 h-px bg-slate-200"></span>
+                        </div>
+                        <Input placeholder="https://..." className="h-10 rounded-lg text-sm bg-slate-50/50" {...field} />
+                      </div>
                     </FormControl>
                     <FormMessage />
                     {field.value && (
