@@ -1,7 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { Plus, Edit, Trash2, MoreHorizontal, Search, Filter } from "lucide-react";
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { Plus, Edit, Trash2, MoreHorizontal, Search, Filter, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -10,9 +17,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { formationsService } from "@/services/formations.service";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 // Fonction utilitaire pour le style des statuts
 const getStatusBadge = (statut: string) => {
@@ -31,10 +49,59 @@ const getStatusBadge = (statut: string) => {
 };
 
 const AdminFormationsPage = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"ALL" | "A_VENIR" | "EN_COURS" | "REPLAY" | "TERMINE">("ALL");
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+  const [formationToDelete, setFormationToDelete] = useState<number | null>(null);
+
   const { data: formations, isLoading, isError } = useQuery({
     queryKey: ['admin-formations'],
     queryFn: formationsService.getFormations,
   });
+
+  const deleteMutation = useMutation({
+    mutationFn: formationsService.deleteFormation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-formations'] });
+      toast.success("Formation supprimée avec succès");
+      setIsDeleteAlertOpen(false);
+      setFormationToDelete(null);
+    },
+    onError: () => {
+      toast.error("Erreur lors de la suppression de la formation");
+    },
+  });
+
+  const toggleActiveMutation = useMutation({
+    mutationFn: ({ id, isActive }: { id: number; isActive: boolean }) =>
+      formationsService.updateFormation(id, { isActive }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-formations'] });
+      toast.success("Statut mis à jour");
+    },
+    onError: () => {
+      toast.error("Erreur lors de la mise à jour du statut");
+    },
+  });
+
+  const filteredFormations = formations?.filter(f => {
+    const matchesSearch =
+      f.titre.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      f.sousTitre?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      f.categorie?.libelle?.toLowerCase().includes(searchQuery.toLowerCase());
+    if (statusFilter === "ALL") return matchesSearch;
+    return matchesSearch && f.statut === statusFilter;
+  });
+
+  const statusLabel = {
+    ALL: "Filtres",
+    A_VENIR: "À venir",
+    EN_COURS: "En cours",
+    REPLAY: "Replay",
+    TERMINE: "Terminé",
+  };
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -63,13 +130,26 @@ const AdminFormationsPage = () => {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input 
             placeholder="Rechercher une formation..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9 border-none bg-slate-50/50 hover:bg-slate-50 focus-visible:ring-1 focus-visible:ring-primary/30 rounded-xl transition-all"
           />
         </div>
-        <Button variant="ghost" className="text-slate-500 rounded-xl px-4 hidden sm:flex">
-          <Filter className="w-4 h-4 mr-2" />
-          Filtres
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="text-slate-500 rounded-xl px-4 hidden sm:flex">
+              <Filter className="w-4 h-4 mr-2" />
+              {statusLabel[statusFilter]}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setStatusFilter("ALL")}>Tous les statuts</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setStatusFilter("A_VENIR")}>À venir</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setStatusFilter("EN_COURS")}>En cours</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setStatusFilter("REPLAY")}>Replay</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setStatusFilter("TERMINE")}>Terminé</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Main Table Card */}
@@ -106,7 +186,7 @@ const AdminFormationsPage = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : formations?.length === 0 ? (
+              ) : filteredFormations?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-16">
                     <div className="flex flex-col items-center justify-center text-slate-500">
@@ -123,7 +203,7 @@ const AdminFormationsPage = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                formations?.map((formation) => (
+                filteredFormations?.map((formation) => (
                   <TableRow key={formation.id} className="border-b-slate-100 hover:bg-slate-50/50 transition-colors group">
                     <TableCell className="pl-6 py-4">
                       <div className="flex items-center gap-3">
@@ -152,15 +232,41 @@ const AdminFormationsPage = () => {
                     </TableCell>
                     <TableCell className="pr-6 py-4 text-right">
                       <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-slate-500 hover:text-primary hover:bg-primary/10">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 rounded-full text-slate-500 hover:text-primary hover:bg-primary/10"
+                          onClick={() => navigate(`/admin/formations/edit/${formation.id}`)}
+                        >
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-slate-500 hover:text-red-600 hover:bg-red-50">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 rounded-full text-slate-500 hover:text-red-600 hover:bg-red-50"
+                          onClick={() => { setFormationToDelete(formation.id); setIsDeleteAlertOpen(true); }}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-slate-500">
-                          <MoreHorizontal className="w-4 h-4" />
-                        </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-slate-500">
+                              <MoreHorizontal className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => navigate(`/admin/formations/edit/${formation.id}`)}>
+                              Modifier
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() =>
+                                toggleActiveMutation.mutate({ id: formation.id, isActive: !formation.isActive })
+                              }
+                            >
+                              {formation.isActive ? 'Désactiver' : 'Activer'}
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -173,11 +279,36 @@ const AdminFormationsPage = () => {
         {/* Pagination placeholder (optional) */}
         <div className="border-t border-slate-100 bg-slate-50/50 p-4 px-6 flex items-center justify-between">
           <span className="text-xs text-slate-500">
-            Affichage de <span className="font-medium text-slate-900">{formations?.length || 0}</span> formations
+            Affichage de <span className="font-medium text-slate-900">{filteredFormations?.length || 0}</span> formations
           </span>
           {/* Pagination controls would go here */}
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={isDeleteAlertOpen} onOpenChange={setIsDeleteAlertOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Êtes-vous absolument sûr ?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Cette action est irréversible. Cela supprimera définitivement la formation et toutes ses données associées.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (formationToDelete) deleteMutation.mutate(formationToDelete);
+              }}
+              className="bg-red-600 hover:bg-red-700"
+              disabled={deleteMutation.isPending}
+            >
+              {deleteMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

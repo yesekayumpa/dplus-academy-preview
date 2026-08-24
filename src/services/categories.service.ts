@@ -1,5 +1,6 @@
 import { baseUrl } from './api';
 import { Categorie, ApiResponse, CreateCategorieDTO, UpdateCategorieDTO } from '@/types/api';
+import { mockCategories } from '@/data/mockApiData';
 
 export const categoriesService = {
   /**
@@ -7,16 +8,7 @@ export const categoriesService = {
    * @returns {Promise<Categorie[]>} Liste des catégories.
    */
   getCategories: async (): Promise<Categorie[]> => {
-    const response = await fetch(`${baseUrl}/api/categories`);
-    
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des catégories');
-    }
-    
-    const data: ApiResponse<Categorie[]> = await response.json();
-    
-    // On retourne uniquement les catégories actives
-    return data.data.filter(cat => cat.active);
+    return mockCategories;
   },
   
   /**

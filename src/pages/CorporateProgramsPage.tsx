@@ -21,6 +21,7 @@ import {
   Search,
   Filter,
   X,
+  ChevronLeft,
   ChevronRight,
   Heart,
   Share2,

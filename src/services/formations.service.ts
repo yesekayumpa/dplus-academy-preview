@@ -1,5 +1,6 @@
 import { baseUrl } from './api';
 import { Formation, ApiResponse, PaginatedData, CreateFormationDTO, UpdateFormationDTO } from '@/types/api';
+import { mockFormations } from '@/data/mockApiData';
 
 export const formationsService = {
   /**
@@ -7,16 +8,7 @@ export const formationsService = {
    * @returns {Promise<Formation[]>} Liste des formations actives.
    */
   getFormations: async (): Promise<Formation[]> => {
-    const response = await fetch(`${baseUrl}/api/formations`);
-
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des formations');
-    }
-
-    const data: ApiResponse<PaginatedData<Formation>> = await response.json();
-
-    // On retourne uniquement les formations actives
-    return data.data.content.filter((formation) => formation.isActive);
+    return mockFormations;
   },
 
   /**
@@ -25,14 +17,9 @@ export const formationsService = {
    * @returns {Promise<Formation>} La formation demandée.
    */
   getFormationById: async (id: number | string): Promise<Formation> => {
-    const response = await fetch(`${baseUrl}/api/formations/${id}`);
-
-    if (!response.ok) {
-      throw new Error(`Erreur lors de la récupération de la formation ${id}`);
-    }
-
-    const data: ApiResponse<Formation> = await response.json();
-    return data.data;
+    const formation = mockFormations.find(f => f.id.toString() === id.toString());
+    if (!formation) throw new Error(`Erreur lors de la récupération de la formation ${id}`);
+    return formation;
   },
 
   /**

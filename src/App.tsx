@@ -28,6 +28,7 @@ import NotFound from "./pages/NotFound";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminFormationsPage from "./pages/admin/AdminFormationsPage";
 import AdminFormationCreatePage from "./pages/admin/AdminFormationCreatePage";
+import AdminFormationEditPage from "./pages/admin/AdminFormationEditPage";
 import AdminFormateursPage from "./pages/admin/AdminFormateursPage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
@@ -75,6 +76,7 @@ const App = () => (
               <Route index element={<AdminFormationsPage />} />
               <Route path="formations" element={<AdminFormationsPage />} />
               <Route path="formations/create" element={<AdminFormationCreatePage />} />
+              <Route path="formations/edit/:id" element={<AdminFormationEditPage />} />
               <Route path="formateurs" element={<AdminFormateursPage />} />
               <Route path="settings" element={<AdminSettingsPage />} />
             </Route>

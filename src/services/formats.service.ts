@@ -1,5 +1,6 @@
 import { baseUrl } from './api';
 import { FormatPedagogique, ApiResponse, CreateFormatPedagogiqueDTO } from '@/types/api';
+import { mockFormats } from '@/data/mockApiData';
 
 export const formatsService = {
   /**
@@ -7,16 +8,7 @@ export const formatsService = {
    * @returns {Promise<FormatPedagogique[]>} Liste des formats pédagogiques.
    */
   getFormatsPedagogiques: async (): Promise<FormatPedagogique[]> => {
-    const response = await fetch(`${baseUrl}/api/formats-pedagogiques`);
-    
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des formats pédagogiques');
-    }
-    
-    const data: ApiResponse<FormatPedagogique[]> = await response.json();
-    
-    // On retourne uniquement les formats actifs
-    return data.data.filter(format => format.active);
+    return mockFormats;
   },
   
   /**

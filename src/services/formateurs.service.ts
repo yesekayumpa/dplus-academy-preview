@@ -1,5 +1,6 @@
 import { baseUrl } from './api';
 import { Formateur, ApiResponse, PaginatedData, CreateFormateurDTO, UpdateFormateurDTO } from '@/types/api';
+import { mockFormateurs } from '@/data/mockApiData';
 
 export const formateursService = {
   /**
@@ -15,22 +16,7 @@ export const formateursService = {
     size?: number;
     competenceId?: number | string;
   }): Promise<Formateur[]> => {
-    const queryParams = new URLSearchParams();
-    if (params?.page !== undefined) queryParams.append('page', params.page.toString());
-    if (params?.size !== undefined) queryParams.append('size', params.size.toString());
-    if (params?.competenceId !== undefined) queryParams.append('competenceId', params.competenceId.toString());
-
-    const queryString = queryParams.toString();
-    const url = `${baseUrl}/api/formateurs${queryString ? `?${queryString}` : ''}`;
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des formateurs');
-    }
-
-    const data: ApiResponse<PaginatedData<Formateur>> = await response.json();
-    return data.data.content.filter((formateur) => formateur.isActive);
+    return mockFormateurs;
   },
 
   /**
@@ -39,14 +25,9 @@ export const formateursService = {
    * @returns {Promise<Formateur>} Le formateur demandé.
    */
   getFormateurById: async (id: number | string): Promise<Formateur> => {
-    const response = await fetch(`${baseUrl}/api/formateurs/${id}`);
-
-    if (!response.ok) {
-      throw new Error(`Erreur lors de la récupération du formateur ${id}`);
-    }
-
-    const data: ApiResponse<Formateur> = await response.json();
-    return data.data;
+    const formateur = mockFormateurs.find(f => f.id.toString() === id.toString());
+    if (!formateur) throw new Error(`Erreur lors de la récupération du formateur ${id}`);
+    return formateur;
   },
 
   /**
